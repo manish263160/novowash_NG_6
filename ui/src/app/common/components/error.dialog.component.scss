@@ -1,0 +1,22 @@
+.err-dialog-wrapper {
+  mat-dialog-content.mat-dialog-content {
+    min-height: initial;
+    max-height: calc(100vh - 20vh - 130px);
+  }
+}
+
+.li-err-wrap {
+  margin-right: -40px;
+  margin-left: -40px;
+  & > div.li-err {
+    min-height: 20px;
+    border-bottom: 1px solid #e8e8e8;
+    display: flex;
+    align-items: center;
+    padding: 12px 40px;
+    word-break: break-all;
+    &:last-of-type {
+      border-bottom: 0;
+    }
+  }
+}

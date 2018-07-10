@@ -1,0 +1,23 @@
+<div class="page-sidenav-content" >
+    <mat-toolbar class="toolbar-primary">
+        <a class="logo" href="/app"></a>
+        <span class="fill-remaining-space"></span>
+        <button mat-raised-button mat-round-button color="primary" (click)="openLoginSignUpDialog()">
+            Login/Signup
+        </button>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+</div>
+
+<!-- <div class="cdk-overlay-container">
+    <div class="cdk-global-overlay-wrapper" style="justify-content: center; align-items: center;">
+        <div class="cdk-overlay-backdrop cdk-overlay-custom-backdrop cdk-overlay-backdrop-showing"></div>
+        <div class="cdk-overlay-pane dialog-panel" style="position: static; pointer-events: auto; width: 75%; height: 100%">
+            <div class="mat-dialog-container">
+                <div>
+                    <router-outlet name="dialog" class="dialog" #o="outlet"></router-outlet>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->

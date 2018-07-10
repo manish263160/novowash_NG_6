@@ -1,0 +1,35 @@
+<div class="containerX">
+    <div fxLayout="row" class="dialog-header">
+        <div fxFlex="flex">
+            <h5></h5>
+        </div>
+        <div fxFlex="none">
+            <button mat-icon-button (click)="closeDialog()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>
+<div>
+    <form [formGroup]="loginForm" novalidate>
+    <div class="mat-dialog-content">
+        <div class="containerX dialog-container">
+            <div fxLayout="column" fxLayoutGap="16px">
+                <mat-form-field floatLabel="never">
+                    <span matPrefix>+91 &nbsp;</span>
+                    <input type="tel" matInput placeholder="Mobile Number" formControlName="number" novalidate>
+                    <mat-error *ngIf="(loginForm.controls['number'].errors | firstKey) ==='required' && loginForm.controls['number'].touched">
+                        Mobile number is required
+                    </mat-error>
+                    <mat-error *ngIf="(loginForm.controls['number'].errors | firstKey) === 'invalidNumber' && loginForm.controls['number'].touched">
+                        Please enter a valid mobile number
+                    </mat-error>
+                </mat-form-field>
+                <button mat-raised-button mat-round-button color="primary" (click)="onClickCheckNumber()">
+                    Login/Signup
+                </button>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
