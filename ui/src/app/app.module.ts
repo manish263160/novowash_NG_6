@@ -3,6 +3,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from "@angular/common/http";
 
 import {
     MatButtonModule,
@@ -24,6 +25,7 @@ import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app.routing";
 
 import { AuthGuard } from "./core/services/auth-guard.service";
+import { CoreModule } from "./core/core.module";
 import { LayoutComponent } from "./layout/layout.component";
 import { LoginComponent } from "./login/login.component";
 
@@ -55,6 +57,8 @@ import { ITDatepickerService } from "./common/services/it-datepicker-service";
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
+        HttpClientModule,
+        CoreModule,
         FlexLayoutModule,
         FormsModule,
         ReactiveFormsModule,

@@ -1,7 +1,9 @@
 <div class="containerX">
     <div fxLayout="row" class="dialog-header">
         <div fxFlex="flex">
-            <h5></h5>
+            <button mat-icon-button (click)="goBackToOne()" *ngIf="isExistingUser">
+                <mat-icon>arrow_back</mat-icon>
+            </button>
         </div>
         <div fxFlex="none">
             <button mat-icon-button (click)="closeDialog()">
@@ -25,8 +27,19 @@
                         Please enter a valid mobile number
                     </mat-error>
                 </mat-form-field>
-                <button mat-raised-button mat-round-button color="primary" (click)="onClickCheckNumber()">
+                <mat-form-field floatLabel="never" *ngIf="isExistingUser">
+                    <input type="text" matInput placeholder="Enter 4 digit OTP" formControlName="otp" novalidate>
+                    <mat-error *ngIf="(loginForm.controls['otp'].errors | firstKey) ==='required' && loginForm.controls['otp'].touched">
+                        OTP is required
+                    </mat-error>
+                </mat-form-field>
+                <button mat-raised-button mat-round-button color="primary" (click)="onClickCheckNumber()"
+                    *ngIf="!isExistingUser">
                     Login/Signup
+                </button>
+                <button mat-raised-button mat-round-button color="primary" (click)="onClickLogin()"
+                    *ngIf="isExistingUser">
+                    Verify & Login
                 </button>
             </div>
         </div>
