@@ -33,6 +33,7 @@ import { ConfirmDialogComponent } from "./common/components/confirm-dialog.compo
 import { ErrorDialogComponent } from "./common/components/error.dialog.component";
 import { FirstKeyPipe } from "./common/pipes/first.key.pipe";
 import { environment } from "../environments/environment";
+import { ITMenuService } from "./common/services/it-menu-service";
 import { DeactivateGuardService } from "./common/services/deactivate-guard.service";
 import { DialogService } from "./common/services/dialog.service";
 import { ITDatepickerService } from "./common/services/it-datepicker-service";
@@ -81,6 +82,7 @@ import { ITDatepickerService } from "./common/services/it-datepicker-service";
         DeactivateGuardService,
         DialogService,
         ITDatepickerService,
+        ITMenuService,
     ],
 })
 export class AppModule {}

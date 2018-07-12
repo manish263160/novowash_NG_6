@@ -1,0 +1,273 @@
+$default-nav-color: rgba(243, 243, 243, 0.41);
+$default-nav-border-color: #e8e8e8;
+$default-item-color: map-get($primary, 500);
+$default-sec-color: map-get($accent, 500);
+$default-hover-color: map-get($accent, 50);
+$default-active-color: #053e45;
+$default-item-hover-color: map-get($primary, 900);
+$default-menu-border-color: #dedede;
+$default-cat-heading-color: map-get($accent, 400);
+$default-not-count-color: #ff6767;
+
+$default-item-font-size: 0.875rem;
+$default-menu-item-font-size: 1rem;
+
+$default-nav-height: 64px;
+
+md-toolbar.mat-toolbar {    
+    .mat-toolbar-row {
+        ul {
+            li {
+                position: relative;
+                &.cat-name {
+                    & > span {
+                        display: block;
+                        padding: 20px 16px 15px;
+                        clear: both;
+                        font-weight: 400;
+                        font-size: 1rem;
+                        line-height: 1.42857143;
+                        color: map-get($accent, 400);
+                        white-space: nowrap;
+                        text-decoration: none;
+                        user-select: none;
+                    }
+                    &.more-cats {
+                        display: inline-block;
+                    }                    
+                }
+                .main-menu, .sub-menu {
+                    position: absolute;
+                    display: none;
+                    float: left;
+                    border: 1px solid #dedede;
+                    -webkit-box-shadow: 0 2px 4px rgba(0,0,0,.5);
+                    box-shadow: 0 2px 4px rgba(0,0,0,.5);
+                }                
+                .main-menu, .sub-menu, .cat-menu {                                        
+                    z-index: 1000;                    
+                    min-width: 160px;
+                    padding: 5px 0;
+                    margin: 2px 0 0;
+                    font-size: 14px;
+                    text-align: left;
+                    list-style: none;
+                    background-color: #fff;
+                    -webkit-background-clip: padding-box;
+                    background-clip: padding-box;                    
+                    border-radius: 0;                    
+                    & > li {
+                        & > a {
+                            display: block;
+                            padding: 5px 16px;
+                            clear: both;
+                            font-weight: 400;
+                            font-size: 1rem;
+                            line-height: 1.42857143;
+                            color: map-get($primary, 500);
+                            white-space: nowrap;
+                            text-decoration: none;
+                            user-select: none;
+                            &:hover, &:focus {          
+                                color: map-get($primary, 900);
+                            }
+                            & > span.material-icons {
+                                float: right;
+                                line-height: 1.3rem;
+                            }
+                        }
+                    }
+                    .divider {
+                    height: 1px;
+                    margin: 9px 0;
+                    overflow: hidden;
+                    background-color: #e5e5e5;
+                    }
+                }
+                .main-menu {
+                    top: 100%;
+                    left: 0;
+                }
+                .sub-menu {
+                    top: 0;
+                    left: 100%;
+                }
+                &.open>.main-menu,
+                &.open>.sub-menu {
+                    display: block;
+                }
+            } 
+        }
+        & > ul.collapse-on-sm {
+            height: 1px;
+            overflow: hidden;
+            margin: 0;
+            padding-left: 0;
+            list-style-type: none;
+            &.shown {
+                height: auto;
+                overflow: initial;
+                & > li {
+                    float: none;
+                }
+            }
+            & > li {
+                transition: background-color .3s;
+                float: left;
+                padding: 0;
+                list-style-type: none;
+                & > a, & > [md-button].mat-button {
+                    -webkit-font-smoothing: antialiased;
+                    transition: background-color .3s;
+                    font-size: $default-item-font-size;
+                    font-weight: $font-weight-bold;
+                    color: $default-item-color;
+                    padding: 0 14px;
+                    cursor: pointer;
+                    text-decoration: none;
+                    text-transform: uppercase;
+                    border-bottom: 2px solid transparent;
+                    border-radius: 0;
+                }
+                & > a {
+                    display: block;
+                }
+                & > [md-button].mat-button {
+                    height: inherit;
+                }
+            }
+        }
+    }
+    //for default nav bar
+    &:not([color]) {
+        background-color: $default-nav-color;
+        border-bottom: 1px solid $default-nav-border-color;
+        color: $default-sec-color;
+        .mat-toolbar-row {
+            & > a {
+                color: inherit;
+            }
+            & > ul {                
+                & > li {
+                    &.active {
+                        & > a, & > [md-button].mat-button {
+                            background-color: mat-color($accent, 400, 0.15);
+                        }
+                    }
+                    & > a, & > [md-button].mat-button {
+                        &:hover {
+                            background-color: $default-hover-color;
+                            border-bottom-color: map-get($primary, 500);
+                        }
+                    }
+                    &.open {
+                        & > a, & > [md-button].mat-button {
+                            background-color: $default-hover-color;
+                            border-bottom-color: map-get($primary, 500);
+                        }
+                    }                    
+                }
+            }
+            & > [md-button].mat-button {
+                height: inherit;
+                padding: 0.75rem;
+                &:not(:last-child) {
+                    //margin-right: 12px;
+                }
+                &.btn-user {
+                    span {
+                        color: #ffffff;
+                        font-size: $default-item-font-size;
+                        vertical-align: baseline;
+                        padding: 8.5px 4px;
+                        border-radius: 50%;
+                        background-color: mat-color($accent, 400);
+                    } 
+                }
+                &.btn-notification {
+                    position: relative;
+                    padding-right: 0;
+                    span.mat-button-wrapper {
+                        background-color: #eff1f2;
+                        border-radius: 28px 0 0 28px;
+                        padding: 10.5px 13px;
+                        .mat-icon {
+                            line-height: 18px;
+                        }
+                    }
+                    span.badge {
+                        min-width: 15px;
+                        padding: 2px;
+                        font-size: 10px;
+                        font-weight: 700;
+                        line-height: 15px;
+                        color: #fff;
+                        text-align: center;
+                        white-space: nowrap;
+                        vertical-align: middle;
+                        background-color: $default-not-count-color;
+                        border-radius: 50%;
+                        min-height: 15px;
+                        position: absolute;
+                        top: 5px;
+                        left: 5px;
+                        z-index: 2; //to avoid ripple effect overlapping
+                    }
+                    .mat-button-ripple-round {
+                        border-radius: inherit;
+                    }
+                }
+            }
+            
+        }
+    }
+}
+
+@media only screen and (max-width: breakpoint-max(xs)) {
+    md-toolbar.mat-toolbar {
+        position: relative;
+        top-menu {
+            position: absolute;
+            bottom: -100%;
+            background-color: #fff;
+            left: 0px;
+            display: none;
+            &.shown {
+                display: block;
+                z-index: 1;
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: breakpoint-min(sm)) {
+    md-toolbar.mat-toolbar {
+        min-height: $default-nav-height;
+        padding-right: 0;
+        .mat-toolbar-row {
+            min-height: $default-nav-height;
+            & > a {
+                height: $default-nav-height;
+                line-height: ($default-nav-height - 1px);
+                margin-right: 22px;
+            }
+            & > ul.collapse-on-sm {
+                height: auto;
+                overflow: initial;
+                & > li {
+                    height: $default-nav-height;
+                    line-height: ($default-nav-height - 1px);
+                }
+            }
+        }
+        .button-collapse {
+            display: none;
+        }
+    }
+}
+
+@media only screen and (min-width: breakpoint-min(md)) {
+    md-toolbar.mat-toolbar {
+        padding-left: 35px;
+    }
+}

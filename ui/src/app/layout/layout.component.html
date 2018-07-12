@@ -2,10 +2,23 @@
     <mat-toolbar class="toolbar-primary">
         <a class="logo" href="/app"></a>
         <span class="fill-remaining-space"></span>
-        <button mat-raised-button mat-round-button color="primary" (click)="openLoginSignUpDialog()">
-            Login/Signup
-        </button>
+        <ng-container *ngIf="!user else userTmpl">            
+            <button mat-button mat-round-button color="primary" (click)="openLoginSignUpDialog()">
+                Login/Signup
+            </button>
+        </ng-container>
+        <ng-template #userTmpl>
+            <button mat-button class="btn-user" [matMenuTriggerFor]="userMenu" #userTrigger="matMenuTrigger"
+                (onMenuOpen)="itMenuService.onMenuOpen(userTrigger);">
+                {{ getInitials() }}
+            </button>
+        </ng-template>
     </mat-toolbar>
+    <mat-menu #userMenu="matMenu">
+        <button mat-menu-item (click)="logout()">
+            <span>Logout</span>
+        </button>
+    </mat-menu>
     <router-outlet></router-outlet>
 </div>
 

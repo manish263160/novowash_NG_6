@@ -1,15 +1,15 @@
-@import "material.variables";
-@import "material.themes";
+@import "styles/material/material.variables";
+@import "styles/material/material.themes";
+@import "styles/app.variables";
+@import "styles/miscmixin";
+@import "styles/button";
+@import "styles/toolbar";
 
-$primary-color: mat-color($primary);
-$accent-color: mat-color($accent);
-$warn-color: mat-color($warn);
 $accent-color-50: map-get($accent, 50);
 $accent-color-100: map-get($accent, 100);
 $accent-color-200: map-get($accent, 200);
 $accent-color-300: map-get($accent, 300);
 $primary-contrast-10: mat-contrast($primary, 10);
-$white-color: #ffffff;
 $custom-color-bcd6bf: #bcd6bf;
 $custom-color-e8e8e8: #e8e8e8;
 $border-radius-round: 4px;

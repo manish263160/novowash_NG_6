@@ -1,0 +1,291 @@
+[mat-raised-button].mat-raised-button {
+    &.mat-primary {
+      background-color: mat-color($primary);
+      &[disabled] {
+        opacity: 0.5;
+        background-color: mat-color($primary);
+        color: mat-contrast($primary, 500);
+      }
+    }
+    &.mat-accent {
+      background-color: mat-color($accent);
+      color: mat-contrast($accent, 30);
+      &[disabled] {
+        background-color: mat-color($accent);
+        color: mat-color(map-get($accent, contrast), 30, 0.5);
+      }
+    }
+    &.mat-warn {
+      background-color: mat-color($warn);
+      &[disabled] {
+        opacity: 0.5;
+        background-color: mat-color($warn);
+        color: mat-contrast($warn, 500);
+      }
+    }
+  }
+  //
+  // Flat Buttons
+  //
+  [mat-button].mat-button {
+    &.mat-primary {
+      color: mat-color($primary);
+      &[disabled] {
+        color: mat-color($primary, 500, 0.5);
+      }
+    }
+    &.mat-accent {
+      color: mat-contrast($accent, 30);
+      &[disabled] {
+        color: mat-color(map-get($accent, contrast), 30, 0.5);
+      }
+    }
+    &.mat-warn {
+      color: mat-color($warn);
+      &[disabled] {
+        color: mat-color($warn, 500, 0.5);
+      }
+    }
+}
+
+$btn-height: 2.25rem;
+$btn-font-size: 0.8rem;
+$btn-pad-tb: 0.75rem;
+$btn-pad-lr: 1rem;
+$btn-sm-height: 1.5rem;
+$btn-sm-font-size: 0.75rem;
+$btn-sm-pad-tb: 0.5rem;
+$btn-sm-pad-lr: 0.75rem;
+$btn-icon-height: 2.25rem;
+$btn-sm-icon-height: 1.5rem;
+$btn-icon-icohght: 1.5rem;
+$btn-sm-icon-icohght: 0.75rem;
+
+$btn-text-transform: uppercase;
+
+//
+// Default Buttons
+//
+[mat-raised-button].mat-raised-button {
+  border: 0;
+  font-size: $btn-font-size;
+  text-transform: $btn-text-transform;
+  user-select: none;
+  @include box-shadow(none);
+  &:not(.mat-icon-button) {
+    height: $btn-height;
+    line-height: $btn-font-size - 0.1rem;
+    min-width: initial;
+    padding: $btn-pad-tb $btn-pad-lr;
+    border-radius: $border-radius-base;
+  }
+  &.mat-icon-button {
+    width: $btn-icon-height;
+    height: $btn-icon-height;
+    font-size: $btn-icon-icohght;
+    line-height: $btn-icon-icohght - 0.1rem;
+    .mat-icon {
+      font-size: inherit;
+    }
+  }
+  &.mat-primary:hover {
+    @include box-shadow(0 1px 3px mat-color(map-get($primary, contrast), 600, 0.25));
+  }
+  &.mat-primary:active {
+    @include box-shadow(none);
+  }
+  &.mat-accent:hover {
+    @include box-shadow(0 1px 3px mat-color(map-get($accent, contrast), 300, 0.31));
+  }
+  &.mat-accent:active {
+    @include box-shadow(none);
+  }
+  /* Add hover behavior for warn */
+  &.mat-warn:hover {
+    @include box-shadow(0 1px 3px mat-color(map-get($warn, contrast), 300, 0.31));
+  }
+  &.mat-warn:active {
+    @include box-shadow(none);
+  }
+  &[disabled] {
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+}
+
+//
+// Flat Buttons
+//
+[mat-button].mat-button {
+  border: 0;
+  font-size: $btn-font-size;
+  text-transform: $btn-text-transform;
+  user-select: none;
+  @include box-shadow(none);
+  &:not(.mat-icon-button) {
+    height: $btn-height;
+    line-height: $btn-font-size - 0.1rem;
+    min-width: initial;
+    padding: $btn-pad-tb $btn-pad-lr;
+    border-radius: $border-radius-base;
+  }
+  &[disabled] {
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+}
+[mat-icon-button].mat-icon-button:not(.mat-raised-button) {
+  width: $btn-icon-height;
+  height: $btn-icon-height;
+  font-size: $btn-icon-icohght;
+  line-height: $btn-icon-icohght - 0.1rem;
+  .mat-icon {
+    font-size: inherit;
+  }
+}
+
+//
+// Round Button
+//
+[mat-round-button].mat-raised-button:not(.mat-icon-button) {
+  border-radius: $border-radius-round;
+}
+
+//
+// small Buttons
+//
+[mat-button-sm].mat-raised-button,
+[mat-button-sm].mat-button {
+  font-size: $btn-sm-font-size;
+  @include box-shadow(none);
+  &:not(.mat-icon-button) {
+    height: $btn-sm-height;
+    line-height: $btn-sm-font-size - 0.1rem;
+    padding: $btn-sm-pad-tb $btn-sm-pad-lr;
+  }
+}
+[mat-button-sm].mat-raised-button.mat-icon-button,
+[mat-button-sm].mat-icon-button:not(.mat-raised-button) {
+  width: $btn-sm-icon-height;
+  height: $btn-sm-icon-height;
+  line-height: $btn-sm-icon-height;
+  font-size: $btn-sm-icon-icohght;
+  .mat-icon {
+    font-size: inherit;
+    line-height: $btn-sm-icon-height - 0.1rem;
+  }
+}
+
+//
+// Fab Buttons
+//
+[mat-fab][disabled],
+[mat-mini-fab][disabled] {
+  opacity: 0.5;
+  &.mat-primary {
+    background-color: map-get($primary,500);
+    color: mat-color(map-get($primary, contrast), 500, 0.6);
+  }
+  &.mat-accent {
+    background-color: map-get($accent,500);
+    color: mat-color(map-get($accent, contrast), 500, 0.6);
+  }
+  &.mat-warn {
+    background-color: map-get($warn,500);
+    color: mat-color(map-get($warn, contrast), 500, 0.6);
+  }
+}
+
+//
+// for dropdown buttons
+//
+.btn-group {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  & > [mat-raised-button].mat-raised-button,
+  & > [mat-button].mat-button {
+    position: relative;
+    float: left;
+    &:first-of-type {
+      margin-left: 0;
+      &:last-of-type {
+        padding-right: 0.5rem;
+      }
+      &:not(:last-of-type) {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        border-right: 1px solid map-get($primary, 300);
+        &[color="accent"] {
+          border-right: 1px solid map-get($accent, 300);
+        }
+        &[color="warn"] {
+          border-right: 1px solid map-get($warn, 300);
+        }
+      }
+    }
+    &:last-of-type:not(:first-of-type) {
+      padding-right: 0.1rem;
+      padding-left: 0.1rem;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    &+[mat-raised-button].mat-raised-button {
+      margin-left: 0;
+    }    
+    .mat-icon {
+      height: inherit;
+      line-height: inherit;
+      vertical-align: bottom;
+      margin-right: 0;
+      margin-left: 0;
+      font-size: 20px;
+    }
+  }
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid mat-color($accent, 500, 0.2);
+    border-radius: 0;
+    -webkit-box-shadow: 0 0 4px rgba(0,0,0,.5);
+    box-shadow: 0 0 4px rgba(0,0,0,.5);
+    & > li {
+      & > a {
+        display: block;
+        padding: 5px 11px;
+        clear: both;
+        font-weight: 400;
+        font-size: 0.875rem;
+        line-height: 1.42857143;
+        color: #021a25;
+        white-space: nowrap;
+        text-decoration: none;
+        &:hover, &:focus {          
+          background-color: map-get($accent, 30);
+        }
+      }
+    }
+    .divider {
+      height: 1px;
+      margin: 9px 0;
+      overflow: hidden;
+      background-color: #e5e5e5;
+    }
+  }
+  &.open>.dropdown-menu {
+    display: block;
+  }
+}

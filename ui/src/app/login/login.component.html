@@ -1,7 +1,7 @@
 <div class="containerX">
     <div fxLayout="row" class="dialog-header">
         <div fxFlex="flex">
-            <button mat-icon-button (click)="goBackToOne()" *ngIf="isExistingUser">
+            <button mat-icon-button (click)="goBackToOne()" *ngIf="isExistingUser || isNewUser">
                 <mat-icon>arrow_back</mat-icon>
             </button>
         </div>
@@ -17,6 +17,16 @@
     <div class="mat-dialog-content">
         <div class="containerX dialog-container">
             <div fxLayout="column" fxLayoutGap="16px">
+                <mat-form-field floatLabel="never" *ngIf="isNewUser">
+                    <span matPrefix>+91 &nbsp;</span>
+                    <input type="text" matInput placeholder="Name" formControlName="name" novalidate>
+                    <mat-error *ngIf="(loginForm.controls['name'].errors | firstKey) ==='required' && loginForm.controls['name'].touched">
+                        Name is required
+                    </mat-error>
+                    <mat-error *ngIf="(loginForm.controls['name'].errors | firstKey) === 'pattern' && loginForm.controls['name'].touched">
+                        Please enter a valid name
+                    </mat-error>
+                </mat-form-field>
                 <mat-form-field floatLabel="never">
                     <span matPrefix>+91 &nbsp;</span>
                     <input type="tel" matInput placeholder="Mobile Number" formControlName="number" novalidate>
@@ -32,14 +42,33 @@
                     <mat-error *ngIf="(loginForm.controls['otp'].errors | firstKey) ==='required' && loginForm.controls['otp'].touched">
                         OTP is required
                     </mat-error>
+                    <mat-error *ngIf="(loginForm.controls['otp'].errors | firstKey) ==='minLength' && loginForm.controls['otp'].touched">
+                        Please enter valid 4-digit OTP
+                    </mat-error>
+                    <mat-error *ngIf="(loginForm.controls['otp'].errors | firstKey) ==='maxLength' && loginForm.controls['otp'].touched">
+                        Please enter valid 4-digit OTP
+                    </mat-error>
                 </mat-form-field>
-                <button mat-raised-button mat-round-button color="primary" (click)="onClickCheckNumber()"
-                    *ngIf="!isExistingUser">
+                <mat-form-field floatLabel="never" *ngIf="isNewUser">
+                    <input type="email" matInput placeholder="Email" formControlName="email" novalidate>
+                    <mat-error *ngIf="(loginForm.controls['email'].errors | firstKey) ==='required' && loginForm.controls['email'].touched">
+                        Email is required
+                    </mat-error>
+                    <mat-error *ngIf="(loginForm.controls['email'].errors | firstKey) ==='pattern' && loginForm.controls['email'].touched">
+                        Please enter valid email id
+                    </mat-error>
+                </mat-form-field>
+                <button mat-raised-button color="primary" (click)="onClickCheckNumber()"
+                    *ngIf="!isExistingUser && !isNewUser" [disabled]="loginForm.invalid">
                     Login/Signup
                 </button>
-                <button mat-raised-button mat-round-button color="primary" (click)="onClickLogin()"
-                    *ngIf="isExistingUser">
+                <button mat-raised-button color="primary" (click)="onClickLogin()"
+                    *ngIf="isExistingUser" [disabled]="loginForm.invalid">
                     Verify & Login
+                </button>
+                <button mat-raised-button color="primary" (click)="onClickGetOTP()"
+                    *ngIf="isNewUser" [disabled]="loginForm.invalid">
+                    Get OTP
                 </button>
             </div>
         </div>
