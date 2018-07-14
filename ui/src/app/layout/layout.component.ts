@@ -28,6 +28,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
     constructor(
         private dialog: MatDialog,
         private userService: UserService,
+        private router: Router,
         public itMenuService: ITMenuService
     ) {
         const docStr = "documentMode";
@@ -51,6 +52,10 @@ export class LayoutComponent implements OnInit, OnDestroy {
             right: "",
             top: "",
         };
+
+        if (this.router.url === "/app") {
+            this.router.navigate(["/app/home"]);
+        }
     }
     
     public ngOnInit(): void {

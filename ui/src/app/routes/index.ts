@@ -9,6 +9,14 @@ export const routes: Routes = [
         redirectTo: "app",
     },
     {
+        canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard],
+        children: [
+            {
+                loadChildren: "./routes/home/home.module#HomeModule",
+                path: "home",
+            },
+        ],
         component: LayoutComponent,
         path: "app",
     },
