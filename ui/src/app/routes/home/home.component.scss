@@ -1,4 +1,43 @@
 .carousel-wrap {
     max-width: 90%;
     margin: 0 auto;
+    padding-bottom: 32px;
+}
+.banner-wrap {
+    background-image: url("/assets/img/title_image2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    height: 440px;
+    .search-wrap {
+        background-color: rgba(0, 0, 0, 0.3);
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        & > .mat-form-field {
+            width: 170px;
+            height: 54px;
+            margin-top: 0;
+            background-color: #fff;
+            box-shadow: none;
+            border: none;
+            padding: 0 8px;
+            line-height: 16px;
+            .mat-form-field-underline {
+                display: none;
+            }
+            &.select-loc {
+                border-radius: 4px 0 0 4px;
+                background-color: rgba(243, 243, 243, 1);
+            }
+            &.search-text {
+                border-radius: 0 4px 4px 0;
+                width: 320px;
+            }
+        }
+    }
+}
+.home-content-wrap {
+    padding: 32px 20px 0;
 }

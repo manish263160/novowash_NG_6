@@ -18,13 +18,23 @@ export class HomeComponent implements OnInit, OnDestroy {
         {img: "http://placehold.it/350x150/666666"},
         {img: "http://placehold.it/350x150/777777"}
     ];
+    public cities = [
+        {value: 'ncr-0', viewValue: 'Delhi-NCR'},
+        {value: 'mumbai-1', viewValue: 'Mumbai'},
+        {value: 'bangalore-2', viewValue: 'Bangalore'}
+    ];
     public slideConfig = {"slidesToShow": 4, "slidesToScroll": 1};
     
     public afterChange(e) {
         console.log('afterChange');
     }
 
-    public ngOnInit() {}
+    public ngOnInit() {
+        const cWrapEl = document.getElementsByClassName("content-wrapper")[0];
+        if (cWrapEl) {
+            cWrapEl.classList.add("no-padding");
+        }
+    }
 
     public ngOnDestroy() {}
 }

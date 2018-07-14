@@ -7,6 +7,12 @@ import { DialogService } from "../../common/services/dialog.service";
 import { HomeComponent } from "./home.component";
 import { HomeRoutes } from "./home.routes";
 
+import { 
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+} from "@angular/material";
+
 @NgModule({
     declarations: [
         HomeComponent,
@@ -17,6 +23,9 @@ import { HomeRoutes } from "./home.routes";
         HomeRoutes,
         FlexLayoutModule,
         SlickModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
     ],
     providers: [
         // DialogService,

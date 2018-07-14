@@ -1,7 +1,51 @@
-<div class="carousel-wrap">    
-    <ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideConfig" (afterChange)="afterChange($event)">
-        <div ngxSlickItem *ngFor="let slide of slides" class="slide">
-              <img src="{{ slide.img }}" alt="" width="100%">
-        </div>
-    </ngx-slick>
+<div class="banner-wrap">
+    <div fxLayout="row" class="search-wrap">
+        <mat-form-field class="select-loc" floatLabel="never">
+            <mat-select placeholder="Select city">
+                <mat-option *ngFor="let city of cities" [value]="city.value">
+                    {{city.viewValue}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field floatLabel="never" class="search-text">
+            <input type="text" matInput placeholder="Search for service">
+        </mat-form-field>
+    </div>
 </div>
+<div class="home-content-wrap">    
+    <div class="carousel-wrap">    
+        <ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideConfig" (afterChange)="afterChange($event)">
+            <div ngxSlickItem *ngFor="let slide of slides" class="slide">
+                    <img src="{{ slide.img }}" alt="" width="100%">
+            </div>
+        </ngx-slick>
+    </div>
+    <div class="carousel-wrap">    
+        <ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideConfig" (afterChange)="afterChange($event)">
+            <div ngxSlickItem *ngFor="let slide of slides" class="slide">
+                    <img src="{{ slide.img }}" alt="" width="100%">
+            </div>
+        </ngx-slick>
+    </div>
+    <div class="carousel-wrap">    
+        <ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideConfig" (afterChange)="afterChange($event)">
+            <div ngxSlickItem *ngFor="let slide of slides" class="slide">
+                    <img src="{{ slide.img }}" alt="" width="100%">
+            </div>
+        </ngx-slick>
+    </div>
+    <div class="carousel-wrap">    
+        <ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideConfig" (afterChange)="afterChange($event)">
+            <div ngxSlickItem *ngFor="let slide of slides" class="slide">
+                    <img src="{{ slide.img }}" alt="" width="100%">
+            </div>
+        </ngx-slick>
+    </div>
+    <div class="carousel-wrap">    
+        <ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideConfig" (afterChange)="afterChange($event)">
+            <div ngxSlickItem *ngFor="let slide of slides" class="slide">
+                    <img src="{{ slide.img }}" alt="" width="100%">
+            </div>
+        </ngx-slick>
+    </div>
+</div>  
