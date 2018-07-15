@@ -1,9 +1,9 @@
 <div class="banner-wrap">
     <div fxLayout="row" class="search-wrap">
         <div fxLayout="column" fxLayoutAlign="baseline center">
-            <p class="p-prime">World Class Service</p>
-            <p class="p-sub">now just a couple of clicks away</p>
-            <div fxLayout="row">                
+            <p class="p-prime">Novowash presents</p>
+            <p class="p-sub">Intelligent Interior Care!</p>
+            <div fxLayout="row" fxLayoutGap="16px">                
                 <mat-form-field class="select-loc" floatLabel="never">
                     <mat-select placeholder="Select city">
                         <mat-option *ngFor="let city of cities" [value]="city.value">
@@ -16,6 +16,16 @@
                 </mat-form-field>
             </div>
         </div>
+    </div>
+    <div class="carousel-wrap service-hlist-wrap">    
+        <ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideHListConfig" (afterChange)="afterChange($event)">
+            <div ngxSlickItem *ngFor="let item of serviceItems" class="slide">
+                <div fxLayout="column" class="service-hlist-item" fxLayoutAlign="center center" width="100%">
+                    <span class="service-icon" [style.backgroundImage]="item.icon"></span>
+                    <span class="service-name">{{ item.name }}</span>
+                </div>
+            </div>
+        </ngx-slick>
     </div>
 </div>
 <div class="home-content-wrap">    

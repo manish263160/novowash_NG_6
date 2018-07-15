@@ -2,6 +2,49 @@
     max-width: 90%;
     margin: 0 auto;
     padding-bottom: 32px;
+    &.service-hlist-wrap {
+        max-width: 100%;
+        width: 100%;
+        padding-bottom: 0;
+        background-color: #f4f4f4;
+        height: 130px;
+        .slick-slider {
+            max-width: 96%;
+            height: 100%;
+            margin: 0 auto;
+            .slick-list {
+                height: 100%;
+                .slick-track {
+                    height: 100%;
+                    .slick-slide {
+                        height: 100%;
+                        .service-hlist-item {
+                            opacity: 0.7;
+                            height: 100%;
+                            cursor: pointer;
+                            &:hover {
+                                opacity: 1;
+                            }
+                            .service-icon {
+                                width: 60px;
+                                height: 60px;
+                                background-size: contain;
+                                background-repeat: no-repeat;
+                                background-position: center center;
+                                margin-bottom: 8px;
+                            }
+                            .service-name {
+                                color: #000;
+                                font-weight: 400;
+                                line-height: normal;
+                                font-size: 14px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 .banner-wrap {
     background-image: url("/assets/img/title_image2.jpg");
@@ -9,23 +52,25 @@
     background-size: cover;
     background-position: center center;
     background-attachment: fixed;
-    height: 440px;
+    height: 520px;
     .search-wrap {
-        background-color: rgba(0, 0, 0, 0.3);
+        background-color: rgba(77,77,77,.5);
         align-items: center;
         justify-content: center;
-        height: 100%;
+        height: calc(100% - 130px);
         p {
             color: #fff;
             margin: 0;
+            font-weight: 500;
             &.p-prime {
                 font-weight: 500;
-                font-size: 44px;
+                font-size: 14px;
+                text-transform: uppercase;
             }
             &.p-sub {
-                font-weight: 400;
-                font-size: 20px;
+                font-size: 40px;
                 margin: 8px 0 20px;
+                text-transform: capitalize;
             }
         }
         .mat-form-field {
@@ -37,11 +82,11 @@
             border: none;
             padding: 0 8px;
             line-height: 16px;
+            border-radius: 4px;
             .mat-form-field-underline {
                 display: none;
             }
             &.select-loc {
-                border-radius: 4px 0 0 4px;
                 background-color: rgba(243, 243, 243, 1);
                 .mat-select {
                     .mat-select-value {
@@ -74,7 +119,6 @@
                 }
             }
             &.search-text {
-                border-radius: 0 4px 4px 0;
                 width: 320px;
             }
         }
