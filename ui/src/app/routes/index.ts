@@ -16,6 +16,10 @@ export const routes: Routes = [
                 loadChildren: "./routes/home/home.module#HomeModule",
                 path: "home",
             },
+            {
+                loadChildren: "./routes/bookings/bookings.module#BookingsModule",
+                path: "mybookings",
+            },
         ],
         component: LayoutComponent,
         path: "app",

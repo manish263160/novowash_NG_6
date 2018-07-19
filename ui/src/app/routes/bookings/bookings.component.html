@@ -1,0 +1,72 @@
+<div class="bookings-wrap" fxLayout="column" fxLayoutGap="16px">
+    <div fxLayout="row" class="page-header" fxLayoutAlign="center center">
+        <h3>My Bookings</h3>
+    </div>
+    <div fxLayout="row" class="tab-switch" fxLayoutAlign="center center">
+        <mat-button-toggle-group #group="matButtonToggleGroup">
+            <mat-button-toggle value="current">
+                <span>Current</span>
+            </mat-button-toggle>
+            <mat-button-toggle value="previous">
+                <span>Previous</span>
+            </mat-button-toggle>
+        </mat-button-toggle-group>
+    </div>
+    <div class="tab-wrap">
+        <mat-tab-group>
+            <mat-tab>
+                <ng-template matTabContent>
+                <div fxLayout="row" class="tab-content">
+                    <mat-card *ngFor="let booking of currentBookings; let i = index">
+                        <mat-card-header>
+                            <mat-card-title>
+                                <div fxLayout="row">                                    
+                                    <span>{{ booking.title }}</span>
+                                    <span class="booking-status">{{ booking.status }}</span>
+                                </div>
+                            </mat-card-title>
+                            <mat-card-subtitle>{{ booking.date }}</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <p class="booking-details">
+                            {{ booking.details }}
+                            </p>
+                        </mat-card-content>
+                        <mat-card-actions>
+                            <button mat-button>VIEW BOOKING</button>
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
+                </ng-template>
+            </mat-tab>
+            <mat-tab>
+                <ng-template matTabContent>
+                <div fxLayout="row" class="tab-content">
+                    <mat-card *ngFor="let booking of previousBookings; let i = index">
+                        <mat-card-header>
+                            <mat-card-title>
+                                <div fxLayout="row">                                    
+                                    <span>{{ booking.title }}</span>
+                                    <span class="booking-status">{{ booking.status }}</span>
+                                </div>
+                            </mat-card-title>
+                            <mat-card-subtitle>{{ booking.date }}</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <p class="booking-details">
+                            {{ booking.details }}
+                            </p>
+                        </mat-card-content>
+                        <mat-card-actions>
+                            <button mat-button>VIEW BOOKING</button>
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
+                </ng-template>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+    <div fxLayout="row" class="book-action" fxLayoutAlign="center center">
+        <button mat-raised-button color="primary" routerLink="/app/home">Book A Service</button>
+    </div>
+</div>

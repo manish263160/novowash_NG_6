@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation, HostListener, ElementRef } from "@angular/core";
+import { Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation, ElementRef } from "@angular/core";
 import { MatButton, MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material";
 import { NavigationStart, Router } from "@angular/router";
 import { Observable, Subscription } from "rxjs";
@@ -21,7 +21,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
     public isIE: boolean = false;
     public isSafari: boolean = false;
     public user: User;
-    public toolbarBG: string = "rgba(243, 243, 243, 0)";
 
     private dialogRef: MatDialogRef<LoginComponent>;
     private config: MatDialogConfig;
@@ -99,15 +98,11 @@ export class LayoutComponent implements OnInit, OnDestroy {
         return initials;
     }
 
-    public gotoBookings() {}
+    public gotoBookings() {
+        this.router.navigate(["/app/mybookings"]);
+    }
 
     public logout() {}
-
-    @HostListener('window:scroll', ['$event'])
-    checkScroll() {
-        const scrollPosition = window.pageYOffset;
-        this.toolbarBG = "rgba(243, 243, 243, " + (scrollPosition - 10)/100 + ")";
-    }
 
     public ngOnDestroy() {}
 }

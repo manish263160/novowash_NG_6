@@ -37,6 +37,7 @@ import { ITMenuService } from "./common/services/it-menu-service";
 import { DeactivateGuardService } from "./common/services/deactivate-guard.service";
 import { DialogService } from "./common/services/dialog.service";
 import { ITDatepickerService } from "./common/services/it-datepicker-service";
+import { SharedModule } from "./shared.module";
 
 @NgModule({
     bootstrap: [
@@ -46,8 +47,6 @@ import { ITDatepickerService } from "./common/services/it-datepicker-service";
         AppComponent,
         LoginComponent,
         LayoutComponent,
-        ConfirmDialogComponent,
-        ErrorDialogComponent,
         FirstKeyPipe,
     ],
     entryComponents: [
@@ -77,6 +76,7 @@ import { ITDatepickerService } from "./common/services/it-datepicker-service";
         MatTooltipModule,
         MatCheckboxModule,
         MatSelectModule,
+        SharedModule,
     ],
     providers: [
         DeactivateGuardService,

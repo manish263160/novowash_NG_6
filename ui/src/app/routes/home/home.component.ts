@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, HostListener, OnDestroy, OnInit, ViewEncapsulation } from "@angular/core";
 import { Observable, Subscription } from "rxjs";
 import { DialogService } from "../../common/services/dialog.service";
 import { ServicesService } from "../../core/services/services.service";
@@ -28,6 +28,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     ];
     public slideConfig = {"slidesToShow": 4, "slidesToScroll": 1};
     public slideHListConfig = {"slidesToShow": 7, "slidesToScroll": 1};
+    private headerEl: any;
+    private styleStr = "style";
+    private bgStr = "background";
 
     constructor(
         private servicesService: ServicesService
@@ -37,7 +40,15 @@ export class HomeComponent implements OnInit, OnDestroy {
         console.log('afterChange');
     }
 
+    @HostListener('window:scroll', ['$event'])
+    checkScroll() {
+        const scrollPosition = window.pageYOffset;
+        this.headerEl[this.styleStr][this.bgStr] = "rgba(243, 243, 243, " + (scrollPosition - 10)/100 + ")";
+    }
+
     public ngOnInit() {
+        this.headerEl = document.getElementById("main-header");
+        this.headerEl[this.styleStr][this.bgStr] = "rgba(243, 243, 243, 0)";
         const cWrapEl = document.getElementsByClassName("content-wrapper")[0];
         if (cWrapEl) {
             cWrapEl.classList.add("no-padding");
@@ -50,5 +61,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     public ngOnDestroy() {
         this.allSubscriptions.unsubscribe();
+        const cWrapEl = document.getElementsByClassName("content-wrapper")[0];
+        if (cWrapEl) {
+            cWrapEl.classList.remove("no-padding");
+        }
+        this.headerEl[this.styleStr][this.bgStr] = "";
     }
 }
