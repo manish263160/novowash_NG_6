@@ -3,7 +3,7 @@
         <a class="logo" href="/app"></a>
         <span class="fill-remaining-space"></span>
         <ng-container *ngIf="!user else userTmpl">            
-            <button mat-button mat-round-button color="primary" (click)="openLoginSignUpDialog()">
+            <button mat-button (click)="openLoginSignUpDialog()">
                 Login/Signup
             </button>
         </ng-container>
@@ -14,25 +14,30 @@
             </button>
         </ng-template>
     </mat-toolbar>
-    <mat-menu #userMenu="matMenu">
+    <mat-menu #userMenu="matMenu" class="custom-menu menu-user" [overlapTrigger]="false">
+            <button mat-menu-item (click)="gotoBookings()">
+                <mat-icon>history</mat-icon>
+                <span>My Bookings</span>
+            </button>
         <button mat-menu-item (click)="logout()">
+            <mat-icon>power_settings_new</mat-icon>
             <span>Logout</span>
         </button>
     </mat-menu>
     <div class="content-wrapper">
         <router-outlet></router-outlet>
     </div>
-</div>
-
-<!-- <div class="cdk-overlay-container">
-    <div class="cdk-global-overlay-wrapper" style="justify-content: center; align-items: center;">
-        <div class="cdk-overlay-backdrop cdk-overlay-custom-backdrop cdk-overlay-backdrop-showing"></div>
-        <div class="cdk-overlay-pane dialog-panel" style="position: static; pointer-events: auto; width: 75%; height: 100%">
-            <div class="mat-dialog-container">
-                <div>
-                    <router-outlet name="dialog" class="dialog" #o="outlet"></router-outlet>
-                </div>
+    <footer class="footer footer-primary">
+        <div fxLayout="column" fxLayoutAlign="baseline center" class="fsec-wrapper">
+            <div fxLayout="row" fxLayoutAlign="center center">
+                <a href="https://www.facebook.com/novowashservices"><i class="fa fa-facebook"></i></a>
+                <a href="https://www.facebook.com/novowashservices"><i class="fa fa-facebook"></i></a>
+                <a href="https://twitter.com/novowash"><i class="fa fa-twitter"></i></a>
+                <a href="https://www.linkedin.com/company/novowash"><i class="fa fa-linkedin"></i></a>
+                <a href="http://www.instagram.com/novowashindia"><i class="fa fa-instagram"></i></a>
+                <a href="https://www.youtube.com/channel/UC0vTJsbwupvVvEzY5BfIVBA"><i class="fa fa-youtube"></i></a>
+                <a href="https://plus.google.com/u/0/105957726178174805323"><i class="fa fa-google-plus"></i></a>
             </div>
         </div>
-    </div>
-</div> -->
+    </footer>
+</div>

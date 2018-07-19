@@ -99,6 +99,10 @@ export class LayoutComponent implements OnInit, OnDestroy {
         return initials;
     }
 
+    public gotoBookings() {}
+
+    public logout() {}
+
     @HostListener('window:scroll', ['$event'])
     checkScroll() {
         const scrollPosition = window.pageYOffset;

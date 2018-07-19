@@ -271,3 +271,60 @@ md-toolbar.mat-toolbar {
         padding-left: 35px;
     }
 }
+
+.custom-menu, .sub-menu-custom {
+    &.mat-menu-panel {
+        border: 1px solid #e8ebed;
+        box-shadow: 0 2px 4px rgba(0,0,0,.2);
+        min-width: 0;
+        max-height: 50vh;
+        .mat-menu-content {
+            padding-top: 16px;
+            padding-bottom: 18px;
+            .mat-menu-item {
+                height: auto;
+                padding: 6px 24px;
+                clear: both;
+                font-weight: 400;
+                font-size: 1rem;
+                line-height: normal;
+                // background-color: transparent;
+                color: #3e5c66;
+                white-space: nowrap;
+                text-decoration: none;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                min-width: 180px;
+                display: -moz-box;
+                & > .mat-icon {
+                    color: #3e5c66;
+                    margin-right: -8px;
+                    // transition: all 0.4s;
+                }
+                &:hover {
+                    & > .mat-icon {
+                        transform: scale(1.1);
+                    }
+                }
+            }
+        }
+        &.menu-user {
+            .mat-menu-content {
+                padding-top: 0;
+                padding-bottom: 0;
+                .mat-menu-item {
+                    &:not(:last-of-type) {                        
+                        border-bottom: 1px solid #e8ebed;
+                    }
+                    padding: 9.5px 16px;
+                    & > .mat-icon {
+                        margin-right: 8px;
+                        line-height: 22px;
+                    }
+                }
+            }
+        }
+    }
+}
