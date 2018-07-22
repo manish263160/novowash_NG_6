@@ -1,0 +1,67 @@
+.bookings-wrap {
+    .tab-switch {
+        .mat-button-toggle-group {
+            border-radius: 0;
+            .mat-button-toggle-button {
+                border-radius: 0;
+                height: 48px;
+                min-width: 120px;
+            }
+        }
+    }
+    .tab-wrap {
+        .mat-tab-group {
+            .mat-tab-header {
+                display: none;
+            }
+            .mat-tab-body-wrapper {
+                .mat-tab-body {
+                    .mat-tab-body-content {
+                        overflow: hidden;
+                        .tab-content {
+                            flex-wrap: wrap;
+                            .mat-card {
+                                margin: 16px;
+                                min-width: 280px;
+                                padding: 0;
+                                & > * {
+                                    padding: 12px;
+                                    &:not(:last-child) {
+                                        border-bottom: 1px solid darkgrey;
+                                    }
+                                }
+                                .mat-card-header {
+                                    .mat-card-header-text {
+                                        margin: 0;
+                                        width: 100%;
+                                        .mat-card-title {
+                                            margin-bottom: 8px;
+                                        }
+                                        .mat-card-subtitle {
+                                            margin-bottom: 0;
+                                            font-size: 12px;
+                                            .booking-status {
+                                                padding: 4px;
+                                                border: 1px solid grey;
+                                                color: #fff;
+                                                text-transform: uppercase;
+                                            }
+                                        }
+                                    }
+                                }
+                                .mat-card-content {
+                                    margin-bottom: 0;
+                                    padding: 16px 12px;
+                                }
+                                .mat-card-actions {
+                                    margin: 0;
+                                    text-align: center;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

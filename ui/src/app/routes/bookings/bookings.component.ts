@@ -1,7 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from "@angular/core";
 import { Observable, Subscription } from "rxjs";
-import { DialogService } from "../../common/services/dialog.service";
-// import { ServicesService } from "../../core/services/services.service";
 
 @Component({
     encapsulation: ViewEncapsulation.None,
@@ -41,26 +39,28 @@ export class BookingsComponent implements OnInit, OnDestroy {
         }];
         this.previousBookings = [{
             title: "PBooking 1",
-            status: "Request Ongoing",
+            status: "Request Completed",
             date: "9 July 2018",
             details: "Booking for a service"
         }, {
             title: "PBooking 2",
-            status: "Request Ongoing",
+            status: "Request Completed",
             date: "9 July 2018",
             details: "Booking for a service"
         }, {
             title: "PBooking 3",
-            status: "Request Ongoing",
+            status: "Request Completed",
             date: "9 July 2018",
             details: "Booking for a service"
         }, {
             title: "PBooking 4",
-            status: "Request Ongoing",
+            status: "Request Completed",
             date: "9 July 2018",
             details: "Booking for a service"
         }];
     }
+
+    public onCategoryChange(event) {}
 
     public ngOnDestroy() {}
 }

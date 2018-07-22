@@ -3,17 +3,18 @@
         <h3>My Bookings</h3>
     </div>
     <div fxLayout="row" class="tab-switch" fxLayoutAlign="center center">
-        <mat-button-toggle-group #group="matButtonToggleGroup">
-            <mat-button-toggle value="current">
+        <mat-button-toggle-group #group="matButtonToggleGroup"
+            value="0" (change)="onCategoryChange($event);">
+            <mat-button-toggle value="0">
                 <span>Current</span>
             </mat-button-toggle>
-            <mat-button-toggle value="previous">
+            <mat-button-toggle value="1">
                 <span>Previous</span>
             </mat-button-toggle>
         </mat-button-toggle-group>
     </div>
     <div class="tab-wrap">
-        <mat-tab-group>
+        <mat-tab-group [selectedIndex]="group.value">
             <mat-tab>
                 <ng-template matTabContent>
                 <div fxLayout="row" class="tab-content">
@@ -22,10 +23,14 @@
                             <mat-card-title>
                                 <div fxLayout="row">                                    
                                     <span>{{ booking.title }}</span>
-                                    <span class="booking-status">{{ booking.status }}</span>
                                 </div>
                             </mat-card-title>
-                            <mat-card-subtitle>{{ booking.date }}</mat-card-subtitle>
+                            <mat-card-subtitle>
+                                <div fxLayout="row" fxLayoutAlign="space-between center">                                    
+                                    <span>{{ booking.date }}</span>
+                                    <span class="booking-status current">{{ booking.status }}</span>
+                                </div>
+                                </mat-card-subtitle>
                         </mat-card-header>
                         <mat-card-content>
                             <p class="booking-details">
@@ -47,10 +52,14 @@
                             <mat-card-title>
                                 <div fxLayout="row">                                    
                                     <span>{{ booking.title }}</span>
-                                    <span class="booking-status">{{ booking.status }}</span>
                                 </div>
                             </mat-card-title>
-                            <mat-card-subtitle>{{ booking.date }}</mat-card-subtitle>
+                            <mat-card-subtitle>
+                                <div fxLayout="row" fxLayoutAlign="space-between center">                                    
+                                    <span>{{ booking.date }}</span>
+                                    <span class="booking-status done">{{ booking.status }}</span>
+                                </div>
+                                </mat-card-subtitle>
                         </mat-card-header>
                         <mat-card-content>
                             <p class="booking-details">

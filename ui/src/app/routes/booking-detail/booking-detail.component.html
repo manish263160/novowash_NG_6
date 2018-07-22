@@ -1,0 +1,57 @@
+<div class="booking-detail-wrap" fxLayout="column" fxLayoutGap="16px">
+    <div class="bd-header" fxLayout="column">
+        <div class="bd-header-main" fxLayout="row" fxLayoutAlign="space-between center">
+            <button mat-button routerLink="/app/mybookings">
+                <mat-icon>arrow_back</mat-icon>
+                <span>All Bookings</span>
+            </button>
+            <h2 class="bd-header-text">{{ service.name }}</h2>
+            <button mat-button color="primary">Cancel Request</button>
+        </div>
+        <div class="bd-header-sub" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="8px">
+            <span class="bd-header-key">Creation Date:</span>
+            <span class="bd-header-value">{{ service.postedOn.toDateString() }}</span>
+            <span class="separation-dot"></span>
+            <span class="bd-header-key">Service Date:</span>
+            <span class="bd-header-value">{{ service.serviceOn.toDateString() }}</span>
+            <span class="separation-dot"></span>
+            <a href="javascript:void(0);" click="showDetails();" class="bd-header-a-details">
+                Details
+            </a>
+        </div>
+    </div>
+    <div class="bd-content" fxLayout="row" fxLayoutGap="16px">
+        <div fxLayout="column" class="left-sec" fxLayoutGap="16px">
+            <div class="bd-card mat-elevation-z1" fxLayout="column">
+                <div class="header-seg">
+                    <h4 class="header">Booking Summary</h4>
+                    <p class="text">
+                        Your serivice for your appliance is confirmed.
+                        Details will appear here.
+                    </p>
+                </div>
+                <div class="technician-seg" *ngIf="service.technician">
+                    <h2 class="header">
+                        <mat-icon>check_circle_outline</mat-icon>
+                        Technician Assigned
+                    </h2>
+                    <div class="technician-info" fxLayout="row">
+                        <img class="technician-dp">
+                        <div fxLayout="column">
+                            <span class="technician-name">{{ service.technician.name }}</span>
+                            <span class="technician-review">
+                                <span class="rating">{{ service.technician.rating }}</span>
+                                <span class="review">({{ service.technician.reviewCount }} reviews)</span>
+                            </span>
+                        </div>
+                        <span fxFlex></span>
+                        <button mat-button disabled>
+                            <mat-icon>call</mat-icon>
+                            <span>{{ service.technician.phone }}</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

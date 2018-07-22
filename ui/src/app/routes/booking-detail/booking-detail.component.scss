@@ -1,0 +1,63 @@
+.booking-detail-wrap {
+    .bd-header {
+        background-color: #f3f3f3;
+        border-top: 1px solid darkgray;
+        box-shadow: 0 0px 4px 0px darkgrey;
+        margin: -12px -20px 0;
+        padding: 0 20px;
+        .bd-header-main {
+            padding: 12px 0;
+            .bd-header-text {
+                margin: 0;
+            }
+        }
+        .bd-header-sub {
+            font-size: 14px;
+            padding: 0 12px 20px;
+            .bd-header-key {
+                color: #5a5959;
+            }
+            .bd-header-value {}
+            .separation-dot {
+                width: 4px;
+                height: 4px;
+                border-radius: 50%;
+                background-color: darkgray;
+            }
+        }
+    }
+    .bd-content {        
+        .left-sec {
+            width: 66%;
+            max-width: 920px;
+        }
+        .bd-card {
+            border: 1px solid #eee;
+            border-radius: 4px;
+            padding: 8px;
+            & > *:not(:last-of-type) {
+                padding: 12px 0;
+                border-bottom: 1px solid darkgray;
+            }
+            .header-seg {
+                .header {
+                    margin: 4px 0 8px;
+                }
+                .text {
+                    margin: 4px 0;
+                    font-size: 14px;
+                    color: #5f5c5c;
+                }
+            }
+            .technician-seg {
+                .header {
+                    color: green;
+                    .mat-icon {
+                        height: 30px;
+                        vertical-align: middle;
+                    }
+                }
+            }
+        }
+    }
+}

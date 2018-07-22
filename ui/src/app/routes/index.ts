@@ -17,6 +17,10 @@ export const routes: Routes = [
                 path: "home",
             },
             {
+                loadChildren: "./routes/booking-detail/booking-detail.module#BookingDetailModule",
+                path: "mybookings/:id",
+            },
+            {
                 loadChildren: "./routes/bookings/bookings.module#BookingsModule",
                 path: "mybookings",
             },
