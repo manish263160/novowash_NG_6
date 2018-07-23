@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from "@angular/core";
 import { Observable, Subscription } from "rxjs";
+import { Router } from "@angular/router";
 
 @Component({
     encapsulation: ViewEncapsulation.None,
@@ -13,7 +14,9 @@ export class BookingsComponent implements OnInit, OnDestroy {
     public currentBookings: any[];
     public previousBookings: any[];
 
-    constructor() {}
+    constructor(
+        private router: Router,
+    ) {}
 
     public ngOnInit() {
         this.currentBookings = [{
@@ -58,6 +61,13 @@ export class BookingsComponent implements OnInit, OnDestroy {
             date: "9 July 2018",
             details: "Booking for a service"
         }];
+    }
+
+    public goToBookingDetail(event, id) {
+        if (event) {
+            event.stopPropagation();
+        }
+        this.router.navigate([`/app/mybookings/${id}`]);
     }
 
     public onCategoryChange(event) {}
