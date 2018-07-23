@@ -26,22 +26,26 @@
             }
         }
     }
-    .bd-content {        
+    .bd-content {
+        justify-content: center;        
         .left-sec {
             width: 66%;
-            max-width: 920px;
+            max-width: 820px;
         }
         .bd-card {
             border: 1px solid #eee;
             border-radius: 4px;
-            padding: 8px;
+            padding: 8px 16px 16px;
             & > *:not(:last-of-type) {
                 padding: 12px 0;
                 border-bottom: 1px solid darkgray;
             }
+            & > *:last-of-type {
+                padding: 12px 0 0;
+            }
             .header-seg {
                 .header {
-                    margin: 4px 0 8px;
+                    margin: 0 0 8px;
                 }
                 .text {
                     margin: 4px 0;
@@ -52,12 +56,34 @@
             .technician-seg {
                 .header {
                     color: green;
+                    margin-top: 0;
                     .mat-icon {
                         height: 30px;
                         vertical-align: middle;
                     }
                 }
+                .technician-info {
+                    align-items: center;
+                    .technician-dp {
+                        width: 50px;
+                        height: 50px;
+                        border-radius: 50%;
+                    }
+                    .technician-review {
+                        star-rating {
+                            margin-right: 4px;
+                        }
+                        .review {
+                            font-size: 14px;
+                            color: #5a5959;
+                        }
+                    }                    
+                }
             }
+        }
+        .right-sec {
+            width: 34%;
+            max-width: 450px;
         }
     }
 }

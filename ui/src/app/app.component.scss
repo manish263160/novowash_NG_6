@@ -6,6 +6,8 @@
 @import "styles/toolbar";
 @import "styles/carousel";
 
+@import '~css-star-rating/scss/star-rating';
+
 $accent-color-50: map-get($accent, 50);
 $accent-color-100: map-get($accent, 100);
 $accent-color-200: map-get($accent, 200);
@@ -3163,4 +3165,34 @@ mat-sidenav.lm {
   &.done {
     background-color: orange;
   }
+}
+
+star-rating {
+  display: inline-block;
+}
+.rating {
+  align-items: baseline;
+  &.sm {
+    .label-value {
+      font-size: 14px;
+      line-height: 1;
+    }
+    .star {
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+
+.mat-button {
+  &.btn-contact {
+      color: initial;
+      .mat-button-focus-overlay {
+          opacity: 1;
+      }
+  }
+}
+
+[mat-raised-button].mat-raised-button:not(.mat-icon-button) {
+  padding: 0 1rem;
 }

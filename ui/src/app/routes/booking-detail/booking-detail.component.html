@@ -1,19 +1,19 @@
-<div class="booking-detail-wrap" fxLayout="column" fxLayoutGap="16px">
+<div class="booking-detail-wrap" fxLayout="column" fxLayoutGap="32px">
     <div class="bd-header" fxLayout="column">
         <div class="bd-header-main" fxLayout="row" fxLayoutAlign="space-between center">
             <button mat-button routerLink="/app/mybookings">
                 <mat-icon>arrow_back</mat-icon>
                 <span>All Bookings</span>
             </button>
-            <h2 class="bd-header-text">{{ service.name }}</h2>
+            <h2 class="bd-header-text">{{ service?.name }}</h2>
             <button mat-button color="primary">Cancel Request</button>
         </div>
         <div class="bd-header-sub" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="8px">
             <span class="bd-header-key">Creation Date:</span>
-            <span class="bd-header-value">{{ service.postedOn.toDateString() }}</span>
+            <span class="bd-header-value">{{ service?.postedOn?.toDateString() }}</span>
             <span class="separation-dot"></span>
             <span class="bd-header-key">Service Date:</span>
-            <span class="bd-header-value">{{ service.serviceOn.toDateString() }}</span>
+            <span class="bd-header-value">{{ service?.serviceOn?.toDateString() }}</span>
             <span class="separation-dot"></span>
             <a href="javascript:void(0);" click="showDetails();" class="bd-header-a-details">
                 Details
@@ -26,29 +26,89 @@
                 <div class="header-seg">
                     <h4 class="header">Booking Summary</h4>
                     <p class="text">
-                        Your serivice for your appliance is confirmed.
+                        Your service for your appliance is confirmed.
                         Details will appear here.
                     </p>
                 </div>
-                <div class="technician-seg" *ngIf="service.technician">
+                <div class="technician-seg" *ngIf="service?.technician">
                     <h2 class="header">
                         <mat-icon>check_circle_outline</mat-icon>
                         Technician Assigned
                     </h2>
-                    <div class="technician-info" fxLayout="row">
-                        <img class="technician-dp">
-                        <div fxLayout="column">
-                            <span class="technician-name">{{ service.technician.name }}</span>
+                    <div class="technician-info" fxLayout="row" fxLayoutGap="16px">
+                        <img class="technician-dp" [src]="(service?.technician?.imgSrc | image) | async" alt="Tech"
+                            onerror="this.src='/assets/img/tech.png'">
+                        <div fxLayout="column" fxLayoutGap="4px">
+                            <span class="technician-name">{{ service?.technician?.name }}</span>
                             <span class="technician-review">
-                                <span class="rating">{{ service.technician.rating }}</span>
-                                <span class="review">({{ service.technician.reviewCount }} reviews)</span>
+                                <star-rating [starType]="'svg'" [rating]="service?.technician?.rating" labelPosition="right" [showHalfStars]="true"
+                                    [labelText]="service?.technician?.rating" [readOnly]="true" size="sm">
+                                </star-rating>
+                                <span class="review">({{ service?.technician?.reviewCount }} reviews)</span>
                             </span>
                         </div>
                         <span fxFlex></span>
-                        <button mat-button disabled>
+                        <a [href]="getTelHref(service?.technician?.phone)" mat-button class="btn-contact">
                             <mat-icon>call</mat-icon>
-                            <span>{{ service.technician.phone }}</span>
-                        </button>
+                            <span>{{ service?.technician?.phone }}</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="header-seg">
+                    <h4 class="header">Your selected time slot</h4>
+                    <p class="text">
+                        Between 9AM to 12PM on {{ service?.serviceOn?.toDateString() }}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div fxLayout="column" class="right-sec" fxLayoutGap="16px">
+            <div class="bd-card mat-elevation-z1" fxLayout="column">
+                <div class="header-seg" fxLayout="row">
+                    <div fxLayout="column">                        
+                        <h4 class="header">Need help?</h4>
+                        <p class="text">
+                            Call us for any query.
+                        </p>
+                    </div>
+                    <span fxFlex></span>
+                    <a [href]="getTelHref(ccNumber)" mat-button class="btn-contact">
+                        <mat-icon>call</mat-icon>
+                        <span>{{ service?.technician?.phone }}</span>
+                    </a>
+                </div>
+            </div>
+            <div class="bd-card mat-elevation-z1" fxLayout="column">
+                <div class="header-seg" fxLayout="row">
+                    <div fxLayout="column">                        
+                        <h4 class="header">Change of plans?</h4>
+                        <p class="text">
+                            Reschedule to a new time slot.
+                        </p>
+                    </div>
+                    <span fxFlex></span>
+                    <button mat-raised-button color="primary">
+                        <mat-icon>restore</mat-icon>
+                        <span>Reschedule</span>
+                    </button>
+                </div>
+            </div>
+            <div class="bd-card mat-elevation-z1" fxLayout="column" *ngIf="paymentDetail?.length">
+                <div class="header-seg" fxLayout="row">
+                    <div fxLayout="column">                        
+                        <h4 class="header">Payment Summary</h4>
+                    </div>
+                </div>
+                <div class="list-seg" fxLayout="column">
+                    <div class="list-item" fxLayout="row"
+                        *ngFor="let payment of paymentDetail">
+                        <span class="list-key">{{ payment?.key }}</span>
+                        <span class="list-value">{{ payment?.amount }}</span>
+                    </div>
+                    <div class="list-item" fxLayout="row">
+                        <span class="list-key">Sub Total</span>
+                        <span class="list-value">{{ getSubTotal() }}</span>
                     </div>
                 </div>
             </div>

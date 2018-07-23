@@ -8,6 +8,8 @@ import { BookingDetailComponent } from "./booking-detail.component";
 import { BookingDetailRoutes } from "./booking-detail.routes";
 import { SharedModule } from "../../shared.module";
 
+import { StarRatingModule } from "angular-star-rating"
+
 import { 
     MatFormFieldModule,
     MatInputModule,
@@ -35,6 +37,7 @@ import {
         MatCardModule,
         MatButtonModule,
         SharedModule,
+        StarRatingModule,
     ],
     providers: [
         DialogService,

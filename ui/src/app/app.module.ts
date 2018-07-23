@@ -31,13 +31,15 @@ import { LoginComponent } from "./login/login.component";
 
 import { ConfirmDialogComponent } from "./common/components/confirm-dialog.component";
 import { ErrorDialogComponent } from "./common/components/error.dialog.component";
-import { FirstKeyPipe } from "./common/pipes/first.key.pipe";
+// import { FirstKeyPipe } from "./common/pipes/first.key.pipe";
 import { environment } from "../environments/environment";
 import { ITMenuService } from "./common/services/it-menu-service";
 import { DeactivateGuardService } from "./common/services/deactivate-guard.service";
 import { DialogService } from "./common/services/dialog.service";
 import { ITDatepickerService } from "./common/services/it-datepicker-service";
 import { SharedModule } from "./shared.module";
+
+import { StarRatingModule } from 'angular-star-rating';
 
 @NgModule({
     bootstrap: [
@@ -47,7 +49,6 @@ import { SharedModule } from "./shared.module";
         AppComponent,
         LoginComponent,
         LayoutComponent,
-        FirstKeyPipe,
     ],
     entryComponents: [
         ConfirmDialogComponent,
@@ -77,6 +78,7 @@ import { SharedModule } from "./shared.module";
         MatCheckboxModule,
         MatSelectModule,
         SharedModule,
+        StarRatingModule.forRoot(),
     ],
     providers: [
         DeactivateGuardService,
