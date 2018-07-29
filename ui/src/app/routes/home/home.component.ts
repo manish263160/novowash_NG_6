@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     public slideConfig = {"slidesToShow": 4, "slidesToScroll": 1};
     public slideHListConfig = {"slidesToShow": 7, "slidesToScroll": 1};
     private headerEl: any;
+    private btnLoginEl: any;
     private styleStr = "style";
     private bgStr = "background";
 
@@ -44,10 +45,18 @@ export class HomeComponent implements OnInit, OnDestroy {
     checkScroll() {
         const scrollPosition = window.pageYOffset;
         this.headerEl[this.styleStr][this.bgStr] = "rgba(243, 243, 243, " + (scrollPosition - 10)/100 + ")";
+        if (scrollPosition > 50) {
+            this.headerEl.classList.remove("mh-tp");
+        } else if(!this.headerEl.classList.contains("mh-tp")) {
+            this.headerEl.classList.add("mh-tp");
+        }
     }
 
     public ngOnInit() {
         this.headerEl = document.getElementById("main-header");
+        if(!this.headerEl.classList.contains("mh-tp")) {
+            this.headerEl.classList.add("mh-tp");
+        }
         this.headerEl[this.styleStr][this.bgStr] = "rgba(243, 243, 243, 0)";
         const cWrapEl = document.getElementsByClassName("content-wrapper")[0];
         if (cWrapEl) {
@@ -66,5 +75,6 @@ export class HomeComponent implements OnInit, OnDestroy {
             cWrapEl.classList.remove("no-padding");
         }
         this.headerEl[this.styleStr][this.bgStr] = "";
+        this.headerEl.classList.remove("mh-tp");
     }
 }

@@ -24,7 +24,7 @@ import {
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app.routing";
 
-import { AuthGuard } from "./core/services/auth-guard.service";
+// import { AuthGuard } from "./core/services/auth-guard.service";
 import { CoreModule } from "./core/core.module";
 import { LayoutComponent } from "./layout/layout.component";
 import { LoginComponent } from "./login/login.component";
@@ -79,6 +79,7 @@ import { StarRatingModule } from 'angular-star-rating';
         MatSelectModule,
         SharedModule,
         StarRatingModule.forRoot(),
+        CoreModule.forRoot(),
     ],
     providers: [
         DeactivateGuardService,

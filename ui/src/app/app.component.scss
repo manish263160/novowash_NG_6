@@ -1446,6 +1446,11 @@ mat-toolbar.mat-toolbar:not([color]).toolbar-primary {
   position: fixed;
   z-index: 2;
   background-color: rgba(243, 243, 243, 1);
+  &.mh-tp {
+    & > button {
+      color: $white-color !important;
+    }
+  }
 }
 
 @media (max-width: 600px) {

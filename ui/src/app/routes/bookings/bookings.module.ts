@@ -5,6 +5,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { BookingsComponent } from "./bookings.component";
 import { BookingsRoutes } from "./bookings.routes";
 import { SharedModule } from "../../shared.module";
+// import { UserService } from "../../core/services/user.service";
 
 import {
     MatTabsModule,
@@ -28,7 +29,8 @@ import {
         MatButtonToggleModule,
         SharedModule,
     ],
-    providers: [],
+    providers: [
+    ],
 })
 
 export class BookingsModule {}

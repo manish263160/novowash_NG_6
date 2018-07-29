@@ -59,7 +59,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
     }
     
     public ngOnInit(): void {
-        this.checkIsLoggedIn();
+        // this.checkIsLoggedIn();
     }
 
     public checkIsLoggedIn() {

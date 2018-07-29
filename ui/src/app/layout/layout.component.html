@@ -3,7 +3,7 @@
         <a class="logo" href="/app"></a>
         <span class="fill-remaining-space"></span>
         <ng-container *ngIf="!user else userTmpl">            
-            <button mat-stroked-button color="primary" (click)="openLoginSignUpDialog()">
+            <button id="mh-btn-login" mat-stroked-button color="primary" (click)="openLoginSignUpDialog()">
                 Login/Signup
             </button>
         </ng-container>

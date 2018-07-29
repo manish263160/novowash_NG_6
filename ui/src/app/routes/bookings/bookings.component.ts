@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from "@angular/core";
 import { Observable, Subscription } from "rxjs";
 import { Router } from "@angular/router";
+import { UserService } from "../../core/services/user.service";
 
 @Component({
     encapsulation: ViewEncapsulation.None,
@@ -16,6 +17,7 @@ export class BookingsComponent implements OnInit, OnDestroy {
 
     constructor(
         private router: Router,
+        private userService: UserService,
     ) {}
 
     public ngOnInit() {
