@@ -1,0 +1,22 @@
+{
+  "/auth/": {
+    "target":  {
+      "host": "13.59.141.30",
+      "protocol": "http:",
+      "port": 8080
+    },
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  },
+  "/common/": {
+    "target":  {
+      "host": "13.59.141.30",
+      "protocol": "http:",
+      "port": 8080
+    },
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+ }
