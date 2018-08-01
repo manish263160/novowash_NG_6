@@ -5,7 +5,7 @@
   "description": "Angular project for novowash new ui",
   "scripts": {
     "lint": "tslint ./src/**/*.ts -t verbose",
-    "start": "ng serve --proxy-config proxy.config.json  --port 8080",
+    "start": "ng serve --proxy-config proxy.config.json  --port 4200",
     "test": "ng test",
     "build": "ng build --prod",
     "e2e": "ng e2e",

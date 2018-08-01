@@ -2,6 +2,8 @@ import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
 import { OAuthService } from "angular-oauth2-oidc";
 import { environment } from "../../environments/environment";
+import { Observable } from "rxjs/Observable";
+import { map, combineLatest } from 'rxjs/operators';
 
 @Injectable()
 export class ROPCService {
@@ -11,10 +13,27 @@ export class ROPCService {
 
   public async login(username: string, password: string) {
     debugger;
-    const profile: any = await this.oauthService.fetchTokenUsingPasswordFlowAndLoadUserProfile(username, password);
-    localStorage.setItem("profile" , JSON.stringify(profile));
-    this.user = profile;
-    return profile;
+    const body = new HttpParams()
+      .set('username', username)
+      .set('password', password)
+      .set('grant_type', environment.auth.grantType);
+    
+    const headers = new HttpHeaders()
+      .set("Content-type", "application/json")
+      .set("Authorization", "Basic d2ViOnNlY3JldA==");
+
+    this.httpClient
+      .post(this.oauthService.tokenEndpoint, body.toString(), {headers})
+      .pipe(map((res: any) => {
+        debugger;
+      })).subscribe(
+        data => {
+          debugger;
+        },
+        err => {
+          debugger;
+        }
+      )
   }
 
   public logOut() {
