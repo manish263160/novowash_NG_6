@@ -1,5 +1,5 @@
 import { Routes } from "@angular/router";
-import { AuthGuard } from "../core/services/auth-guard.service";
+import { AuthGuard } from "../auth/auth.guard";
 import { LayoutComponent } from "../layout/layout.component";
 
 export const routes: Routes = [
@@ -9,8 +9,6 @@ export const routes: Routes = [
         redirectTo: "app",
     },
     {
-        canActivate: [AuthGuard],
-        canActivateChild: [AuthGuard],
         children: [
             {
                 loadChildren: "./routes/home/home.module#HomeModule",
