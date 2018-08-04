@@ -29,14 +29,80 @@
     </div>
     <footer class="footer footer-primary">
         <div fxLayout="column" fxLayoutAlign="baseline center" class="fsec-wrapper">
-            <div fxLayout="row" fxLayoutAlign="center center">
-                <a href="https://www.facebook.com/novowashservices"><i class="fa fa-facebook"></i></a>
+            <div fxLayout="row" fxLayoutAlign="center center" class="light-dark fsec-social-wrap">
                 <a href="https://www.facebook.com/novowashservices"><i class="fa fa-facebook"></i></a>
                 <a href="https://twitter.com/novowash"><i class="fa fa-twitter"></i></a>
                 <a href="https://www.linkedin.com/company/novowash"><i class="fa fa-linkedin"></i></a>
                 <a href="http://www.instagram.com/novowashindia"><i class="fa fa-instagram"></i></a>
                 <a href="https://www.youtube.com/channel/UC0vTJsbwupvVvEzY5BfIVBA"><i class="fa fa-youtube"></i></a>
                 <a href="https://plus.google.com/u/0/105957726178174805323"><i class="fa fa-google-plus"></i></a>
+            </div>
+            <div class="fsec-divider"></div>
+            <div class="fsec-content-wrap light-dark" fxLayout="row">
+                <!-- about us -->
+                <div class="content-block">
+                    <h3 class="fsec-block-header">About Us</h3>
+                    <div class="fsec-block-content">
+                        <p class="p-about">
+                            Novowash was founded by a team of passionate IITians,
+                            looking to provide highly standardized and ultra premium
+                            services to consumers and clients on a PAN India basis.
+                        </p>
+                    </div>
+                </div>
+                <!-- company -->
+                <div class="content-block">
+                    <h3 class="fsec-block-header">Company</h3>
+                    <div class="fsec-block-content">
+                        <ul class="fsec-content-list">
+                            <li *ngFor="let item of companyQItems">
+                                <a [href]="item.href">{{ item.text }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- address -->
+                <div class="content-block">
+                    <h3 class="fsec-block-header">Address</h3>
+                    <div class="fsec-block-content">
+                        <ul class="fsec-content-list">
+                            <li>
+                                <span><b>Corporate Office:</b></span>
+                            </li>
+                            <li>
+                                <span>C-10, Main Market, Malviyanagar, Delhi : 110017</span>
+                            </li>
+                            <li>
+                                <span>Ph: +91-7505100200</span>
+                            </li>
+                            <li>
+                                <span>Email: info@novowash.com</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- serving 1 -->
+                <div class="content-block">
+                    <h3 class="fsec-block-header">Serving In</h3>
+                    <div class="fsec-block-content">
+                        <ul class="fsec-content-list">
+                            <li *ngFor="let item of servingItems[0]">
+                                <span>{{ item }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- serving 2 -->
+                <div class="content-block">
+                    <h3 class="fsec-block-header">&nbsp;</h3>
+                    <div class="fsec-block-content">
+                        <ul class="fsec-content-list">
+                            <li *ngFor="let item of servingItems[1]">
+                                <span>{{ item }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </footer>

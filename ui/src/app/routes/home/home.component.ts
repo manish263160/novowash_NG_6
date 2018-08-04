@@ -1,4 +1,5 @@
 import { Component, HostListener, OnDestroy, OnInit, ViewEncapsulation } from "@angular/core";
+import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { Observable, Subscription } from "rxjs";
 import { DialogService } from "../../common/services/dialog.service";
 import { ServicesService } from "../../core/services/services.service";
@@ -27,14 +28,15 @@ export class HomeComponent implements OnInit, OnDestroy {
         {value: 'bangalore-2', viewValue: 'Bangalore'}
     ];
     public slideConfig = {"slidesToShow": 4, "slidesToScroll": 1};
-    public slideHListConfig = {"slidesToShow": 7, "slidesToScroll": 1};
+    public slideHListConfig = {"slidesToShow": 8, "slidesToScroll": 1};
     private headerEl: any;
     private btnLoginEl: any;
     private styleStr = "style";
     private bgStr = "background";
 
     constructor(
-        private servicesService: ServicesService
+        private servicesService: ServicesService,
+        private _sanitizer: DomSanitizer,
     ) {}
     
     public afterChange(e) {
@@ -76,5 +78,13 @@ export class HomeComponent implements OnInit, OnDestroy {
         }
         this.headerEl[this.styleStr][this.bgStr] = "";
         this.headerEl.classList.remove("mh-tp");
+    }
+
+    public getBackground(image) {
+        return this._sanitizer.bypassSecurityTrustStyle(`url(${image})`);
+    }
+
+    public openServiceBookDlg(serviceId: number = 0) {
+        //
     }
 }

@@ -21,6 +21,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
     public isIE: boolean = false;
     public isSafari: boolean = false;
     public user: User;
+    public companyQItems: any[] = [];
+    public servingItems: any[] = [];
 
     private dialogRef: MatDialogRef<LoginComponent>;
     private config: MatDialogConfig;
@@ -60,6 +62,35 @@ export class LayoutComponent implements OnInit, OnDestroy {
     
     public ngOnInit(): void {
         // this.checkIsLoggedIn();
+        this.companyQItems = [{
+            href: "#",
+            text: "Company Overview"
+        }, {
+            href: "#",
+            text: "Frequently Asked Questions"
+        }, {
+            href: "#",
+            text: "Privacy Policy"
+        }, {
+            href: "#",
+            text: "Terms of Use"
+        }];
+        let servingItemsTotal = [
+            "New Delhi",
+            "North-West Delhi",
+            "West Delhi",
+            "South-West Delhi",
+            "South Delhi",
+            "Gurgaon",
+            "South-East Delhi",
+            "Central Delhi",
+            "Norht-East Delhi",
+            "Shahdara",
+            "East Delhi",
+            "Noida",
+        ];
+        this.servingItems[0] = servingItemsTotal.splice(0, servingItemsTotal.length/2);
+        this.servingItems[1] = servingItemsTotal;
     }
 
     public checkIsLoggedIn() {

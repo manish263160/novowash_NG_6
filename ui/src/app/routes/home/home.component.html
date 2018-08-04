@@ -19,10 +19,10 @@
     </div>
     <div class="carousel-wrap service-hlist-wrap">    
         <ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideHListConfig" (afterChange)="afterChange($event)">
-            <div ngxSlickItem *ngFor="let item of serviceItems" class="slide">
+            <div ngxSlickItem *ngFor="let item of serviceItems" class="slide" (click)="openServiceBookDlg(item.id)">
                 <div fxLayout="column" class="service-hlist-item" fxLayoutAlign="center center" width="100%">
-                    <span class="service-icon" [style.backgroundImage]="item.icon"></span>
-                    <span class="service-name">{{ item.name }}</span>
+                    <span class="service-icon" [style.backgroundImage]="getBackground(item.imageUrl)"></span>
+                    <span class="service-name">{{ item.catName }}</span>
                 </div>
             </div>
         </ngx-slick>

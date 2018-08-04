@@ -12,42 +12,11 @@ export class ServicesService {
     }
 
     public getServices(): Observable<any> {
-        // return this.http
-        //     .get("/api/checkNumber")
-        //     .pipe(map((res: any) => {
-        //         return res.content || [];
-        //     }));
-        let serviceItems = [{
-                icon: "url('/assets/img/home-cleaning.png')",
-                name: "Home Cleaning"
-            }, {
-                icon: "url('/assets/img/furniture.png')",
-                name: "Home Upholstery/Furniture"
-            }, {
-                icon: "url('/assets/img/home-package.png')",
-                name: "New home package"
-            }, {
-                icon: "url('/assets/img/sanitization.png')",
-                name: "Home Sanitization"
-            }, {
-                icon: "url('/assets/img/car-detailing.png')",
-                name: "Car Detailing"
-            }, {
-                icon: "url('/assets/img/laundry.png')",
-                name: "Laundry Services"
-            }, {
-                icon: "url('/assets/img/pest-control.png')",
-                name: "Pest Control"
-            }, {
-                icon: "url('/assets/img/comm-cleaning.png')",
-                name: "Commercial cleaning"
-        }];
-        return new Observable(observer => {
-            setTimeout(() => {
-              observer.next(serviceItems);
-              observer.complete();
-            },1000);
-        });
+        return this.http
+            .post("http://54.245.176.18:8080/NovoWash/services/get/category", {})
+            .pipe(map((res: any) => {
+                return res.data || [];
+            }));
     }
 
     public getService(id): Observable<Service> {
@@ -56,6 +25,7 @@ export class ServicesService {
         //     .pipe(map((res: any) => {
         //         return res.content || {};
         //     }));
+
         let service: Service = {
             id: Math.ceil(Math.random() * 10),
             name: "Service Name",
@@ -68,7 +38,13 @@ export class ServicesService {
                 phone: "+919988102030",
                 rating: 3.5,
                 reviewCount: 132
-            }
+            },
+            createdOn: 1212,
+            createdBy: "system",
+            catName: "Sample",
+            imageUrl: "",
+            catType: 1,
+            status: 1
         };
         return new Observable(observer => {
             setTimeout(() => {
