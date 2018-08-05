@@ -3201,3 +3201,10 @@ star-rating {
 [mat-raised-button].mat-raised-button:not(.mat-icon-button) {
   padding: 0 1rem;
 }
+
+.separator-1 {
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(170, 170, 170, 1);
+}
