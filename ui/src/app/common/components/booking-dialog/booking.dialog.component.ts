@@ -128,12 +128,32 @@ export class BookingDialogComponent implements OnDestroy, OnInit {
                 this.allSubscriptions = serviceSub;
             }
         }
+        this.loadSubServices();
     }
 
     ngOnDestroy() {
         if (this.allSubscriptions) {
             this.allSubscriptions.unsubscribe();
         }
+    }
+
+    public loadSubServices() {
+        if (this.selectedServiceId) {
+            const subServiceSub = this.servicesService.getSubServices(this.selectedServiceId)
+                .subscribe((val) => {
+                    this.subList = val;
+                });
+            if (this.allSubscriptions) {
+                this.allSubscriptions.add(subServiceSub);
+            } else {
+                this.allSubscriptions = subServiceSub;
+            }
+        }
+    }
+
+    public onClickMainService(serviceId){
+        this.selectedServiceId = serviceId;
+        this.loadSubServices();
     }
 
     public getBackground(image) {

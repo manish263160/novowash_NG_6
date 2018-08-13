@@ -29,7 +29,7 @@
                 </mat-form-field>
                 <mat-form-field floatLabel="never">
                     <span matPrefix>+91 &nbsp;</span>
-                    <input type="tel" matInput placeholder="Mobile Number" formControlName="number" novalidate>
+                    <input type="tel" cdkFocusRegionstart matInput placeholder="Mobile Number" formControlName="number" novalidate>
                     <mat-error *ngIf="(loginForm.controls['number'].errors | firstKey) ==='required' && loginForm.controls['number'].touched">
                         Mobile number is required
                     </mat-error>

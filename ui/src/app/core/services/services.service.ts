@@ -19,6 +19,14 @@ export class ServicesService {
             }));
     }
 
+    public getSubServices(serviceId): Observable<any> {
+        return this.http
+            .post(`http://54.245.176.18:8080/NovoWash/services/get/${serviceId}`, {})
+            .pipe(map((res: any) => {
+                return res.data || [];
+            }));
+    }
+
     public getService(id): Observable<Service> {
         // return this.http
         //     .get(`/api/getService?id=${id}`)

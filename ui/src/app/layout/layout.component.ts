@@ -44,7 +44,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
         this.isSafari = ua.indexOf("Safari") !== -1 && !isChrome;
 
         this.config = new MatDialogConfig();
-        this.config.backdropClass = "cdk-overlay-custom-backdrop";
+        // this.config.backdropClass = "cdk-overlay-custom-backdrop";
         this.config.width = "75%";
         this.config.disableClose = true;
         this.config.panelClass = "dialog-panel-login";

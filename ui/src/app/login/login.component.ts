@@ -130,7 +130,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     public ngOnDestroy() {
-        this.allSubscriptions.unsubscribe();
+        if (this.allSubscriptions) {            
+            this.allSubscriptions.unsubscribe();
+        }
     }
 
     public openSnackBar(message: string, panelClass:string = "", action: string = "") {
