@@ -1,6 +1,8 @@
 import { Component, HostListener, OnDestroy, OnInit, ViewEncapsulation } from "@angular/core";
+import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material";
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { Observable, Subscription } from "rxjs";
+import { BookingDialogComponent } from "../../common/components/booking-dialog/booking.dialog.component";
 import { DialogService } from "../../common/services/dialog.service";
 import { ServicesService } from "../../core/services/services.service";
 
@@ -34,10 +36,27 @@ export class HomeComponent implements OnInit, OnDestroy {
     private styleStr = "style";
     private bgStr = "background";
 
+    private dialogRef: MatDialogRef<BookingDialogComponent>;
+    private config: MatDialogConfig;
+
     constructor(
         private servicesService: ServicesService,
         private _sanitizer: DomSanitizer,
-    ) {}
+        private dialog: MatDialog,
+        private dialogService: DialogService,
+    ) {
+        this.config = new MatDialogConfig();
+        this.config.backdropClass = "cdk-overlay-custom-backdrop";
+        this.config.width = "75%";
+        this.config.disableClose = true;
+        this.config.panelClass = "dialog-panel";
+        this.config.position = {
+            bottom: "",
+            left: "",
+            right: "",
+            top: "",
+        };
+    }
     
     public afterChange(e) {
         console.log('afterChange');
@@ -85,6 +104,15 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
 
     public openServiceBookDlg(serviceId: number = 0) {
-        //
+        this.dialogRef = this.dialog.open(BookingDialogComponent, this.config);
+        this.dialogRef.componentInstance.serviceItems = this.serviceItems;
+        this.dialogRef.componentInstance.selectedServiceId = 0;
+        this.dialogRef.componentInstance.onBookingCancelled.subscribe(() => {
+            console.log("onBookingCancelled()");
+            this.dialogRef.close();
+        });
+        this.dialogRef.afterClosed().subscribe((result) => {
+            this.dialogRef = null;
+        });
     }
 }

@@ -38,15 +38,15 @@
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field floatLabel="never" *ngIf="isExistingUser">
-                    <input type="text" matInput placeholder="Enter 4 digit OTP" formControlName="otp" novalidate>
+                    <input type="text" matInput placeholder="Enter 6 digit OTP" formControlName="otp" novalidate>
                     <mat-error *ngIf="(loginForm.controls['otp'].errors | firstKey) ==='required' && loginForm.controls['otp'].touched">
                         OTP is required
                     </mat-error>
                     <mat-error *ngIf="(loginForm.controls['otp'].errors | firstKey) ==='minLength' && loginForm.controls['otp'].touched">
-                        Please enter valid 4-digit OTP
+                        Please enter valid 6-digit OTP
                     </mat-error>
                     <mat-error *ngIf="(loginForm.controls['otp'].errors | firstKey) ==='maxLength' && loginForm.controls['otp'].touched">
-                        Please enter valid 4-digit OTP
+                        Please enter valid 6-digit OTP
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field floatLabel="never" *ngIf="isNewUser">
@@ -58,7 +58,7 @@
                         Please enter valid email id
                     </mat-error>
                 </mat-form-field>
-                <button mat-raised-button color="primary" (click)="onClickCheckNumber()"
+                <button mat-raised-button color="primary" (click)="onClickGetOTP()"
                     *ngIf="!isExistingUser && !isNewUser" [disabled]="loginForm.invalid">
                     Login/Signup
                 </button>

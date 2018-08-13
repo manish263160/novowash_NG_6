@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output, ViewEncapsulation } from "@angular/core";
 import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms";
+import { MatSnackBar } from "@angular/material";
 import { ValidatorService } from "../common/services/validator.service";
 import { AuthConfig, OAuthService } from "angular-oauth2-oidc";
 import { ROPCService } from "../auth/ropc.service";
@@ -44,16 +45,32 @@ export class LoginComponent implements OnInit, OnDestroy {
         useIdTokenHintForSilentRefresh: true,
     };
 
+    private otpRes = {
+        data: "",
+        description: "",
+        message: "",
+        status: "",
+        statusCode: 0,
+    };
+
     constructor(
         private fb: FormBuilder,
         private oauthService: OAuthService,
         private ropcService: ROPCService,
         private userService: UserService,
+        public snackBar: MatSnackBar,
     ) {}
 
     public ngOnInit() {
         console.log("Login ngOnInit()....");
-        this.initLoginForm();       
+        this.initLoginForm();
+        this.otpRes = {
+            data: "",
+            description: "",
+            message: "",
+            status: "",
+            statusCode: 0,
+        };
     }
 
     public initLoginForm() {
@@ -64,17 +81,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         });
     }
 
-    public onClickCheckNumber() {
-        this.allSubscriptions = this.userService.checkNumber({number: this.loginForm.controls.number.value})
-            .subscribe((val) => {
-                if (val === true) {
-                    this.proceedWithLogin();
-                } else {
-                    this.proceedWithSignup();
-                }
-            })
-    }
-
     public proceedWithSignup() {
         this.loginForm.addControl("name", new FormControl("", Validators.compose([Validators.required, Validators.pattern(this.namePattern)])));
         this.loginForm.addControl("email", new FormControl("", Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])));
@@ -83,34 +89,31 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
     
     public proceedWithLogin() {
-        this.loginForm.addControl("otp", new FormControl("", Validators.compose([Validators.required, Validators.minLength(4), , Validators.maxLength(4)])));
+        this.loginForm.addControl("otp", new FormControl("", Validators.compose([Validators.required, Validators.minLength(6), , Validators.maxLength(6)])));
         this.isExistingUser = true;
         this.isNewUser = false;
         this.loginForm.controls.number.disable();
     }
 
     public onClickGetOTP() {
-
+        this.allSubscriptions = this.ropcService.getOTP(this.loginForm.controls.number.value)
+            .subscribe((res) => {
+                Object.assign(this.otpRes, res);
+                if (this.otpRes.statusCode === 200 && this.otpRes.status.toLowerCase() === "success") {
+                    this.openSnackBar("OTP sent successfully", "success");
+                    this.proceedWithLogin();
+                } else {
+                    this.openSnackBar("Something went wrong. Please try again.", "error");
+                }
+            });
     }
 
     public onClickLogin() {
-        // const loginSub = this.userService.login({
-        //         number: this.loginForm.controls.number.value,
-        //         otp: this.loginForm.controls.otp.value
-        //     }).subscribe((user) => {
-        //         this.onLoginSuccessful.emit(user);
-        //     })
         this.oauthService.configure(this.authConfigPassword);
-        try {
-            this.ropcService.login("manish263160@gmail.com", "password").then((profile) => {
-                if (profile) {
-                } else {
-                    console.log(profile);
-                }
+        const loginSub = this.ropcService.login(this.loginForm.controls.number.value, this.loginForm.controls.otp.value)
+            .subscribe((res) => {
+                debugger;
             });
-        } catch (error /*: HttpErrorResponse*/) {
-            console.log(error);
-        }
     }
 
     public goBackToOne() {
@@ -128,5 +131,12 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     public ngOnDestroy() {
         this.allSubscriptions.unsubscribe();
+    }
+
+    public openSnackBar(message: string, panelClass:string = "", action: string = "") {
+        this.snackBar.open(message, action, {
+          duration: 2000,
+          panelClass: panelClass,
+        });
     }
 }

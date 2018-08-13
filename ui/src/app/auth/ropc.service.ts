@@ -11,29 +11,29 @@ export class ROPCService {
 
   constructor(private httpClient: HttpClient, private oauthService: OAuthService) {}
 
-  public async login(username: string, password: string) {
+  public getOTP(mobileNo: string) {
+    return this.httpClient
+      .post(environment.auth.otpUrl + `?mobileNo=${mobileNo}`, "");
+  }
+
+  public login(username: string, password: string) {
     debugger;
-    const body = new HttpParams()
-      .set('username', username)
-      .set('password', password)
-      .set('grant_type', environment.auth.grantType);
+    const url = this.oauthService.tokenEndpoint
+      + `?grant_type=${environment.auth.grantType}&username=${username}&password=${password}`;
+
+    
+    // let params = new URLSearchParams();
+    // params.append('username', username);
+    // params.append('password', password);    
+    // params.append('grant_type','password');
+    // params.append('client_id','novo-client'); 
     
     const headers = new HttpHeaders()
       .set("Content-type", "application/json")
-      .set("Authorization", "Basic d2ViOnNlY3JldA==");
+      .set("Authorization", "Basic " + btoa("novo-client:novo-secret"));
 
-    this.httpClient
-      .post(this.oauthService.tokenEndpoint, body.toString(), {headers})
-      .pipe(map((res: any) => {
-        debugger;
-      })).subscribe(
-        data => {
-          debugger;
-        },
-        err => {
-          debugger;
-        }
-      )
+    return this.httpClient
+      .post(url, "", {headers});
   }
 
   public logOut() {

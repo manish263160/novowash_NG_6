@@ -2,6 +2,7 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { BookingDialogComponent } from "./common/components/booking-dialog/booking.dialog.component";
 import { ConfirmDialogComponent } from "./common/components/confirm-dialog.component";
 import { ErrorDialogComponent } from "./common/components/error.dialog.component";
 import { FirstKeyPipe } from "./common/pipes/first.key.pipe";
@@ -15,6 +16,7 @@ import {
 
 @NgModule({
     declarations: [
+        BookingDialogComponent,
         ConfirmDialogComponent,
         ErrorDialogComponent,
         FirstKeyPipe,

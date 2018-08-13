@@ -1,0 +1,53 @@
+<div class="containerX" >
+    <div fxLayout="row" class="dialog-header" *ngIf="slide === 1" [@firstSlideHeader]>
+        <div fxFlex="flex">
+            <h5>Book A Service</h5>
+        </div>
+        <div fxFlex="none">
+            <button mat-icon-button class="close-icon" (click)="closeDialog()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </div>
+    <div fxLayout="row" class="dialog-header" *ngIf="slide === 2" [@secondSlideHeader]>
+        <button mat-raised-button mat-icon-button class="close-sidenav"
+            (click)="slide=1; backButtonClicked()" [@headerBackButton]>
+            <mat-icon>keyboard_arrow_left</mat-icon>
+        </button>
+        <div fxFlex="flex">
+            <h5>Second Page</h5>
+        </div>
+        <div fxFlex="none">
+            <button mat-icon-button class="close-icon" (click)="closeDialog()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>
+<div class="booking-dialog-wrap dialog-sans-actions">
+    <div mat-dialog-content>
+        <!-- slide 1 -->
+        <div class="containerX dialog-container" *ngIf="slide === 1" [@firstSlide]>
+            <div fxLayout="row" class="bd-content-1-wrap">
+                <div class="bd-service-list" fxLayout="column">
+                    <div class="bd-service-list-item" fxLayout="row"
+                        *ngFor="let service of serviceItems; let i = index">
+                        <span class="service-icon" [style.backgroundImage]="getBackground(service.imageUrl)"></span>
+                        <span class="service-name">{{ service.catName }}</span>
+                    </div>
+                </div>
+                <div class="bd-service-sub-list" fxLayout="column">
+                    <div class="bd-service-sub-list-item" fxLayout="row"
+                        *ngFor="let sub of subList; let i = index">
+                        <span class="question-text">{{ sub.serviceName }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- slide 2 -->
+        <div class="containerX dialog-container" *ngIf="slide === 2" [@secondSlide]>
+            Slide 2
+        </div>
+    </div>
+</div>

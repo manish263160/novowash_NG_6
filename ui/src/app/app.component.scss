@@ -3208,3 +3208,13 @@ star-rating {
   padding: 12px 0;
   border-bottom: 1px solid rgba(170, 170, 170, 1);
 }
+
+.mat-snack-bar-container {
+  font-weight: 500;
+  &.success {
+    background: mediumseagreen;
+  }
+  &.error {
+    background: indianred;
+  }
+}
