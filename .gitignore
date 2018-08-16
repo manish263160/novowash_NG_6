@@ -3,3 +3,4 @@ dist/
 NovoWash/
 .project
 .idea/
+ui/package-lock.json
