@@ -1,0 +1,72 @@
+<div class="about-us-wrap">
+    <div fxLayout="column" class="about-us-content-wrap">
+        <div class="about-us-section">
+            <div fxLayout="row" fxLayout.sm="column" fxLayoutGap="12px">
+                <div class="sec-vision-img" fxFlex="1 1 50%"></div>
+                <div class="sec-vision-content" fxFlex="1 1 50%">
+                    <h2 class="sec-header">Our Vision</h2>
+                    <p class="sec text">
+                        Novowash aims to build India's first organized chain providing end-to-end home 
+                        interior care solutions to urban households, who need premium service quality 
+                        as well as ease and convenience in their busy life-style. We look to build not 
+                        just a brand but an eco-system of partners who would be standardized by our 
+                        strategic technology partnerships, highly trained professionals and complete 
+                        digitized service deliverance. Novowash is committed to working with entrepreneurs 
+                        and investors to co-build Novowash brand through the franchise route. We have built 
+                        a team of passionate individuals looking to build a sustainable business in the 
+                        direct-to-home services segment and look to become an overall segment creator.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="founders-section">
+            <div fxLayout="column" fxLayoutGap="24px">
+                <div class="sec-vision-content" fxFlex="1 1 50%">
+                    <h2 class="sec-header">Our Founders</h2>
+                    <p class="sec text">
+                        While working together in their previous company our founders looked deeply into 
+                        the problems consumers faced when dealing with home and car care service providers. 
+                        There was a huge need for creating not just a market-place but an eco-system of 
+                        organized and standardized chain of service providers. Novowash was built with great 
+                        effort and understanding of the current market and requirement for high quality 
+                        hassle free services.
+                    </p>
+                </div>
+                <div class="pic-card-wrap" fxLayout="row" fxFlex="1 1 100%">
+                    <mat-card class="pic-card" *ngFor="let founder of founders"
+                        fxLayoutGap="40px" fxLayoutGap.sm="12px" fxLayoutGap.xs="4px">
+                        <img mat-card-image [src]="getBackground(founder.imageUrl)" [alt]="founder.name">
+                        <mat-card-header>
+                            <mat-card-title>{{ founder.name }}</mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <p class="text-center">{{ founder.designation }}
+                            <p class="text-center">{{ founder.institute }}
+                        </mat-card-content>
+                        <mat-card-actions>
+                            <a target="_blank" [href]="founder.url" class="text-center">
+                                <img src="assets/img/linkedin.png" title="LinkedIn" width="20" height="20">  
+                            </a>
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+        <div class="service-pro-section">
+            <div fxLayout="row" fxLayout.sm="column" fxLayoutGap="12px">
+                <div class="sec-vision-img" fxFlex="1 1 50%"></div>
+                <div class="sec-vision-content" fxFlex="1 1 50%">
+                    <h2 class="sec-header">Our service professionals</h2>
+                    <p class="sec text">
+                        Our service executives are highly trained professionals and are always happy to 
+                        serve our customers. We provide an excellent environment for their professional 
+                        training and provide them with state-of-the-art technologies to cater to our 
+                        customers.We take sheer pleasure and joy in serving our customers. We believe in 
+                        providing an elite service experience in our services primarily with the help of 
+                        technology and service quality.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
