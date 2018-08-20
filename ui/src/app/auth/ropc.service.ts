@@ -1,9 +1,10 @@
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
-import { OAuthService } from "angular-oauth2-oidc";
+import { OAuthService,  } from "angular-oauth2-oidc";
 import { environment } from "../../environments/environment";
 import { Observable } from "rxjs/Observable";
 import { map, combineLatest } from 'rxjs/operators';
+import { JwtHelperService } from "@auth0/angular-jwt";
 
 @Injectable()
 export class ROPCService {
@@ -33,7 +34,19 @@ export class ROPCService {
       .set("Authorization", "Basic " + btoa("novo-client:novo-secret"));
 
     return this.httpClient
-      .post(url, "", {headers});
+      .post(url, "", {headers})
+      .pipe(map((res: { access_token: string, refresh_token: string }) => {
+        if (res) {
+          localStorage.setItem("access_token", res.access_token);
+          localStorage.setItem("refreshToken", res.refresh_token);
+          const jwtHelper = new JwtHelperService();
+          this.user = jwtHelper.decodeToken(res.access_token);
+          return this.user;
+        } else {
+          this.user = {};
+          return {};
+        }
+      }));
   }
 
   public logOut() {

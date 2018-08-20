@@ -3221,3 +3221,17 @@ star-rating {
     background: indianred;
   }
 }
+
+.toolbar-primary {
+  & > * {
+    &:not(:last-child) {
+      margin-right: 8px;
+    }
+  }
+  .btn-top-menu {
+    background-color: transparent;
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}

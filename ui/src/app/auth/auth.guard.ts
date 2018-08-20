@@ -4,12 +4,23 @@ import { OAuthService } from "angular-oauth2-oidc";
 
 @Injectable()
 export class AuthGuard implements CanActivate {
+
+    private nonSecuredUrls = [
+        "/app/about-us",
+        "/app/home",
+    ];
+
     constructor(
         private router: Router,
         private oauthService: OAuthService
     ) { }
 
     public async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+        const url: string = state.url;
+        const isNonSecuredUrl = this.nonSecuredUrls.indexOf(url) !== -1;
+        if (isNonSecuredUrl) {
+            return true;
+        }
         if (this.oauthService.hasValidIdToken() || this.oauthService.hasValidAccessToken()) {
             return true;
         } else {

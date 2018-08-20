@@ -93,6 +93,10 @@ export class LayoutComponent implements OnInit, OnDestroy {
         this.servingItems[1] = servingItemsTotal;
     }
 
+    public goToPage(pageName) {
+        this.router.navigate([`/app/${pageName}`]);
+    }
+
     public checkIsLoggedIn() {
         if (this.userService.isLoggedIn()) {
             this.user = this.userService.getLoggedInUserInfo();
@@ -110,9 +114,17 @@ export class LayoutComponent implements OnInit, OnDestroy {
             this.dialogRef.close();
         });
         this.dialogRef.componentInstance.onLoginSuccessful.subscribe((user) => {
+            const unStr = "user_name";
             console.log("onLoginSuccessful()");
             this.dialogRef.close();
             this.user = user;
+            this.user.full_name = this.user[unStr];
+            this.user.full_name = this.user.full_name.replace("User [", "");
+            this.user.full_name = this.user.full_name.replace("]", "");
+            const unArr = this.user.full_name.split(", ");
+            this.user.full_name = unArr[1].replace("username=", "");
+            this.user.full_name = this.user.full_name.replace("_", " ");
+            this.getInitials();
         });
         this.dialogRef.afterClosed().subscribe((result) => {
             this.dialogRef = null;

@@ -112,7 +112,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.oauthService.configure(this.authConfigPassword);
         const loginSub = this.ropcService.login(this.loginForm.controls.number.value, this.loginForm.controls.otp.value)
             .subscribe((res) => {
-                debugger;
+                this.onLoginSuccessful.emit(res)
             });
     }
 

@@ -11,6 +11,10 @@ export const routes: Routes = [
     {
         children: [
             {
+                loadChildren: "./routes/about-us/about-us.module#AboutUsModule",
+                path: "about-us",
+            },
+            {
                 loadChildren: "./routes/home/home.module#HomeModule",
                 path: "home",
             },

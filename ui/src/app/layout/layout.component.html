@@ -2,6 +2,12 @@
     <mat-toolbar class="toolbar-primary" id="main-header">
         <a class="logo" href="/app"></a>
         <span class="fill-remaining-space"></span>
+        <button mat-button (click)="goToPage('about-us')" class="btn-top-menu">
+            About Us
+        </button>
+        <button mat-button (click)="goToPage('be-a-partner')" class="btn-top-menu">
+            Be A Partner
+        </button>
         <ng-container *ngIf="!user else userTmpl">            
             <button id="mh-btn-login" mat-stroked-button color="primary" (click)="openLoginSignUpDialog()">
                 Login/Signup
