@@ -96,6 +96,7 @@ import { User } from "../../../model/user";
     encapsulation: ViewEncapsulation.None,
     // tslint:disable-next-line:use-host-property-decorator
     selector: "booking-dialog",
+    styleUrls: ["booking.dialog.component.scss"],
     templateUrl: "booking.dialog.component.html",
 })
 export class BookingDialogComponent implements OnDestroy, OnInit {

@@ -1,0 +1,14 @@
+.dialog-panel-booking {
+    max-width: 640px !important;
+    .mat-dialog-container {
+        .mat-dialog-content {
+            min-height: 450px;
+            max-height: 450px;
+            .dialog-container {
+                // padding: 16px 60px 30px;
+                // max-width: 440px;
+                // margin: 0 auto;
+            }
+        }
+    }
+}

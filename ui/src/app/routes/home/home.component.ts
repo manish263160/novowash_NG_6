@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.config.backdropClass = "cdk-overlay-custom-backdrop";
         this.config.width = "75%";
         this.config.disableClose = true;
-        this.config.panelClass = "dialog-panel";
+        this.config.panelClass = "dialog-panel-booking";
         this.config.position = {
             bottom: "",
             left: "",

@@ -65,16 +65,16 @@ export class LayoutComponent implements OnInit, OnDestroy {
     public ngOnInit(): void {
         this.checkIsLoggedIn();
         this.companyQItems = [{
-            href: "#",
-            text: "Company Overview"
+            page: "about-us",
+            text: "About Us"
         }, {
-            href: "#",
+            page: "faq",
             text: "Frequently Asked Questions"
         }, {
-            href: "#",
+            page: "privacy-policy",
             text: "Privacy Policy"
         }, {
-            href: "#",
+            page: "terms-of-use",
             text: "Terms of Use"
         }];
         let servingItemsTotal = [
@@ -159,7 +159,10 @@ export class LayoutComponent implements OnInit, OnDestroy {
         this.router.navigate(["/app/mybookings"]);
     }
 
-    public logout() {}
+    public logout() {
+        const user = this.ropcService.logOut();
+        this.user = null;
+    }
 
     public ngOnDestroy() {}
 }

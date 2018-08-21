@@ -50,19 +50,25 @@ export class ROPCService {
   }
 
   public logOut() {
-    if (this.oauthService.getRefreshToken() === null) {
-      return;
-    }
-    const refreshToken = this.oauthService.getRefreshToken();
-    const accessToken = this.oauthService.getAccessToken();
+    // if (this.oauthService.getRefreshToken() === null) {
+    //   return;
+    // }
+    // const refreshToken = this.oauthService.getRefreshToken();
+    // const accessToken = this.oauthService.getAccessToken();
 
-    this.oauthService.logOut(true);
+    // this.oauthService.logOut(true);
 
-    const body = new HttpParams().set("client_id", this.oauthService.clientId).set("refresh_token", refreshToken);
+    // const body = new HttpParams().set("client_id", this.oauthService.clientId).set("refresh_token", refreshToken);
 
-    return this.httpClient.post(this.oauthService.logoutUrl, body.toString(), {
-      headers: new HttpHeaders().set("Content-Type", "application/x-www-form-urlencoded"),
-    });
+    // return this.httpClient.post(this.oauthService.logoutUrl, body.toString(), {
+    //   headers: new HttpHeaders().set("Content-Type", "application/x-www-form-urlencoded"),
+    // });
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refreshToken");
+    this.user = {};
+    return this.user;
+    // return this.httpClient
+    //   .delete(his.oauthService.tokenEndpoint, )
   }
 
   public getLoggedInUser() {
