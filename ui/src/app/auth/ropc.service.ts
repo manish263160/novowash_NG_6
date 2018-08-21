@@ -65,6 +65,17 @@ export class ROPCService {
     });
   }
 
+  public getLoggedInUser() {
+    const access_token = localStorage.getItem("access_token");
+    if (access_token) {
+      const jwtHelper = new JwtHelperService();
+      this.user = jwtHelper.decodeToken(access_token);
+    } else {
+      this.user = {};
+    }
+    return this.user;
+  }
+
   public get user() {
     return this._user;
   }

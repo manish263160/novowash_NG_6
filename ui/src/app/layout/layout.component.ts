@@ -6,6 +6,7 @@ import { Observable, Subscription } from "rxjs";
 import { DialogService } from "../common/services/dialog.service";
 import { ITMenuService } from "../common/services/it-menu-service";
 import { LoginComponent } from "../login/login.component";
+import { ROPCService } from "../auth/ropc.service";
 import { UserService } from "../core/services/user.service";
 import { map } from 'rxjs/operators';
 import { User } from "../model/user";
@@ -30,6 +31,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
     constructor(
         private dialog: MatDialog,
         private userService: UserService,
+        private ropcService: ROPCService,
         private router: Router,
         public itMenuService: ITMenuService
     ) {
@@ -61,7 +63,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
     }
     
     public ngOnInit(): void {
-        // this.checkIsLoggedIn();
+        this.checkIsLoggedIn();
         this.companyQItems = [{
             href: "#",
             text: "Company Overview"
@@ -98,8 +100,19 @@ export class LayoutComponent implements OnInit, OnDestroy {
     }
 
     public checkIsLoggedIn() {
-        if (this.userService.isLoggedIn()) {
-            this.user = this.userService.getLoggedInUserInfo();
+        // if (this.ropcService.isLoggedIn()) {
+        //     this.user = this.userService.getLoggedInUserInfo();
+        // }
+        const user = this.ropcService.getLoggedInUser();
+        if (Object.keys(user).length) {
+            this.user = user;
+            const unStr = "user_name";
+            this.user.full_name = this.user[unStr];
+            this.user.full_name = this.user.full_name.replace("User [", "");
+            this.user.full_name = this.user.full_name.replace("]", "");
+            const unArr = this.user.full_name.split(", ");
+            this.user.full_name = unArr[1].replace("username=", "");
+            this.user.full_name = this.user.full_name.replace("_", " ");
         }
     }
 
@@ -117,14 +130,15 @@ export class LayoutComponent implements OnInit, OnDestroy {
             const unStr = "user_name";
             console.log("onLoginSuccessful()");
             this.dialogRef.close();
-            this.user = user;
-            this.user.full_name = this.user[unStr];
-            this.user.full_name = this.user.full_name.replace("User [", "");
-            this.user.full_name = this.user.full_name.replace("]", "");
-            const unArr = this.user.full_name.split(", ");
-            this.user.full_name = unArr[1].replace("username=", "");
-            this.user.full_name = this.user.full_name.replace("_", " ");
-            this.getInitials();
+            if (Object.keys(user).length) {                
+                this.user = user;
+                this.user.full_name = this.user[unStr];
+                this.user.full_name = this.user.full_name.replace("User [", "");
+                this.user.full_name = this.user.full_name.replace("]", "");
+                const unArr = this.user.full_name.split(", ");
+                this.user.full_name = unArr[1].replace("username=", "");
+                this.user.full_name = this.user.full_name.replace("_", " ");
+            }
         });
         this.dialogRef.afterClosed().subscribe((result) => {
             this.dialogRef = null;
