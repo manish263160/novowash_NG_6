@@ -10,8 +10,11 @@ import { ImagePipe } from "./common/pipes/image.pipe";
 
 import {
     MatButtonModule,
+    MatCardModule,
     MatDialogModule,
     MatIconModule,
+    MatMenuModule,
+    MatRadioModule,
 } from "@angular/material";
 
 @NgModule({
@@ -33,8 +36,11 @@ import {
         FormsModule,
         ReactiveFormsModule,
         MatButtonModule,
+        MatCardModule,
         MatDialogModule,
         MatIconModule,
+        MatMenuModule,
+        MatRadioModule,
     ],
 })
 

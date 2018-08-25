@@ -1,5 +1,5 @@
 <div class="containerX" >
-    <div fxLayout="row" class="dialog-header" *ngIf="slide === 1" [@firstSlideHeader]>
+    <div fxLayout="row" class="dialog-header" *ngIf="slide === 1">
         <div fxFlex="flex">
             <h5>Book A Service</h5>
         </div>
@@ -9,13 +9,13 @@
             </button>
         </div>
     </div>
-    <div fxLayout="row" class="dialog-header" *ngIf="slide === 2" [@secondSlideHeader]>
+    <div fxLayout="row" class="dialog-header no-padding-left" *ngIf="slide === 2">
         <button mat-raised-button mat-icon-button class="close-sidenav"
-            (click)="slide=1; backButtonClicked()" [@headerBackButton]>
+            (click)="slide=1; backButtonClicked()">
             <mat-icon>keyboard_arrow_left</mat-icon>
         </button>
         <div fxFlex="flex">
-            <h5>Second Page</h5>
+            <h5>{{ getSelectedServiceName() }}</h5>
         </div>
         <div fxFlex="none">
             <button mat-icon-button class="close-icon" (click)="closeDialog()">
@@ -24,12 +24,14 @@
         </div>
     </div>
 </div>
-<div class="booking-dialog-wrap dialog-sans-actions">
+<div class="booking-dialog-wrap" [ngClass]="{'dialog-sans-actions': slide === 1}">
     <div mat-dialog-content>
         <!-- slide 1 -->
-        <div class="containerX dialog-container" *ngIf="slide === 1" [@firstSlide]>
+        <div class="containerX dialog-container" *ngIf="slide === 1"
+            [ngClass]="{'sidenav-fi': slide === 1, 'sidenav-fo': slide !== 1}">
             <div fxLayout="row" class="bd-content-1-wrap">
-                <div cdkFocusRegionstart class="bd-service-list" fxLayout="column">
+                <div cdkFocusRegionstart class="bd-service-list" fxLayout="column"
+                    [ngClass]="{'li-mh-60': serviceItems?.length > 8}">
                     <div class="bd-service-list-item" fxLayout="row"
                         [ngClass]="{'selected': service.id === selectedServiceId}"
                         *ngFor="let service of serviceItems; let i = index"
@@ -40,7 +42,8 @@
                 </div>
                 <div class="bd-service-sub-list" fxLayout="column">
                     <div class="bd-service-sub-list-item" fxLayout="row"
-                        *ngFor="let sub of subList; let j = index">
+                        *ngFor="let sub of subList; let j = index"
+                        (click)="onClickSubService1(sub.id)">
                         <span class="question-text">{{ sub.serviceName }}</span>
                     </div>
                 </div>
@@ -48,8 +51,70 @@
         </div>
 
         <!-- slide 2 -->
-        <div class="containerX dialog-container" *ngIf="slide === 2" [@secondSlide]>
-            Slide 2
+        <div class="containerX dialog-container" *ngIf="slide === 2"
+            [ngClass]="{'sidenav-fi': slide === 2, 'sidenav-fo': slide !== 2}">
+            <div fxLayout="row" class="bd-content-1-wrap">
+                <div class="bd-service-list" fxLayout="column"
+                    [ngClass]="{'li-mh-60': subList?.length > 8}">
+                    <div class="bd-service-list-item" fxLayout="row" [id]="'sub' + service.id"
+                        [ngClass]="{'selected': service.id === highlightedSubServiceId}"
+                        *ngFor="let service of subList; let i = index"
+                        (click)="onClickSubService2(service.id)">
+                        <span class="service-name">{{ service.serviceName }}</span>
+                    </div>
+                </div>
+                <div class="bd-service-sub-list bd-sub-bg" fxLayout="column" *ngIf="packages" fxLayoutGap="16px">
+                    <mat-card class="card-package" [id]="'card' + package.serviceId"
+                        *ngFor="let package of packages; let j = index">
+                        <mat-card-header>
+                            <mat-card-title>{{ package.serviceName }}</mat-card-title>
+                            <mat-card-subtitle>{{ package.serviceDesc }}</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <mat-radio-group class="rg-p-options" [(ngModel)]="package.selectedValue">
+                                <mat-radio-button class="rb-p-options"
+                                    *ngFor="let item of package.items" [value]="item.price">
+                                    {{ item.costDetails }}
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </mat-card-content>
+                        <mat-card-actions>
+                            <button mat-button class="btn-p-details"
+                                mat-button [matMenuTriggerFor]="detailMenu">View Details</button>
+                            <span class="fill-remaining-space"></span>
+                            <button mat-raised-button class="btn-p-add mat-elevation-z0" color="primary"
+                                (click)="updatePackageSelection(package);"
+                                [disabled]="package.selectedValue <= 0">
+                                {{ package.isAdded ? 'Remove' : 'Add' }}
+                            </button>
+                            <mat-menu #detailMenu="matMenu" class="menu-p-detail">
+                                <div class="menu-p-detail-content">
+                                    <p>{{ package.description }}</p>
+                                </div>
+                            </mat-menu>
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
+            </div>
         </div>
+    </div>
+    <div mat-dialog-actions *ngIf="slide === 2">
+        <span fxFlex></span>
+        <ng-container *ngIf="totalAmount > 0 else emptyCartTmpl">
+            <button mat-raised-button class="btn-p-proceed" color="primary"
+                (click)="submitServiceSelection()">        
+                <span class="spn-amount">Rs. {{ totalAmount | number }}</span>
+                <span class="fill-remaining-space"></span>
+                <span class="spn-text">Proceed</span>
+                <mat-icon>arrow_forward</mat-icon>
+            </button>
+        </ng-container>
+        <ng-template #emptyCartTmpl>
+            <button mat-raised-button class="btn-p-proceed" disabled>        
+                <span class="spn-amount">Rs. {{ totalAmount | number }}</span>
+                <span class="fill-remaining-space"></span>
+                <span class="spn-text">Add a service to proceed</span>
+            </button>
+        </ng-template>
     </div>
 </div>

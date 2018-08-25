@@ -1,13 +1,170 @@
 .dialog-panel-booking {
     max-width: 640px !important;
     .mat-dialog-container {
-        .mat-dialog-content {
-            min-height: 450px;
-            max-height: 450px;
-            .dialog-container {
-                // padding: 16px 60px 30px;
-                // max-width: 440px;
-                // margin: 0 auto;
+        .booking-dialog-wrap {
+            .mat-dialog-content {
+                min-height: 440px;
+                max-height: 440px;
+                display: flex;
+                flex: 1 1 100%;
+                .dialog-container {
+                    padding: 0;
+                    flex: 1 1 100%;
+                    max-height: inherit;
+                    .bd-content-1-wrap {
+                        max-height: inherit;
+                        overflow: hidden;
+                        & > * {
+                            max-height: inherit;
+                            overflow: auto;
+                        }
+                        .bd-service-list {
+                            // height: 100%;
+                            flex: 1 1 30%;
+                            border-right: 1px solid #eee;
+                            box-shadow: 0 0 4px 2px #eee;
+                            .bd-service-list-item {
+                                padding-right: 12px;
+                                height: 66px;
+                                align-items: center;
+                                cursor: pointer;
+                                &.selected {
+                                    background-color: #eeeeee;
+                                }
+                                .service-icon {
+                                    height: 24px;
+                                    width: 24px;
+                                    background-size: contain;
+                                    background-repeat: no-repeat;
+                                    background-position: center center;
+                                    margin: 0 12px;
+                                    margin-bottom: 4px;
+                                }
+                                .service-name {
+                                    &:first-child {
+                                        padding-left: 16px;
+                                    }
+                                }
+                            }
+                            &.li-mh-60 {
+                                .bd-service-list-item {
+                                    min-height: 60px;
+                                }
+                            }
+                        }
+                        .bd-service-sub-list {
+                            height: 100%;
+                            flex: 1 1 70%;
+                            &.bd-sub-bg {
+                                padding: 12px;
+                                background-color: #eee;
+                            }
+                            .bd-service-sub-list-item {
+                                padding: 0 12px;
+                                height: 42px;
+                                align-items: center;
+                                cursor: pointer;
+                                &:hover {
+                                    background-color: #eee;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            &.dialog-sans-actions {
+                .mat-dialog-content {
+                    min-height: 500px;
+                    max-height: 500px;
+                }
+            }
+            .mat-dialog-actions {
+                padding: 12px 28px !important;
+                [mat-raised-button].mat-raised-button {
+                    &.btn-p-proceed {
+                        width: 260px;
+                        .mat-button-wrapper {
+                            display: flex;
+                            align-items: center;
+                            .mat-icon {
+                                font-size: 18px;
+                                height: 16px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.mat-card {
+    &.card-package {
+        padding: 0;
+        .mat-card-header {
+            .mat-card-header-text{
+                width: 100%;
+                margin: 0;
+                & > * {
+                    padding-left: 12px;
+                    padding-right: 12px;
+                }
+                .mat-card-title {
+                    padding-top: 16px;
+                    padding-bottom: 16px;
+                    font-size: 1rem;
+                    border-bottom: 1px solid #eee;
+                }
+                .mat-card-subtitle {
+                    padding-top: 8px;
+                }
+            }
+        }
+        .mat-card-content {
+            padding-left: 12px;
+            padding-right: 12px;
+            .mat-radio-group {
+                &.rg-p-options {
+                    display: flex;
+                    flex-direction: column;
+                    & > * {
+                        &:not(:last-child) {
+                            margin-bottom: 12px;
+                        }
+                    }
+                    .mat-radio-button {
+                        &.rb-p-options {
+                            line-height: 18px;
+                        }
+                    }
+                }
+            }
+        }
+        .mat-card-actions {
+            &:last-child {                
+                margin: 0;
+                border-top: 1px solid #eee;
+                padding: 8px 12px;
+                display: flex;
+            }
+        }
+    }
+}
+
+.mat-menu-panel {
+    &.menu-p-detail {
+        pointer-events: none;
+        background-color: #eee;
+        .mat-menu-content {
+            .menu-p-detail-content {
+                padding: 0 12px;
+                font-size: 12px;
+                color: dimgrey;
+                text-align: justify;
+                & > p {
+                    padding: 0;
+                    margin: 0;
+                }
             }
         }
     }
