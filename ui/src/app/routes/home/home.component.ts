@@ -3,6 +3,7 @@ import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material";
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { Observable, Subscription } from "rxjs";
 import { BookingDialogComponent } from "../../common/components/booking-dialog/booking.dialog.component";
+import { DateUserDetailsDialogComponent } from "../../common/components/date-user-details-dialog/date.user.details.dialog.component";
 import { DialogService } from "../../common/services/dialog.service";
 import { ServicesService } from "../../core/services/services.service";
 
@@ -31,12 +32,13 @@ export class HomeComponent implements OnInit, OnDestroy {
     ];
     public slideConfig = {"slidesToShow": 4, "slidesToScroll": 1};
     public slideHListConfig = {"slidesToShow": 8, "slidesToScroll": 1};
+    private selectedServices: any;
     private headerEl: any;
     private btnLoginEl: any;
     private styleStr = "style";
     private bgStr = "background";
 
-    private dialogRef: MatDialogRef<BookingDialogComponent>;
+    private dialogRef: MatDialogRef<any>;
     private config: MatDialogConfig;
 
     constructor(
@@ -111,8 +113,39 @@ export class HomeComponent implements OnInit, OnDestroy {
             console.log("onBookingCancelled()");
             this.dialogRef.close();
         });
-        this.dialogRef.afterClosed().subscribe((result) => {
-            this.dialogRef = null;
+        this.dialogRef.componentInstance.onServiceSelected.subscribe((selectedServices) => {
+            console.log("onServiceSelected()");
+            this.selectedServices = selectedServices;
+            this.dialogRef.close();
+            this.openServiceDateTimeDlg();
         });
+        // this.dialogRef.afterClosed().subscribe((result) => {
+        //     this.dialogRef = null;
+        // });
+    }
+
+    public openServiceDateTimeDlg() {
+        let selectedServiceName = "Book A Service";
+        const selectedService = this.serviceItems.filter((service) => {
+            return service.id === this.selectedServices.selectedServiceId;
+        })
+        if (selectedService && selectedService.length) {
+            selectedServiceName = selectedService[0].catName;
+        }
+        this.dialogRef = this.dialog.open(DateUserDetailsDialogComponent, this.config);
+        this.dialogRef.componentInstance.selectedServiceName = selectedServiceName;
+
+        this.dialogRef.componentInstance.onDetailEnteringCancelled.subscribe(() => {
+            console.log("onDetailEnteringCancelled()");
+            this.dialogRef.close();
+        });
+        this.dialogRef.componentInstance.onDetailEntered.subscribe((selectedServices) => {
+            console.log("onDetailEntered()");
+            // this.selectedServices = selectedServices;
+            this.dialogRef.close();
+        });
+        // this.dialogRef.afterClosed().subscribe((result) => {
+        //     this.dialogRef = null;
+        // });
     }
 }

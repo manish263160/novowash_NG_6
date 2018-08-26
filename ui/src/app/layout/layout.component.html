@@ -8,7 +8,7 @@
         <button mat-button (click)="goToPage('be-a-partner')" class="btn-top-menu">
             Be A Partner
         </button> -->
-        <ng-container *ngIf="!user else userTmpl">            
+        <ng-container *ngIf="!ropcService.user else userTmpl">            
             <button id="mh-btn-login" mat-stroked-button color="primary" (click)="openLoginSignUpDialog()">
                 Login/Signup
             </button>

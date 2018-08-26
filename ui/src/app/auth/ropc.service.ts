@@ -41,10 +41,15 @@ export class ROPCService {
           localStorage.setItem("refreshToken", res.refresh_token);
           const jwtHelper = new JwtHelperService();
           this.user = jwtHelper.decodeToken(res.access_token);
+          if (this.user && !Object.keys(this.user).length) {
+            this.user = null;
+          }
           return this.user;
         } else {
-          this.user = {};
-          return {};
+          // this.user = {};
+          // return {};
+          this.user = null;
+          return null;
         }
       }));
   }
@@ -65,7 +70,7 @@ export class ROPCService {
     // });
     localStorage.removeItem("access_token");
     localStorage.removeItem("refreshToken");
-    this.user = {};
+    this.user = null;
     return this.user;
     // return this.httpClient
     //   .delete(his.oauthService.tokenEndpoint, )
@@ -76,10 +81,13 @@ export class ROPCService {
     if (access_token) {
       const jwtHelper = new JwtHelperService();
       this.user = jwtHelper.decodeToken(access_token);
+      if (this.user && !Object.keys(this.user).length) {
+        this.user = null;
+      }
     } else {
-      this.user = {};
+      // this.user = {};
     }
-    return this.user;
+    // return this.user;
   }
 
   public get user() {

@@ -21,7 +21,7 @@ import { User } from "../model/user";
 export class LayoutComponent implements OnInit, OnDestroy {
     public isIE: boolean = false;
     public isSafari: boolean = false;
-    public user: User;
+    // public user: User;
     public companyQItems: any[] = [];
     public servingItems: any[] = [];
 
@@ -103,17 +103,18 @@ export class LayoutComponent implements OnInit, OnDestroy {
         // if (this.ropcService.isLoggedIn()) {
         //     this.user = this.userService.getLoggedInUserInfo();
         // }
-        const user = this.ropcService.getLoggedInUser();
-        if (Object.keys(user).length) {
-            this.user = user;
-            const unStr = "user_name";
-            this.user.full_name = this.user[unStr];
-            this.user.full_name = this.user.full_name.replace("User [", "");
-            this.user.full_name = this.user.full_name.replace("]", "");
-            const unArr = this.user.full_name.split(", ");
-            this.user.full_name = unArr[1].replace("username=", "");
-            this.user.full_name = this.user.full_name.replace("_", " ");
-        }
+        // const user = this.ropcService.getLoggedInUser();
+        // if (Object.keys(user).length) {
+        //     this.user = user;
+        //     const unStr = "user_name";
+        //     this.user.full_name = this.user[unStr];
+        //     this.user.full_name = this.user.full_name.replace("User [", "");
+        //     this.user.full_name = this.user.full_name.replace("]", "");
+        //     const unArr = this.user.full_name.split(", ");
+        //     this.user.full_name = unArr[1].replace("username=", "");
+        //     this.user.full_name = this.user.full_name.replace("_", " ");
+        // }
+        this.ropcService.getLoggedInUser();
     }
 
     public getState(outlet) {
@@ -127,18 +128,18 @@ export class LayoutComponent implements OnInit, OnDestroy {
             this.dialogRef.close();
         });
         this.dialogRef.componentInstance.onLoginSuccessful.subscribe((user) => {
-            const unStr = "user_name";
             console.log("onLoginSuccessful()");
             this.dialogRef.close();
-            if (Object.keys(user).length) {                
-                this.user = user;
-                this.user.full_name = this.user[unStr];
-                this.user.full_name = this.user.full_name.replace("User [", "");
-                this.user.full_name = this.user.full_name.replace("]", "");
-                const unArr = this.user.full_name.split(", ");
-                this.user.full_name = unArr[1].replace("username=", "");
-                this.user.full_name = this.user.full_name.replace("_", " ");
-            }
+            // const unStr = "user_name";
+            // if (Object.keys(user).length) {                
+            //     this.user = user;
+            //     this.user.full_name = this.user[unStr];
+            //     this.user.full_name = this.user.full_name.replace("User [", "");
+            //     this.user.full_name = this.user.full_name.replace("]", "");
+            //     const unArr = this.user.full_name.split(", ");
+            //     this.user.full_name = unArr[1].replace("username=", "");
+            //     this.user.full_name = this.user.full_name.replace("_", " ");
+            // }
         });
         this.dialogRef.afterClosed().subscribe((result) => {
             this.dialogRef = null;
@@ -146,7 +147,18 @@ export class LayoutComponent implements OnInit, OnDestroy {
     }
 
     public getInitials(): string {
-        const names = this.user.full_name.split(" ");
+        const logUser = this.ropcService.user;
+        let fullName = "";
+        if (logUser && Object.keys(logUser).length)  {
+            const unStr = "user_name";
+            fullName = logUser[unStr];
+            fullName = fullName.replace("User [", "");
+            fullName = fullName.replace("]", "");
+            const unArr = fullName.split(", ");
+            fullName = unArr[1].replace("username=", "");
+            fullName = fullName.replace("_", " ");
+        }
+        const names = fullName.split(" ");
         let initials = names[0].substring(0, 1).toUpperCase();
 
         if (names.length > 1) {
@@ -161,7 +173,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
     public logout() {
         const user = this.ropcService.logOut();
-        this.user = null;
+        // this.user = null;
     }
 
     public ngOnDestroy() {}

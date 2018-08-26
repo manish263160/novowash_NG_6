@@ -1,27 +1,23 @@
-import { animate, group, state, style, transition, trigger } from "@angular/animations";
-import { Component, ElementRef, EventEmitter, HostListener, OnDestroy, OnInit, Input, Output, ViewChild, ViewEncapsulation } from "@angular/core";
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { Component, EventEmitter, OnDestroy, OnInit, Input, Output, ViewEncapsulation } from "@angular/core";
 import { MatDialog, MatDialogRef } from "@angular/material";
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
-import { ActivatedRoute } from "@angular/router";
-import { ValidatorService } from "../../services/validator.service";
 import { Observable, Subscription, Subscriber } from "rxjs";
 import { map, startWith } from "rxjs/operators";
 import { DialogService } from "../../../common/services/dialog.service";
 import { ServicesService } from "../../../core/services/services.service";
-import { User } from "../../../model/user";
 
 @Component({
     encapsulation: ViewEncapsulation.None,
     // tslint:disable-next-line:use-host-property-decorator
     selector: "booking-dialog",
-    styleUrls: ["booking.dialog.component.scss"],
+    styleUrls: ["../booking.dialog.component.scss"],
     templateUrl: "booking.dialog.component.html",
 })
 export class BookingDialogComponent implements OnDestroy, OnInit {
     @Input() public serviceItems = [];
     @Input() public selectedServiceId: number;
     @Output() public onBookingCancelled: EventEmitter<any> = new EventEmitter();
+    @Output() public onServiceSelected: EventEmitter<any> = new EventEmitter();
     public highlightedSubServiceId: number;
     public allSubscriptions: Subscription;
     public packages: any[];
@@ -33,12 +29,10 @@ export class BookingDialogComponent implements OnDestroy, OnInit {
     
     constructor(
         private dialog: MatDialog ,
-        public element: ElementRef,
         private dialogRef: MatDialogRef<BookingDialogComponent>,
         private dialogService: DialogService,
         private servicesService: ServicesService,
         private _sanitizer: DomSanitizer,
-        private route: ActivatedRoute,
     ) {}
 
     ngOnInit() {
@@ -235,7 +229,19 @@ export class BookingDialogComponent implements OnDestroy, OnInit {
     }
 
     public submitServiceSelection() {
-        
+        const selectedServices = {
+            selectedServiceId: this.selectedServiceId,
+            totalAmount: this.totalAmount,
+            selectedPackages: [],
+        };
+        let selectedPackages = [];
+        this.packages.forEach((pack) => {
+            if (pack.isAdded) {
+                selectedPackages.push(pack);
+            }
+        });
+        selectedServices.selectedPackages = selectedPackages;
+        this.onServiceSelected.emit(selectedServices);
     }
 
     public closeDialog() {

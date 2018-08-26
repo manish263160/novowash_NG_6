@@ -1,0 +1,103 @@
+<div class="containerX" >
+    <div fxLayout="row" class="dialog-header" [ngClass]="{'no-padding-left': slide === 2}">
+        <button mat-raised-button mat-icon-button class="close-sidenav"
+            (click)="slide=1; backButtonClicked()" *ngIf="slide === 2">
+            <mat-icon>keyboard_arrow_left</mat-icon>
+        </button>
+        <div fxFlex="flex">
+            <h5>{{ selectedServiceName }}</h5>
+        </div>
+        <div fxFlex="none">
+            <button mat-icon-button class="close-icon" (click)="closeDialog()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>
+<div class="booking-dialog-wrap bd-wrap-date-time">
+    <div mat-dialog-content>
+        <!-- slide 1 -->
+        <div class="containerX dialog-container" *ngIf="slide === 1"
+            [ngClass]="{'sidenav-fi': slide === 1, 'sidenav-fo': slide !== 1}">
+            <form [formGroup]="addressForm" novalidate>
+                <div class="bd-content-1-wrap" fxLayout="column" fxLayoutGap="32px">
+                    <h3>Where do you require the service?</h3>
+                    <!-- <span class="spacer"></span> -->
+                    <mat-form-field>
+                        <input matInput formControlName="addressLine" required type="text" placeholder="Address">
+                        <mat-error *ngIf="(addressForm.controls.addressLine.errors | firstKey) === 'required' && addressForm.controls['addressLine'].touched">
+                            Address is required
+                        </mat-error>
+                    </mat-form-field>
+                    <div fxLayout="row" fxLayoutGap="12px">
+                        <mat-form-field>
+                            <input matInput formControlName="landmark" type="text" placeholder="Landmark (optional)">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-select placeholder="City" required formControlName="city">
+                                <mat-option *ngFor="let city of cities" [value]="city.value">
+                                {{ city.viewValue }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="(addressForm.controls.city.errors | firstKey) === 'required' && addressForm.controls['city'].touched">
+                                City is required
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput formControlName="pincode" required type="text" placeholder="PIN Code">
+                            <mat-error *ngIf="(addressForm.controls.pincode.errors | firstKey) === 'required' && addressForm.controls['pincode'].touched">
+                                PIN Code is required
+                            </mat-error>
+                            <mat-error *ngIf="(addressForm.controls.pincode.errors | firstKey) === 'pattern' && addressForm.controls['pincode'].touched">
+                                Entered PIN Code is invalid
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- slide 2 -->
+        <div class="containerX dialog-container" *ngIf="slide === 2"
+            [ngClass]="{'sidenav-fi': slide === 2, 'sidenav-fo': slide !== 2}">
+            <div fxLayout="column" class="bd-content-1-wrap" fxLayout="column" fxLayoutGap="20px">
+                <h3>Select Date of Service</h3>
+                <div fxLayout="row" class="date-time-box-wrap" fxLayoutGap="8px">
+                    <div class="date-time-box" *ngFor="let dateTimeSlot of dateTimeSlots; let i = index"
+                        [ngClass]="{'selected': (selectedDateTimeIndex && i === selectedDateTimeIndex[0]), 'blocked': dateTimeSlot.isBlocked}"
+                        (click)="selectDateIndex(i)">
+                        <span class="sub-text">{{ dateTimeSlot.dateText[0] }}</span>
+                        <span>{{ dateTimeSlot.dateText[1] }}</span>
+                    </div>
+                </div>
+                <h3>Select Time of Service</h3>
+                <div fxLayout="row" class="date-time-box-wrap" fxLayoutGap="8px">
+                    <div class="date-time-box time-box" *ngFor="let timeSlot of dateTimeSlots[selectedDateIndex]?.timeSlots; let j = index"
+                        [ngClass]="{'selected': (selectedDateTimeIndex && j === selectedDateTimeIndex[1]), 'blocked': timeSlot.isBlocked}"
+                        (click)="selectTimeIndex(j)">
+                        <span>{{ timeSlot.name }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div mat-dialog-actions>
+        <ng-container *ngIf="slide === 1 else slide2Tmpl">
+            <span fxFlex></span>
+            <button mat-raised-button class="btn-p-proceed" [color]="addressForm.invalid ? '' : 'primary'"
+                (click)="proceedToSlide2()" [disabled]="addressForm.invalid">
+                <span class="spn-text">Continue with this address</span>
+                <mat-icon>arrow_forward</mat-icon>
+            </button>
+        </ng-container>
+        <ng-template #slide2Tmpl>
+            <span fxFlex></span>
+            <button mat-raised-button class="btn-p-proceed" 
+                [color]="(selectedDateTimeIndex && selectedDateTimeIndex[0] >= 0 && selectedDateTimeIndex[1] >= 0) ? 'primary' : ''"
+                (click)="proceedToUser()" [disabled]="!(selectedDateTimeIndex && selectedDateTimeIndex[0] >= 0 && selectedDateTimeIndex[1] >= 0)">        
+                <span class="spn-text">Continue with selected slot</span>
+                <mat-icon>arrow_forward</mat-icon>
+            </button>
+        </ng-template>
+    </div>
+</div>

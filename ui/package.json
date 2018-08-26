@@ -38,7 +38,8 @@
     "ngx-slick": "^0.2.0",
     "rxjs": "^6.2.1",
     "rxjs-compat": "^6.2.2",
-    "zone.js": "^0.8.24"
+    "zone.js": "^0.8.24",
+    "moment": "^2.18.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.6.0",

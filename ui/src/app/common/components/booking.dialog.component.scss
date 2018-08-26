@@ -69,6 +69,32 @@
                                 }
                             }
                         }
+                        .date-time-box-wrap {
+                            flex-wrap: wrap;
+                            align-items: baseline;
+                            .date-time-box {
+                                width: 106px;
+                                height: 64px;
+                                border-radius: 4px;
+                                display: inline-block;
+                                border: 1px solid #bdbdbd;
+                                cursor: pointer;
+                                margin-bottom: 12px;
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: center;
+                                box-sizing: border-box;
+                                &.time-box {
+                                    height: 48px;
+                                }
+                                & > span {
+                                    text-align: center;
+                                }
+                                .sub-text {
+                                    color: #757575;
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -90,6 +116,18 @@
                                 font-size: 18px;
                                 height: 16px;
                             }
+                        }
+                    }
+                }
+            }
+            &.bd-wrap-date-time {
+                .mat-dialog-content {
+                    .dialog-container {
+                        padding: 16px 38px;
+                        h3 {
+                            margin: 24px 0 0;
+                            font-size: 24px;
+                            font-weight: 500;
                         }
                     }
                 }
