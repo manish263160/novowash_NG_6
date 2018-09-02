@@ -4,6 +4,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BookingDialogComponent } from "./common/components/booking-dialog/booking.dialog.component";
 import { DateUserDetailsDialogComponent } from "./common/components/date-user-details-dialog/date.user.details.dialog.component";
+import { SummaryDialogComponent } from "./common/components/summary-dialog/summary.dialog.component";
 import { ConfirmDialogComponent } from "./common/components/confirm-dialog.component";
 import { ErrorDialogComponent } from "./common/components/error.dialog.component";
 import { FirstKeyPipe } from "./common/pipes/first.key.pipe";
@@ -26,6 +27,7 @@ import {
         BookingDialogComponent,
         ConfirmDialogComponent,
         DateUserDetailsDialogComponent,
+        SummaryDialogComponent,
         ErrorDialogComponent,
         FirstKeyPipe,
         ImagePipe,

@@ -4,6 +4,7 @@ import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browse
 import { Observable, Subscription } from "rxjs";
 import { BookingDialogComponent } from "../../common/components/booking-dialog/booking.dialog.component";
 import { DateUserDetailsDialogComponent } from "../../common/components/date-user-details-dialog/date.user.details.dialog.component";
+import { SummaryDialogComponent } from "../../common/components/summary-dialog/summary.dialog.component";
 import { DialogService } from "../../common/services/dialog.service";
 import { ServicesService } from "../../core/services/services.service";
 
@@ -33,6 +34,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     public slideConfig = {"slidesToShow": 4, "slidesToScroll": 1};
     public slideHListConfig = {"slidesToShow": 8, "slidesToScroll": 1};
     private selectedServices: any;
+    private dateUserDetails: any;
     private headerEl: any;
     private btnLoginEl: any;
     private styleStr = "style";
@@ -139,13 +141,45 @@ export class HomeComponent implements OnInit, OnDestroy {
             console.log("onDetailEnteringCancelled()");
             this.dialogRef.close();
         });
-        this.dialogRef.componentInstance.onDetailEntered.subscribe((selectedServices) => {
+        this.dialogRef.componentInstance.onDetailEntered.subscribe((dateUserDetails) => {
             console.log("onDetailEntered()");
-            // this.selectedServices = selectedServices;
+            this.dateUserDetails = dateUserDetails;
             this.dialogRef.close();
+            this.openBookingSummaryDialog();
         });
         // this.dialogRef.afterClosed().subscribe((result) => {
         //     this.dialogRef = null;
         // });
+    }
+
+    public openBookingSummaryDialog() {
+        let selectedServiceName = "Book A Service";
+        const selectedService = this.serviceItems.filter((service) => {
+            return service.id === this.selectedServices.selectedServiceId;
+        })
+        if (selectedService && selectedService.length) {
+            selectedServiceName = selectedService[0].catName;
+        }
+        this.dialogRef = this.dialog.open(SummaryDialogComponent, this.config);
+        this.dialogRef.componentInstance.selectedServiceName = selectedServiceName;
+        this.dialogRef.componentInstance.selectedServices = this.selectedServices;
+        this.dialogRef.componentInstance.dateUserDetails = this.dateUserDetails;
+
+        this.dialogRef.componentInstance.onSummaryCancelled.subscribe(() => {
+            console.log("onSummaryCancelled()");
+            this.dialogRef.close();
+        });
+        this.dialogRef.componentInstance.onSummaryConfirmed.subscribe(() => {
+            console.log("onSummaryConfirmed()");
+            this.dialogRef.close();
+            this.proceedToPayment();
+        });
+        // this.dialogRef.afterClosed().subscribe((result) => {
+        //     this.dialogRef = null;
+        // });
+    }
+
+    public proceedToPayment() {
+
     }
 }

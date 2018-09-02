@@ -1,0 +1,64 @@
+<div class="containerX" >
+    <div fxLayout="row" class="dialog-header">
+        <div fxFlex="flex">
+            <h5>Booking Summary</h5>
+        </div>
+        <div fxFlex="none">
+            <button mat-icon-button class="close-icon" (click)="closeDialog()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>
+<div class="booking-dialog-wrap bd-wrap-summary">
+    <div mat-dialog-content>
+        <div class="containerX dialog-container">
+            <div class="bd-content-1-wrap" fxLayout="column" fxLayoutGap="8px">
+                <!-- service details -->
+                <div class="summary-sec" fxLayout="column">
+                    <span class="header">Selected Service</span>
+                    <span class="text">{{ selectedServiceName }}</span>
+                    <span class="text sub" *ngFor="let package of selectedServices?.selectedPackages">
+                        {{ package?.serviceName }}
+                    </span>
+                </div>
+                <!-- time slot -->
+                <div class="summary-sec" fxLayout="column">
+                    <span class="header">Selected Time Slot</span>
+                    <span class="text">
+                        Between {{ dateUserDetails?.time }} on {{ dateUserDetails?.dateText }}
+                    </span>
+                </div>
+                <!-- address -->
+                <span class="summary-sec" fxLayout="column">
+                    <span class="header">Service Required At</span>
+                    <span class="text">
+                        {{ dateUserDetails?.address?.addressLine }}
+                    </span>
+                    <span class="text" *ngIf="dateUserDetails?.address?.landmark">
+                        {{ dateUserDetails?.address?.landmark }}
+                    </span>
+                    <span class="text">
+                        {{ dateUserDetails?.city }} - {{ dateUserDetails?.address?.pincode }}
+                    </span>
+                </span>
+                <!-- contact -->
+                <div class="summary-sec" fxLayout="column">
+                    <span class="header">Contact Details</span>
+                    <span class="text">{{ ropcService?.user?.number }}</span>
+                    <span class="text">{{ dateUserDetails?.contactDetails?.email }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div mat-dialog-actions>
+        <span fxFlex></span>
+        <button cdkFocusRegionstart mat-raised-button class="btn-p-proceed" color="primary"
+            (click)="submitSummary()">        
+            <span class="spn-amount">Rs. {{ selectedServices?.totalAmount | number }}</span>
+            <span class="fill-remaining-space"></span>
+            <span class="spn-text">Proceed to Pay</span>
+            <mat-icon>arrow_forward</mat-icon>
+        </button>
+    </div>
+</div>

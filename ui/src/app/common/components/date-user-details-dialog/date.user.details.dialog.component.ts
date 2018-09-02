@@ -58,7 +58,6 @@ export class DateUserDetailsDialogComponent implements OnDestroy, OnInit {
     ngOnDestroy() {
         if (this.allSubscriptions) {
             this.allSubscriptions.unsubscribe();
-
         }
         if (this.subServiceSub) {
             this.subServiceSub.unsubscribe();
@@ -134,9 +133,11 @@ export class DateUserDetailsDialogComponent implements OnDestroy, OnInit {
 
     public proceedToSlide3() {
         this.slide = 3;
+        // TO DELETE _ STARTS
         if (!this.ropcService.user.number) {
             this.ropcService.user.number = "9987777224";
         }
+        // TO DELETE - ENDS
         this.userForm = this.fb.group({
             email: [this.ropcService.user.email, Validators.compose([Validators.required, Validators.pattern(this.pattern)])],
             number: [this.ropcService.user.number, Validators.compose([Validators.required, ValidatorService.phoneValidator])],
@@ -152,8 +153,31 @@ export class DateUserDetailsDialogComponent implements OnDestroy, OnInit {
         }
     }
 
-    public submitDateUserDetails() {
+    public getCityName() {
+        let cityName = "";
+        this.cities = [
+            {value: 'ncr-0', viewValue: 'Delhi-NCR'},
+            {value: 'mumbai-1', viewValue: 'Mumbai'},
+            {value: 'bangalore-2', viewValue: 'Bangalore'}
+        ];
+        const selectedCity = this.cities.filter(city => city.value === this.addressForm.controls.city.value);
+        if (selectedCity && selectedCity.length) {
+            cityName = selectedCity[0].viewValue;
+        }
+        return cityName;
+    }
 
+    public submitDateUserDetails() {
+        const dateUserDetails = {
+            address: this.addressForm.value,
+            city: this.getCityName(),
+            dateTimeSlots: this.dateTimeSlots,
+            selectedDateTimeIndex: this.selectedDateTimeIndex,
+            dateText: this.dateTimeSlots[this.selectedDateTimeIndex[0]].dateText.join(", "),
+            time: this.dateTimeSlots[this.selectedDateTimeIndex[0]].timeSlots[this.selectedDateTimeIndex[1]].name,
+            contactDetails: this.userForm.value,
+        };
+        this.onDetailEntered.emit(dateUserDetails);
     }
 
     public selectDateIndex(index) {
