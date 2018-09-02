@@ -1,10 +1,20 @@
 <div class="containerX">
-    <div fxLayout="row" class="dialog-header">
-        <div fxFlex="flex">
-            <button mat-icon-button (click)="goBackToOne()" *ngIf="isExistingUser || isNewUser">
-                <mat-icon>arrow_back</mat-icon>
+    <div fxLayout="row" class="dialog-header" [ngClass]="{'no-padding-left': isForBooking}">
+        <ng-container *ngIf="isForBooking else normalTmpl">
+            <button mat-raised-button mat-icon-button class="close-sidenav" (click)="closeDialog()">
+                <mat-icon>keyboard_arrow_left</mat-icon>
             </button>
-        </div>
+            <div fxFlex="flex">
+                <h5>{{ selectedServiceName }}</h5>
+            </div>
+        </ng-container>
+        <ng-template #normalTmpl>
+            <div fxFlex="flex">
+                <button mat-icon-button (click)="goBackToOne()" *ngIf="isExistingUser || isNewUser">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+            </div>
+        </ng-template>
         <div fxFlex="none">
             <button mat-icon-button (click)="closeDialog()">
                 <mat-icon>close</mat-icon>
@@ -17,6 +27,10 @@
     <div class="mat-dialog-content">
         <div class="containerX dialog-container">
             <div fxLayout="column" fxLayoutGap="16px">
+                <div *ngIf="isForBooking" class="msg-booking-login">
+                    <h1>Almost there!</h1>
+                    <h3>Please login/signup to continue</h3>
+                </div>
                 <mat-form-field floatLabel="never" *ngIf="isNewUser">
                     <span matPrefix>+91 &nbsp;</span>
                     <input type="text" matInput placeholder="Name" formControlName="name" novalidate>
@@ -58,6 +72,7 @@
                         Please enter valid email id
                     </mat-error>
                 </mat-form-field>
+                <span class="spacer"></span>
                 <button mat-raised-button color="primary" (click)="onClickGetOTP()"
                     *ngIf="!isExistingUser && !isNewUser" [disabled]="loginForm.invalid">
                     Login/Signup

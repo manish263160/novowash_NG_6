@@ -1,9 +1,11 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Input, Output, ViewEncapsulation } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import { MatDialog, MatDialogRef } from "@angular/material";
+import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material";
 import * as moment from "moment";
 import { Observable, Subscription, Subscriber } from "rxjs";
 import { DialogService } from "../../../common/services/dialog.service";
+import { ValidatorService } from "../../../common/services/validator.service";
+import { LoginComponent } from "../../../login/login.component";
 import { Address } from "../../../model/address";
 import { ROPCService } from "../../../../app/auth/ropc.service";
 
@@ -23,15 +25,18 @@ export class DateUserDetailsDialogComponent implements OnDestroy, OnInit {
     @Output() public onDetailEntered: EventEmitter<any> = new EventEmitter();
     public allSubscriptions: Subscription;
     public addressForm: FormGroup;
+    public userForm: FormGroup;
     public dateTimeSlots: any;
     public cities: any[];
     public selectedDateIndex: number;
+    public pattern = "^(([^<>()\\[\\]\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\\.)+[a-zA-Z]{2,}))$";
 
     private subServiceSub: any;
     
     constructor(
         private dialog: MatDialog ,
         private dialogRef: MatDialogRef<DateUserDetailsDialogComponent>,
+        private dialogRefLogin: MatDialogRef<LoginComponent>,
         private dialogService: DialogService,
         private fb: FormBuilder,
         private ropcService: ROPCService,
@@ -53,6 +58,7 @@ export class DateUserDetailsDialogComponent implements OnDestroy, OnInit {
     ngOnDestroy() {
         if (this.allSubscriptions) {
             this.allSubscriptions.unsubscribe();
+
         }
         if (this.subServiceSub) {
             this.subServiceSub.unsubscribe();
@@ -126,12 +132,28 @@ export class DateUserDetailsDialogComponent implements OnDestroy, OnInit {
         this.loadTimeSlots();
     }
 
+    public proceedToSlide3() {
+        this.slide = 3;
+        if (!this.ropcService.user.number) {
+            this.ropcService.user.number = "9987777224";
+        }
+        this.userForm = this.fb.group({
+            email: [this.ropcService.user.email, Validators.compose([Validators.required, Validators.pattern(this.pattern)])],
+            number: [this.ropcService.user.number, Validators.compose([Validators.required, ValidatorService.phoneValidator])],
+        });
+        this.userForm.controls.number.disable();
+    }
+
     public proceedToUser() {
         if (this.ropcService.user) {
-            alert ("Logged In!");
+            this.proceedToSlide3();
         } else {
-            alert ("Not Logged In");
+            this.openLoginSignUpDialog();
         }
+    }
+
+    public submitDateUserDetails() {
+
     }
 
     public selectDateIndex(index) {
@@ -147,8 +169,37 @@ export class DateUserDetailsDialogComponent implements OnDestroy, OnInit {
 
     }
 
-    public submitDateTimeSelection() {
-        
+    public openLoginSignUpDialog() {
+        const dlEl = document.getElementsByClassName("dialog-panel-booking")[0];
+        if (dlEl) {
+            dlEl.classList.add("hidden");
+        }
+        const config = new MatDialogConfig();
+        config.width = "75%";
+        config.disableClose = true;
+        config.panelClass = "dialog-panel-login";
+        config.position = {
+            bottom: "",
+            left: "",
+            right: "",
+            top: "",
+        };
+        this.dialogRefLogin = this.dialog.open(LoginComponent, config);
+        this.dialogRefLogin.componentInstance.isForBooking = true;
+        this.dialogRefLogin.componentInstance.selectedServiceName = this.selectedServiceName;
+        this.dialogRefLogin.componentInstance.onLoginCancelled.subscribe(() => {
+            console.log("onLoginCancelled()");
+            this.dialogRefLogin.close();
+        });
+        this.dialogRefLogin.componentInstance.onLoginSuccessful.subscribe((user) => {
+            console.log("onLoginSuccessful()");
+            this.dialogRefLogin.close();
+            this.proceedToSlide3();
+        });
+        this.dialogRefLogin.afterClosed().subscribe((result) => {
+            this.dialogRefLogin = null;
+            dlEl.classList.remove("hidden");
+        });
     }
 
     public closeDialog() {

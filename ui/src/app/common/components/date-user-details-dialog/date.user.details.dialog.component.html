@@ -1,7 +1,7 @@
 <div class="containerX" >
-    <div fxLayout="row" class="dialog-header" [ngClass]="{'no-padding-left': slide === 2}">
+    <div fxLayout="row" class="dialog-header" [ngClass]="{'no-padding-left': slide > 1}">
         <button mat-raised-button mat-icon-button class="close-sidenav"
-            (click)="slide=1; backButtonClicked()" *ngIf="slide === 2">
+            (click)="slide=(slide-1); backButtonClicked()" *ngIf="slide > 1">
             <mat-icon>keyboard_arrow_left</mat-icon>
         </button>
         <div fxFlex="flex">
@@ -80,24 +80,63 @@
                 </div>
             </div>
         </div>
+
+        <!-- slide 3 -->
+        <div class="containerX dialog-container" *ngIf="slide === 3"
+            [ngClass]="{'sidenav-fi': slide === 3, 'sidenav-fo': slide !== 3}">
+            <form [formGroup]="userForm" novalidate>
+                <div class="bd-content-1-wrap" fxLayout="column" fxLayoutGap="32px">
+                    <h3>Please enter your contact details</h3>
+                    <!-- <span class="spacer"></span> -->
+                    <mat-form-field>
+                        <span matPrefix>+91 &nbsp;</span>
+                        <input type="tel" matInput placeholder="Mobile Number" formControlName="number" novalidate>
+                        <mat-error *ngIf="(userForm.controls['number'].errors | firstKey) ==='required' && userForm.controls['number'].touched">
+                            Mobile number is required
+                        </mat-error>
+                        <mat-error *ngIf="(userForm.controls['number'].errors | firstKey) === 'invalidNumber' && userForm.controls['number'].touched">
+                            Please enter a valid mobile number
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input type="email" matInput placeholder="Email" formControlName="email" novalidate>
+                        <mat-error *ngIf="(userForm.controls['email'].errors | firstKey) ==='required' && userForm.controls['email'].touched">
+                            Email ID is required
+                        </mat-error>
+                        <mat-error *ngIf="(userForm.controls['email'].errors | firstKey) === 'invalidNumber' && userForm.controls['email'].touched">
+                            Please enter a valid email ID
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </form>
+        </div>
     </div>
     <div mat-dialog-actions>
-        <ng-container *ngIf="slide === 1 else slide2Tmpl">
-            <span fxFlex></span>
+        <span fxFlex></span>
+        <ng-container *ngIf="slide === 1">
             <button mat-raised-button class="btn-p-proceed" [color]="addressForm.invalid ? '' : 'primary'"
                 (click)="proceedToSlide2()" [disabled]="addressForm.invalid">
+                <span class="fill-remaining-space"></span>
                 <span class="spn-text">Continue with this address</span>
                 <mat-icon>arrow_forward</mat-icon>
             </button>
         </ng-container>
-        <ng-template #slide2Tmpl>
-            <span fxFlex></span>
+        <ng-container *ngIf="slide === 2">
             <button mat-raised-button class="btn-p-proceed" 
                 [color]="(selectedDateTimeIndex && selectedDateTimeIndex[0] >= 0 && selectedDateTimeIndex[1] >= 0) ? 'primary' : ''"
                 (click)="proceedToUser()" [disabled]="!(selectedDateTimeIndex && selectedDateTimeIndex[0] >= 0 && selectedDateTimeIndex[1] >= 0)">        
+                <span class="fill-remaining-space"></span>
                 <span class="spn-text">Continue with selected slot</span>
                 <mat-icon>arrow_forward</mat-icon>
             </button>
-        </ng-template>
+        </ng-container>
+        <ng-container *ngIf="slide === 3">
+            <button mat-raised-button class="btn-p-proceed" [color]="userForm.invalid ? '' : 'primary'"
+                (click)="submitDateUserDetails()" [disabled]="userForm.invalid">
+                <span class="fill-remaining-space"></span>
+                <span class="spn-text">Proceed to summary</span>
+                <mat-icon>arrow_forward</mat-icon>
+            </button>
+        </ng-container>
     </div>
 </div>

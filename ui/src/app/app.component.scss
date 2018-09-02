@@ -3255,3 +3255,9 @@ mat-dialog-container.mat-dialog-container {
     pointer-events: none;
   }
 }
+
+.cdk-overlay-pane {
+  &.hidden {
+    display: none !important;
+  }
+}

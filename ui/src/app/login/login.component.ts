@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output, ViewEncapsulation } from "@angular/core";
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation } from "@angular/core";
 import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms";
 import { MatSnackBar } from "@angular/material";
 import { ValidatorService } from "../common/services/validator.service";
@@ -18,6 +18,8 @@ import { User } from "../model/user";
 })
 
 export class LoginComponent implements OnInit, OnDestroy {
+    @Input() public isForBooking: boolean;
+    @Input() public selectedServiceName: string;
     @Output() public onLoginCancelled: EventEmitter<any> = new EventEmitter();
     @Output() public onLoginSuccessful: EventEmitter<User> = new EventEmitter();
     public loginForm: FormGroup;
