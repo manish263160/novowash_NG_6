@@ -22,10 +22,11 @@ export class BookingDialogComponent implements OnDestroy, OnInit {
     public allSubscriptions: Subscription;
     public packages: any[];
     public subList = [];
+    public allSubServices = [];
     public slide: number = 1;
     public totalAmount = 0;
 
-    private subServiceSub: any;
+    // private subServiceSub: any;
     
     constructor(
         private dialog: MatDialog ,
@@ -47,16 +48,25 @@ export class BookingDialogComponent implements OnDestroy, OnInit {
                 this.allSubscriptions = serviceSub;
             }
         }
-        this.loadSubServices();
+        const subServiceSub = this.servicesService.getAllSubServices()
+            .subscribe((val) => {
+                this.allSubServices = val;
+                this.loadSubServices();
+            });
+        if (this.allSubscriptions) {
+            this.allSubscriptions.add(subServiceSub);
+        } else {
+            this.allSubscriptions = subServiceSub;
+        }
     }
 
     ngOnDestroy() {
         if (this.allSubscriptions) {
             this.allSubscriptions.unsubscribe();
         }
-        if (this.subServiceSub) {
-            this.subServiceSub.unsubscribe();
-        }
+        // if (this.subServiceSub) {
+        //     this.subServiceSub.unsubscribe();
+        // }
     }
 
     public updatePackageSelection(pack) {
@@ -85,17 +95,13 @@ export class BookingDialogComponent implements OnDestroy, OnInit {
     }
 
     public loadSubServices() {
-        if (this.selectedServiceId) {
-            this.subServiceSub = this.servicesService.getSubServices(this.selectedServiceId)
-                .subscribe((val) => {
-                    this.subServiceSub.unsubscribe();
-                    this.subList = val;
-                });
-            // if (this.allSubscriptions) {
-            //     this.allSubscriptions.add(subServiceSub);
-            // } else {
-            //     this.allSubscriptions = subServiceSub;
-            // }
+        if (this.selectedServiceId && this.allSubServices && this.allSubServices.length) {
+            // this.subServiceSub = this.servicesService.getSubServices(this.selectedServiceId)
+            //     .subscribe((val) => {
+            //         this.subServiceSub.unsubscribe();
+            //         this.subList = val;
+            //     });
+            this.subList = this.allSubServices.filter((service) => service.serviceCatId === this.selectedServiceId);
         }
     }
 

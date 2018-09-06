@@ -1,8 +1,8 @@
 <div class="containerX" >
     <div fxLayout="row" class="dialog-header" [ngClass]="{'no-padding-left': slide > 1}">
-        <button mat-raised-button mat-icon-button class="close-sidenav"
+        <button mat-icon-button class="close-sidenav-flat"
             (click)="slide=(slide-1); backButtonClicked()" *ngIf="slide > 1">
-            <mat-icon>keyboard_arrow_left</mat-icon>
+            <mat-icon>arrow_back</mat-icon>
         </button>
         <div fxFlex="flex">
             <h5>{{ selectedServiceName }}</h5>

@@ -10,9 +10,8 @@
         </div>
     </div>
     <div fxLayout="row" class="dialog-header no-padding-left" *ngIf="slide === 2">
-        <button mat-raised-button mat-icon-button class="close-sidenav"
-            (click)="slide=1; backButtonClicked()">
-            <mat-icon>keyboard_arrow_left</mat-icon>
+        <button mat-icon-button class="close-sidenav-flat" (click)="slide=1; backButtonClicked()">
+            <mat-icon>arrow_back</mat-icon>
         </button>
         <div fxFlex="flex">
             <h5>{{ getSelectedServiceName() }}</h5>
@@ -41,10 +40,16 @@
                     </div>
                 </div>
                 <div class="bd-service-sub-list" fxLayout="column">
-                    <div class="bd-service-sub-list-item" fxLayout="row"
+                    <!-- <div class="bd-service-sub-list-item" fxLayout="row"
                         *ngFor="let sub of subList; let j = index"
                         (click)="onClickSubService1(sub.id)">
                         <span class="question-text">{{ sub.serviceName }}</span>
+                    </div> -->
+                    <div class="bd-service-sub-list-item" fxLayout="row"
+                        *ngFor="let sub of subList; let j = index"
+                        (click)="onClickSubService1(sub.id)">
+                        <span class="service-icon" [style.backgroundImage]="getBackground(sub.imageUrl)"></span>
+                        <span class="service-name">{{ sub.serviceName }}</span>
                     </div>
                 </div>
             </div>
