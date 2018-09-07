@@ -3,6 +3,7 @@ import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material";
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { Observable, Subscription } from "rxjs";
 import { BookingDialogComponent } from "../../common/components/booking-dialog/booking.dialog.component";
+import { BookingEndDialogComponent } from "../../common/components/booking-end-dialog/booking.end.dialog.component";
 import { DateUserDetailsDialogComponent } from "../../common/components/date-user-details-dialog/date.user.details.dialog.component";
 import { SummaryDialogComponent } from "../../common/components/summary-dialog/summary.dialog.component";
 import { DialogService } from "../../common/services/dialog.service";
@@ -180,6 +181,20 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
 
     public proceedToPayment() {
+        this.proceedToBookingEnd();
+    }
 
+    public proceedToBookingEnd() {
+        this.dialogRef = this.dialog.open(BookingEndDialogComponent, this.config);
+        this.dialogRef.componentInstance.isSuccess = true;
+        this.dialogRef.componentInstance.totalAmount = this.selectedServices.totalAmount;
+
+        this.dialogRef.componentInstance.onBookingEndClosed.subscribe(() => {
+            console.log("onBookingEndClosed()");
+            this.dialogRef.close();
+        });
+        // this.dialogRef.afterClosed().subscribe((result) => {
+        //     this.dialogRef = null;
+        // });
     }
 }
