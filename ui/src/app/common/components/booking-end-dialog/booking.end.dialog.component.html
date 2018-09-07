@@ -1,0 +1,38 @@
+<div class="containerX" >
+    <div fxLayout="row" class="dialog-header">
+        <div fxFlex="flex">
+            <h5>Booking {{ isSuccess ? 'Confirmed' : 'Failed' }}</h5>
+        </div>
+        <div fxFlex="none">
+            <button mat-icon-button class="close-icon" (click)="closeDialog()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>
+<div class="booking-dialog-wrap bd-wrap-booking-end">
+    <div mat-dialog-content>
+        <div class="containerX dialog-container" cdkFocusRegionstart>
+            <div class="bd-content-1-wrap" fxLayout="column" fxLayoutGap="8px">
+                <div class="be-header" fxLayout="column" fxLayoutAlign="center center"
+                    [ngClass]="{'success': isSuccess, 'error': !isSuccess}">
+                    <mat-icon *ngIf="isSuccess">check_circle_outline</mat-icon>
+                    <mat-icon *ngIf="!isSuccess">error_outline</mat-icon>
+                    <h3>{{ isSuccess ? 'Thank You' : 'Something went wrong'}}</h3>
+                </div>
+                <div class="be-content">
+                    <ng-container *ngIf="isSuccess else errorTmpl">
+                        Payment of Rs. {{ totalAmount }} made successfully,
+                        and your booking is confirmed. You can always go to My Bookings
+                        page and check out details of your booked services.
+                    </ng-container>
+                    <ng-template #errorTmpl>
+                        Payment of Rs. {{ totalAmount }} failed,
+                        and your booking couldn't be completed successfully.
+                        You can always retry booking the service(s) you require.
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
