@@ -16,7 +16,7 @@ export class SummaryDialogComponent implements OnInit {
     @Output() public onSummaryConfirmed: EventEmitter<any> = new EventEmitter();
 
     constructor(
-        private ropcService: ROPCService,
+        public ropcService: ROPCService,
     ) {}
 
     ngOnInit() {

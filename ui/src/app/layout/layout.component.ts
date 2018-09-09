@@ -29,9 +29,9 @@ export class LayoutComponent implements OnInit, OnDestroy {
     private config: MatDialogConfig;
 
     constructor(
+        public ropcService: ROPCService,
         private dialog: MatDialog,
         private userService: UserService,
-        private ropcService: ROPCService,
         private router: Router,
         public itMenuService: ITMenuService
     ) {
