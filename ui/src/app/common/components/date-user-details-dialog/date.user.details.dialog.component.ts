@@ -82,40 +82,93 @@ export class DateUserDetailsDialogComponent implements OnDestroy, OnInit {
     }
 
     public loadTimeSlots() {
+        const dtObject = {
+            "2018-09-08##true": {
+                "07 AM - 10 AM": true,
+                "10 AM - 01 PM": true,
+                "01 PM - 04 PM": true,
+                "04 PM - 07 PM": false
+            },
+            "2018-09-09##false": null,
+            "2018-09-10##false": null,
+            "2018-09-11##true": {
+                "07 AM - 10 AM": true,
+                "10 AM - 01 PM": true,
+                "01 PM - 04 PM": true,
+                "04 PM - 07 PM": true
+            },
+            "2018-09-12##true": {
+                "07 AM - 10 AM": true,
+                "10 AM - 01 PM": true,
+                "01 PM - 04 PM": true,
+                "04 PM - 07 PM": true
+            },
+            "2018-09-13##true": {
+                "07 AM - 10 AM": true,
+                "10 AM - 01 PM": true,
+                "01 PM - 04 PM": true,
+                "04 PM - 07 PM": true
+            },
+            "2018-09-14##true": {
+                "07 AM - 10 AM": true,
+                "10 AM - 01 PM": true,
+                "01 PM - 04 PM": true,
+                "04 PM - 07 PM": true
+            },
+            "2018-09-15##true": {
+                "07 AM - 10 AM": true,
+                "10 AM - 01 PM": true,
+                "01 PM - 04 PM": true,
+                "04 PM - 07 PM": true
+            }
+        };
         if (!this.dateTimeSlots || !(Object.keys(this.dateTimeSlots)).length) {
-            this.dateTimeSlots = [{
-                date: new Date(),
-                timeSlots: [{
-                    name: "7AM - 9AM",
-                    isBlocked: true,
-                }, {
-                    name: "9AM - 12PM",
-                    isBlocked: false,
-                }, {
-                    name: "12PM - 3PM",
-                    isBlocked: false,
-                }, {
-                    name: "3PM - 6PM",
-                    isBlocked: false,
-                }],
-                isBlocked: false,
-            }, {
-                date: (new Date()).setDate((new Date()).getDate()+1),
-                timeSlots: [{
-                    name: "7AM - 9AM",
-                    isBlocked: false,
-                }, {
-                    name: "9AM - 12PM",
-                    isBlocked: false,
-                }, {
-                    name: "12PM - 3PM",
-                    isBlocked: false,
-                }, {
-                    name: "3PM - 6PM",
-                    isBlocked: false,
-                }],
-                isBlocked: false,
-            }];
+            this.dateTimeSlots = [];
+            Object.keys(dtObject).forEach((key) => {
+                const dA = key.split("##");
+                const b = {date: dA[0], isBlocked: (dA[1] === "true" ? false : true), timeSlots: []};
+                const tO = dtObject[key];
+                if (tO) {
+                    Object.keys(tO).forEach((tKey) => {
+                        const t = {name: tKey, isBlocked: !tO[tKey]};
+                        b.timeSlots.push(t);
+                    });
+                }
+                this.dateTimeSlots.push(b);
+            });
+            // this.dateTimeSlots = [{
+            //     date: new Date(),
+            //     timeSlots: [{
+            //         name: "7AM - 9AM",
+            //         isBlocked: true,
+            //     }, {
+            //         name: "9AM - 12PM",
+            //         isBlocked: false,
+            //     }, {
+            //         name: "12PM - 3PM",
+            //         isBlocked: false,
+            //     }, {
+            //         name: "3PM - 6PM",
+            //         isBlocked: false,
+            //     }],
+            //     isBlocked: false,
+            // }, {
+            //     date: (new Date()).setDate((new Date()).getDate()+1),
+            //     timeSlots: [{
+            //         name: "7AM - 9AM",
+            //         isBlocked: false,
+            //     }, {
+            //         name: "9AM - 12PM",
+            //         isBlocked: false,
+            //     }, {
+            //         name: "12PM - 3PM",
+            //         isBlocked: false,
+            //     }, {
+            //         name: "3PM - 6PM",
+            //         isBlocked: false,
+            //     }],
+            //     isBlocked: false,
+            // }];
             this.dateTimeSlots.map((slot) => {
                 slot.dateText = moment(slot.date).format("dddd, MMM Do");
                 slot.dateText = slot.dateText.split(", ");
