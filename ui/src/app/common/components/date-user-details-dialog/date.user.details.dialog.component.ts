@@ -5,6 +5,7 @@ import * as moment from "moment";
 import { Observable, Subscription, Subscriber } from "rxjs";
 import { DialogService } from "../../../common/services/dialog.service";
 import { ValidatorService } from "../../../common/services/validator.service";
+import { ServicesService } from "../../../core/services/services.service";
 import { LoginComponent } from "../../../login/login.component";
 import { Address } from "../../../model/address";
 import { ROPCService } from "../../../../app/auth/ropc.service";
@@ -40,6 +41,7 @@ export class DateUserDetailsDialogComponent implements OnDestroy, OnInit {
         private dialogService: DialogService,
         private fb: FormBuilder,
         private ropcService: ROPCService,
+        private servicesService: ServicesService,
     ) {}
 
     ngOnInit() {
@@ -82,60 +84,35 @@ export class DateUserDetailsDialogComponent implements OnDestroy, OnInit {
     }
 
     public loadTimeSlots() {
-        const dtObject = {
-            "2018-09-08##true": {
-                "07 AM - 10 AM": true,
-                "10 AM - 01 PM": true,
-                "01 PM - 04 PM": true,
-                "04 PM - 07 PM": false
-            },
-            "2018-09-09##false": null,
-            "2018-09-10##false": null,
-            "2018-09-11##true": {
-                "07 AM - 10 AM": true,
-                "10 AM - 01 PM": true,
-                "01 PM - 04 PM": true,
-                "04 PM - 07 PM": true
-            },
-            "2018-09-12##true": {
-                "07 AM - 10 AM": true,
-                "10 AM - 01 PM": true,
-                "01 PM - 04 PM": true,
-                "04 PM - 07 PM": true
-            },
-            "2018-09-13##true": {
-                "07 AM - 10 AM": true,
-                "10 AM - 01 PM": true,
-                "01 PM - 04 PM": true,
-                "04 PM - 07 PM": true
-            },
-            "2018-09-14##true": {
-                "07 AM - 10 AM": true,
-                "10 AM - 01 PM": true,
-                "01 PM - 04 PM": true,
-                "04 PM - 07 PM": true
-            },
-            "2018-09-15##true": {
-                "07 AM - 10 AM": true,
-                "10 AM - 01 PM": true,
-                "01 PM - 04 PM": true,
-                "04 PM - 07 PM": true
-            }
-        };
         if (!this.dateTimeSlots || !(Object.keys(this.dateTimeSlots)).length) {
-            this.dateTimeSlots = [];
-            Object.keys(dtObject).forEach((key) => {
-                const dA = key.split("##");
-                const b = {date: dA[0], isBlocked: (dA[1] === "true" ? false : true), timeSlots: []};
-                const tO = dtObject[key];
-                if (tO) {
-                    Object.keys(tO).forEach((tKey) => {
-                        const t = {name: tKey, isBlocked: !tO[tKey]};
-                        b.timeSlots.push(t);
+            let dtObject = {};
+            const sub = this.servicesService.getDateTimeSlots(1)
+                .subscribe((val) => {
+                    dtObject = val;
+                    this.dateTimeSlots = [];
+                    Object.keys(dtObject).forEach((key) => {
+                        const dA = key.split("##");
+                        const b = {date: dA[0], isBlocked: (dA[1] === "false" ? true : false), timeSlots: []};
+                        const tO = dtObject[key];
+                        if (tO) {
+                            Object.keys(tO).forEach((tKey) => {
+                                const t = {name: tKey, isBlocked: !tO[tKey]};
+                                b.timeSlots.push(t);
+                            });
+                        }
+                        this.dateTimeSlots.push(b);
                     });
-                }
-                this.dateTimeSlots.push(b);
-            });
+                    this.dateTimeSlots.map((slot) => {
+                        slot.dateText = moment(slot.date).format("dddd, MMM Do");
+                        slot.dateText = slot.dateText.split(", ");
+                    });
+                });
+            if (this.allSubscriptions) {
+                this.allSubscriptions.add(sub);
+            } else {
+                this.allSubscriptions = sub;
+            }
+            
             // this.dateTimeSlots = [{
             //     date: new Date(),
             //     timeSlots: [{
@@ -169,10 +146,6 @@ export class DateUserDetailsDialogComponent implements OnDestroy, OnInit {
             //     }],
             //     isBlocked: false,
             // }];
-            this.dateTimeSlots.map((slot) => {
-                slot.dateText = moment(slot.date).format("dddd, MMM Do");
-                slot.dateText = slot.dateText.split(", ");
-            });
         }
         this.selectedDateIndex = 
             (this.selectedDateTimeIndex && this.selectedDateTimeIndex[0]) ?

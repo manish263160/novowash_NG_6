@@ -111,19 +111,20 @@
                             flex-wrap: wrap;
                             align-items: baseline;
                             .date-time-box {
-                                width: 106px;
+                                width: 121px;
                                 height: 64px;
                                 border-radius: 4px;
                                 display: inline-block;
                                 border: 1px solid #bdbdbd;
                                 cursor: pointer;
-                                margin-bottom: 12px;
+                                margin-bottom: 8px;
                                 display: flex;
                                 flex-direction: column;
                                 justify-content: center;
                                 box-sizing: border-box;
                                 &.time-box {
                                     height: 48px;
+                                    width: 164px;
                                 }
                                 & > span {
                                     text-align: center;

@@ -60,7 +60,7 @@
         <!-- slide 2 -->
         <div class="containerX dialog-container" *ngIf="slide === 2"
             [ngClass]="{'sidenav-fi': slide === 2, 'sidenav-fo': slide !== 2}">
-            <div fxLayout="column" class="bd-content-1-wrap" fxLayout="column" fxLayoutGap="20px">
+            <div fxLayout="column" class="bd-content-1-wrap" fxLayout="column" fxLayoutGap="16px" *ngIf="dateTimeSlots && dateTimeSlots.length">
                 <h3>Select Date of Service</h3>
                 <div fxLayout="row" class="date-time-box-wrap" fxLayoutGap="8px">
                     <div class="date-time-box" *ngFor="let dateTimeSlot of dateTimeSlots; let i = index"
