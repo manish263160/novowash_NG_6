@@ -23,7 +23,9 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/checkout.js"
+            ]
           },
           "configurations": {
             "production": {

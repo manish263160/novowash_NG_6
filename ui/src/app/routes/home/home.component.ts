@@ -2,12 +2,15 @@ import { Component, HostListener, OnDestroy, OnInit, ViewEncapsulation } from "@
 import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material";
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { Observable, Subscription } from "rxjs";
+import { ROPCService } from "../../../app/auth/ropc.service";
 import { BookingDialogComponent } from "../../common/components/booking-dialog/booking.dialog.component";
 import { BookingEndDialogComponent } from "../../common/components/booking-end-dialog/booking.end.dialog.component";
 import { DateUserDetailsDialogComponent } from "../../common/components/date-user-details-dialog/date.user.details.dialog.component";
 import { SummaryDialogComponent } from "../../common/components/summary-dialog/summary.dialog.component";
 import { DialogService } from "../../common/services/dialog.service";
 import { ServicesService } from "../../core/services/services.service";
+
+declare var Instamojo: any;
 
 @Component({
     encapsulation: ViewEncapsulation.None,
@@ -43,8 +46,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     private dialogRef: MatDialogRef<any>;
     private config: MatDialogConfig;
+    private paymentUrlResponse: any;
 
     constructor(
+        public ropcService: ROPCService,
         private servicesService: ServicesService,
         private _sanitizer: DomSanitizer,
         private dialog: MatDialog,
@@ -146,6 +151,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             console.log("onDetailEntered()");
             this.dateUserDetails = dateUserDetails;
             this.dialogRef.close();
+            this.getPaymentUrl();
             this.openBookingSummaryDialog();
         });
         // this.dialogRef.afterClosed().subscribe((result) => {
@@ -196,5 +202,33 @@ export class HomeComponent implements OnInit, OnDestroy {
         // this.dialogRef.afterClosed().subscribe((result) => {
         //     this.dialogRef = null;
         // });
+    }
+
+    public getPaymentUrl() {
+        // const formData = new FormData();
+        const rUser = this.ropcService.user;
+        // formData.append("name", rUser.username);
+        // formData.append("email", rUser.email ? rUser.email : "sample@abc.com");
+        // formData.append("phone", rUser.mobile_number);
+        // formData.append("currency", "INR");
+        // formData.append("amount", this.selectedServices.totalAmount);
+        // formData.append("description", "For Novowash Service Booking");
+        const payload = {
+            name: rUser.username,
+            email: rUser.email ? rUser.email : "sample@abc.com",
+            phone: rUser.mobile_number,
+            currency: "INR",
+            amount: this.selectedServices.totalAmount,
+            description: "For Novowash Service Booking",
+        };
+        const pSub = this.servicesService.getPaymentUrl(payload)
+            .subscribe((res) => {
+                this.paymentUrlResponse = res;
+            });
+        if (!this.allSubscriptions) {
+            this.allSubscriptions = pSub;
+        } else {
+            this.allSubscriptions.add(pSub);
+        }
     }
 }

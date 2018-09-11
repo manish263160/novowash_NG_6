@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { map } from 'rxjs/operators';
 import { Service } from "../../model/service";
 import { Payment } from "../../model/payment";
@@ -38,6 +38,14 @@ export class ServicesService {
     public getDateTimeSlots(serviceId): Observable<any> {
         return this.http
             .get(`http://13.59.141.30:8080/NovoWash/services/get/serviceDateTime/${serviceId}`)
+            .pipe(map((res: any) => {
+                return res.data || {};
+            }));
+    }
+
+    public getPaymentUrl(payload) {
+        return this.http
+            .post("http://13.59.141.30:8080/NovoWash/payment/paymentRequest", payload)
             .pipe(map((res: any) => {
                 return res.data || {};
             }));
