@@ -47,6 +47,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     private dialogRef: MatDialogRef<any>;
     private config: MatDialogConfig;
     private paymentUrlResponse: any;
+    private pSub: any;
 
     constructor(
         public ropcService: ROPCService,
@@ -101,6 +102,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     public ngOnDestroy() {
         this.allSubscriptions.unsubscribe();
+        if (this.pSub) {
+            this.pSub.unsubscribe();
+        }
         const cWrapEl = document.getElementsByClassName("content-wrapper")[0];
         if (cWrapEl) {
             cWrapEl.classList.remove("no-padding");
@@ -187,6 +191,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
 
     public proceedToPayment() {
+        this.openPaymentGateway();
         this.proceedToBookingEnd();
     }
 
@@ -205,14 +210,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
 
     public getPaymentUrl() {
-        // const formData = new FormData();
         const rUser = this.ropcService.user;
-        // formData.append("name", rUser.username);
-        // formData.append("email", rUser.email ? rUser.email : "sample@abc.com");
-        // formData.append("phone", rUser.mobile_number);
-        // formData.append("currency", "INR");
-        // formData.append("amount", this.selectedServices.totalAmount);
-        // formData.append("description", "For Novowash Service Booking");
         const payload = {
             name: rUser.username,
             email: rUser.email ? rUser.email : "sample@abc.com",
@@ -221,14 +219,17 @@ export class HomeComponent implements OnInit, OnDestroy {
             amount: this.selectedServices.totalAmount,
             description: "For Novowash Service Booking",
         };
-        const pSub = this.servicesService.getPaymentUrl(payload)
+        this.pSub = this.servicesService.getPaymentUrl(payload)
             .subscribe((res) => {
                 this.paymentUrlResponse = res;
             });
-        if (!this.allSubscriptions) {
-            this.allSubscriptions = pSub;
-        } else {
-            this.allSubscriptions.add(pSub);
+    }
+
+    public openPaymentGateway() {
+        try {
+            Instamojo.open(this.paymentUrlResponse.paymentOptions.paymentUrl);
+        } catch (e) {
+            console.log("Failed while opening payment gateway");
         }
     }
 }
