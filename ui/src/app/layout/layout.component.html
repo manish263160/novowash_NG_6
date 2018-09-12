@@ -15,8 +15,8 @@
         </ng-container>
         <ng-template #userTmpl>
             <button mat-button class="btn-user" [matMenuTriggerFor]="userMenu" #userTrigger="matMenuTrigger"
-                (onMenuOpen)="itMenuService.onMenuOpen(userTrigger);">
-                {{ getInitials() }}
+                (onMenuOpen)="itMenuService.onMenuOpen(userTrigger);" >
+                {{ getInitials() }}<mat-icon>play_arrow</mat-icon>
             </button>
         </ng-template>
     </mat-toolbar>

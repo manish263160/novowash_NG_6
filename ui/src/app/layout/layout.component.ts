@@ -149,21 +149,22 @@ export class LayoutComponent implements OnInit, OnDestroy {
     public getInitials(): string {
         const logUser = this.ropcService.user;
         let fullName = "";
-        if (logUser && Object.keys(logUser).length)  {
-            const unStr = "user_name";
-            fullName = logUser[unStr];
-            fullName = fullName.replace("User [", "");
-            fullName = fullName.replace("]", "");
-            const unArr = fullName.split(", ");
-            fullName = unArr[1].replace("username=", "");
-            fullName = fullName.replace("_", " ");
+        if (logUser && Object.keys(logUser).length) {
+            // const unStr = "username";
+            fullName = logUser.username;
+            // fullName = fullName.replace("User [", "");
+            // fullName = fullName.replace("]", "");
+            // const unArr = fullName.split(", ");
+            // fullName = unArr[1].replace("username=", "");
+
+            fullName = fullName.includes("_") ? fullName.replace("_", " ") : fullName;
         }
         const names = fullName.split(" ");
-        let initials = names[0].substring(0, 1).toUpperCase();
-
-        if (names.length > 1) {
+        // let initials = names[0].substring(0, 1).toUpperCase();
+        let initials = names[0].toUpperCase();
+        /* if (names.length > 1) {
             initials += names[names.length - 1].substring(0, 1).toUpperCase();
-        }
+        } */
         return initials;
     }
 
@@ -176,5 +177,5 @@ export class LayoutComponent implements OnInit, OnDestroy {
         // this.user = null;
     }
 
-    public ngOnDestroy() {}
+    public ngOnDestroy() { }
 }
