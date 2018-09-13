@@ -35,12 +35,13 @@ export class HomeComponent implements OnInit, OnDestroy {
         {value: 'mumbai-1', viewValue: 'Mumbai'},
         {value: 'bangalore-2', viewValue: 'Bangalore'}
     ];
-    public slideConfig = {"slidesToShow": 4, "slidesToScroll": 1};
+    public slideConfig = {"slidesToShow": 4, "slidesToScroll": 1, dots: true};
     public slideHListConfig = {"slidesToShow": 8, "slidesToScroll": 1};
     private selectedServices: any;
     private dateUserDetails: any;
     private headerEl: any;
     private btnLoginEl: any;
+    private searchWrapEl: any;
     private styleStr = "style";
     private bgStr = "background";
 
@@ -82,9 +83,17 @@ export class HomeComponent implements OnInit, OnDestroy {
         } else if(!this.headerEl.classList.contains("mh-tp")) {
             this.headerEl.classList.add("mh-tp");
         }
+        if (scrollPosition >= 212) {
+            if (!this.searchWrapEl.classList.contains("fixed")) {
+                this.searchWrapEl.classList.add("fixed");
+            }
+        } else {
+            this.searchWrapEl.classList.remove("fixed");
+        }
     }
 
     public ngOnInit() {
+        this.searchWrapEl = document.getElementById("searchWrap");
         this.headerEl = document.getElementById("main-header");
         if(!this.headerEl.classList.contains("mh-tp")) {
             this.headerEl.classList.add("mh-tp");

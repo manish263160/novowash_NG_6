@@ -4,6 +4,10 @@
     padding-bottom: 32px;
     .carousel-header {
         padding-left: 6px;
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        font-weight: 500;
+        color: #020202;
     }
     &.service-hlist-wrap {
         max-width: 100%;
@@ -130,4 +134,15 @@
 }
 .home-content-wrap {
     padding: 32px 20px 0;
+}
+
+#searchWrap {
+    &.fixed {
+        position: fixed;
+        top: 4px;
+        z-index: 2;
+        .mat-form-field.select-loc {
+            background-color: #fff;
+        }
+    }
 }

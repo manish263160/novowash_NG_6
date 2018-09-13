@@ -3,7 +3,7 @@
         <div fxLayout="column" fxLayoutAlign="baseline center">
             <p class="p-prime">Novowash presents</p>
             <p class="p-sub">Intelligent Interior Care!</p>
-            <div fxLayout="row" fxLayoutGap="16px">                
+            <div fxLayout="row" fxLayoutGap="16px" id="searchWrap">                
                 <mat-form-field class="select-loc" floatLabel="never">
                     <mat-select placeholder="Select city">
                         <mat-option *ngFor="let city of cities" [value]="city.value">

@@ -78,3 +78,42 @@
     }
   }
 }
+
+.mat-button, .mat-stroked-button {
+  &.btn-login {
+    width: 60px;
+    padding: 0;
+    min-width: unset;
+    border: 0;
+  }
+  &.btn-user {
+    border: 0;
+  }
+}
+
+.custom-menu.mat-menu-panel {
+  &.menu-help {
+    width: 320px;
+    height: 276px;
+    max-width: unset;
+    max-height: unset;
+    .help-popup-wrap {
+      align-items: center;
+      padding: 0 12px;
+      .help-header {
+        margin: 0;
+        font-weight: 400;
+      }
+      .help-sub-header {
+        margin: 0;
+        font-weight: 400;
+        color: grey;
+        margin-top: 4px;
+      }
+      .mat-form-field {
+        width: 100%;
+        max-width: 268px;
+      }
+    }
+  }
+}

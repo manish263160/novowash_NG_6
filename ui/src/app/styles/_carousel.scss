@@ -2,6 +2,7 @@
     .slick-arrow {
         width: 24px;
         height: 24px;
+        display: none;
         &:before {
             font-family: "Material Icons";
             text-rendering: optimizeLegibility;
@@ -27,6 +28,16 @@
             &:before {
                 content: "arrow_drop_down_circle";
                 transform: rotate(-90deg);
+            }
+        }
+    }
+    .slick-dots {
+        bottom: -30px;
+        li {
+            button {
+                &:before {
+                    font-size: 32px;
+                }
             }
         }
     }

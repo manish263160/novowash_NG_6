@@ -9,16 +9,23 @@
             Be A Partner
         </button> -->
         <ng-container *ngIf="!ropcService.user else userTmpl">            
-            <button id="mh-btn-login" mat-stroked-button color="primary" (click)="openLoginSignUpDialog()">
-                Login/Signup
+            <button id="mh-btn-login" mat-stroked-button color="primary"
+                class="btn-login" (click)="openLoginSignUpDialog()">
+                <mat-icon>person</mat-icon>
+                <mat-icon>arrow_drop_down</mat-icon>
             </button>
         </ng-container>
         <ng-template #userTmpl>
             <button mat-button class="btn-user" [matMenuTriggerFor]="userMenu" #userTrigger="matMenuTrigger"
                 (onMenuOpen)="itMenuService.onMenuOpen(userTrigger);">
-                {{ getInitials() }}
+                <span>{{ getInitials() }}</span>
+                <mat-icon>arrow_drop_down</mat-icon>
             </button>
         </ng-template>
+        <button mat-button class="btn-help" [matMenuTriggerFor]="helpMenu" #helpTrigger="matMenuTrigger"
+            (onMenuOpen)="itMenuService.onMenuOpen(helpTrigger);">
+            <span>Need Help?</span>
+        </button>
     </mat-toolbar>
     <mat-menu #userMenu="matMenu" class="custom-menu menu-user" [overlapTrigger]="false">
             <button mat-menu-item (click)="gotoBookings()">
@@ -29,6 +36,37 @@
             <mat-icon>power_settings_new</mat-icon>
             <span>Logout</span>
         </button>
+    </mat-menu>
+    <mat-menu #helpMenu="matMenu" class="custom-menu menu-help" [overlapTrigger]="false">
+        <form [formGroup]="helpForm" novalidate>
+            <div class="help-popup-wrap" fxLayout="column"
+                (click)="$event.stopPropagation(); $event.preventDefault();">
+                <h4 class="help-header">Need Help?</h4>
+                <h6 class="help-sub-header">We will get in touch with you in 24 hours</h6>
+                <span class="spacer" style="height: 8px"></span>
+                <mat-form-field>
+                    <input matInput formControlName="name" type="text" placeholder="Name*">
+                    <mat-error *ngIf="(helpForm.controls.name.errors | firstKey) === 'required' && helpForm.controls['name'].touched">
+                        Name is required
+                    </mat-error>
+                </mat-form-field>
+                <span class="spacer" style="height: 4px"></span>
+                <mat-form-field>
+                    <input type="tel" cdkFocusRegionstart matInput placeholder="Mobile*" formControlName="number" novalidate>
+                    <mat-error *ngIf="(helpForm.controls['number'].errors | firstKey) ==='required' && helpForm.controls['number'].touched">
+                        Mobile number is required
+                    </mat-error>
+                    <mat-error *ngIf="(helpForm.controls['number'].errors | firstKey) === 'invalidNumber' && helpForm.controls['number'].touched">
+                        Please enter a valid mobile number
+                    </mat-error>
+                </mat-form-field>
+                <span class="spacer" style="height: 20px"></span>
+                <button mat-raised-button color="primary" (click)="onClickHelpSubmit(helpTrigger)"
+                    [disabled]="helpForm.invalid">
+                    Submit
+                </button>
+            </div>
+        </form>
     </mat-menu>
     <div class="content-wrapper">
         <router-outlet></router-outlet>
