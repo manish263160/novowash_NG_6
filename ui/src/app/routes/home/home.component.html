@@ -19,7 +19,7 @@
     </div>
     <div class="carousel-wrap service-hlist-wrap">    
         <ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideHListConfig" (afterChange)="afterChange($event)">
-            <div ngxSlickItem *ngFor="let item of serviceItems" class="slide" (click)="openServiceBookDlg(item.id)">
+            <div ngxSlickItem *ngFor="let item of serviceItems" class="slide" (click)="openServiceBookDlg(item.id, item.catName)">
                 <div fxLayout="column" class="service-hlist-item" fxLayoutAlign="center center" width="100%">
                     <span class="service-icon" [style.backgroundImage]="getBackground(item.imageUrl)"></span>
                     <span class="service-name">{{ item.catName }}</span>

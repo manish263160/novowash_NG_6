@@ -16,6 +16,7 @@ import { ServicesService } from "../../../core/services/services.service";
 export class BookingDialogComponent implements OnDestroy, OnInit {
     @Input() public serviceItems = [];
     @Input() public selectedServiceId: number;
+    @Input() public selectedServiceName: string;
     @Output() public onBookingCancelled: EventEmitter<any> = new EventEmitter();
     @Output() public onServiceSelected: EventEmitter<any> = new EventEmitter();
     public highlightedSubServiceId: number;
@@ -197,8 +198,9 @@ export class BookingDialogComponent implements OnDestroy, OnInit {
         })
     }
 
-    public onClickMainService(serviceId){
+    public onClickMainService(serviceId, serviceName){
         this.selectedServiceId = serviceId;
+        this.selectedServiceName = serviceName;
         this.loadSubServices();
     }
 
