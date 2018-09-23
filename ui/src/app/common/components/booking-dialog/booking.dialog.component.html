@@ -1,20 +1,9 @@
 <div class="containerX" >
-    <div fxLayout="row" class="dialog-header" *ngIf="slide === 1">
+    <div fxLayout="row" class="dialog-header">
         <div fxFlex="flex">
-            <h5>Book A Service</h5>
-        </div>
-        <div fxFlex="none">
-            <button mat-icon-button class="close-icon" (click)="closeDialog()">
-                <mat-icon>close</mat-icon>
-            </button>
-        </div>
-    </div>
-    <div fxLayout="row" class="dialog-header no-padding-left" *ngIf="slide === 2">
-        <button mat-icon-button class="close-sidenav-flat" (click)="slide=1; backButtonClicked()">
-            <mat-icon>arrow_back</mat-icon>
-        </button>
-        <div fxFlex="flex">
-            <h5>{{ getSelectedServiceName() }}</h5>
+            <h5 *ngIf="slide === 1">Book A Service</h5>
+            <h5 *ngIf="slide === 2">{{ getSelectedSubServiceName() }}</h5>
+            <h5 *ngIf="slide === 3">Service Details</h5>
         </div>
         <div fxFlex="none">
             <button mat-icon-button class="close-icon" (click)="closeDialog()">
@@ -29,13 +18,13 @@
         <div class="containerX dialog-container" *ngIf="slide === 1"
             [ngClass]="{'sidenav-fi': slide === 1, 'sidenav-fo': slide !== 1}">
             <div fxLayout="row" class="bd-content-1-wrap">
-                <div cdkFocusRegionstart class="bd-service-list" fxLayout="column" fxLayoutGap="12px"
+                <div cdkFocusRegionstart class="bd-service-list" fxLayout="column" fxLayoutGap="20px"
                     [ngClass]="{'li-mh-60': serviceItems?.length > 8}">
                     <div class="bd-service-list-item" fxLayout="row"
                         [ngClass]="{'selected': service.id === selectedServiceId}"
                         *ngFor="let service of serviceItems; let i = index"
                         (click)="onClickMainService(service.id, service.catName)">
-                        <span class="service-icon" [style.backgroundImage]="getBackground(service.imageUrl)"></span>
+                        <!-- <span class="service-icon" [style.backgroundImage]="getBackground(service.imageUrl)"></span> -->
                         <span class="service-name">{{ service.catName }}</span>
                     </div>
                 </div>
@@ -49,7 +38,7 @@
                         </div> -->
                         <div class="bd-service-sub-list-item" fxLayout="column"
                             *ngFor="let sub of subList; let j = index"
-                            (click)="onClickSubService1(sub.id)">
+                            (click)="onClickSubServiceGetDesc(sub.id)">
                             <span class="service-icon" [style.backgroundImage]="getBackground(sub.imageUrl)"></span>
                             <span class="service-name">{{ sub.serviceName }}</span>
                         </div>
@@ -62,16 +51,137 @@
         <div class="containerX dialog-container" *ngIf="slide === 2"
             [ngClass]="{'sidenav-fi': slide === 2, 'sidenav-fo': slide !== 2}">
             <div fxLayout="row" class="bd-content-1-wrap">
+                {{ serviceDesc }}
+            </div>
+        </div>
+
+        <!-- slide 3 -->
+        <div class="containerX dialog-container" *ngIf="slide === 3"
+            [ngClass]="{'sidenav-fi': slide === 3, 'sidenav-fo': slide !== 3}">
+            <div fxLayout="row" class="bd-content-1-wrap">
                 <div class="bd-service-list" fxLayout="column" fxLayoutGap="12px"
                     [ngClass]="{'li-mh-60': subList?.length > 8}">
                     <div class="bd-service-list-item" fxLayout="row" [id]="'sub' + service.id"
                         [ngClass]="{'selected': service.id === highlightedSubServiceId}"
                         *ngFor="let service of subList; let i = index"
-                        (click)="onClickSubService2(service.id)">
+                        (click)="onClickSubService1(service.id)">
                         <span class="service-name">{{ service.serviceName }}</span>
                     </div>
                 </div>
-                <div class="bd-service-sub-list bd-sub-bg" fxLayout="column" *ngIf="packages" fxLayoutGap="16px">
+                <div class="right-wrap bd-service-sub-list">
+                    <ng-container *ngIf="mainServiceType === 1">
+                        <div class="sub-wrap mst1" fxLayout="column" fxLayoutGap="16px">
+                            <div class="control-lr-pm" fxLayout="row" fxLayoutGap="12px"
+                                *ngFor="let mainPack of mainPackages; let mi = index">
+                                <span class="lr-label">{{ mainPack?.userInputs }}</span>
+                                <div class="control-pm" fxLayout="row">
+                                    <button mat-raised-button mat-icon-button class="btn-control plus"
+                                        (click)="updatePackageSelection(1, mainPack)">
+                                        <mat-icon>add</mat-icon>
+                                    </button>
+                                    <span class="value">{{ mainPack?.selectedValue }}</span>
+                                    <button mat-raised-button mat-icon-button class="btn-control minus"
+                                        (click)="updatePackageSelection(-1, mainPack)">
+                                        <mat-icon>remove</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                            <ng-container *ngIf="extraPackages?.length">
+                                <h3 class="sub-header-extra">Extras</h3>
+                                <div class="extra-wrap" fxLayout="row" fxLayoutGap="16px">
+                                    <div class="control-ud-pm" fxLayout="column" fxLayoutGap="8px"
+                                        *ngFor="let extraPack of extraPackages; let ei = index">
+                                        <span class="service-icon" [style.backgroundImage]="getBackground(extraPack.imageUrl)"></span>
+                                        <span class="ud-label small">{{ extraPack?.userInputs }}</span>
+                                        <div class="control-pm small" fxLayout="row">
+                                            <button mat-raised-button mat-icon-button class="btn-control plus"
+                                                (click)="updatePackageSelection(1, extraPack)">
+                                                <mat-icon>add</mat-icon>
+                                            </button>
+                                            <span class="value">{{ extraPack?.selectedValue }}</span>
+                                            <button mat-raised-button mat-icon-button class="btn-control minus"
+                                                (click)="updatePackageSelection(-1, extraPack)">
+                                                <mat-icon>remove</mat-icon>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="mainServiceType === 2 || mainServiceType === 5">
+                        <div class="sub-wrap mst2" [ngClass]="{'mst5': mainServiceType === 5}" fxLayout="row">
+                            <div class="control-ud-pm" fxLayout="column" fxLayoutGap="12px"
+                                *ngFor="let mainPack of mainPackages; let mi = index">
+                                <span class="service-icon" [style.backgroundImage]="getBackground(mainPack.imageUrl)" *ngIf="mainServiceType === 5"></span>
+                                <span class="ud-label">{{ mainPack?.userInputs }}</span>
+                                <div class="control-pm" fxLayout="row">
+                                    <button mat-raised-button mat-icon-button class="btn-control plus"
+                                        (click)="updatePackageSelection(1, mainPack)">
+                                        <mat-icon>add</mat-icon>
+                                    </button>
+                                    <span class="value">{{ mainPack?.selectedValue }}</span>
+                                    <button mat-raised-button mat-icon-button class="btn-control minus"
+                                        (click)="updatePackageSelection(-1, mainPack)">
+                                        <mat-icon>remove</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="mainServiceType === 3 || mainServiceType === 4">
+                        <div class="sub-wrap mst3" fxLayout="column" fxLayoutGap="24px" *ngIf="categorisedPackages">
+                            <label class="lbl-toggle">{{ categorisedPackages[0]?.key }}</label>
+                            <mat-button-toggle-group #group3="matButtonToggleGroup" class="btn-tg-booking"
+                                (change)="onBTValueChange()" [value]="categorisedPackages[0].items[0]">
+                                <mat-button-toggle [value]="item"
+                                    *ngFor="let item of categorisedPackages[0].items; let ci = index">
+                                    {{ item?.userInputs }}
+                                </mat-button-toggle>
+                            </mat-button-toggle-group>
+                            <div class="control-ud-pm" fxLayout="column" fxLayoutGap="12px">
+                                <span class="service-icon"></span>
+                                <span class="ud-label">{{ categorisedPackages[0].items[0].unitName }}</span>
+                                <div class="control-pm" fxLayout="row">
+                                    <button mat-raised-button mat-icon-button class="btn-control plus"
+                                        (click)="updatePackageSelection(1, group3.value)">
+                                        <mat-icon>add</mat-icon>
+                                    </button>
+                                    <span class="value">{{ group3.value.selectedValue }}</span>
+                                    <button mat-raised-button mat-icon-button class="btn-control minus"
+                                        (click)="updatePackageSelection(-1, group3.value)">
+                                        <mat-icon>remove</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="mainServiceType === 6">
+                        <div class="sub-wrap mst6" fxLayout="column" fxLayoutGap="24px" *ngIf="categorisedPackages">
+                            <label class="lbl-toggle">{{ categorisedPackages[0]?.key }}</label>
+                            <mat-button-toggle-group #group60="matButtonToggleGroup" class="btn-tg-booking"
+                                (change)="onBTValueChange(); group61.value=null;" [value]="categorisedPackages[0].items[0]">
+                                <mat-button-toggle [value]="item"
+                                    *ngFor="let item of categorisedPackages[0].items; let ci = index">
+                                    {{ item?.userInputs }}
+                                </mat-button-toggle>
+                            </mat-button-toggle-group>
+                            <span class="spacer" style="height: 20px;"></span>
+                            <label class="lbl-toggle">{{ categorisedPackages[1]?.key }}</label>
+                            <mat-button-toggle-group #group61="matButtonToggleGroup" class="btn-tg-booking"
+                                (change)="updatePackageSelection(0, [group60.value, group61.value])">
+                                <mat-button-toggle [value]="item"
+                                    *ngFor="let item of categorisedPackages[1].items; let ci = index">
+                                    {{ item?.userInputs }}
+                                </mat-button-toggle>
+                            </mat-button-toggle-group>
+                        </div>
+                    </ng-container>
+                </div>
+
+
+
+                <!-- <div class="bd-service-sub-list bd-sub-bg" fxLayout="column" *ngIf="packages" fxLayoutGap="16px">
                     <mat-card class="card-package" [id]="'card' + package.serviceId"
                         *ngFor="let package of packages; let j = index">
                         <mat-card-header>
@@ -102,27 +212,51 @@
                             </mat-menu>
                         </mat-card-actions>
                     </mat-card>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
-    <div mat-dialog-actions *ngIf="slide === 2">
-        <span fxFlex></span>
-        <ng-container *ngIf="totalAmount > 0 else emptyCartTmpl">
-            <button mat-raised-button class="btn-p-proceed" color="primary"
-                (click)="submitServiceSelection()">        
-                <span class="spn-amount">Rs. {{ totalAmount | number }}</span>
-                <span class="fill-remaining-space"></span>
-                <span class="spn-text">Proceed</span>
-                <mat-icon>arrow_forward</mat-icon>
+    <div mat-dialog-actions *ngIf="slide > 1">
+        <ng-container *ngIf="slide === 2">
+            <span fxFlex></span>
+            <button mat-raised-button class="btn-p-back"
+                (click)="slide=1">
+                Back
+            </button>
+            <button mat-raised-button class="btn-p-next" color="primary"
+                (click)="onClickSubService1(highlightedSubServiceId)">
+                Next
             </button>
         </ng-container>
-        <ng-template #emptyCartTmpl>
-            <button mat-raised-button class="btn-p-proceed" disabled>        
-                <span class="spn-amount">Rs. {{ totalAmount | number }}</span>
-                <span class="fill-remaining-space"></span>
-                <span class="spn-text">Add a service to proceed</span>
+        <ng-container *ngIf="slide === 3">
+            <div class="amount-wrap">
+                <span class="amount">Rs. {{ totalAmount | number }}</span>
+            </div>
+            <span fxFlex></span>
+            <button mat-raised-button class="btn-p-back"
+                (click)="slide=1">
+                Back
             </button>
-        </ng-template>
+            <button mat-raised-button class="btn-p-next" color="primary" [disabled]="totalAmount <= 0"
+                (click)="submitServiceSelection()">
+                Next
+            </button>
+            <!-- <ng-container *ngIf="totalAmount > 0 else emptyCartTmpl">
+                <button mat-raised-button class="btn-p-proceed" color="primary"
+                    (click)="submitServiceSelection()">        
+                    <span class="spn-amount">Rs. {{ totalAmount | number }}</span>
+                    <span class="fill-remaining-space"></span>
+                    <span class="spn-text">Proceed</span>
+                    <mat-icon>arrow_forward</mat-icon>
+                </button>
+            </ng-container>
+            <ng-template #emptyCartTmpl>
+                <button mat-raised-button class="btn-p-proceed" disabled>        
+                    <span class="spn-amount">Rs. {{ totalAmount | number }}</span>
+                    <span class="fill-remaining-space"></span>
+                    <span class="spn-text">Add a service to proceed</span>
+                </button>
+            </ng-template> -->
+        </ng-container>
     </div>
 </div>

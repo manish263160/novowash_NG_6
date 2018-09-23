@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         private dialogService: DialogService,
     ) {
         this.config = new MatDialogConfig();
-        this.config.backdropClass = "cdk-overlay-custom-backdrop";
+        // this.config.backdropClass = "cdk-overlay-custom-backdrop";
         this.config.width = "75%";
         this.config.disableClose = true;
         this.config.panelClass = "dialog-panel-booking";
@@ -147,15 +147,12 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
 
     public openServiceDateTimeDlg() {
-        let selectedServiceName = "Book A Service";
-        const selectedService = this.serviceItems.filter((service) => {
-            return service.id === this.selectedServices.selectedServiceId;
-        })
-        if (selectedService && selectedService.length) {
-            selectedServiceName = selectedService[0].catName;
-        }
         this.dialogRef = this.dialog.open(DateUserDetailsDialogComponent, this.config);
-        this.dialogRef.componentInstance.selectedServiceName = selectedServiceName;
+        try {
+            this.dialogRef.componentInstance.selectedServiceName = this.selectedServices.mainService.catName;
+        } catch (e) {
+            this.dialogRef.componentInstance.selectedServiceName = "Book A Service";
+        }
 
         this.dialogRef.componentInstance.onDetailEnteringCancelled.subscribe(() => {
             console.log("onDetailEnteringCancelled()");

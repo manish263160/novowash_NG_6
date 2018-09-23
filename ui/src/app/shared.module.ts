@@ -13,6 +13,7 @@ import { ImagePipe } from "./common/pipes/image.pipe";
 
 import {
     MatButtonModule,
+    MatButtonToggleModule,
     MatCardModule,
     MatDialogModule,
     MatIconModule,
@@ -45,6 +46,7 @@ import {
         FormsModule,
         ReactiveFormsModule,
         MatButtonModule,
+        MatButtonToggleModule,
         MatCardModule,
         MatDialogModule,
         MatIconModule,

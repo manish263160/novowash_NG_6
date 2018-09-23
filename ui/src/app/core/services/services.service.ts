@@ -13,7 +13,8 @@ export class ServicesService {
 
     public getServices(): Observable<any> {
         return this.http
-            .post("http://54.245.176.18:8080/NovoWash/services/get/category", {})
+            // .post("http://54.245.176.18:8080/NovoWash/services/get/category", {})
+            .get("http://13.59.141.30:8080/NovoWash/services/get/category")
             .pipe(map((res: any) => {
                 return res.data || [];
             }));
@@ -30,6 +31,14 @@ export class ServicesService {
     public getAllSubServices(): Observable<any> {
         return this.http
             .get(`http://13.59.141.30:8080/NovoWash/services/getAllServices`)
+            .pipe(map((res: any) => {
+                return res.data || [];
+            }));
+    }
+
+    public getCostByServiceID(serviceId): Observable<any> {
+        return this.http
+            .get(`http://13.59.141.30:8080/NovoWash/services/get/cost/${serviceId}`)
             .pipe(map((res: any) => {
                 return res.data || [];
             }));
