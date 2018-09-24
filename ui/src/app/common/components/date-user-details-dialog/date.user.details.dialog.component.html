@@ -1,11 +1,13 @@
 <div class="containerX" >
-    <div fxLayout="row" class="dialog-header" [ngClass]="{'no-padding-left': slide > 1}">
-        <button mat-icon-button class="close-sidenav-flat"
+    <div fxLayout="row" class="dialog-header">
+        <!-- <button mat-icon-button class="close-sidenav-flat"
             (click)="slide=(slide-1); backButtonClicked()" *ngIf="slide > 1">
             <mat-icon>arrow_back</mat-icon>
-        </button>
+        </button> -->
         <div fxFlex="flex">
-            <h5>{{ selectedServiceName }}</h5>
+            <h5 *ngIf="slide === 1">When do you want the service?</h5>
+            <h5 *ngIf="slide === 2">Where do you want the service?</h5>
+            <h5 *ngIf="slide === 3">Please enter your contact details</h5>
         </div>
         <div fxFlex="none">
             <button mat-icon-button class="close-icon" (click)="closeDialog()">
@@ -19,21 +21,49 @@
         <!-- slide 1 -->
         <div class="containerX dialog-container" *ngIf="slide === 1"
             [ngClass]="{'sidenav-fi': slide === 1, 'sidenav-fo': slide !== 1}">
+            <div fxLayout="column" class="bd-content-1-wrap" fxLayout="column" fxLayoutGap="24px" *ngIf="dateTimeSlots && dateTimeSlots.length">
+                <span class="spacer"></span>
+                <label class="lbl-date-time date">Date</label>
+                <div fxLayout="row" class="date-time-box-wrap date" fxLayoutGap="12px">
+                    <div class="date-time-box" *ngFor="let dateTimeSlot of dateTimeSlots; let i = index"
+                        [ngClass]="{'selected': (selectedDateTimeIndex && i === selectedDateTimeIndex[0]), 'blocked': dateTimeSlot.isBlocked}"
+                        (click)="selectDateIndex(i)">
+                        <!-- <span class="sub-text">{{ dateTimeSlot.dateText[0] }}</span> -->
+                        <span>{{ dateTimeSlot.dateText }}</span>
+                    </div>
+                </div>
+                <span class="spacer"></span>
+                <label class="lbl-date-time">Select Time Slots</label>
+                <div fxLayout="row" class="date-time-box-wrap" fxLayoutGap="20px">
+                    <div class="date-time-box time-box" *ngFor="let timeSlot of dateTimeSlots[selectedDateIndex]?.timeSlots; let j = index"
+                        [ngClass]="{'selected': (selectedDateTimeIndex && j === selectedDateTimeIndex[1]), 'blocked': timeSlot.isBlocked}"
+                        (click)="selectTimeIndex(j)">
+                        <span>{{ timeSlot.text }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- slide 2 -->
+        <div class="containerX dialog-container" *ngIf="slide === 2"
+            [ngClass]="{'sidenav-fi': slide === 2, 'sidenav-fo': slide !== 2}">
             <form [formGroup]="addressForm" novalidate>
                 <div class="bd-content-1-wrap" fxLayout="column" fxLayoutGap="32px">
-                    <h3>Where do you require the service?</h3>
+                    <!-- <h3>Where do you require the service?</h3> -->
                     <!-- <span class="spacer"></span> -->
-                    <mat-form-field>
+                    <span class="spacer"></span>
+                    <mat-form-field fxFlex="1 1 100%">
                         <input matInput formControlName="addressLine" required type="text" placeholder="Address">
                         <mat-error *ngIf="(addressForm.controls.addressLine.errors | firstKey) === 'required' && addressForm.controls['addressLine'].touched">
                             Address is required
                         </mat-error>
                     </mat-form-field>
-                    <div fxLayout="row" fxLayoutGap="12px">
-                        <mat-form-field>
+                    <span class="spacer"></span>
+                    <div fxLayout="row" fxLayoutGap="24px">
+                        <mat-form-field fxFlex="1 1 30%">
                             <input matInput formControlName="landmark" type="text" placeholder="Landmark (optional)">
                         </mat-form-field>
-                        <mat-form-field>
+                        <mat-form-field fxFlex="1 1 30%">
                             <mat-select placeholder="City" required formControlName="city">
                                 <mat-option *ngFor="let city of cities" [value]="city.value">
                                 {{ city.viewValue }}
@@ -43,7 +73,7 @@
                                 City is required
                             </mat-error>
                         </mat-form-field>
-                        <mat-form-field>
+                        <mat-form-field fxFlex="1 1 30%">
                             <input matInput formControlName="pincode" required type="text" placeholder="PIN Code">
                             <mat-error *ngIf="(addressForm.controls.pincode.errors | firstKey) === 'required' && addressForm.controls['pincode'].touched">
                                 PIN Code is required
@@ -57,37 +87,14 @@
             </form>
         </div>
 
-        <!-- slide 2 -->
-        <div class="containerX dialog-container" *ngIf="slide === 2"
-            [ngClass]="{'sidenav-fi': slide === 2, 'sidenav-fo': slide !== 2}">
-            <div fxLayout="column" class="bd-content-1-wrap" fxLayout="column" fxLayoutGap="16px" *ngIf="dateTimeSlots && dateTimeSlots.length">
-                <h3>Select Date of Service</h3>
-                <div fxLayout="row" class="date-time-box-wrap" fxLayoutGap="8px">
-                    <div class="date-time-box" *ngFor="let dateTimeSlot of dateTimeSlots; let i = index"
-                        [ngClass]="{'selected': (selectedDateTimeIndex && i === selectedDateTimeIndex[0]), 'blocked': dateTimeSlot.isBlocked}"
-                        (click)="selectDateIndex(i)">
-                        <span class="sub-text">{{ dateTimeSlot.dateText[0] }}</span>
-                        <span>{{ dateTimeSlot.dateText[1] }}</span>
-                    </div>
-                </div>
-                <h3>Select Time of Service</h3>
-                <div fxLayout="row" class="date-time-box-wrap" fxLayoutGap="8px">
-                    <div class="date-time-box time-box" *ngFor="let timeSlot of dateTimeSlots[selectedDateIndex]?.timeSlots; let j = index"
-                        [ngClass]="{'selected': (selectedDateTimeIndex && j === selectedDateTimeIndex[1]), 'blocked': timeSlot.isBlocked}"
-                        (click)="selectTimeIndex(j)">
-                        <span>{{ timeSlot.name }}</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- slide 3 -->
         <div class="containerX dialog-container" *ngIf="slide === 3"
             [ngClass]="{'sidenav-fi': slide === 3, 'sidenav-fo': slide !== 3}">
             <form [formGroup]="userForm" novalidate>
                 <div class="bd-content-1-wrap" fxLayout="column" fxLayoutGap="32px">
-                    <h3>Please enter your contact details</h3>
+                    <!-- <h3>Please enter your contact details</h3> -->
                     <!-- <span class="spacer"></span> -->
+                    <span class="spacer"></span>
                     <mat-form-field>
                         <span matPrefix>+91 &nbsp;</span>
                         <input type="tel" matInput placeholder="Mobile Number" formControlName="number" novalidate>
@@ -114,20 +121,32 @@
     <div mat-dialog-actions>
         <span fxFlex></span>
         <ng-container *ngIf="slide === 1">
-            <button mat-raised-button class="btn-p-proceed" [color]="addressForm.invalid ? '' : 'primary'"
-                (click)="proceedToSlide2()" [disabled]="addressForm.invalid">
-                <span class="fill-remaining-space"></span>
-                <span class="spn-text">Continue with this address</span>
-                <mat-icon>arrow_forward</mat-icon>
-            </button>
-        </ng-container>
-        <ng-container *ngIf="slide === 2">
-            <button mat-raised-button class="btn-p-proceed" 
+            <!-- <button mat-raised-button class="btn-p-proceed" 
                 [color]="(selectedDateTimeIndex && selectedDateTimeIndex[0] >= 0 && selectedDateTimeIndex[1] >= 0) ? 'primary' : ''"
                 (click)="proceedToUser()" [disabled]="!(selectedDateTimeIndex && selectedDateTimeIndex[0] >= 0 && selectedDateTimeIndex[1] >= 0)">        
                 <span class="fill-remaining-space"></span>
                 <span class="spn-text">Continue with selected slot</span>
                 <mat-icon>arrow_forward</mat-icon>
+            </button> -->
+            <button mat-raised-button class="btn-p-next" color="primary" (click)="proceedToSlide2()"
+                [disabled]="!(selectedDateTimeIndex && selectedDateTimeIndex[0] >= 0 && selectedDateTimeIndex[1] >= 0)">
+                Next
+            </button>
+        </ng-container>
+        <ng-container *ngIf="slide === 2">
+            <!-- <button mat-raised-button class="btn-p-proceed" [color]="addressForm.invalid ? '' : 'primary'"
+                (click)="proceedToSlide2()" [disabled]="addressForm.invalid">
+                <span class="fill-remaining-space"></span>
+                <span class="spn-text">Continue with this address</span>
+                <mat-icon>arrow_forward</mat-icon>
+            </button> -->
+            <button mat-raised-button class="btn-p-back"
+                (click)="slide=1">
+                Back
+            </button>
+            <button mat-raised-button class="btn-p-next" color="primary"
+                (click)="proceedToUser()" [disabled]="addressForm.invalid">
+                Next
             </button>
         </ng-container>
         <ng-container *ngIf="slide === 3">
@@ -136,6 +155,14 @@
                 <span class="fill-remaining-space"></span>
                 <span class="spn-text">Proceed to summary</span>
                 <mat-icon>arrow_forward</mat-icon>
+            </button>
+            <button mat-raised-button class="btn-p-back"
+                (click)="slide=2">
+                Back
+            </button>
+            <button mat-raised-button class="btn-p-next" color="primary"
+                (click)="submitDateUserDetails()" [disabled]="userForm.invalid">
+                Next
             </button>
         </ng-container>
     </div>

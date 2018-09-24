@@ -239,21 +239,51 @@
                         .date-time-box-wrap {
                             flex-wrap: wrap;
                             align-items: baseline;
+                            &.date {
+                                padding-left: 20px;
+                                padding-right: 20px;
+                            }
                             .date-time-box {
-                                width: 121px;
-                                height: 64px;
-                                border-radius: 4px;
-                                display: inline-block;
-                                border: 1px solid #bdbdbd;
+                                // width: 121px;
+                                // height: 64px;
+                                // border-radius: 4px;
+                                // display: inline-block;
+                                // border: 1px solid #bdbdbd;
+                                width: 44px;
+                                height: 36px;
+                                border-radius: 50%;
+                                font-size: 20px;
                                 cursor: pointer;
                                 margin-bottom: 8px;
                                 display: flex;
                                 flex-direction: column;
                                 justify-content: center;
                                 box-sizing: border-box;
+                                &.selected {
+                                    box-shadow: 2px 2px 10px -2px black;
+                                    background-color: #f8e71c;
+                                }
+                                &.blocked {
+                                    opacity: 0.3;
+                                    cursor: not-allowed;
+                                    pointer-events: none;
+                                }
                                 &.time-box {
-                                    height: 48px;
-                                    width: 164px;
+                                    // height: 48px;
+                                    // width: 164px;
+                                    border: 1px solid grey;
+                                    border-radius: 8px;
+                                    width: 92px;
+                                    font-size: 14px;
+                                    height: 60px;
+                                    justify-content: flex-start;
+                                    padding-top: 12px;
+                                    white-space: normal;
+                                    background-color: #d8d8d8;
+                                    &.selected {
+                                        box-shadow: none;
+                                        background-color: #f8e71c;
+                                    }
                                 }
                                 & > span {
                                     text-align: center;
@@ -261,6 +291,12 @@
                                 .sub-text {
                                     color: #757575;
                                 }
+                            }
+                        }
+                        .lbl-date-time {
+                            font-size: 14px;
+                            &.date {
+                                margin-left: 24px;
                             }
                         }
                     }
@@ -296,6 +332,8 @@
                 .mat-dialog-content {
                     .dialog-container {
                         padding: 16px 38px;
+                        max-width: 100%;
+                        box-sizing: border-box;
                         h3 {
                             margin: 24px 0 0;
                             font-size: 24px;

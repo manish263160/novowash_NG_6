@@ -20,7 +20,7 @@ import { ROPCService } from "../../../../app/auth/ropc.service";
 export class DateUserDetailsDialogComponent implements OnDestroy, OnInit {
     @Input() slide: number;
     @Input() address: Address;
-    @Input() selectedServiceName: string;
+    @Input() selectedServices: any;
     @Input() selectedDateTimeIndex: any[];
     @Output() public onDetailEnteringCancelled: EventEmitter<any> = new EventEmitter();
     @Output() public onDetailEntered: EventEmitter<any> = new EventEmitter();
@@ -47,9 +47,8 @@ export class DateUserDetailsDialogComponent implements OnDestroy, OnInit {
     ngOnInit() {
         if (!this.slide) {
             this.slide = 1;
-        } else if (this.slide === 2) {
-            this.loadTimeSlots();
         }
+        this.loadTimeSlots();
         this.loadCities();
         this.initAddressForm();
         if (this.address) {
@@ -86,66 +85,32 @@ export class DateUserDetailsDialogComponent implements OnDestroy, OnInit {
     public loadTimeSlots() {
         if (!this.dateTimeSlots || !(Object.keys(this.dateTimeSlots)).length) {
             let dtObject = {};
-            const sub = this.servicesService.getDateTimeSlots(1)
+            const sub = this.servicesService.getDateTimeSlots(this.selectedServices.subService.id)
                 .subscribe((val) => {
                     dtObject = val;
                     this.dateTimeSlots = [];
                     Object.keys(dtObject).forEach((key) => {
                         const dA = key.split("##");
-                        const b = {date: dA[0], isBlocked: (dA[1] === "false" ? true : false), timeSlots: []};
+                        const b = {date: dA[0], dateText: dA[0].split("-")[2], isBlocked: (dA[1] === "false" ? true : false), timeSlots: []};
                         const tO = dtObject[key];
                         if (tO) {
                             Object.keys(tO).forEach((tKey) => {
-                                const t = {name: tKey, isBlocked: !tO[tKey]};
+                                const t = {name: tKey, text: tKey.replace(/ AM/g, "am").replace(/ PM/g, "pm"), isBlocked: !tO[tKey]};
                                 b.timeSlots.push(t);
                             });
                         }
                         this.dateTimeSlots.push(b);
                     });
-                    this.dateTimeSlots.map((slot) => {
-                        slot.dateText = moment(slot.date).format("dddd, MMM Do");
-                        slot.dateText = slot.dateText.split(", ");
-                    });
+                    // this.dateTimeSlots.map((slot) => {
+                    //     slot.dateText = moment(slot.date).format("dddd, MMM Do");
+                    //     slot.dateText = slot.dateText.split(", ");
+                    // });
                 });
             if (this.allSubscriptions) {
                 this.allSubscriptions.add(sub);
             } else {
                 this.allSubscriptions = sub;
             }
-            
-            // this.dateTimeSlots = [{
-            //     date: new Date(),
-            //     timeSlots: [{
-            //         name: "7AM - 9AM",
-            //         isBlocked: true,
-            //     }, {
-            //         name: "9AM - 12PM",
-            //         isBlocked: false,
-            //     }, {
-            //         name: "12PM - 3PM",
-            //         isBlocked: false,
-            //     }, {
-            //         name: "3PM - 6PM",
-            //         isBlocked: false,
-            //     }],
-            //     isBlocked: false,
-            // }, {
-            //     date: (new Date()).setDate((new Date()).getDate()+1),
-            //     timeSlots: [{
-            //         name: "7AM - 9AM",
-            //         isBlocked: false,
-            //     }, {
-            //         name: "9AM - 12PM",
-            //         isBlocked: false,
-            //     }, {
-            //         name: "12PM - 3PM",
-            //         isBlocked: false,
-            //     }, {
-            //         name: "3PM - 6PM",
-            //         isBlocked: false,
-            //     }],
-            //     isBlocked: false,
-            // }];
         }
         this.selectedDateIndex = 
             (this.selectedDateTimeIndex && this.selectedDateTimeIndex[0]) ?
@@ -154,7 +119,7 @@ export class DateUserDetailsDialogComponent implements OnDestroy, OnInit {
 
     public proceedToSlide2() {
         this.slide = 2;
-        this.loadTimeSlots();
+        // this.loadTimeSlots();
     }
 
     public proceedToSlide3() {
@@ -194,13 +159,15 @@ export class DateUserDetailsDialogComponent implements OnDestroy, OnInit {
     }
 
     public submitDateUserDetails() {
+        let selectedDate = this.dateTimeSlots[this.selectedDateTimeIndex[0]];
+        let timeSlot = selectedDate.timeSlots[this.selectedDateTimeIndex[1]];
         const dateUserDetails = {
             address: this.addressForm.value,
             city: this.getCityName(),
             dateTimeSlots: this.dateTimeSlots,
             selectedDateTimeIndex: this.selectedDateTimeIndex,
-            dateText: this.dateTimeSlots[this.selectedDateTimeIndex[0]].dateText.join(", "),
-            time: this.dateTimeSlots[this.selectedDateTimeIndex[0]].timeSlots[this.selectedDateTimeIndex[1]].name,
+            date: selectedDate.date,
+            time: timeSlot.name,
             contactDetails: this.userForm.value,
         };
         this.onDetailEntered.emit(dateUserDetails);
@@ -236,7 +203,7 @@ export class DateUserDetailsDialogComponent implements OnDestroy, OnInit {
         };
         this.dialogRefLogin = this.dialog.open(LoginComponent, config);
         this.dialogRefLogin.componentInstance.isForBooking = true;
-        this.dialogRefLogin.componentInstance.selectedServiceName = this.selectedServiceName;
+        // this.dialogRefLogin.componentInstance.selectedServiceName = this.selectedServiceName;
         this.dialogRefLogin.componentInstance.onLoginCancelled.subscribe(() => {
             console.log("onLoginCancelled()");
             this.dialogRefLogin.close();

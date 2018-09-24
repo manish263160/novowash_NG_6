@@ -148,11 +148,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     public openServiceDateTimeDlg() {
         this.dialogRef = this.dialog.open(DateUserDetailsDialogComponent, this.config);
-        try {
-            this.dialogRef.componentInstance.selectedServiceName = this.selectedServices.mainService.catName;
-        } catch (e) {
-            this.dialogRef.componentInstance.selectedServiceName = "Book A Service";
-        }
+        this.dialogRef.componentInstance.selectedServices = this.selectedServices;
 
         this.dialogRef.componentInstance.onDetailEnteringCancelled.subscribe(() => {
             console.log("onDetailEnteringCancelled()");
@@ -160,7 +156,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         });
         this.dialogRef.componentInstance.onDetailEntered.subscribe((dateUserDetails) => {
             console.log("onDetailEntered()");
-            this.dateUserDetails = dateUserDetails;
+            this.selectedServices.dateUserDetails = dateUserDetails;
             this.dialogRef.close();
             this.getPaymentUrl();
             this.openBookingSummaryDialog();

@@ -3240,21 +3240,21 @@ mat-dialog-container.mat-dialog-container {
   border-radius: 4px !important;
 }
 
-.date-time-box {
-  &.selected {
-    color: $primary-color !important;
-    border-color: $primary-color !important;
-    background-color: mat-color($primary, 500, 0.2);
-    & > span {
-      color: $primary-color !important;
-    }
-  }
-  &.blocked {
-    opacity: 0.3;
-    cursor: not-allowed;
-    pointer-events: none;
-  }
-}
+// .date-time-box {
+//   &.selected {
+//     color: $primary-color !important;
+//     border-color: $primary-color !important;
+//     background-color: mat-color($primary, 500, 0.2);
+//     & > span {
+//       color: $primary-color !important;
+//     }
+//   }
+//   &.blocked {
+//     opacity: 0.3;
+//     cursor: not-allowed;
+//     pointer-events: none;
+//   }
+// }
 
 .cdk-overlay-pane {
   &.hidden {
