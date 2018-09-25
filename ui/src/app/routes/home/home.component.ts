@@ -158,7 +158,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             console.log("onDetailEntered()");
             this.selectedServices.dateUserDetails = dateUserDetails;
             this.dialogRef.close();
-            this.getPaymentUrl();
+            // this.getPaymentUrl();
             this.openBookingSummaryDialog();
         });
         // this.dialogRef.afterClosed().subscribe((result) => {
@@ -167,17 +167,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
 
     public openBookingSummaryDialog() {
-        let selectedServiceName = "Book A Service";
-        const selectedService = this.serviceItems.filter((service) => {
-            return service.id === this.selectedServices.selectedServiceId;
-        })
-        if (selectedService && selectedService.length) {
-            selectedServiceName = selectedService[0].catName;
-        }
         this.dialogRef = this.dialog.open(SummaryDialogComponent, this.config);
-        this.dialogRef.componentInstance.selectedServiceName = selectedServiceName;
         this.dialogRef.componentInstance.selectedServices = this.selectedServices;
-        this.dialogRef.componentInstance.dateUserDetails = this.dateUserDetails;
 
         this.dialogRef.componentInstance.onSummaryCancelled.subscribe(() => {
             console.log("onSummaryCancelled()");
@@ -185,8 +176,9 @@ export class HomeComponent implements OnInit, OnDestroy {
         });
         this.dialogRef.componentInstance.onSummaryConfirmed.subscribe(() => {
             console.log("onSummaryConfirmed()");
+            this.getPaymentUrl();
             this.dialogRef.close();
-            this.proceedToPayment();
+            // this.proceedToPayment();
         });
         // this.dialogRef.afterClosed().subscribe((result) => {
         //     this.dialogRef = null;
@@ -195,7 +187,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     public proceedToPayment() {
         this.openPaymentGateway();
-        this.proceedToBookingEnd();
+        // this.proceedToBookingEnd();
     }
 
     public proceedToBookingEnd() {
@@ -214,9 +206,15 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     public getPaymentUrl() {
         const rUser = this.ropcService.user;
+        let emailId: string;
+        try {
+            emailId = rUser.email ? rUser.email : this.selectedServices.dateUserDetails.contactDetails.email;
+        } catch (e) {
+            emailId = "sample@abc.com";
+        }
         const payload = {
             name: rUser.username,
-            email: rUser.email ? rUser.email : "sample@abc.com",
+            email: emailId,
             phone: rUser.mobile_number,
             currency: "INR",
             amount: this.selectedServices.totalAmount,
@@ -225,6 +223,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.pSub = this.servicesService.getPaymentUrl(payload)
             .subscribe((res) => {
                 this.paymentUrlResponse = res;
+                this.proceedToPayment();
             });
     }
 
