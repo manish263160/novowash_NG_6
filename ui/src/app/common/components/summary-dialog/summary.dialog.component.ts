@@ -9,9 +9,7 @@ import { ROPCService } from "../../../../app/auth/ropc.service";
     templateUrl: "summary.dialog.component.html",
 })
 export class SummaryDialogComponent implements OnInit {
-    @Input() public selectedServiceName: string;
     @Input() public selectedServices: any;
-    @Input() public dateUserDetails: any;
     @Output() public onSummaryCancelled: EventEmitter<any> = new EventEmitter();
     @Output() public onSummaryConfirmed: EventEmitter<any> = new EventEmitter();
 
@@ -20,8 +18,8 @@ export class SummaryDialogComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        if (!this.selectedServiceName) {
-            this.selectedServiceName = "";
+        if (!this.selectedServices) {
+            this.selectedServices = {};
         }
     }
 

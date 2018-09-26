@@ -144,7 +144,7 @@ mat-sidenav {
   box-shadow: 1px 1px 2px 0 $custom-color-bcd6bf;
 }
 
-.loader {
+.loader:not(.iframe-container) {
   border: 3px solid $primary-color; /* Light grey */
   border-top: 3px solid $white-color; /* Blue */
   border-radius: 50%;

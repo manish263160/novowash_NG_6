@@ -17,48 +17,54 @@
                 <!-- service details -->
                 <div class="summary-sec" fxLayout="column">
                     <span class="header">Selected Service</span>
-                    <span class="text">{{ selectedServiceName }}</span>
-                    <span class="text sub" *ngFor="let package of selectedServices?.selectedPackages">
-                        {{ package?.serviceName }}
-                    </span>
+                    <span class="text">{{ selectedServices?.mainService?.catName }}</span>
+                    <span class="text sub">{{ selectedServices?.subService?.serviceName }}</span>
                 </div>
                 <!-- time slot -->
                 <div class="summary-sec" fxLayout="column">
                     <span class="header">Selected Time Slot</span>
                     <span class="text">
-                        Between {{ dateUserDetails?.time }} on {{ dateUserDetails?.dateText }}
+                        Between {{ selectedServices?.dateUserDetails?.time }} on {{ selectedServices?.dateUserDetails?.date }}
                     </span>
                 </div>
                 <!-- address -->
                 <span class="summary-sec" fxLayout="column">
                     <span class="header">Service Required At</span>
                     <span class="text">
-                        {{ dateUserDetails?.address?.addressLine }}
+                        {{ selectedServices?.dateUserDetails?.address?.addressLine }}
                     </span>
                     <span class="text" *ngIf="dateUserDetails?.address?.landmark">
-                        {{ dateUserDetails?.address?.landmark }}
+                        {{ selectedServices?.dateUserDetails?.address?.landmark }}
                     </span>
                     <span class="text">
-                        {{ dateUserDetails?.city }} - {{ dateUserDetails?.address?.pincode }}
+                        {{ selectedServices?.dateUserDetails?.city }} - {{ selectedServices?.dateUserDetails?.address?.pincode }}
                     </span>
                 </span>
                 <!-- contact -->
                 <div class="summary-sec" fxLayout="column">
                     <span class="header">Contact Details</span>
                     <span class="text">{{ ropcService?.user?.number }}</span>
-                    <span class="text">{{ dateUserDetails?.contactDetails?.email }}</span>
+                    <span class="text">{{ selectedServices?.dateUserDetails?.contactDetails?.email }}</span>
                 </div>
             </div>
         </div>
     </div>
     <div mat-dialog-actions>
+        <div class="amount-wrap">
+            <span class="amount">Rs. {{ selectedServices?.totalAmount | number }}</span>
+        </div>
         <span fxFlex></span>
+        <button mat-raised-button class="btn-p-next" color="primary"
+            (click)="submitSummary()">
+            Proceed to Pay
+        </button>
+        <!-- <span fxFlex></span>
         <button cdkFocusRegionstart mat-raised-button class="btn-p-proceed" color="primary"
             (click)="submitSummary()">        
             <span class="spn-amount">Rs. {{ selectedServices?.totalAmount | number }}</span>
             <span class="fill-remaining-space"></span>
             <span class="spn-text">Proceed to Pay</span>
             <mat-icon>arrow_forward</mat-icon>
-        </button>
+        </button> -->
     </div>
 </div>
