@@ -125,13 +125,13 @@ export class DateUserDetailsDialogComponent implements OnDestroy, OnInit {
     public proceedToSlide3() {
         this.slide = 3;
         // TO DELETE _ STARTS
-        if (!this.ropcService.user.number) {
-            this.ropcService.user.number = "9987777224";
+        if (!this.ropcService.user.mobile_number) {
+            this.ropcService.user.mobile_number = "0000000000";
         }
         // TO DELETE - ENDS
         this.userForm = this.fb.group({
             email: [this.ropcService.user.email, Validators.compose([Validators.required, Validators.pattern(this.pattern)])],
-            number: [this.ropcService.user.number, Validators.compose([Validators.required, ValidatorService.phoneValidator])],
+            number: [this.ropcService.user.mobile_number, Validators.compose([Validators.required, ValidatorService.phoneValidator])],
         });
         this.userForm.controls.number.disable();
     }

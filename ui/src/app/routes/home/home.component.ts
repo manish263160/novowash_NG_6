@@ -212,6 +212,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         } catch (e) {
             emailId = "sample@abc.com";
         }
+        this.selectedServices.userid = rUser.id;
         const payload = {
             name: rUser.username,
             email: emailId,
@@ -219,6 +220,9 @@ export class HomeComponent implements OnInit, OnDestroy {
             currency: "INR",
             amount: this.selectedServices.totalAmount,
             description: "For Novowash Service Booking",
+            successUrl: `${location.href}?p=success`,
+            failUrl: `${location.href}?p=fail`,
+            selectedServices: this.selectedServices,
         };
         this.pSub = this.servicesService.getPaymentUrl(payload)
             .subscribe((res) => {
