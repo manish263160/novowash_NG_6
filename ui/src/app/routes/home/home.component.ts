@@ -68,6 +68,15 @@ export class HomeComponent implements OnInit, OnDestroy {
             right: "",
             top: "",
         };
+
+        Instamojo.configure({
+            handlers: {
+              onOpen: this.openPaymentGateway,
+              onClose: this.onCloseHandler,
+              onSuccess: this.onPaymentSuccessHandler,
+              onFailure: this.onPaymentFailureHandler
+            }
+          });
     }
     
     public afterChange(e) {
@@ -238,4 +247,20 @@ export class HomeComponent implements OnInit, OnDestroy {
             console.log("Failed while opening payment gateway");
         }
     }
+
+    public onCloseHandler(){
+        try {
+            console.log("Model Closed");
+        } catch (e) {
+            console.log("Failed while opening payment gateway");
+        }
+    }
+
+    public onPaymentSuccessHandler (response) {
+        console.log('Payment Success Response', response);
+      }
+
+      public onPaymentFailureHandler (response) {
+        console.log('Payment Failure Response', response);
+      }
 }
