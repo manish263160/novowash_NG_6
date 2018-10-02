@@ -52,6 +52,14 @@ export class ServicesService {
             }));
     }
 
+    public sendPaymentStatus(payload) {
+        return this.http
+            .post("http://13.59.141.30:8080/NovoWash/payment/details", payload)
+            .pipe(map((res: any) => {
+                return res.data || {};
+            }));
+    }
+
     public getPaymentUrl(payload) {
         return this.http
             .post("http://13.59.141.30:8080/NovoWash/payment/paymentRequest", payload)
@@ -65,6 +73,30 @@ export class ServicesService {
             `http://13.59.141.30:8080/NovoWash/permitall/insertPotentialUser?name=${payload.name}&email=&phone=${payload.number}`;
         return this.http
             .put(encodeURI(url), {})
+            .pipe(map((res: any) => {
+                return res.data || {};
+            }));
+    }
+
+    public getPackages(): Observable<any> {
+        return this.http
+            .get(`http://13.59.141.30:8080/NovoWash/permitall/packages/category`)
+            .pipe(map((res: any) => {
+                return res.data || {};
+            }));
+    }
+
+    public getPackageItems(packageId): Observable<any> {
+        return this.http
+            .get(`http://13.59.141.30:8080/NovoWash/permitall/packages/getpackages/${packageId}`)
+            .pipe(map((res: any) => {
+                return res.data || {};
+            }));
+    }
+
+    public getPackageCost(packageId): Observable<any> {
+        return this.http
+            .get(`http://13.59.141.30:8080/NovoWash/permitall/packages/getpackagecost/${packageId}`)
             .pipe(map((res: any) => {
                 return res.data || {};
             }));

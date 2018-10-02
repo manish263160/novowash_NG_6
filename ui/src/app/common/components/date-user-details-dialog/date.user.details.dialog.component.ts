@@ -22,6 +22,7 @@ export class DateUserDetailsDialogComponent implements OnDestroy, OnInit {
     @Input() address: Address;
     @Input() selectedServices: any;
     @Input() selectedDateTimeIndex: any[];
+    @Input() isForPackage: boolean = false;
     @Output() public onDetailEnteringCancelled: EventEmitter<any> = new EventEmitter();
     @Output() public onDetailEntered: EventEmitter<any> = new EventEmitter();
     public allSubscriptions: Subscription;
@@ -45,10 +46,12 @@ export class DateUserDetailsDialogComponent implements OnDestroy, OnInit {
     ) {}
 
     ngOnInit() {
-        if (!this.slide) {
-            this.slide = 1;
+        if (this.isForPackage) {
+            this.slide = this.slide || 2;
+        } else {
+            this.loadTimeSlots();
+            this.slide = this.slide || 1;
         }
-        this.loadTimeSlots();
         this.loadCities();
         this.initAddressForm();
         if (this.address) {
@@ -159,15 +162,15 @@ export class DateUserDetailsDialogComponent implements OnDestroy, OnInit {
     }
 
     public submitDateUserDetails() {
-        let selectedDate = this.dateTimeSlots[this.selectedDateTimeIndex[0]];
-        let timeSlot = selectedDate.timeSlots[this.selectedDateTimeIndex[1]];
+        let selectedDate = this.isForPackage ? null : this.dateTimeSlots[this.selectedDateTimeIndex[0]];
+        let timeSlot = this.isForPackage ? null : selectedDate.timeSlots[this.selectedDateTimeIndex[1]];
         const dateUserDetails = {
             address: this.addressForm.value,
             city: this.getCityName(),
             dateTimeSlots: this.dateTimeSlots,
             selectedDateTimeIndex: this.selectedDateTimeIndex,
-            date: selectedDate.date,
-            time: timeSlot.name,
+            date: selectedDate ? selectedDate.date : null,
+            time: timeSlot ? timeSlot.name : null,
             contactDetails: this.userForm.value,
         };
         this.onDetailEntered.emit(dateUserDetails);

@@ -141,7 +141,7 @@
                 <mat-icon>arrow_forward</mat-icon>
             </button> -->
             <button mat-raised-button class="btn-p-back"
-                (click)="slide=1">
+                (click)="slide=1" *ngIf="!isForPackage">
                 Back
             </button>
             <button mat-raised-button class="btn-p-next" color="primary"

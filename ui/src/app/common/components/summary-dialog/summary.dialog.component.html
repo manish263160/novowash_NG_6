@@ -15,13 +15,22 @@
         <div class="containerX dialog-container">
             <div class="bd-content-1-wrap" fxLayout="column" fxLayoutGap="8px">
                 <!-- service details -->
-                <div class="summary-sec" fxLayout="column">
-                    <span class="header">Selected Service</span>
-                    <span class="text">{{ selectedServices?.mainService?.catName }}</span>
-                    <span class="text sub">{{ selectedServices?.subService?.serviceName }}</span>
-                </div>
+                <ng-container *ngIf="!isForPackage else packTmpl">
+                    <div class="summary-sec" fxLayout="column">
+                        <span class="header">Selected Service</span>
+                        <span class="text">{{ selectedServices?.mainService?.catName }}</span>
+                        <span class="text sub">{{ selectedServices?.subService?.serviceName }}</span>
+                    </div>
+                </ng-container>
+                <ng-template #packTmpl>
+                    <div class="summary-sec" fxLayout="column">
+                        <span class="header">Selected Service</span>
+                        <span class="text">{{ selectedServices?.mainService?.packageName }}</span>
+                        <span class="text sub">{{ selectedServices?.subService?.packageName }}</span>
+                    </div>
+                </ng-template>
                 <!-- time slot -->
-                <div class="summary-sec" fxLayout="column">
+                <div class="summary-sec" fxLayout="column" *ngIf="!isForPackage">
                     <span class="header">Selected Time Slot</span>
                     <span class="text">
                         Between {{ selectedServices?.dateUserDetails?.time }} on {{ selectedServices?.dateUserDetails?.date }}

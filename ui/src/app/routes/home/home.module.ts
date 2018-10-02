@@ -7,6 +7,7 @@ import { DialogService } from "../../common/services/dialog.service";
 import { BookingDialogComponent } from "../../common/components/booking-dialog/booking.dialog.component";
 import { BookingEndDialogComponent } from "../../common/components/booking-end-dialog/booking.end.dialog.component";
 import { DateUserDetailsDialogComponent } from "../../common/components/date-user-details-dialog/date.user.details.dialog.component";
+import { PackageBookingDialogComponent } from "../../common/components/package-booking-dialog/package.booking.dialog.component";
 import { SummaryDialogComponent } from "../../common/components/summary-dialog/summary.dialog.component";
 import { SharedModule } from "../../shared.module";
 import { HomeComponent } from "./home.component";
@@ -27,6 +28,7 @@ import {
         BookingDialogComponent,
         BookingEndDialogComponent,
         DateUserDetailsDialogComponent,
+        PackageBookingDialogComponent,
         SummaryDialogComponent,
     ],
     imports: [

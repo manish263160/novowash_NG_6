@@ -6,6 +6,7 @@ import { ROPCService } from "../../../app/auth/ropc.service";
 import { BookingDialogComponent } from "../../common/components/booking-dialog/booking.dialog.component";
 import { BookingEndDialogComponent } from "../../common/components/booking-end-dialog/booking.end.dialog.component";
 import { DateUserDetailsDialogComponent } from "../../common/components/date-user-details-dialog/date.user.details.dialog.component";
+import { PackageBookingDialogComponent } from "../../common/components/package-booking-dialog/package.booking.dialog.component";
 import { SummaryDialogComponent } from "../../common/components/summary-dialog/summary.dialog.component";
 import { DialogService } from "../../common/services/dialog.service";
 import { ServicesService } from "../../core/services/services.service";
@@ -30,6 +31,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         {img: "http://placehold.it/350x150/777777"}
     ];
     public serviceItems = [];
+    public packageItems = [];
     public cities = [
         {value: 'ncr-0', viewValue: 'Delhi-NCR'},
         {value: 'mumbai-1', viewValue: 'Mumbai'},
@@ -49,6 +51,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     private config: MatDialogConfig;
     private paymentUrlResponse: any;
     private pSub: any;
+    private packageSub: any;
 
     constructor(
         public ropcService: ROPCService,
@@ -71,12 +74,11 @@ export class HomeComponent implements OnInit, OnDestroy {
 
         Instamojo.configure({
             handlers: {
-              onOpen: this.openPaymentGateway,
-              onClose: this.onCloseHandler,
+              onClose: this.onInstaCloseHandler,
               onSuccess: this.onPaymentSuccessHandler,
               onFailure: this.onPaymentFailureHandler
             }
-          });
+        });
     }
     
     public afterChange(e) {
@@ -116,12 +118,19 @@ export class HomeComponent implements OnInit, OnDestroy {
             .subscribe((val) => {
                 this.serviceItems = val;
             })
+        this.packageSub = this.servicesService.getPackages()
+            .subscribe((val) => {
+                this.packageItems = val;
+            })
     }
 
     public ngOnDestroy() {
         this.allSubscriptions.unsubscribe();
         if (this.pSub) {
             this.pSub.unsubscribe();
+        }
+        if (this.packageSub) {
+            this.packageSub.unsubscribe();
         }
         const cWrapEl = document.getElementsByClassName("content-wrapper")[0];
         if (cWrapEl) {
@@ -133,6 +142,27 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     public getBackground(image) {
         return this._sanitizer.bypassSecurityTrustStyle(`url(${image})`);
+    }
+
+    public openPackageBookDlg(packageId: number = 0, packageName: string = "") {
+        this.dialogRef = this.dialog.open(PackageBookingDialogComponent, this.config);
+        // this.dialogRef.componentInstance.serviceItems = this.serviceItems;
+        this.dialogRef.componentInstance.selectedServiceId = packageId;
+        this.dialogRef.componentInstance.selectedServiceName = packageName;
+        this.dialogRef.componentInstance.onBookingCancelled.subscribe(() => {
+            console.log("onBookingCancelled()");
+            this.dialogRef.close();
+        });
+        this.dialogRef.componentInstance.onServiceSelected.subscribe((selectedServices) => {
+            console.log("onServiceSelected()");
+            this.selectedServices = selectedServices;
+            this.selectedServices.mainService = this.packageItems.filter((e) => e.id === packageId);
+            this.dialogRef.close();
+            this.openServiceDateTimeDlg(true);
+        });
+        // this.dialogRef.afterClosed().subscribe((result) => {
+        //     this.dialogRef = null;
+        // });
     }
 
     public openServiceBookDlg(serviceId: number = 0, serviceName: string = "") {
@@ -155,9 +185,10 @@ export class HomeComponent implements OnInit, OnDestroy {
         // });
     }
 
-    public openServiceDateTimeDlg() {
+    public openServiceDateTimeDlg(isForPackage: boolean = false) {
         this.dialogRef = this.dialog.open(DateUserDetailsDialogComponent, this.config);
         this.dialogRef.componentInstance.selectedServices = this.selectedServices;
+        this.dialogRef.componentInstance.isForPackage = isForPackage;
 
         this.dialogRef.componentInstance.onDetailEnteringCancelled.subscribe(() => {
             console.log("onDetailEnteringCancelled()");
@@ -168,16 +199,17 @@ export class HomeComponent implements OnInit, OnDestroy {
             this.selectedServices.dateUserDetails = dateUserDetails;
             this.dialogRef.close();
             // this.getPaymentUrl();
-            this.openBookingSummaryDialog();
+            this.openBookingSummaryDialog(isForPackage);
         });
         // this.dialogRef.afterClosed().subscribe((result) => {
         //     this.dialogRef = null;
         // });
     }
 
-    public openBookingSummaryDialog() {
+    public openBookingSummaryDialog(isForPackage: boolean = false) {
         this.dialogRef = this.dialog.open(SummaryDialogComponent, this.config);
         this.dialogRef.componentInstance.selectedServices = this.selectedServices;
+        this.dialogRef.componentInstance.isForPackage = isForPackage;
 
         this.dialogRef.componentInstance.onSummaryCancelled.subscribe(() => {
             console.log("onSummaryCancelled()");
@@ -196,18 +228,21 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     public proceedToPayment() {
         this.openPaymentGateway();
-        // this.proceedToBookingEnd();
     }
 
-    public proceedToBookingEnd() {
+    public proceedToBookingEnd(isSuccess: boolean, response: any) {
         this.dialogRef = this.dialog.open(BookingEndDialogComponent, this.config);
-        this.dialogRef.componentInstance.isSuccess = true;
+        this.dialogRef.componentInstance.isSuccess = isSuccess;
         this.dialogRef.componentInstance.totalAmount = this.selectedServices.totalAmount;
 
         this.dialogRef.componentInstance.onBookingEndClosed.subscribe(() => {
             console.log("onBookingEndClosed()");
             this.dialogRef.close();
         });
+        this.pSub = this.servicesService.sendPaymentStatus(response)
+            .subscribe((res) => {
+                console.log(`sendPaymentStatus:::::${res}`);
+            });
         // this.dialogRef.afterClosed().subscribe((result) => {
         //     this.dialogRef = null;
         // });
@@ -248,7 +283,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         }
     }
 
-    public onCloseHandler(){
+    public onInstaCloseHandler(){
         try {
             console.log("Model Closed");
         } catch (e) {
@@ -258,9 +293,15 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     public onPaymentSuccessHandler (response) {
         console.log('Payment Success Response', response);
-      }
+        setTimeout(() => {
+            this.proceedToBookingEnd(true, response);
+        }, 3000);
+    }
 
       public onPaymentFailureHandler (response) {
         console.log('Payment Failure Response', response);
-      }
+        setTimeout(() => {
+            this.proceedToBookingEnd(false, response);
+        }, 3000);
+    }
 }

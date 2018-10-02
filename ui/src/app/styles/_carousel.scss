@@ -45,7 +45,19 @@
         .slick-track {
             .slide {
                 &.slick-slide {
-                    padding: 0 8px;
+                    margin: 0 8px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    min-height: 120px;
+                    cursor: pointer;
+                    &.with-bg {
+                        background-color: aliceblue;
+                    }
+                    .slide-item {
+                        width: 100%;
+                        justify-content: center;
+                    }
                 }
             }
         }

@@ -10,6 +10,7 @@ import { ROPCService } from "../../../../app/auth/ropc.service";
 })
 export class SummaryDialogComponent implements OnInit {
     @Input() public selectedServices: any;
+    @Input() public isForPackage: boolean = false;
     @Output() public onSummaryCancelled: EventEmitter<any> = new EventEmitter();
     @Output() public onSummaryConfirmed: EventEmitter<any> = new EventEmitter();
 

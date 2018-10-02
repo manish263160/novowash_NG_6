@@ -37,11 +37,19 @@
             </div>
         </ngx-slick>
     </div>
-    <div class="carousel-wrap">
+    <div class="carousel-wrap" *ngIf="packageItems?.length">
         <h4 class="carousel-header">Packages</h4>
         <ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideConfig" (afterChange)="afterChange($event)">
-            <div ngxSlickItem *ngFor="let slide of slides" class="slide">
-                <img src="{{ slide.img }}" alt="" width="100%">
+            <div ngxSlickItem *ngFor="let slide of packageItems" class="slide with-bg"
+                (click)="openPackageBookDlg(slide.id, slide.packageName)">
+                <ng-container *ngIf="(slide.imageUrl && slide.imageUrl !== 'null') else noPImgTmpl">
+                    <img src="{{ slide.imageUrl }}" alt="" width="100%">
+                </ng-container>
+                <ng-template #noPImgTmpl>
+                    <div class="slide-item" fxLayout="row">
+                        <span>{{ slide.packageName }}</span>
+                    </div>
+                </ng-template>
             </div>
         </ngx-slick>
     </div>

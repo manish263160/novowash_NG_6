@@ -183,6 +183,13 @@
                                         height: 164px;
                                     }
                                 }
+                                &.mstb1, &.mstb2, &.mstb3, &.mstb4 {
+                                    .lbl-toggle {
+                                        .btn-tg-booking {
+                                            width: 100%;
+                                        }
+                                    }
+                                }
                             }
                             .bd-service-sub-list-item {
                                 // padding: 0 12px;
@@ -533,4 +540,8 @@
         white-space: nowrap;
         display: inline-block;
     }
+}
+
+.fwrap {
+    flex-wrap: wrap !important;
 }
