@@ -68,6 +68,14 @@ export class ServicesService {
             }));
     }
 
+    public getPackagePaymentUrl(payload) {
+        return this.http
+            .post("http://13.59.141.30:8080/NovoWash/payment/paymentRequestPackage", payload)
+            .pipe(map((res: any) => {
+                return res.data || {};
+            }));
+    }
+
     public registerForHelp(payload) {
         const url = 
             `http://13.59.141.30:8080/NovoWash/permitall/insertPotentialUser?name=${payload.name}&email=&phone=${payload.number}`;

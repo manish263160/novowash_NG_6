@@ -142,8 +142,8 @@ export class BookingDialogComponent implements OnDestroy, OnInit {
                     }
                 });
                 tAmount = pack[0].unitPrice;
-                this.selectedObj.type = pack[0];
-                this.selectedObj.subType = pack[1];
+                this.selectedObj.type = [pack[0]];
+                this.selectedObj.subType = [pack[1]];
                 break;
             }
         }

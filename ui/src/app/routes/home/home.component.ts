@@ -217,7 +217,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         });
         this.dialogRef.componentInstance.onSummaryConfirmed.subscribe(() => {
             console.log("onSummaryConfirmed()");
-            this.getPaymentUrl();
+            this.getPaymentUrl(isForPackage);
             this.dialogRef.close();
             // this.proceedToPayment();
         });
@@ -250,7 +250,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         // });
     }
 
-    public getPaymentUrl() {
+    public getPaymentUrl(isForPackage: boolean = false) {
         const rUser = this.ropcService.user;
         let emailId: string;
         try {
@@ -270,11 +270,19 @@ export class HomeComponent implements OnInit, OnDestroy {
             failUrl: `${location.href}?p=fail`,
             selectedServices: this.selectedServices,
         };
-        this.pSub = this.servicesService.getPaymentUrl(payload)
-            .subscribe((res) => {
-                this.paymentUrlResponse = res;
-                this.proceedToPayment();
-            });
+        if (isForPackage) {
+            this.pSub = this.servicesService.getPackagePaymentUrl(payload)
+                .subscribe((res) => {
+                    this.paymentUrlResponse = res;
+                    this.proceedToPayment();
+                });
+        } else {
+            this.pSub = this.servicesService.getPaymentUrl(payload)
+                .subscribe((res) => {
+                    this.paymentUrlResponse = res;
+                    this.proceedToPayment();
+                });
+        }
     }
 
     public openPaymentGateway() {

@@ -17,14 +17,14 @@
                 <!-- service details -->
                 <ng-container *ngIf="!isForPackage else packTmpl">
                     <div class="summary-sec" fxLayout="column">
-                        <span class="header">Selected Service</span>
+                        <span class="header">Selected {{ isForPackage ? 'Package' : 'Service'}}</span>
                         <span class="text">{{ selectedServices?.mainService?.catName }}</span>
                         <span class="text sub">{{ selectedServices?.subService?.serviceName }}</span>
                     </div>
                 </ng-container>
                 <ng-template #packTmpl>
                     <div class="summary-sec" fxLayout="column">
-                        <span class="header">Selected Service</span>
+                        <span class="header">Selected {{ isForPackage ? 'Package' : 'Service'}}</span>
                         <span class="text">{{ selectedServices?.mainService?.packageName }}</span>
                         <span class="text sub">{{ selectedServices?.subService?.packageName }}</span>
                     </div>
@@ -38,7 +38,7 @@
                 </div>
                 <!-- address -->
                 <span class="summary-sec" fxLayout="column">
-                    <span class="header">Service Required At</span>
+                    <span class="header">{{ isForPackage ? 'Services Of Package' : 'Service'}} Required At</span>
                     <span class="text">
                         {{ selectedServices?.dateUserDetails?.address?.addressLine }}
                     </span>
