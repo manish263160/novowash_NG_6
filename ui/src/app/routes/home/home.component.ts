@@ -74,9 +74,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
         Instamojo.configure({
             handlers: {
-              onClose: this.onInstaCloseHandler,
-              onSuccess: this.onPaymentSuccessHandler,
-              onFailure: this.onPaymentFailureHandler
+              onClose: this.onInstaCloseHandler.bind(this),
+              onSuccess: this.onPaymentSuccessHandler.bind(this),
+              onFailure: this.onPaymentFailureHandler.bind(this)
             }
         });
     }
@@ -232,6 +232,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     public proceedToBookingEnd(isSuccess: boolean, response: any) {
         setTimeout(() => {
+            Instamojo.close();
             this.dialogRef = this.dialog.open(BookingEndDialogComponent, this.config);
             this.dialogRef.componentInstance.isSuccess = isSuccess;
             this.dialogRef.componentInstance.totalAmount = this.selectedServices.totalAmount;
@@ -309,5 +310,5 @@ export class HomeComponent implements OnInit, OnDestroy {
       public onPaymentFailureHandler (response) {
         console.log('Payment Failure Response', response);
         this.proceedToBookingEnd(false, response);
-    }
+       }
 }
