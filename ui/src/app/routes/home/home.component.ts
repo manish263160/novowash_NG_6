@@ -231,14 +231,16 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
 
     public proceedToBookingEnd(isSuccess: boolean, response: any) {
-        this.dialogRef = this.dialog.open(BookingEndDialogComponent, this.config);
-        this.dialogRef.componentInstance.isSuccess = isSuccess;
-        this.dialogRef.componentInstance.totalAmount = this.selectedServices.totalAmount;
-
-        this.dialogRef.componentInstance.onBookingEndClosed.subscribe(() => {
-            console.log("onBookingEndClosed()");
-            this.dialogRef.close();
-        });
+        setTimeout(() => {
+            this.dialogRef = this.dialog.open(BookingEndDialogComponent, this.config);
+            this.dialogRef.componentInstance.isSuccess = isSuccess;
+            this.dialogRef.componentInstance.totalAmount = this.selectedServices.totalAmount;
+    
+            this.dialogRef.componentInstance.onBookingEndClosed.subscribe(() => {
+                console.log("onBookingEndClosed()");
+                this.dialogRef.close();
+            });
+        }, 3000);
         this.pSub = this.servicesService.sendPaymentStatus(response)
             .subscribe((res) => {
                 console.log(`sendPaymentStatus:::::${res}`);
@@ -293,15 +295,11 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     public onPaymentSuccessHandler (response) {
         console.log('Payment Success Response', response);
-        setTimeout(() => {
-            this.proceedToBookingEnd(true, response);
-        }, 3000);
+        this.proceedToBookingEnd(true, response);
     }
 
       public onPaymentFailureHandler (response) {
         console.log('Payment Failure Response', response);
-        setTimeout(() => {
-            this.proceedToBookingEnd(false, response);
-        }, 3000);
+        this.proceedToBookingEnd(false, response);
     }
 }
