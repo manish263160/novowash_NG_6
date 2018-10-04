@@ -14,6 +14,7 @@ import { HomeComponent } from "./home.component";
 import { HomeRoutes } from "./home.routes";
 
 import { 
+    MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
@@ -36,6 +37,7 @@ import {
         HomeRoutes,
         FlexLayoutModule,
         SlickModule,
+        MatButtonModule,
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,

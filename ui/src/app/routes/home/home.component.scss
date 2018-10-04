@@ -81,18 +81,29 @@
                 text-transform: capitalize;
             }
         }
+        .mat-raised-button {
+            &.btn-search-serv {
+                height: 50px;
+                line-height: 1;
+            }
+        }
         .mat-form-field {
             width: 170px;
-            height: 54px;
+            height: 48px;
             margin-top: 0;
             background-color: #fff;
             box-shadow: none;
-            border: none;
+            border: 1px solid transparent;
             padding: 0 8px;
             line-height: 16px;
             border-radius: 4px;
             .mat-form-field-underline {
                 display: none;
+            }
+            .mat-form-field-wrapper {
+                .mat-form-field-infix {
+                    margin-top: -4px;
+                }
             }
             &.select-loc {
                 background-color: rgba(243, 243, 243, 1);
@@ -139,10 +150,13 @@
 #searchWrap {
     &.fixed {
         position: fixed;
-        top: 4px;
+        top: 7px;
         z-index: 2;
-        .mat-form-field.select-loc {
-            background-color: #fff;
+        .mat-form-field {
+            border-color: #c1c1c1;
+            &.select-loc {
+                background-color: #fff;
+            }
         }
     }
 }

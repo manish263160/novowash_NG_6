@@ -156,7 +156,8 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.dialogRef.componentInstance.onServiceSelected.subscribe((selectedServices) => {
             console.log("onServiceSelected()");
             this.selectedServices = selectedServices;
-            this.selectedServices.mainService = this.packageItems.filter((e) => e.id === packageId);
+            const mService = this.packageItems.filter((e) => e.id === packageId);
+            this.selectedServices.mainService = (mService && mService.length) ? mService[0] : null;
             this.dialogRef.close();
             this.openServiceDateTimeDlg(true);
         });

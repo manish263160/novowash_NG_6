@@ -4,16 +4,20 @@
             <p class="p-prime">Novowash presents</p>
             <p class="p-sub">Intelligent Interior Care!</p>
             <div fxLayout="row" fxLayoutGap="16px" id="searchWrap">                
-                <mat-form-field class="select-loc" floatLabel="never">
+                <!-- <mat-form-field class="select-loc" floatLabel="never">
                     <mat-select placeholder="Select city">
                         <mat-option *ngFor="let city of cities" [value]="city.value">
                             {{city.viewValue}}
                         </mat-option>
                     </mat-select>
-                </mat-form-field>
+                </mat-form-field> -->
                 <mat-form-field floatLabel="never" class="search-text">
                     <input type="text" matInput placeholder="Search for a service">
                 </mat-form-field>
+                <button mat-raised-button class="btn-search-serv">
+                    <mat-icon>search</mat-icon>
+                    <span>Search</span>
+                </button>
             </div>
         </div>
     </div>
