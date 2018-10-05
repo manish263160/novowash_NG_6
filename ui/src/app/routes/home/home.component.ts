@@ -289,7 +289,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     public openPaymentGateway() {
         try {
-            Instamojo.open(this.paymentUrlResponse.paymentOptions.paymentUrl);
+            Instamojo.open(this.paymentUrlResponse.longurl);
         } catch (e) {
             console.log("Failed while opening payment gateway");
         }
