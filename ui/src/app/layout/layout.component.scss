@@ -117,3 +117,25 @@
     }
   }
 }
+
+@media (max-width: 768px) {
+  .page-sidenav-content {
+    mat-toolbar.mat-toolbar:not([color]).toolbar-primary {
+      max-width: 100%;
+      width: inherit;
+      .logo {
+        width: 136px;
+        flex: 1 1 100%;
+      }  
+    }
+  }
+  .dialog-panel-login {
+    .mat-dialog-container {
+      .mat-dialog-content {
+        .dialog-container {
+          padding: 16px 16px 30px;
+        }
+      }
+    }
+  }
+}

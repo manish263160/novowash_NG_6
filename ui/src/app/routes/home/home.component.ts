@@ -3,6 +3,7 @@ import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material";
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { Observable, Subscription } from "rxjs";
 import { ROPCService } from "../../../app/auth/ropc.service";
+import { CommonService } from "../../common/services/common.service";
 import { BookingDialogComponent } from "../../common/components/booking-dialog/booking.dialog.component";
 import { BookingEndDialogComponent } from "../../common/components/booking-end-dialog/booking.end.dialog.component";
 import { DateUserDetailsDialogComponent } from "../../common/components/date-user-details-dialog/date.user.details.dialog.component";
@@ -37,8 +38,8 @@ export class HomeComponent implements OnInit, OnDestroy {
         {value: 'mumbai-1', viewValue: 'Mumbai'},
         {value: 'bangalore-2', viewValue: 'Bangalore'}
     ];
-    public slideConfig = {"slidesToShow": 4, "slidesToScroll": 1, dots: true};
-    public slideHListConfig = {"slidesToShow": 8, "slidesToScroll": 1};
+    public slideConfig: any = {"slidesToShow": 4, "slidesToScroll": 1, dots: true};
+    public slideHListConfig: any = {"slidesToShow": 8, "slidesToScroll": 1};
     private selectedServices: any;
     private dateUserDetails: any;
     private headerEl: any;
@@ -54,6 +55,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     private packageSub: any;
 
     constructor(
+        public commonService: CommonService,
         public ropcService: ROPCService,
         private servicesService: ServicesService,
         private _sanitizer: DomSanitizer,
@@ -79,6 +81,11 @@ export class HomeComponent implements OnInit, OnDestroy {
               onFailure: this.onPaymentFailureHandler.bind(this)
             }
         });
+
+        if (commonService.getViewPort() === "mobile") {
+            this.slideHListConfig = {"slidesToShow": 3, "slidesToScroll": 3, dots: true};
+            this.slideConfig = {"slidesToShow": 1, "slidesToScroll": 1, dots: true};
+        }
     }
     
     public afterChange(e) {
@@ -94,12 +101,14 @@ export class HomeComponent implements OnInit, OnDestroy {
         } else if(!this.headerEl.classList.contains("mh-tp")) {
             this.headerEl.classList.add("mh-tp");
         }
-        if (scrollPosition >= 212) {
-            if (!this.searchWrapEl.classList.contains("fixed")) {
-                this.searchWrapEl.classList.add("fixed");
+        if (this.commonService.getViewPort() !== "mobile") {
+            if (scrollPosition >= 212) {
+                if (!this.searchWrapEl.classList.contains("fixed")) {
+                    this.searchWrapEl.classList.add("fixed");
+                }
+            } else {
+                this.searchWrapEl.classList.remove("fixed");
             }
-        } else {
-            this.searchWrapEl.classList.remove("fixed");
         }
     }
 

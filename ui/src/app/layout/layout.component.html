@@ -1,4 +1,4 @@
-<div class="page-sidenav-content" >
+<div class="page-sidenav-content" [ngClass]="commonService.browserClasses">
     <mat-toolbar class="toolbar-primary" id="main-header">
         <a class="logo" href="/app"></a>
         <span class="fill-remaining-space"></span>
@@ -17,13 +17,13 @@
         </ng-container>
         <ng-template #userTmpl>
             <button mat-button class="btn-user" [matMenuTriggerFor]="userMenu" #userTrigger="matMenuTrigger"
-                (onMenuOpen)="itMenuService.onMenuOpen(userTrigger);">
+                (onMenuOpen)="itMenuService.onMenuOpen(userTrigger);onMenuOpen();" (onMenuClose)="onMenuClose();">
                 <span>{{ getInitials() }}</span>
                 <mat-icon>arrow_drop_down</mat-icon>
             </button>
         </ng-template>
         <button mat-button class="btn-help" [matMenuTriggerFor]="helpMenu" #helpTrigger="matMenuTrigger"
-            (onMenuOpen)="itMenuService.onMenuOpen(helpTrigger);">
+            (onMenuOpen)="itMenuService.onMenuOpen(helpTrigger);onMenuOpen();" (onMenuClose)="onMenuClose();">
             <span>Need Help?</span>
         </button>
     </mat-toolbar>
@@ -82,7 +82,7 @@
                 <a href="https://plus.google.com/u/0/105957726178174805323"><i class="fa fa-google-plus"></i></a>
             </div>
             <div class="fsec-divider"></div>
-            <div class="fsec-content-wrap light-dark" fxLayout="row">
+            <div class="fsec-content-wrap light-dark" fxLayout="row" fxLayout.lt-sm="column">
                 <!-- about us -->
                 <div class="content-block">
                     <h3 class="fsec-block-header">About Us</h3>

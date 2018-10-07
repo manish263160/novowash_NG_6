@@ -3268,6 +3268,18 @@ mat-dialog-container.mat-dialog-container {
   }
 }
 
+@media (max-width: 768px) {
+  mat-dialog-container.mat-dialog-container .dialog-header {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  
+  mat-dialog-content .dialog-container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
 
 // .mat-form-field {
 //   .mat-form-field-wrapper {

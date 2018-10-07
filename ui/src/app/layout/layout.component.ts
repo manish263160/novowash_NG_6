@@ -5,6 +5,7 @@ import { NavigationStart, Router } from "@angular/router";
 import { Observable, Subscription } from "rxjs";
 
 import { DialogService } from "../common/services/dialog.service";
+import { CommonService } from "../common/services/common.service";
 import { ITMenuService } from "../common/services/it-menu-service";
 import { ValidatorService } from "../common/services/validator.service";
 import { LoginComponent } from "../login/login.component";
@@ -22,9 +23,6 @@ import { User } from "../model/user";
 })
 
 export class LayoutComponent implements OnInit, OnDestroy {
-    public isIE: boolean = false;
-    public isSafari: boolean = false;
-    // public user: User;
     public companyQItems: any[] = [];
     public servingItems: any[] = [];
     public helpForm: FormGroup;
@@ -43,20 +41,11 @@ export class LayoutComponent implements OnInit, OnDestroy {
         private router: Router,
         private fb: FormBuilder,
         public snackBar: MatSnackBar,
+        public commonService: CommonService,
     ) {
-        const docStr = "documentMode";
-        const msie = document[docStr];
-        if (msie) {
-            this.isIE = true;
-        }
-
-        const ua = navigator.userAgent;
-        const isChrome = ua.indexOf("Chrome") !== -1;
-        this.isSafari = ua.indexOf("Safari") !== -1 && !isChrome;
-
         this.config = new MatDialogConfig();
         // this.config.backdropClass = "cdk-overlay-custom-backdrop";
-        this.config.width = "75%";
+        this.config.width = this.commonService.getViewPort() === "mobile" ? "90%" : "75%";
         this.config.disableClose = true;
         this.config.panelClass = "dialog-panel-login";
         this.config.position = {
@@ -222,6 +211,20 @@ export class LayoutComponent implements OnInit, OnDestroy {
           duration: 2000,
           panelClass: panelClass,
         });
+    }
+
+    public onMenuOpen() {
+        const bEl = document.getElementsByTagName("body")[0];
+        if (bEl) {
+            bEl.style.overflow = "hidden";
+        }
+    }
+
+    public onMenuClose() {
+        const bEl = document.getElementsByTagName("body")[0];
+        if (bEl) {
+            bEl.style.overflow = "auto";
+        }
     }
 
     public ngOnDestroy() {}

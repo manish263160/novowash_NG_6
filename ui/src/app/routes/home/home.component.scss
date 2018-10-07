@@ -138,7 +138,14 @@
                 }
             }
             &.search-text {
-                width: 320px;
+                width: 420px;
+                .mat-form-field-suffix {
+                    .mat-icon {
+                        vertical-align: middle;
+                        height: 30px;
+                        cursor: pointer;
+                    }
+                }
             }
         }
     }
@@ -156,6 +163,21 @@
             border-color: #c1c1c1;
             &.select-loc {
                 background-color: #fff;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .content-wrapper {
+        .banner-wrap {
+            .search-wrap {
+                .p-sub {
+                    font-size: 32px;
+                }
+                .search-text {
+                    width: 300px;
+                }
             }
         }
     }

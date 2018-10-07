@@ -33,6 +33,7 @@ import { ConfirmDialogComponent } from "./common/components/confirm-dialog.compo
 import { ErrorDialogComponent } from "./common/components/error.dialog.component";
 // import { FirstKeyPipe } from "./common/pipes/first.key.pipe";
 import { environment } from "../environments/environment";
+import { CommonService } from "./common/services/common.service";
 import { ITMenuService } from "./common/services/it-menu-service";
 import { DeactivateGuardService } from "./common/services/deactivate-guard.service";
 import { DialogService } from "./common/services/dialog.service";
@@ -86,6 +87,7 @@ import { StarRatingModule } from 'angular-star-rating';
         DialogService,
         ITDatepickerService,
         ITMenuService,
+        CommonService,
     ],
 })
 export class AppModule {}
