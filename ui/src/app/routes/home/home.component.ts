@@ -63,10 +63,15 @@ export class HomeComponent implements OnInit, OnDestroy {
         private dialogService: DialogService,
     ) {
         this.config = new MatDialogConfig();
-        // this.config.backdropClass = "cdk-overlay-custom-backdrop";
-        this.config.width = "75%";
+        if (this.commonService.getViewPort() === "mobile") {
+            this.config.width = "100%";
+            this.config.height = "100%";
+            this.config.panelClass = ["dialog-panel-booking", "dp-booking-mobile"];
+        } else {
+            this.config.width = "100%";
+            this.config.panelClass = ["dialog-panel-booking"];
+        }
         this.config.disableClose = true;
-        this.config.panelClass = "dialog-panel-booking";
         this.config.position = {
             bottom: "",
             left: "",

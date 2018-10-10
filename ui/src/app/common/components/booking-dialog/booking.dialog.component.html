@@ -17,9 +17,9 @@
         <!-- slide 1 -->
         <div class="containerX dialog-container" *ngIf="slide === 1"
             [ngClass]="{'sidenav-fi': slide === 1, 'sidenav-fo': slide !== 1}">
-            <div fxLayout="row" class="bd-content-1-wrap">
+            <div fxLayout="row" fxLayout.lt-sm="column" class="bd-content-1-wrap">
                 <div cdkFocusRegionstart class="bd-service-list" fxLayout="column" fxLayoutGap="20px"
-                    [ngClass]="{'li-mh-60': serviceItems?.length > 8}">
+                    [ngClass]="{'li-mh-60': serviceItems?.length > 8, 'li-mh-40': commonService.getViewPort() === 'mobile'}">
                     <div class="bd-service-list-item" fxLayout="row"
                         [ngClass]="{'selected': service.id === selectedServiceId}"
                         *ngFor="let service of serviceItems; let i = index"
@@ -50,7 +50,7 @@
         <!-- slide 2 -->
         <div class="containerX dialog-container" *ngIf="slide === 2"
             [ngClass]="{'sidenav-fi': slide === 2, 'sidenav-fo': slide !== 2}">
-            <div fxLayout="row" class="bd-content-1-wrap">
+            <div fxLayout="row" fxLayout.lt-sm="column" class="bd-content-1-wrap">
                 {{ serviceDesc }}
             </div>
         </div>
@@ -58,7 +58,7 @@
         <!-- slide 3 -->
         <div class="containerX dialog-container" *ngIf="slide === 3"
             [ngClass]="{'sidenav-fi': slide === 3, 'sidenav-fo': slide !== 3}">
-            <div fxLayout="row" class="bd-content-1-wrap">
+            <div fxLayout="row" fxLayout.lt-sm="column" class="bd-content-1-wrap">
                 <div class="bd-service-list" fxLayout="column" fxLayoutGap="12px"
                     [ngClass]="{'li-mh-60': subList?.length > 8}">
                     <div class="bd-service-list-item" fxLayout="row" [id]="'sub' + service.id"

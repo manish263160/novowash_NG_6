@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 
 import { UserService } from "./services/user.service";
 import { AuthModule } from "../auth";
+import { ProfileService } from "./services/profile.service";
 import { ServicesService } from "./services/services.service";
 import { AuthGuard } from "./services/auth-guard.service";
 
@@ -16,6 +17,7 @@ import { AuthGuard } from "./services/auth-guard.service";
     exports: [],
     declarations: [],
     providers: [
+        ProfileService,
         ServicesService,
         UserService,
     ]

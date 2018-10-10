@@ -3,6 +3,7 @@ import { MatDialog, MatDialogRef } from "@angular/material";
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { Observable, Subscription, Subscriber } from "rxjs";
 import { map, startWith } from "rxjs/operators";
+import { CommonService } from "../../../common/services/common.service";
 import { DialogService } from "../../../common/services/dialog.service";
 import { ServicesService } from "../../../core/services/services.service";
 
@@ -47,6 +48,7 @@ export class BookingDialogComponent implements OnDestroy, OnInit {
     // private subServiceSub: any;
     
     constructor(
+        public commonService: CommonService,
         private dialog: MatDialog ,
         private dialogRef: MatDialogRef<BookingDialogComponent>,
         private dialogService: DialogService,

@@ -26,6 +26,10 @@ export const routes: Routes = [
                 loadChildren: "./routes/bookings/bookings.module#BookingsModule",
                 path: "mybookings",
             },
+            {
+                loadChildren: "./routes/user-profile/user.profile.module#UserProfileModule",
+                path: "myprofile",
+            },
         ],
         component: LayoutComponent,
         path: "app",
