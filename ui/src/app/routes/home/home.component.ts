@@ -68,7 +68,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             this.config.height = "100%";
             this.config.panelClass = ["dialog-panel-booking", "dp-booking-mobile"];
         } else {
-            this.config.width = "100%";
+            this.config.width = "75%";
             this.config.panelClass = ["dialog-panel-booking"];
         }
         this.config.disableClose = true;
