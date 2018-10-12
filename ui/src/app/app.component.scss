@@ -28,11 +28,11 @@ html, body, oms-app {
 :focus {outline:none;}
 ::-moz-focus-inner {border:0;}
 
-::-moz-selection { 
+::-moz-selection {
   background: $primary-color;
   color: $white-color;
 }
-::selection { 
+::selection {
   background: $primary-color;
   color: $white-color;
 }
@@ -258,7 +258,7 @@ mat-sidenav {
     width: 692px;
     .dialog-slide {
       width: 692px;
-      .new-lot-dialog-wrapper {        
+      .new-lot-dialog-wrapper {
         mat-dialog-content.mat-dialog-content {
           min-height: calc(100vh - 130px);
           max-height: calc(100vh - 130px);
@@ -490,10 +490,10 @@ mat-tooltip-component div.mat-tooltip[class] {
   }
 }
 
-.mat-radio-button {		
-  .mat-radio-label {		
-      align-items: initial;		
-  }		
+.mat-radio-button {
+  .mat-radio-label {
+      align-items: initial;
+  }
 }
 
 .mat-dialog-content {
@@ -511,24 +511,24 @@ mat-tooltip-component div.mat-tooltip[class] {
   }
 }
 
-.dialog-panel-client-access-login {		
-  max-width: 500px;		
+.dialog-panel-client-access-login {
+  max-width: 500px;
 }
 
 .containerX {
-  .toggleContent {	
+  .toggleContent {
       .mat-form-field {
-          max-width: 253px;		
-      }		
-      label:not([class^='mat-']):not([class*=' mat-']) {		
-          &.itn-custom-label {		
-              max-width: 253px;      		
-          }		
-      }		
-      .input-group {		
-          max-width: 253px;		
-      }		
-  }		
+          max-width: 253px;
+      }
+      label:not([class^='mat-']):not([class*=' mat-']) {
+          &.itn-custom-label {
+              max-width: 253px;
+          }
+      }
+      .input-group {
+          max-width: 253px;
+      }
+  }
 }
 
 .input-group {
@@ -545,7 +545,7 @@ mat-tooltip-component div.mat-tooltip[class] {
           }
           label:not([class^='mat-']):not([class*=' mat-']) {
               &.itn-custom-label:not(.unset) {
-                  width: 48.5%;            
+                  width: 48.5%;
               }
           }
       }
@@ -560,7 +560,7 @@ mat-tooltip-component div.mat-tooltip[class] {
       }
       label:not([class^='mat-']):not([class*=' mat-']) {
           &.itn-custom-label:not(.unset) {
-              width: 48.5%;            
+              width: 48.5%;
           }
       }
       .mat-button {
@@ -620,11 +620,11 @@ mat-tooltip-component div.mat-tooltip[class] {
           margin-top: -1px;
       }
   }
-  &.mat-button-toggle-checked {    
+  &.mat-button-toggle-checked {
       & + .toggleContent {
           display: block;
       }
-  }    
+  }
 }
 
 .mat-button-toggle.mat-button-toggle-standalone {
@@ -904,16 +904,16 @@ display: none;
       .mat-form-field.input-name {
           flex-basis: 40%;
       }
-      .edit, .close {		
-          color: $accent-color-200;		
-          width: 30px;		
-          cursor: pointer;		
-          .mat-icon {		
-              font-size: 16px;		
-              width: 16px;		
-              height: 16px;		
-              vertical-align: sub;		
-          }		
+      .edit, .close {
+          color: $accent-color-200;
+          width: 30px;
+          cursor: pointer;
+          .mat-icon {
+              font-size: 16px;
+              width: 16px;
+              height: 16px;
+              vertical-align: sub;
+          }
       }
   }
   .variety-detail-container, .field-detail-container,
@@ -1002,25 +1002,25 @@ display: none;
   font-size: 1rem;
 }
 
-.sub-action-container, .sub-header-container {		
-  margin-right: -40px;		
-  padding-bottom: 24px;		
-  .bulk-action-container {		
-      margin-right: 12px;		
-  }		
-  .header-action-container {		
-      margin-right: 12px;		
-      .mat-button .mat-button-wrapper {		
-          & > * {		
-              vertical-align: text-top;		
-          }		
-          .mat-icon {		
-              font-size: 1rem;		
-              width: 1rem;		
-              height: 1rem;		
-          }           		
-      }		
-  }		
+.sub-action-container, .sub-header-container {
+  margin-right: -40px;
+  padding-bottom: 24px;
+  .bulk-action-container {
+      margin-right: 12px;
+  }
+  .header-action-container {
+      margin-right: 12px;
+      .mat-button .mat-button-wrapper {
+          & > * {
+              vertical-align: text-top;
+          }
+          .mat-icon {
+              font-size: 1rem;
+              width: 1rem;
+              height: 1rem;
+          }
+      }
+  }
 }
 
 .account-setting-content {
@@ -1112,7 +1112,7 @@ mat-sidenav-container.backdrop-invisible > .mat-sidenav-backdrop.mat-sidenav-sho
       width: 101%;
       .mat-menu-content {
         padding: 0;
-        
+
       }
   }
 }
@@ -1461,7 +1461,7 @@ mat-toolbar.mat-toolbar:not([color]).toolbar-primary {
     .listing-sidenav-menu {
       margin-top: 56px;
       max-height: calc(100% - 56px);
-    }    
+    }
   }
   .sGrid-fixed-header {
     padding-top: 56px;
@@ -1473,7 +1473,7 @@ mat-toolbar.mat-toolbar:not([color]).toolbar-primary {
     .listing-sidenav-menu {
       margin-top: 64px;
       max-height: calc(100% - 64px);
-    }    
+    }
   }
   .sGrid-fixed-header {
     padding-top: 64px;
@@ -1500,7 +1500,7 @@ mat-select.mat-select.mat-select-disabled {
 
 .mat-form-field {
   .mat-input-suffix {
-    .mat-icon {      
+    .mat-icon {
       &:before {
         height: 2.25rem;
         width: 2px;
@@ -1578,7 +1578,7 @@ div[wj-part='chcells'] .wj-header {
       padding-left: 4px;
     }
   }
-  
+
   .wj-row .wj-cell:first-child {
     .v-transform {
         &.v-row-selector {
@@ -1695,7 +1695,7 @@ div[wj-part='chcells'] .wj-header {
               }
             }
           }
-        }        
+        }
         &:not(.mat-input-number-container) {
           &.mat-focused {
             .mat-input-wrapper {
@@ -3273,7 +3273,7 @@ mat-dialog-container.mat-dialog-container {
     padding-left: 16px;
     padding-right: 16px;
   }
-  
+
   mat-dialog-content .dialog-container {
     padding-left: 16px;
     padding-right: 16px;

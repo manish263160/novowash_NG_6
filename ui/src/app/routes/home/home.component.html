@@ -3,7 +3,7 @@
         <div fxLayout="column" fxLayoutAlign="baseline center">
             <p class="p-prime">Novowash presents</p>
             <p class="p-sub">Intelligent Interior Care!</p>
-            <div fxLayout="row" fxLayoutGap="16px" id="searchWrap">                
+            <div fxLayout="row" fxLayoutGap="16px" id="searchWrap">
                 <!-- <mat-form-field class="select-loc" floatLabel="never">
                     <mat-select placeholder="Select city">
                         <mat-option *ngFor="let city of cities" [value]="city.value">
@@ -13,7 +13,7 @@
                 </mat-form-field> -->
                 <mat-form-field floatLabel="never" class="search-text">
                     <input type="text" matInput placeholder="Search for a service">
-                    <mat-icon matSuffix>search</mat-icon>
+                    <!-- <mat-icon matSuffix>search</mat-icon> -->
                     <mat-icon matSuffix>keyboard_arrow_down</mat-icon>
                 </mat-form-field>
                 <!-- <button mat-raised-button class="btn-search-serv">
@@ -23,7 +23,7 @@
             </div>
         </div>
     </div>
-    <div class="carousel-wrap service-hlist-wrap">    
+    <div class="carousel-wrap service-hlist-wrap">
         <ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideHListConfig" (afterChange)="afterChange($event)">
             <div ngxSlickItem *ngFor="let item of serviceItems" class="slide" (click)="openServiceBookDlg(item.id, item.catName)">
                 <div fxLayout="column" class="service-hlist-item" fxLayoutAlign="center center" width="100%">
@@ -34,7 +34,7 @@
         </ngx-slick>
     </div>
 </div>
-<div class="home-content-wrap">    
+<div class="home-content-wrap">
     <div class="carousel-wrap">
         <h4 class="carousel-header">Recommended Services</h4>
         <ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideConfig" (afterChange)="afterChange($event)">
@@ -69,7 +69,7 @@
     </div>
     <div class="separator-1"></div>
     <div class="carousel-wrap">
-        <h4 class="carousel-header">Customer Reviews</h4>    
+        <h4 class="carousel-header">Customer Reviews</h4>
         <ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideConfig" (afterChange)="afterChange($event)">
             <div ngxSlickItem *ngFor="let slide of slides" class="slide">
                 <img src="{{ slide.img }}" alt="" width="100%">
