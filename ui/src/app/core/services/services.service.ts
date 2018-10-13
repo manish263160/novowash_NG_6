@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpErrorResponse } from "@angular/common/http";
 import { map } from 'rxjs/operators';
+import 'rxjs/add/operator/catch';
 import { Service } from "../../model/service";
 import { Payment } from "../../model/payment";
 
@@ -108,6 +109,19 @@ export class ServicesService {
             .pipe(map((res: any) => {
                 return res.data || {};
             }));
+    }
+
+    public getCouponValidity(couponCode): Observable<any> {
+        return this.http
+            .get(`http://13.59.141.30:8080/NovoWash/payment/getCouponValidity/${couponCode}`)
+            .pipe(map((res: any) => {
+                return res.data || {};
+            }))
+            .catch(err => {
+                debugger;
+                throw err;
+            })
+            
     }
 
     public getService(id): Observable<Service> {

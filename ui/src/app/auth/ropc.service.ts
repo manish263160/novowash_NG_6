@@ -18,7 +18,6 @@ export class ROPCService {
   }
 
   public login(username: string, password: string) {
-    debugger;
     const url = this.oauthService.tokenEndpoint
       + `?grant_type=${environment.auth.grantType}&username=${username}&password=${password}`;
 

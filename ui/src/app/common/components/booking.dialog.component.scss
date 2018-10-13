@@ -537,6 +537,21 @@
                         }
                     }
                 }
+                .summary-sec-wrap {
+                    .summary-sec {
+                        width: 50%;
+                        max-width: 50%;
+                        overflow: auto;
+                        & + .summary-sec {
+                            border-top: 0;
+                        }
+                    }
+                    &:not(:last-of-type) {
+                        .summary-sec {
+                            border-bottom: 1px solid darkgray;
+                        }
+                    }
+                }
             }
         }
     }
@@ -609,9 +624,59 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         display: inline-block;
+        &.cut {
+            text-decoration: line-through;
+            color: darkslategray;
+            padding-left: 4px;
+            padding-right: 4px;
+        }
     }
 }
 
 .fwrap {
     flex-wrap: wrap !important;
+}
+
+.bd-card {
+    &.bd-card-coupon {
+        padding: 8px 16px;
+        .header-seg {
+            .header {
+                margin-bottom: 4px;
+            }
+            .text {
+                margin-top: 0;
+                font-size: 0.875rem;
+            }
+        }
+        &.mh-168 {
+            min-height: 168px;
+        }
+    }
+}
+
+.mat-form-field {
+    &.in-coupon {
+        .mat-form-field-wrapper {
+            .mat-form-field-flex {
+                border: 1px solid rgb(100, 128, 247);
+                border-radius: 4px;
+                padding: 4px 0 4px 8px;
+                padding-right: 0;
+                .mat-form-field-infix {
+                    border-top: 0;
+                }
+                .mat-form-field-suffix {
+                    .mat-raised-button {
+                        border-radius: 0 4px 4px 0;
+                        margin: -5px -1px;
+                        height: 44px;
+                    }
+                }
+            }
+            .mat-form-field-underline {
+                display: none;
+            }
+        }
+    }
 }

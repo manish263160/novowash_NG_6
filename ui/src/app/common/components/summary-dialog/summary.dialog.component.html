@@ -14,53 +14,93 @@
     <div mat-dialog-content>
         <div class="containerX dialog-container">
             <div class="bd-content-1-wrap" fxLayout="column" fxLayoutGap="8px">
-                <!-- service details -->
-                <ng-container *ngIf="!isForPackage else packTmpl">
+                <div fxLayout="row" class="summary-sec-wrap">
+                    <!-- service details -->
+                    <ng-container *ngIf="!isForPackage else packTmpl">
+                        <div class="summary-sec" fxLayout="column">
+                            <span class="header">Selected {{ isForPackage ? 'Package' : 'Service'}}</span>
+                            <span class="text">{{ selectedServices?.mainService?.catName }}</span>
+                            <span class="text sub">{{ selectedServices?.subService?.serviceName }}</span>
+                        </div>
+                    </ng-container>
+                    <ng-template #packTmpl>
+                        <div class="summary-sec" fxLayout="column">
+                            <span class="header">Selected {{ isForPackage ? 'Package' : 'Service'}}</span>
+                            <span class="text">{{ selectedServices?.mainService?.packageName }}</span>
+                            <span class="text sub">{{ selectedServices?.subService?.packageName }}</span>
+                        </div>
+                    </ng-template>
+                    <!-- address -->
                     <div class="summary-sec" fxLayout="column">
-                        <span class="header">Selected {{ isForPackage ? 'Package' : 'Service'}}</span>
-                        <span class="text">{{ selectedServices?.mainService?.catName }}</span>
-                        <span class="text sub">{{ selectedServices?.subService?.serviceName }}</span>
+                        <span class="header">{{ isForPackage ? 'Services Of Package' : 'Service'}} Required At</span>
+                        <span class="text">
+                            {{ selectedServices?.dateUserDetails?.address?.addressLine }}
+                        </span>
+                        <span class="text" *ngIf="selectedServices.dateUserDetails?.address?.landmark">
+                            {{ selectedServices?.dateUserDetails?.address?.landmark }}
+                        </span>
+                        <span class="text">
+                            {{ selectedServices?.dateUserDetails?.city }} - {{ selectedServices?.dateUserDetails?.address?.pincode }}
+                        </span>
                     </div>
-                </ng-container>
-                <ng-template #packTmpl>
-                    <div class="summary-sec" fxLayout="column">
-                        <span class="header">Selected {{ isForPackage ? 'Package' : 'Service'}}</span>
-                        <span class="text">{{ selectedServices?.mainService?.packageName }}</span>
-                        <span class="text sub">{{ selectedServices?.subService?.packageName }}</span>
-                    </div>
-                </ng-template>
-                <!-- time slot -->
-                <div class="summary-sec" fxLayout="column" *ngIf="!isForPackage">
-                    <span class="header">Selected Time Slot</span>
-                    <span class="text">
-                        Between {{ selectedServices?.dateUserDetails?.time }} on {{ selectedServices?.dateUserDetails?.date }}
-                    </span>
                 </div>
-                <!-- address -->
-                <span class="summary-sec" fxLayout="column">
-                    <span class="header">{{ isForPackage ? 'Services Of Package' : 'Service'}} Required At</span>
-                    <span class="text">
-                        {{ selectedServices?.dateUserDetails?.address?.addressLine }}
-                    </span>
-                    <span class="text" *ngIf="selectedServices.dateUserDetails?.address?.landmark">
-                        {{ selectedServices?.dateUserDetails?.address?.landmark }}
-                    </span>
-                    <span class="text">
-                        {{ selectedServices?.dateUserDetails?.city }} - {{ selectedServices?.dateUserDetails?.address?.pincode }}
-                    </span>
-                </span>
-                <!-- contact -->
-                <div class="summary-sec" fxLayout="column">
-                    <span class="header">Contact Details</span>
-                    <span class="text">{{ ropcService?.user?.mobile_number }}</span>
-                    <span class="text">{{ selectedServices?.dateUserDetails?.contactDetails?.email }}</span>
+                <div fxLayout="row" class="summary-sec-wrap">
+                    <!-- contact -->
+                    <div class="summary-sec" fxLayout="column">
+                        <span class="header">Contact Details</span>
+                        <span class="text">{{ ropcService?.user?.mobile_number }}</span>
+                        <span class="text">{{ selectedServices?.dateUserDetails?.contactDetails?.email }}</span>
+                    </div>
+                    <!-- time slot -->
+                    <div class="summary-sec" fxLayout="column" *ngIf="!isForPackage">
+                        <span class="header">Selected Time Slot</span>
+                        <span class="text">
+                            Between {{ selectedServices?.dateUserDetails?.time }} on {{ selectedServices?.dateUserDetails?.date }}
+                        </span>
+                    </div>
+                </div>
+                <div class="bd-card bd-card-coupon mat-elevation-z1" fxLayout="column"
+                    [ngClass]="{'mh-168': this.selectedServices.couponApplied && this.selectedServices.couponDiscount > 0}">
+                    <div class="header-seg">
+                        <h4 class="header">Apply Coupon</h4>
+                        <p class="text">
+                            Enter a coupon code and hit the Apply Coupon button
+                        </p>
+                        <mat-form-field class="in-coupon" [floatLabel]="'never'">
+                            <input type="text" matInput placeholder="Coupon Code" #inCoupon [disabled]="couponSuccessful">
+                            <button mat-raised-button matSuffix class="btn-p-next mat-elevation-z0" color="primary"
+                                (click)="removeCoupon()" *ngIf="couponSuccessful">
+                                Remove Coupon
+                            </button>
+                            <button mat-raised-button matSuffix class="btn-p-next mat-elevation-z0" color="primary"
+                                (click)="applyCoupon(inCoupon.value)" *ngIf="!couponSuccessful">
+                                Apply Coupon
+                            </button>
+                            <mat-hint align="start" *ngIf="noCouponEntered" class="hint-warn">
+                                No coupon code entered
+                            </mat-hint>
+                            <mat-hint align="start" *ngIf="noValidCouponCode" class="hint-warn">
+                                Coupon already used or is invalid
+                            </mat-hint>
+                            <mat-hint align="start" *ngIf="couponSuccessful" class="hint-success">
+                                Coupon code successfully applied!
+                                <span class="sp-coupon-discount">
+                                    Coupon Discount: Rs. {{ selectedServices?.couponDiscount | number }}
+                                </span>
+                            </mat-hint>
+                        </mat-form-field>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <div mat-dialog-actions>
         <div class="amount-wrap">
-            <span class="amount">Rs. {{ selectedServices?.totalAmount | number }}</span>
+            <span class="amount">Rs.&nbsp;</span>
+            <span class="amount cut" *ngIf="this.selectedServices.couponApplied && this.selectedServices.couponDiscount > 0">
+                {{ selectedServices?.totalAmountOriginal | number }}
+            </span>
+            <span class="amount">{{ selectedServices?.totalAmount | number }}</span>
         </div>
         <span fxFlex></span>
         <button mat-raised-button class="btn-p-next" color="primary"

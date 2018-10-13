@@ -1,0 +1,106 @@
+<div class="user-profile-outer-wrap">
+    <ng-container *ngIf="(ropcService && ropcService.user) else noUserTmpl">
+        <div class="user-profile-wrap" fxLayout="column">
+            <div class="header-wrap" fxLayout="column">
+                <h4 class="my-profile-header">My Profile</h4>
+                <ng-container *ngIf="ropcService.user.email else noEmailTmpl">
+                    <div class="header-subtext txt-faded">{{ ropcService.user.email }}</div>
+                </ng-container>
+                <ng-template #noEmailTmpl>
+                    <div class="header-subtext txt-faded">&lt;user email id not available&gt;</div>
+                </ng-template>
+            </div>
+            <div class="content-wrap">
+                <div class="content-inner-wrap" fxLayout="row">
+                    <!-- left side -->
+                    <div class="left-side" fxLayout="column">
+                        <div class="menu-section" fxLayout="column">
+                            <div class="ms-header">My Account</div>
+                            <div class="ms-item" (click)="onClickLeftMenu('profile');" [ngClass]="{'active': slide === 'profile'}">
+                                Profile
+                            </div>
+                        </div>
+                        <div class="menu-section" fxLayout="column">
+                            <div class="ms-header">My Bookings</div>
+                            <div class="ms-item" (click)="onClickLeftMenu('booked-services');" [ngClass]="{'active': slide === 'booked-services'}">
+                                Booked Services
+                            </div>
+                            <div class="ms-item" (click)="onClickLeftMenu('booked-packages');" [ngClass]="{'active': slide === 'booked-packages'}">
+                                Booked Packages
+                            </div>
+                        </div>
+                    </div>
+                    <!-- right side -->
+                    <div class="right-side" fxLayout="column">
+                        <div class="rs-content-wrap profile" *ngIf="slide === 'profile'">
+                            <form [formGroup]="userForm" novalidate>
+                                <div class="bd-card mat-elevation-z1" fxLayout="column">
+                                    <div class="header-seg">
+                                        <h4 class="header">User Information</h4>
+                                        <p class="text">
+                                            View/Edit your details
+                                        </p>
+                                    </div>
+                                    <div class="middle-seg" fxLayout="column">
+                                        <div class="profile-sec" fxLayout="row">
+                                            <span class="ps-label">Name</span>
+                                            <span class="ps-value" *ngIf="!isUserDetailEdit">{{ ropcService.user.username }}</span>
+                                            <mat-form-field floatLabel="never" *ngIf="isUserDetailEdit">
+                                                <input type="text" matInput placeholder="Name" formControlName="name" novalidate>
+                                                <mat-error *ngIf="(userForm.controls['name'].errors | firstKey) ==='required' && userForm.controls['name'].touched">
+                                                    Name is required
+                                                </mat-error>
+                                                <mat-error *ngIf="(userForm.controls['name'].errors | firstKey) === 'pattern' && userForm.controls['name'].touched">
+                                                    Please enter a valid name
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="profile-sec" fxLayout="row">
+                                            <span class="ps-label">Mobile Number</span>
+                                            <span class="ps-value">{{ ropcService.user.mobile_number }}</span>
+                                        </div>
+                                        <div class="profile-sec" fxLayout="row">
+                                            <span class="ps-label">E-mail id</span>
+                                            <span class="ps-value" *ngIf="!isUserDetailEdit">{{ ropcService.user.email }}</span>
+                                            <mat-form-field floatLabel="never" *ngIf="isUserDetailEdit">
+                                                <input type="email" matInput placeholder="Email" formControlName="email" novalidate>
+                                                <mat-error *ngIf="(userForm.controls['email'].errors | firstKey) ==='required' && userForm.controls['email'].touched">
+                                                    Email is required
+                                                </mat-error>
+                                                <mat-error *ngIf="(userForm.controls['email'].errors | firstKey) ==='pattern' && userForm.controls['email'].touched">
+                                                    Please enter valid email id
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="action-seg" fxLayout="row" fxLayoutGap="12px">
+                                        <ng-container *ngIf="isUserDetailEdit else noUserDetailEditTmpl">
+                                            <button type="button" mat-raised-button class="mat-elevation-z0" (click)="cancelUserDetailEdit()">
+                                                Cancel
+                                            </button>
+                                            <button type="submit" mat-raised-button class="mat-elevation-z0" color="primary" (click)="saveUserDetailEdit()"
+                                                [disabled]="userForm.invalid">
+                                                Save
+                                            </button>
+                                        </ng-container>
+                                        <ng-template #noUserDetailEditTmpl>
+                                            <button type="button" mat-raised-button class="mat-elevation-z0" color="primary" (click)="enableUserDetailEdit()">
+                                                Edit Details
+                                            </button>
+                                        </ng-template>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <ng-template #noUserTmpl>
+        <div class="user-profile-wrap" fxLayout="column">
+            <h1>Not Logged In</h1>
+            <p>Please log in to see profile information</p>
+        </div>
+    </ng-template>
+</div>

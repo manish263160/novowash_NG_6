@@ -12,6 +12,7 @@ $accent-color-50: map-get($accent, 50);
 $accent-color-100: map-get($accent, 100);
 $accent-color-200: map-get($accent, 200);
 $accent-color-300: map-get($accent, 300);
+$warn-color: map-get($warn, 500);
 $primary-contrast-10: mat-contrast($primary, 10);
 $custom-color-bcd6bf: #bcd6bf;
 $custom-color-e8e8e8: #e8e8e8;
@@ -3277,6 +3278,38 @@ mat-dialog-container.mat-dialog-container {
   mat-dialog-content .dialog-container {
     padding-left: 16px;
     padding-right: 16px;
+  }
+}
+
+.dialog-panel-booking {
+  .mat-hint {
+    &.hint-warn {
+        color: $warn-color;
+    }
+    &.hint-success {
+      color: green;
+    }
+    .sp-coupon-discount {
+      display: inline-block;
+      background-color: green;
+      color: white;
+      width: auto;
+      padding: 2px 4px;
+      margin: 2px 0;
+    }
+  }
+}
+
+.txt-faded {
+  opacity: 0.3 !important;
+}
+
+.menu-section {
+  .ms-item {
+    &.active {
+      font-weight: bold;
+      color: $primary-color;
+    }
   }
 }
 
