@@ -1,0 +1,64 @@
+<div class="containerX" >
+    <div fxLayout="row" class="dialog-header">
+        <div fxFlex="flex">
+            <h5>Where do you want the service?</h5>
+        </div>
+        <div fxFlex="none">
+            <button mat-icon-button class="close-icon" (click)="closeDialog()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>
+<div class="booking-dialog-wrap bd-wrap-date-time">
+    <div mat-dialog-content>
+        <div class="containerX dialog-container">
+            <form [formGroup]="addressForm" novalidate>
+                <div class="bd-content-1-wrap" fxLayout="column" fxLayoutGap="32px">
+                    <span class="spacer"></span>
+                    <mat-form-field fxFlex="1 1 100%">
+                        <input matInput formControlName="addressLine" required type="text" placeholder="Address">
+                        <mat-error *ngIf="(addressForm.controls.addressLine.errors | firstKey) === 'required' && addressForm.controls['addressLine'].touched">
+                            Address is required
+                        </mat-error>
+                    </mat-form-field>
+                    <span class="spacer"></span>
+                    <div fxLayout="row" fxLayoutGap="24px">
+                        <mat-form-field fxFlex="1 1 30%">
+                            <input matInput formControlName="landmark" type="text" placeholder="Landmark (optional)">
+                        </mat-form-field>
+                        <mat-form-field fxFlex="1 1 30%">
+                            <mat-select placeholder="City" required formControlName="city">
+                                <mat-option *ngFor="let city of cities" [value]="city.value">
+                                {{ city.viewValue }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="(addressForm.controls.city.errors | firstKey) === 'required' && addressForm.controls['city'].touched">
+                                City is required
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field fxFlex="1 1 30%">
+                            <input matInput formControlName="pincode" required type="text" placeholder="PIN Code">
+                            <mat-error *ngIf="(addressForm.controls.pincode.errors | firstKey) === 'required' && addressForm.controls['pincode'].touched">
+                                PIN Code is required
+                            </mat-error>
+                            <mat-error *ngIf="(addressForm.controls.pincode.errors | firstKey) === 'pattern' && addressForm.controls['pincode'].touched">
+                                Entered PIN Code is invalid
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div mat-dialog-actions>
+        <span fxFlex></span>
+        <button mat-raised-button class="btn-p-back" (click)="closeDialog()">
+            Cancel
+        </button>
+        <button mat-raised-button class="btn-p-next" color="primary"
+            (click)="submitAddress()" [disabled]="addressForm.invalid">
+            Save
+        </button>
+    </div>
+</div>

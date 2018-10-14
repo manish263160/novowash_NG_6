@@ -32,7 +32,49 @@ export class ProfileService {
                 { headers: impHeaders }
             )
             .pipe(map((res: any) => {
-                return res.data || [];
+                return res;
+            }));
+    }
+
+    public updateServiceAddress(type: string, payload) {
+        let impHeaders = new HttpHeaders();
+        impHeaders = impHeaders.set("Content-Type", "application/json")
+            .set("Authorization", `Bearer ${this.token}`);
+        return this.http
+            .put(
+                `http://13.59.141.30:8080/NovoWash/userprofile/updateServiceAddress/${type}`,
+                payload,
+                { headers: impHeaders }
+            ).pipe(map((res: any) => {
+                return res;
+            }));
+    }
+
+    public updateServiceDate(type: string, payload) {
+        let impHeaders = new HttpHeaders();
+        impHeaders = impHeaders.set("Content-Type", "application/json")
+            .set("Authorization", `Bearer ${this.token}`);
+        return this.http
+            .put(
+                `http://13.59.141.30:8080/NovoWash/userprofile/updateServiceDate/${type}`,
+                payload,
+                { headers: impHeaders }
+            ).pipe(map((res: any) => {
+                return res;
+            }));
+    }
+
+    public insertPackageDateSlot(payload) {
+        let impHeaders = new HttpHeaders();
+        impHeaders = impHeaders.set("Content-Type", "application/json")
+            .set("Authorization", `Bearer ${this.token}`);
+        return this.http
+            .post(
+                `http://13.59.141.30:8080/NovoWash/userprofile/insertPackageDateSlot/${payload.id}`,
+                payload,
+                { headers: impHeaders }
+            ).pipe(map((res: any) => {
+                return res;
             }));
     }
 
@@ -47,7 +89,7 @@ export class ProfileService {
         return this.http
             .get(`http://13.59.141.30:8080/NovoWash/userprofile/getPreviousBookingService/service/${userId}`, {headers: impHeaders})
             .pipe(map((res: any) => {
-                return res.data || [];
+                return res || [];
             }));
     }
 
@@ -61,7 +103,7 @@ export class ProfileService {
         return this.http
             .get(`http://13.59.141.30:8080/NovoWash/userprofile/getPreviousBookingService/package/${userId}`, {headers: impHeaders})
             .pipe(map((res: any) => {
-                return res.data || [];
+                return res || [];
             }));
     }
 }

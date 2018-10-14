@@ -150,6 +150,11 @@ export class LayoutComponent implements OnInit, OnDestroy {
         this.dialogRef.componentInstance.onLoginSuccessful.subscribe((user) => {
             console.log("onLoginSuccessful()");
             this.dialogRef.close();
+            try {
+                if (location.href.includes("/app/myprofile")) {
+                    location.reload();
+                }
+            } catch (e) {}
             // const unStr = "user_name";
             // if (Object.keys(user).length) {                
             //     this.user = user;

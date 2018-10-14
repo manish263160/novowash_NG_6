@@ -97,7 +97,7 @@
     <div mat-dialog-actions>
         <div class="amount-wrap">
             <span class="amount">Rs.&nbsp;</span>
-            <span class="amount cut" *ngIf="this.selectedServices.couponApplied && this.selectedServices.couponDiscount > 0">
+            <span class="amount cut" *ngIf="selectedServices.couponApplied && selectedServices.couponDiscount > 0">
                 {{ selectedServices?.totalAmountOriginal | number }}
             </span>
             <span class="amount">{{ selectedServices?.totalAmount | number }}</span>

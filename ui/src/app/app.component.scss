@@ -3309,6 +3309,7 @@ mat-dialog-container.mat-dialog-container {
     &.active {
       font-weight: bold;
       color: $primary-color;
+      pointer-events: none;
     }
   }
 }

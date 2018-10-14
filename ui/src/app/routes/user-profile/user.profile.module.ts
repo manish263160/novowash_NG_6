@@ -4,13 +4,16 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { DialogService } from "../../common/services/dialog.service";
+import { AddressChangeDialogComponent } from "../../common/components/address-change-dialog/address.change.dialog.component";
+import { DateSelectDialogComponent } from "../../common/components/date-select-dialog/date.select.dialog.component";
 import { SharedModule } from "../../shared.module";
-import { UserProfileComponent } from "./user.profile.component";
+import { NnovoCurlBracketRemoverPipe, NovoUserAddressPipe, UserProfileComponent } from "./user.profile.component";
 import { UserProfileRoutes } from "./user.profile.routes";
 
 import { 
     MatButtonModule,
     MatFormFieldModule,
+    MatMenuModule,
     MatInputModule,
     MatIconModule,
     MatSelectModule,
@@ -19,8 +22,12 @@ import {
 @NgModule({
     declarations: [
         UserProfileComponent,
+        NovoUserAddressPipe,
+        NnovoCurlBracketRemoverPipe,
     ],
     entryComponents: [
+        AddressChangeDialogComponent,
+        DateSelectDialogComponent,
     ],
     imports: [
         CommonModule,
@@ -29,6 +36,7 @@ import {
         UserProfileRoutes,
         FlexLayoutModule,
         MatButtonModule,
+        MatMenuModule,
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,

@@ -1,0 +1,48 @@
+<div class="containerX" >
+    <div fxLayout="row" class="dialog-header">
+        <div fxFlex="flex">
+            <h5>When do you want the service?</h5>
+        </div>
+        <div fxFlex="none">
+            <button mat-icon-button class="close-icon" (click)="closeDialog()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>
+<div class="booking-dialog-wrap bd-wrap-date-time">
+    <div mat-dialog-content>
+        <div class="containerX dialog-container">
+            <div fxLayout="column" class="bd-content-1-wrap" fxLayout="column" fxLayoutGap="24px" *ngIf="dateTimeSlots && dateTimeSlots.length">
+                <span class="spacer"></span>
+                <label class="lbl-date-time date">Date</label>
+                <div fxLayout="row" class="date-time-box-wrap date" fxLayoutGap="12px">
+                    <div class="date-time-box" *ngFor="let dateTimeSlot of dateTimeSlots; let i = index"
+                        [ngClass]="{'selected': i === selectedDateIndex, 'blocked': dateTimeSlot.isBlocked}"
+                        (click)="selectDateIndex(i)">
+                        <span>{{ dateTimeSlot.dateText }}</span>
+                    </div>
+                </div>
+                <span class="spacer"></span>
+                <label class="lbl-date-time">Select Time Slots</label>
+                <div fxLayout="row" class="date-time-box-wrap" fxLayoutGap="20px">
+                    <div class="date-time-box time-box" *ngFor="let timeSlot of dateTimeSlots[selectedDateIndex]?.timeSlots; let j = index"
+                        [ngClass]="{'selected': j === selectedTimeIndex, 'blocked': timeSlot.isBlocked}"
+                        (click)="selectTimeIndex(j)">
+                        <span>{{ timeSlot.text }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div mat-dialog-actions>
+        <span fxFlex></span>
+        <button mat-raised-button class="btn-p-back" (click)="closeDialog()">
+            Cancel
+        </button>
+        <button mat-raised-button class="btn-p-next" color="primary" (click)="submiDate()"
+            [disabled]="selectedDateIndex < 0 || selectedTimeIndex < 0">
+            Save
+        </button>
+    </div>
+</div>

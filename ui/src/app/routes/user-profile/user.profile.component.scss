@@ -41,7 +41,7 @@
                                 padding-bottom: 12px;
                             }
                             & + .ms-item {
-                                padding-top: 8px;
+                                padding-top: 12px;
                             }
                             &:not(.active) {
                                 cursor: pointer;
@@ -84,6 +84,65 @@
                                         align-items: center;
                                         .ps-label {
                                             width: 200px;
+                                            color: #5f5c5c;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        &.bserv {
+                            .bd-card {
+                                .header-seg {
+                                    position: relative;
+                                    button.btn-sp-menu {
+                                        position: absolute;
+                                        right: 0;
+                                        top: 8px;
+                                    }
+                                }
+                                .middle-seg {
+                                    margin-top: 20px;
+                                    font-size: .875rem;
+                                    .sp-detail-sec{
+                                        height: 24px;
+                                        align-items: center;
+                                        .spdc-label {
+                                            width: 200px;
+                                            color: #5f5c5c;
+                                        }
+                                        .spdc-value {
+                                            &.value-status {
+                                                color: white;
+                                                padding: 2px 4px;
+                                                border-radius: 2px;
+                                                text-transform: uppercase;
+                                                background-color: silver;
+                                                &.success {
+                                                    background-color: green;
+                                                }
+                                                &.error {
+                                                    background-color: red;
+                                                }
+                                                &.warn {
+                                                    background-color: orange;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                .action-seg {
+                                    border-top: 1px solid #eaeaec;
+                                    padding-top: 20px;
+                                    font-size: .875rem;
+                                    .as-sec {
+                                        width: 50%;
+                                        padding-right: 20px;
+                                        .as-header {
+                                            color: #5f5c5c;
+                                            margin-bottom: 12px;
+                                        }
+                                        .as-value {
+                                            line-height: 20px;
                                         }
                                     }
                                 }

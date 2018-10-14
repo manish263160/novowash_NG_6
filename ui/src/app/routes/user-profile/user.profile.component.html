@@ -3,12 +3,7 @@
         <div class="user-profile-wrap" fxLayout="column">
             <div class="header-wrap" fxLayout="column">
                 <h4 class="my-profile-header">My Profile</h4>
-                <ng-container *ngIf="ropcService.user.email else noEmailTmpl">
-                    <div class="header-subtext txt-faded">{{ ropcService.user.email }}</div>
-                </ng-container>
-                <ng-template #noEmailTmpl>
-                    <div class="header-subtext txt-faded">&lt;user email id not available&gt;</div>
-                </ng-template>
+                <div class="header-subtext txt-faded">{{ userEmailString }}</div>
             </div>
             <div class="content-wrap">
                 <div class="content-inner-wrap" fxLayout="row">
@@ -32,6 +27,7 @@
                     </div>
                     <!-- right side -->
                     <div class="right-side" fxLayout="column">
+                        <!-- profile -->
                         <div class="rs-content-wrap profile" *ngIf="slide === 'profile'">
                             <form [formGroup]="userForm" novalidate>
                                 <div class="bd-card mat-elevation-z1" fxLayout="column">
@@ -61,7 +57,7 @@
                                         </div>
                                         <div class="profile-sec" fxLayout="row">
                                             <span class="ps-label">E-mail id</span>
-                                            <span class="ps-value" *ngIf="!isUserDetailEdit">{{ ropcService.user.email }}</span>
+                                            <span class="ps-value" *ngIf="!isUserDetailEdit">{{ userEmailString }}</span>
                                             <mat-form-field floatLabel="never" *ngIf="isUserDetailEdit">
                                                 <input type="email" matInput placeholder="Email" formControlName="email" novalidate>
                                                 <mat-error *ngIf="(userForm.controls['email'].errors | firstKey) ==='required' && userForm.controls['email'].touched">
@@ -91,6 +87,147 @@
                                     </div>
                                 </div>
                             </form>
+                        </div>
+                        <!-- booked services -->
+                        <div class="rs-content-wrap bserv" *ngIf="slide === 'booked-services'" fxLayout="column" fxLayoutGap="16px">
+                            <div class="bd-card mat-elevation-z1" fxLayout="column"
+                                *ngFor="let service of bookedServices; let bi = index">
+                                <div class="header-seg">
+                                    <h4 class="header">{{ service.serviceCatName }}</h4>
+                                    <button mat-icon-button color="accent" (onMenuOpen)="itMenuService.onMenuOpen(trigger);"
+                                        [matMenuTriggerFor]="serviceMoreMenu" #trigger="matMenuTrigger" class="btn-sp-menu">
+                                        <mat-icon>more_vert</mat-icon>
+                                    </button>
+                                    <mat-menu #serviceMoreMenu="matMenu" class="more-menu">
+                                        <button mat-menu-item (click)="onClickServiceChangeTime(bi, service)">
+                                                {{ service.bookingDate ? 'Change Date and Time' : 'Select Date and Time'}}
+                                        </button>
+                                        <button mat-menu-item (click)="onClickServiceChangeAddress(bi, service)">
+                                            Change Address
+                                        </button>
+                                    </mat-menu>
+                                    <p class="text">
+                                        {{ service.serviceName }}
+                                    </p>
+                                </div>
+                                <div class="middle-seg" fxLayout="column">
+                                    <div class="sp-detail-sec" fxLayout="row">
+                                        <span class="spdc-label">Main Packages</span>
+                                        <span class="spdc-value">{{ service.comboPackages | novoCurlBracketRemover }}</span>
+                                    </div>
+                                    <div class="sp-detail-sec" fxLayout="row">
+                                        <span class="spdc-label">Extra Packages</span>
+                                        <span class="spdc-value">{{ ((service.extraPackages && service.extraPackages.length) ? service.extraPackages : '') | novoCurlBracketRemover }}</span>
+                                    </div>
+                                    <div class="sp-detail-sec" fxLayout="row">
+                                        <span class="spdc-label">Total Amount</span>
+                                        <ng-container *ngIf="(service.couponApplied && service.couponDiscount > 0) else noCouponTmpl">
+                                            <span class="spdc-value">
+                                                Rs.&nbsp;
+                                                <span class="cut">{{ service.totalAmountOriginal | number }}</span>
+                                                &nbsp;{{ service.totalAmount | number }}
+                                            </span>
+                                        </ng-container>
+                                        <ng-template #noCouponTmpl>
+                                            <span class="spdc-value">Rs. {{ service.totalAmount | number }}</span>
+                                        </ng-template>
+                                    </div>
+                                    <div class="sp-detail-sec" fxLayout="row">
+                                        <span class="spdc-label">Status</span>
+                                        <ng-container [ngSwitch]="service.bookingStatus.toLowerCase()">
+                                            <span *ngSwitchCase="'completed'" class="spdc-value value-status success">Confirmed</span>
+                                            <span *ngSwitchCase="'failed'" class="spdc-value value-status error">Failed</span>
+                                            <span *ngSwitchDefault class="spdc-value value-status">{{ service.bookingStatus }}</span>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                                <div class="action-seg" fxLayout="row" fxLayoutGap="8px">
+                                    <div class="as-sec" fxLayout="column">
+                                        <span class="as-header">Service required at</span>
+                                        <span class="as-value">{{ service | novoUserAddress }}</span>
+                                    </div>
+                                    <div class="as-sec" fxLayout="column">
+                                        <span class="as-header">Service required on</span>
+                                        <span class="as-value">{{ service.bookingDate | date : 'fullDate' }}</span>
+                                        <span class="as-value">Between {{ service.bookingTime }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- booked packages -->
+                        <div class="rs-content-wrap bserv" *ngIf="slide === 'booked-packages'" fxLayout="column" fxLayoutGap="16px">
+                            <div class="bd-card mat-elevation-z1" fxLayout="column"
+                                *ngFor="let service of bookedPackages; let bi = index">
+                                <div class="header-seg">
+                                    <h4 class="header">{{ service.packageCatName }}</h4>
+                                    <button mat-icon-button color="accent" (onMenuOpen)="itMenuService.onMenuOpen(trigger);"
+                                        [matMenuTriggerFor]="serviceMoreMenu" #trigger="matMenuTrigger" class="btn-sp-menu">
+                                        <mat-icon>more_vert</mat-icon>
+                                    </button>
+                                    <mat-menu #serviceMoreMenu="matMenu" class="more-menu">
+                                        <button mat-menu-item (click)="onClickPackageChangeTime(bi, service)">
+                                            {{ service.lastBookingDate ? 'Change Date and Time' : 'Select Date and Time'}}
+                                        </button>
+                                        <button mat-menu-item (click)="onClickPackageChangeAddress(bi, service)">
+                                            Change Address
+                                        </button>
+                                    </mat-menu>
+                                    <p class="text">
+                                        {{ service.packageName }}
+                                    </p>
+                                </div>
+                                <div class="middle-seg" fxLayout="column">
+                                    <div class="sp-detail-sec" fxLayout="row">
+                                        <span class="spdc-label">Main Packages</span>
+                                        <span class="spdc-value">{{ service.comboPackages | novoCurlBracketRemover }}</span>
+                                    </div>
+                                    <div class="sp-detail-sec" fxLayout="row">
+                                        <span class="spdc-label">Extra Packages</span>
+                                        <span class="spdc-value">{{ ((service.extraPackages && service.extraPackages.length) ? service.extraPackages : '-') | novoCurlBracketRemover }}</span>
+                                    </div>
+                                    <div class="sp-detail-sec" fxLayout="row">
+                                        <span class="spdc-label">Total Amount</span>
+                                        <ng-container *ngIf="(service.couponApplied && service.couponDiscount > 0) else noCouponTmpl">
+                                            <span class="spdc-value">
+                                                Rs.&nbsp;
+                                                <span class="cut">{{ service.totalAmountOriginal | number }}</span>
+                                                &nbsp;{{ service.totalAmount | number }}
+                                            </span>
+                                        </ng-container>
+                                        <ng-template #noCouponTmpl>
+                                            <span class="spdc-value">Rs. {{ service.totalAmount | number }}</span>
+                                        </ng-template>
+                                    </div>
+                                    <div class="sp-detail-sec" fxLayout="row">
+                                        <span class="spdc-label">Expires On</span>
+                                        <span class="spdc-value">{{ service.expiredDate | date : 'medium' }}</span>
+                                    </div>
+                                    <div class="sp-detail-sec" fxLayout="row">
+                                        <span class="spdc-label">Status</span>
+                                        <ng-container [ngSwitch]="service.bookingStatus.toLowerCase()">
+                                            <span *ngSwitchCase="'completed'" class="spdc-value value-status success">Confirmed</span>
+                                            <span *ngSwitchCase="'failed'" class="spdc-value value-status error">Failed</span>
+                                            <span *ngSwitchDefault class="spdc-value value-status">{{ service.bookingStatus }}</span>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                                <div class="action-seg" fxLayout="row" fxLayoutGap="8px">
+                                    <div class="as-sec" fxLayout="column">
+                                        <span class="as-header">Package required at</span>
+                                        <span class="as-value">{{ service | novoUserAddress }}</span>
+                                    </div>
+                                    <div class="as-sec" fxLayout="column">
+                                        <span class="as-header">Package Date and Time</span>
+                                        <ng-container *ngIf="service.bookingDate else noDateTimeTmpl">
+                                            <span class="as-value">{{ service.lastBookingDate | date : 'fullDate' }}</span>
+                                            <span class="as-value">Between {{ service.lastBookingTime }}</span>
+                                        </ng-container>
+                                        <ng-template #noDateTimeTmpl>
+                                            <span class="as-value">&lt;date time not yet selected&gt;</span>
+                                        </ng-template>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
