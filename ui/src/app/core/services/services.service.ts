@@ -81,7 +81,7 @@ export class ServicesService {
     }
 
     public registerForHelp(payload) {
-        const url = 
+        const url =
             `${this.urlCommonPart}/permitall/insertPotentialUser?name=${payload.name}&email=&phone=${payload.number}`;
         return this.http
             .put(encodeURI(url), {})
@@ -116,7 +116,7 @@ export class ServicesService {
 
     public getCouponValidity(couponCode): Observable<any> {
         return this.http
-            .get(`${this.urlCommonPart}/payment/getCouponValidity/${couponCode}`)
+            .get(`${this.urlCommonPart}/permitall/promocodes/getCouponValidity/${couponCode}`)
             .pipe(map((res: any) => {
                 return res.data || {};
             }))
@@ -124,7 +124,7 @@ export class ServicesService {
                 debugger;
                 throw err;
             })
-            
+
     }
 
     public getService(id): Observable<Service> {
