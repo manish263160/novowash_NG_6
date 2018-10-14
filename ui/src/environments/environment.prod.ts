@@ -1,12 +1,13 @@
-declare const require: any;
+import { urlHosts } from "./urlHosts";
+// declare const require: any;
 export const environment = {
   auth: {
     clientId: "novo-client",
     clientSecret: "novo-secret",
     grantType: "password",
-    tokenUrl: "http://13.59.141.30:8080/NovoWash/oauth/token",
-    otpUrl: "http://13.59.141.30:8080/NovoWash/login/generateOtp",
+    tokenUrl: `${urlHosts.main}/${urlHosts.appName}/oauth/token`,
+    otpUrl: `${urlHosts.main}/${urlHosts.appName}/login/generateOtp`,
   },
   production: true,
-  version: require("../../package.json").version,
+  urlHosts: urlHosts,
 };

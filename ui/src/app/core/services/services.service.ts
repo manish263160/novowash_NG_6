@@ -6,16 +6,19 @@ import { map } from 'rxjs/operators';
 import 'rxjs/add/operator/catch';
 import { Service } from "../../model/service";
 import { Payment } from "../../model/payment";
+import { environment } from "../../../environments/environment";
 
 @Injectable()
 export class ServicesService {
+    public urlCommonPart = `${environment.urlHosts.main}/${environment.urlHosts.appName}`;
+    public urlCommonPartSec = `${environment.urlHosts.secondary}/${environment.urlHosts.appName}`;
     constructor(private http: HttpClient) {
     }
 
     public getServices(): Observable<any> {
         return this.http
-            // .post("http://54.245.176.18:8080/NovoWash/services/get/category", {})
-            .get("http://13.59.141.30:8080/NovoWash/services/get/category")
+            // .post(`${this.urlCommonPartSec}/services/get/category`, {})
+            .get(`${this.urlCommonPart}/services/get/category`)
             .pipe(map((res: any) => {
                 return res.data || [];
             }));
@@ -23,7 +26,7 @@ export class ServicesService {
 
     public getSubServices(serviceId): Observable<any> {
         return this.http
-            .post(`http://54.245.176.18:8080/NovoWash/services/get/${serviceId}`, {})
+            .post(`${this.urlCommonPartSec}/services/get/${serviceId}`, {})
             .pipe(map((res: any) => {
                 return res.data || [];
             }));
@@ -31,7 +34,7 @@ export class ServicesService {
 
     public getAllSubServices(): Observable<any> {
         return this.http
-            .get(`http://13.59.141.30:8080/NovoWash/services/getAllServices`)
+            .get(`${this.urlCommonPart}/services/getAllServices`)
             .pipe(map((res: any) => {
                 return res.data || [];
             }));
@@ -39,7 +42,7 @@ export class ServicesService {
 
     public getCostByServiceID(serviceId): Observable<any> {
         return this.http
-            .get(`http://13.59.141.30:8080/NovoWash/services/get/cost/${serviceId}`)
+            .get(`${this.urlCommonPart}/services/get/cost/${serviceId}`)
             .pipe(map((res: any) => {
                 return res.data || [];
             }));
@@ -47,7 +50,7 @@ export class ServicesService {
 
     public getDateTimeSlots(serviceId): Observable<any> {
         return this.http
-            .get(`http://13.59.141.30:8080/NovoWash/services/get/serviceDateTime/${serviceId}`)
+            .get(`${this.urlCommonPart}/services/get/serviceDateTime/${serviceId}`)
             .pipe(map((res: any) => {
                 return res.data || {};
             }));
@@ -55,7 +58,7 @@ export class ServicesService {
 
     public sendPaymentStatus(payload) {
         return this.http
-            .post("http://13.59.141.30:8080/NovoWash/payment/details", payload)
+            .post(`${this.urlCommonPart}/payment/details`, payload)
             .pipe(map((res: any) => {
                 return res.data || {};
             }));
@@ -63,7 +66,7 @@ export class ServicesService {
 
     public getPaymentUrl(payload) {
         return this.http
-            .post("http://13.59.141.30:8080/NovoWash/payment/paymentRequest", payload)
+            .post(`${this.urlCommonPart}/payment/paymentRequest`, payload)
             .pipe(map((res: any) => {
                 return res.data || {};
             }));
@@ -71,7 +74,7 @@ export class ServicesService {
 
     public getPackagePaymentUrl(payload) {
         return this.http
-            .post("http://13.59.141.30:8080/NovoWash/payment/paymentRequestPackage", payload)
+            .post(`${this.urlCommonPart}/payment/paymentRequestPackage`, payload)
             .pipe(map((res: any) => {
                 return res.data || {};
             }));
@@ -79,7 +82,7 @@ export class ServicesService {
 
     public registerForHelp(payload) {
         const url = 
-            `http://13.59.141.30:8080/NovoWash/permitall/insertPotentialUser?name=${payload.name}&email=&phone=${payload.number}`;
+            `${this.urlCommonPart}/permitall/insertPotentialUser?name=${payload.name}&email=&phone=${payload.number}`;
         return this.http
             .put(encodeURI(url), {})
             .pipe(map((res: any) => {
@@ -89,7 +92,7 @@ export class ServicesService {
 
     public getPackages(): Observable<any> {
         return this.http
-            .get(`http://13.59.141.30:8080/NovoWash/permitall/packages/category`)
+            .get(`${this.urlCommonPart}/permitall/packages/category`)
             .pipe(map((res: any) => {
                 return res.data || {};
             }));
@@ -97,7 +100,7 @@ export class ServicesService {
 
     public getPackageItems(packageId): Observable<any> {
         return this.http
-            .get(`http://13.59.141.30:8080/NovoWash/permitall/packages/getpackages/${packageId}`)
+            .get(`${this.urlCommonPart}/permitall/packages/getpackages/${packageId}`)
             .pipe(map((res: any) => {
                 return res.data || {};
             }));
@@ -105,7 +108,7 @@ export class ServicesService {
 
     public getPackageCost(packageId): Observable<any> {
         return this.http
-            .get(`http://13.59.141.30:8080/NovoWash/permitall/packages/getpackagecost/${packageId}`)
+            .get(`${this.urlCommonPart}/permitall/packages/getpackagecost/${packageId}`)
             .pipe(map((res: any) => {
                 return res.data || {};
             }));
@@ -113,7 +116,7 @@ export class ServicesService {
 
     public getCouponValidity(couponCode): Observable<any> {
         return this.http
-            .get(`http://13.59.141.30:8080/NovoWash/payment/getCouponValidity/${couponCode}`)
+            .get(`${this.urlCommonPart}/payment/getCouponValidity/${couponCode}`)
             .pipe(map((res: any) => {
                 return res.data || {};
             }))

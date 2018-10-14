@@ -28,9 +28,9 @@
         </button>
     </mat-toolbar>
     <mat-menu #userMenu="matMenu" class="custom-menu menu-user" [overlapTrigger]="false">
-            <button mat-menu-item (click)="gotoBookings()">
-                <mat-icon>history</mat-icon>
-                <span>My Bookings</span>
+            <button mat-menu-item (click)="goToMyProfile()">
+                <mat-icon>account_circle</mat-icon>
+                <span>My Profile</span>
             </button>
         <button mat-menu-item (click)="logout()">
             <mat-icon>power_settings_new</mat-icon>

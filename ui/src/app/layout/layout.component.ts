@@ -202,8 +202,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
         return fullName;
     }
 
-    public gotoBookings() {
-        this.router.navigate(["/app/mybookings"]);
+    public goToMyProfile() {
+        this.router.navigate(["/app/myprofile"]);
     }
 
     public logout() {

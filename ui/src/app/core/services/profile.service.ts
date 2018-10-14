@@ -4,11 +4,14 @@ import { Observable } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { map } from 'rxjs/operators';
 import { ROPCService } from "../../auth/ropc.service";
+import { environment } from "../../../environments/environment";
 
 @Injectable()
 export class ProfileService {
     public user: any;
     public token: any;
+    public urlCommonPart = `${environment.urlHosts.main}/${environment.urlHosts.appName}`;
+
     constructor(
         public ropcService: ROPCService,
         private http: HttpClient
@@ -27,7 +30,7 @@ export class ProfileService {
             .set("Authorization", `Bearer ${this.token}`);
         return this.http
             .put(
-                `http://13.59.141.30:8080/NovoWash/userprofile/updateUserDetails/${userId} `,
+                `${this.urlCommonPart}/userprofile/updateUserDetails/${userId}`,
                 { name: username, email: email },
                 { headers: impHeaders }
             )
@@ -42,7 +45,7 @@ export class ProfileService {
             .set("Authorization", `Bearer ${this.token}`);
         return this.http
             .put(
-                `http://13.59.141.30:8080/NovoWash/userprofile/updateServiceAddress/${type}`,
+                `${this.urlCommonPart}/userprofile/updateServiceAddress/${type}`,
                 payload,
                 { headers: impHeaders }
             ).pipe(map((res: any) => {
@@ -56,7 +59,7 @@ export class ProfileService {
             .set("Authorization", `Bearer ${this.token}`);
         return this.http
             .put(
-                `http://13.59.141.30:8080/NovoWash/userprofile/updateServiceDate/${type}`,
+                `${this.urlCommonPart}/userprofile/updateServiceDate/${type}`,
                 payload,
                 { headers: impHeaders }
             ).pipe(map((res: any) => {
@@ -70,7 +73,7 @@ export class ProfileService {
             .set("Authorization", `Bearer ${this.token}`);
         return this.http
             .post(
-                `http://13.59.141.30:8080/NovoWash/userprofile/insertPackageDateSlot/${payload.id}`,
+                `${this.urlCommonPart}/userprofile/insertPackageDateSlot/${payload.id}`,
                 payload,
                 { headers: impHeaders }
             ).pipe(map((res: any) => {
@@ -87,7 +90,7 @@ export class ProfileService {
         impHeaders = impHeaders.set("Content-Type", "application/json")
             .set("Authorization", `Bearer ${this.token}`);
         return this.http
-            .get(`http://13.59.141.30:8080/NovoWash/userprofile/getPreviousBookingService/service/${userId}`, {headers: impHeaders})
+            .get(`${this.urlCommonPart}/userprofile/getPreviousBookingService/service/${userId}`, {headers: impHeaders})
             .pipe(map((res: any) => {
                 return res || [];
             }));
@@ -101,7 +104,7 @@ export class ProfileService {
         impHeaders = impHeaders.set("Content-Type", "application/json")
             .set("Authorization", `Bearer ${this.token}`);
         return this.http
-            .get(`http://13.59.141.30:8080/NovoWash/userprofile/getPreviousBookingService/package/${userId}`, {headers: impHeaders})
+            .get(`${this.urlCommonPart}/userprofile/getPreviousBookingService/package/${userId}`, {headers: impHeaders})
             .pipe(map((res: any) => {
                 return res || [];
             }));

@@ -3314,43 +3314,18 @@ mat-dialog-container.mat-dialog-container {
   }
 }
 
-
-// .mat-form-field {
-//   .mat-form-field-wrapper {
-//     .mat-form-field-flex {
-//       .mat-form-field-infix {
-//         .mat-input-element{
-//           height: 56px;
-//           background-color: #fff;
-//           box-shadow: 0 1px 2px 0 rgba(0,0,0,.12);
-//           border: 1px solid #d4d4d4;
-//           border-radius: 4px;
-//           max-width: 98%;
-//           padding: 0 8px;
-//           box-sizing: border-box;
-//         }
-//         .mat-form-field-label-wrapper {
-//           top: 0.3rem;
-//           .mat-form-field-label {
-
-//           }
-//         }
-//       }
-//     }
-//   }
-//   &.mat-form-field-should-float {
-//     .mat-form-field-wrapper {
-//       .mat-form-field-flex {
-//         .mat-form-field-infix {
-//           .mat-form-field-label-wrapper {
-//             .mat-form-field-label {
-//               -webkit-transform: translateY(-1em) scale(0.75) perspective(100px) translateZ(0.001px);
-//               transform: translateY(-1em) scale(0.75) perspective(100px) translateZ(0.001px);
-//               -ms-transform: translateY(-1em) scale(0.75);
-//             }
-//           }
-//         }
-//       }
-//     }
-//   }
-// }
+.card-no-items {
+  align-items: center;
+  color: #bdbdbd;
+  height: 280px;
+  justify-content: center;
+  .mat-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 24px;
+  }
+  p {
+    margin: 4px;
+  }
+}

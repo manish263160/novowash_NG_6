@@ -1,18 +1,18 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
-
-declare const require: any;
+import { urlHosts } from "./urlHosts";
+// declare const require: any;
 export const environment = {
   auth: {
     clientId: "novo-client",
     clientSecret: "novo-secret",
     grantType: "password",
-    tokenUrl: "http://13.59.141.30:8080/NovoWash/oauth/token",
-    otpUrl: "http://13.59.141.30:8080/NovoWash/login/generateOtp",
+    tokenUrl: `${urlHosts.main}/${urlHosts.appName}/oauth/token`,
+    otpUrl: `${urlHosts.main}/${urlHosts.appName}/login/generateOtp`,
   },
   production: false,
-  version: require("../../package.json").version,
+  urlHosts: urlHosts,
 };
 
 /*
