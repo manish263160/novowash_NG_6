@@ -164,6 +164,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     public onClickServiceChangeTime(index, service) {
         this.dialogRef = this.dialog.open(DateSelectDialogComponent, this.config);
         this.dialogRef.componentInstance.selectedServiceId = service.id;
+        this.dialogRef.componentInstance.type = "service";
 
         this.dialogRef.componentInstance.onDateSelectionCancelled.subscribe(() => {
             console.log("onDateSelectionCancelled()");
@@ -209,6 +210,8 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     public onClickPackageChangeTime(index, pack) {
         this.dialogRef = this.dialog.open(DateSelectDialogComponent, this.config);
         this.dialogRef.componentInstance.selectedServiceId = pack.id;
+        this.dialogRef.componentInstance.selectedPackExpiry = pack.expiredDate;
+        this.dialogRef.componentInstance.type = "package";
 
         this.dialogRef.componentInstance.onDateSelectionCancelled.subscribe(() => {
             console.log("onDateSelectionCancelled()");

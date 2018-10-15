@@ -220,10 +220,10 @@
                                             <span class="as-value">{{ service | novoUserAddress }}</span>
                                         </div>
                                         <div class="as-sec" fxLayout="column">
-                                            <span class="as-header">Package Date and Time</span>
-                                            <ng-container *ngIf="service.bookingDate else noDateTimeTmpl">
+                                            <span class="as-header">Package required on</span>
+                                            <ng-container *ngIf="service.lastBookingDate else noDateTimeTmpl">
                                                 <span class="as-value">{{ service.lastBookingDate | date : 'fullDate' }}</span>
-                                                <span class="as-value">Between {{ service.lastBookingTime }}</span>
+                                                <!-- <span class="as-value">Between {{ service.lastBookingTime }}</span> -->
                                             </ng-container>
                                             <ng-template #noDateTimeTmpl>
                                                 <span class="as-value">&lt;date time not yet selected&gt;</span>

@@ -4,6 +4,7 @@ import * as moment from "moment";
 import { Observable, Subscription, Subscriber } from "rxjs";
 import { ValidatorService } from "../../../common/services/validator.service";
 import { ServicesService } from "../../../core/services/services.service";
+import { every } from "rxjs/operators";
 
 @Component({
     encapsulation: ViewEncapsulation.None,
@@ -14,9 +15,13 @@ import { ServicesService } from "../../../core/services/services.service";
 })
 export class DateSelectDialogComponent implements OnDestroy, OnInit {
     @Input() selectedServiceId: any;
+    @Input() selectedPackExpiry: any;
+    @Input() type: string;
     @Output() public onDateSelectionCancelled: EventEmitter<any> = new EventEmitter();
     @Output() public onDateSelected: EventEmitter<any> = new EventEmitter();
     public allSubscriptions: Subscription;
+    public calendarData: any;
+    public pDateStr: string;
     public dateTimeSlots: any;
     public selectedDateIndex: number = -1;
     public selectedTimeIndex: number = -1
@@ -27,13 +32,26 @@ export class DateSelectDialogComponent implements OnDestroy, OnInit {
     ) {}
 
     ngOnInit() {
-        this.loadTimeSlots();
+        if (!this.type || !this.type.length) {
+            this.type = "service";
+        }
+        if (this.type === "service") {
+            this.loadTimeSlots();
+        } else if (this.type === "package") {
+            this.loadCalendarData();
+        }
     }
 
     ngOnDestroy() {
         if (this.allSubscriptions) {
             this.allSubscriptions.unsubscribe();
         }
+    }
+
+    public loadCalendarData() {
+        this.calendarData = {};
+        this.calendarData.maxDate = new Date(this.selectedPackExpiry);
+        this.calendarData.minDate = new Date();
     }
 
     public loadTimeSlots() {
@@ -65,13 +83,28 @@ export class DateSelectDialogComponent implements OnDestroy, OnInit {
         this.selectedDateIndex =  0;
     }
 
+    public onPDateChange(event) {
+        try {
+            if (event) {
+                this.pDateStr = moment(event.value.toISOString()).format("YYYY-MM-DD");
+            }
+        } catch (e) {}
+    }
+
     public submiDate() {
-        let selectedDate = this.dateTimeSlots[this.selectedDateIndex];
-        let timeSlot = selectedDate.timeSlots[this.selectedTimeIndex];
         const dateDetails = {
-            date: selectedDate ? selectedDate.date : null,
-            time: timeSlot ? timeSlot.name : null,
-        };
+            date: null,
+            time: null,
+        }
+        if (this.type === "service") {
+            let selectedDate = this.dateTimeSlots[this.selectedDateIndex];
+            let timeSlot = selectedDate.timeSlots[this.selectedTimeIndex];
+            dateDetails.date = selectedDate ? selectedDate.date : null;
+            dateDetails.time = timeSlot ? timeSlot.name : null;
+        } else if (this.type === "package") {
+            dateDetails.date = this.pDateStr;
+            dateDetails.time = "";
+        }
         this.onDateSelected.emit(dateDetails);
     }
 
