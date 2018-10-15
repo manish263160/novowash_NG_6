@@ -23,7 +23,7 @@
             </div>
         </div>
     </div>
-    <div class="carousel-wrap service-hlist-wrap">
+    <div class="carousel-wrap1 service-hlist-wrap">
         <ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideHListConfig" (afterChange)="afterChange($event)">
             <div ngxSlickItem *ngFor="let item of serviceItems" class="slide" (click)="openServiceBookDlg(item.id, item.catName)">
                 <div fxLayout="column" class="service-hlist-item" fxLayoutAlign="center center" width="100%">

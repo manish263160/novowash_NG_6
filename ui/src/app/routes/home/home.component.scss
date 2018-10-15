@@ -1,4 +1,4 @@
-.carousel-wrap {
+.carousel-wrap1 {
     max-width: 90%;
     margin: 0 auto;
     padding-bottom: 32px;
@@ -13,7 +13,7 @@
         max-width: 100%;
         width: 100%;
         padding-bottom: 0;
-        background-color: #f4f4f4;
+        background-color: rgba(77, 77, 77, 0.5);
         height: 130px;
         .slick-slider {
             max-width: 96%;
@@ -26,26 +26,51 @@
                     .slick-slide {
                         height: 100%;
                         .service-hlist-item {
-                            opacity: 0.6;
-                            height: 100%;
-                            cursor: pointer;
+                          height: 90px!important;
+                          width: 90px!important;
+                          padding: 4px 0;
+                          border-radius: 4.8px!important;
+                          background-color: #fff!important;
+                          -webkit-box-shadow: 0 2px 5px 0 rgba(193,193,193,.5)!important;
+                          box-shadow: 0 2px 5px 0 rgba(193,193,193,.5)!important;
+                          -webkit-transition: .2s ease-out!important;
+                          transition: .2s ease-out!important;
                             &:hover {
                                 opacity: 1;
+                                transform: scale(1.05);
                             }
                             .service-icon {
-                                width: 52px;
-                                height: 52px;
-                                background-size: contain;
-                                background-repeat: no-repeat;
-                                background-position: center center;
-                                margin-bottom: 8px;
+                              width: 52px;
+                              height: 52px;
+                              background-size: contain;
+                              background-repeat: no-repeat;
+                              background-position: center center;
+                              margin-bottom: 8px;
+                              box-sizing: border-box;
+                              flex: 1 1 100%;
+                              -webkit-box-flex: 1;
+                              margin-bottom: 7px;
+                              display: flex;
+                              flex-direction: column;
+                              -webkit-box-orient: vertical;
+                              -webkit-box-direction: normal;
+                              place-content: center flex-end;
+                              align-items: center;
+                              -webkit-box-pack: end;
+                              -webkit-box-align: center;
+                              max-height: 60%;
                             }
                             .service-name {
-                                color: #000;
-                                font-weight: 400;
-                                line-height: normal;
-                                font-size: 14px;
-                                text-align: center;
+                              font-size: 10px;
+                              font-weight: 400;
+                              font-style: normal;
+                              font-stretch: normal;
+                              line-height: 1.2;
+                              letter-spacing: 1.2px;
+                              text-align: center;
+                              text-transform: uppercase;
+                              white-space: initial;
+                              width: 80px;
                             }
                         }
                     }
