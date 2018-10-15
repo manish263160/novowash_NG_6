@@ -1,13 +1,14 @@
+import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation } from "@angular/core";
-import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { MatSnackBar } from "@angular/material";
-import { ValidatorService } from "../common/services/validator.service";
 import { AuthConfig, OAuthService } from "angular-oauth2-oidc";
-import { ROPCService } from "../auth/ropc.service";
-import { UserService } from "../core/services/user.service";
-import { Observable, Subscription } from "rxjs";
+import { Subscription } from "rxjs";
 import { environment } from "../../environments/environment";
-import { map } from 'rxjs/operators';
+import { ROPCService } from "../auth/ropc.service";
+import { ValidatorService } from "../common/services/validator.service";
+import { UserService } from "../core/services/user.service";
 import { User } from "../model/user";
 
 @Component({
@@ -36,7 +37,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         tokenEndpoint: environment.auth.tokenUrl,
         clientId: environment.auth.clientId,
         scope: "openid profile email voucher",
-        dummyClientSecret: "secret",      
+        dummyClientSecret: "secret",
         postLogoutRedirectUri: this.baseUrl + "app/home",
         redirectUri: this.baseUrl + "app/home",
         requireHttps: false,
@@ -89,7 +90,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.isExistingUser = false;
         this.isNewUser = true;
     }
-    
+
     public proceedWithLogin() {
         this.loginForm.addControl("otp", new FormControl("", Validators.compose([Validators.required, Validators.minLength(6), , Validators.maxLength(6)])));
         this.isExistingUser = true;
@@ -113,7 +114,12 @@ export class LoginComponent implements OnInit, OnDestroy {
     public onClickLogin() {
         this.oauthService.configure(this.authConfigPassword);
         const loginSub = this.ropcService.login(this.loginForm.controls.number.value, this.loginForm.controls.otp.value)
-            .subscribe((res) => {
+        .catch((error : HttpErrorResponse) =>{
+          if(error.status === 400 || error.status === 300)
+          this.openSnackBar("Invalid OTP! Please try again", "error");
+          return ErrorObservable.create(error.error);
+        })
+         .subscribe((res) => {
                 this.onLoginSuccessful.emit(res)
             });
     }
@@ -132,7 +138,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     public ngOnDestroy() {
-        if (this.allSubscriptions) {            
+        if (this.allSubscriptions) {
             this.allSubscriptions.unsubscribe();
         }
     }
