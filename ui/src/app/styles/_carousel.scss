@@ -54,6 +54,9 @@
                     &.with-bg {
                         background-color: aliceblue;
                     }
+                    &.with-bg-r {
+                        background-color: rgba(0, 139, 139, .2);
+                    }
                     .slide-item {
                         width: 100%;
                         justify-content: center;

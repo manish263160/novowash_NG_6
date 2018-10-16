@@ -90,6 +90,22 @@ export class ServicesService {
             }));
     }
 
+    public getSearchResult(searchText: string): Observable<any> {
+        return this.http
+            .get(`${this.urlCommonPart}/permitall/search/getSearch/${searchText}`)
+            .pipe(map((res: any) => {
+                return res || {};
+            }));
+    }
+
+    public getRecomendedServices(): Observable<any> {
+        return this.http
+            .get(`${this.urlCommonPart}/services/getRecomendedService`)
+            .pipe(map((res: any) => {
+                return res.data || {};
+            }));
+    }
+
     public getPackages(): Observable<any> {
         return this.http
             .get(`${this.urlCommonPart}/permitall/packages/category`)

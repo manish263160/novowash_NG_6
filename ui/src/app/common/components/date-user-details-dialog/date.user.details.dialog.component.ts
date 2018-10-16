@@ -197,7 +197,7 @@ export class DateUserDetailsDialogComponent implements OnDestroy, OnInit {
         const config = new MatDialogConfig();
         config.width = "75%";
         config.disableClose = true;
-        config.panelClass = "dialog-panel-login";
+        config.panelClass = "dialog-panel-booking";
         config.position = {
             bottom: "",
             left: "",

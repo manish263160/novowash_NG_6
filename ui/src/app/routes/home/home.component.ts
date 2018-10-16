@@ -1,7 +1,9 @@
 import { Component, HostListener, OnDestroy, OnInit, ViewEncapsulation } from "@angular/core";
+import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material";
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { Observable, Subscription } from "rxjs";
+import { map, startWith } from 'rxjs/operators';
 import { ROPCService } from "../../../app/auth/ropc.service";
 import { CommonService } from "../../common/services/common.service";
 import { BookingDialogComponent } from "../../common/components/booking-dialog/booking.dialog.component";
@@ -33,6 +35,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     ];
     public serviceItems = [];
     public packageItems = [];
+    public recommendedServiceItems = [];
     public cities = [
         {value: 'ncr-0', viewValue: 'Delhi-NCR'},
         {value: 'mumbai-1', viewValue: 'Mumbai'},
@@ -40,6 +43,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     ];
     public slideConfig: any = {"slidesToShow": 4, "slidesToScroll": 1, dots: true};
     public slideHListConfig: any = {"slidesToShow": 8, "slidesToScroll": 1};
+
+    public searchControl = new FormControl();
+    public searchResult = [];
+    public filteredOptions = [];
+
     private selectedServices: any;
     private dateUserDetails: any;
     private headerEl: any;
@@ -53,6 +61,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     private paymentUrlResponse: any;
     private pSub: any;
     private packageSub: any;
+    private recommendedServicesSub: any;
+    private searchSub: any;
 
     constructor(
         public commonService: CommonService,
@@ -136,6 +146,10 @@ export class HomeComponent implements OnInit, OnDestroy {
             .subscribe((val) => {
                 this.packageItems = val;
             })
+        this.recommendedServicesSub = this.servicesService.getRecomendedServices()
+            .subscribe((val) => {
+                this.recommendedServiceItems = val;
+            })
     }
 
     public ngOnDestroy() {
@@ -146,6 +160,9 @@ export class HomeComponent implements OnInit, OnDestroy {
         if (this.packageSub) {
             this.packageSub.unsubscribe();
         }
+        if (this.searchSub) {
+            this.searchSub.unsubscribe();
+        }
         const cWrapEl = document.getElementsByClassName("content-wrapper")[0];
         if (cWrapEl) {
             cWrapEl.classList.remove("no-padding");
@@ -154,8 +171,61 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.headerEl.classList.remove("mh-tp");
     }
 
+    public getSearchResult(searchText) {
+        const filterValue = searchText.toLowerCase();
+        if (filterValue && filterValue.length > 2) {
+            this.searchSub = this.servicesService.getSearchResult(filterValue)
+                .subscribe((val) => {
+                    this.filteredOptions = val;
+                })
+        }
+    }
+
+    public onSearchItemClicked(event) {
+        this.openRecommendedServiceBookDlg(event.option.value);
+    }
+
+    public displayWithSearch() {
+        return "";
+    }
+
+    private filterSearch(value: string) {
+        const filterValue = value.toLowerCase();
+        if (filterValue && filterValue.length > 2) {
+            this.searchSub = this.servicesService.getSearchResult(filterValue)
+                .subscribe((val) => {
+                    this.filteredOptions = val;
+                })
+        }
+    
+        // return this.options.filter(option => option.toLowerCase().includes(filterValue));
+    }
+
     public getBackground(image) {
         return this._sanitizer.bypassSecurityTrustStyle(`url(${image})`);
+    }
+
+    public openRecommendedServiceBookDlg(selectedSubService) {
+        let mainService: any = this.serviceItems.filter ((mainService) => mainService.id === selectedSubService.serviceCatId);
+        mainService = (mainService && mainService.length) ? mainService[0] : null;
+        if (mainService) {
+            this.dialogRef = this.dialog.open(BookingDialogComponent, this.config);
+            this.dialogRef.componentInstance.serviceItems = this.serviceItems;
+            this.dialogRef.componentInstance.selectedServiceId = mainService.id;
+            this.dialogRef.componentInstance.selectedServiceName = mainService.catName;
+            this.dialogRef.componentInstance.isForRecommended = true;
+            this.dialogRef.componentInstance.selectedSubService = selectedSubService;
+            this.dialogRef.componentInstance.onBookingCancelled.subscribe(() => {
+                console.log("onBookingCancelled()");
+                this.dialogRef.close();
+            });
+            this.dialogRef.componentInstance.onServiceSelected.subscribe((selectedServices) => {
+                console.log("onServiceSelected()");
+                this.selectedServices = selectedServices;
+                this.dialogRef.close();
+                this.openServiceDateTimeDlg();
+            });
+        }
     }
 
     public openPackageBookDlg(packageId: number = 0, packageName: string = "") {

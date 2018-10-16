@@ -219,7 +219,7 @@
     <div mat-dialog-actions *ngIf="slide > 1">
         <ng-container *ngIf="slide === 2">
             <span fxFlex></span>
-            <button mat-raised-button class="btn-p-back"
+            <button mat-raised-button class="btn-p-back" *ngIf="!isForRecommended"
                 (click)="slide=1">
                 Back
             </button>

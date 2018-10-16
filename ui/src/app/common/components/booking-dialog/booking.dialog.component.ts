@@ -18,6 +18,8 @@ export class BookingDialogComponent implements OnDestroy, OnInit {
     @Input() public serviceItems = [];
     @Input() public selectedServiceId: number;
     @Input() public selectedServiceName: string;
+    @Input() public selectedSubService: any;
+    @Input() public isForRecommended: boolean = false;
     @Output() public onBookingCancelled: EventEmitter<any> = new EventEmitter();
     @Output() public onServiceSelected: EventEmitter<any> = new EventEmitter();
     public highlightedSubServiceId: number;
@@ -68,15 +70,21 @@ export class BookingDialogComponent implements OnDestroy, OnInit {
                 this.allSubscriptions = serviceSub;
             }
         }
-        const subServiceSub = this.servicesService.getAllSubServices()
-            .subscribe((val) => {
-                this.allSubServices = val;
-                this.loadSubServices();
-            });
-        if (this.allSubscriptions) {
-            this.allSubscriptions.add(subServiceSub);
+        if (this.isForRecommended) {
+            this.allSubServices = [this.selectedSubService];
+            this.loadSubServices();
+            this.onClickSubServiceGetDesc(this.selectedSubService.id);
         } else {
-            this.allSubscriptions = subServiceSub;
+            const subServiceSub = this.servicesService.getAllSubServices()
+                .subscribe((val) => {
+                    this.allSubServices = val;
+                    this.loadSubServices();
+                });
+            if (this.allSubscriptions) {
+                this.allSubscriptions.add(subServiceSub);
+            } else {
+                this.allSubscriptions = subServiceSub;
+            }
         }
     }
 

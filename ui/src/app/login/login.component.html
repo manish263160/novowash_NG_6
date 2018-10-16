@@ -1,7 +1,7 @@
 <div class="containerX">
-    <div fxLayout="row" class="dialog-header" [ngClass]="{'no-padding-left': isForBooking}">
+    <div fxLayout="row" class="dialog-header">
         <ng-container *ngIf="isForBooking else normalTmpl">
-            <button mat-icon-button class="close-sidenav-flat"class="close-sidenav" (click)="closeDialog()">
+            <button mat-icon-button (click)="closeDialog()">
                 <mat-icon>arrow_back</mat-icon>
             </button>
             <div fxFlex="flex">
@@ -72,7 +72,7 @@
                         Please enter valid email id
                     </mat-error>
                 </mat-form-field>
-                <span class="spacer"></span>
+                <span class="spacer" style="height: 24px;"></span>
                 <button mat-raised-button color="primary" (click)="onClickGetOTP()"
                     *ngIf="!isExistingUser && !isNewUser" [disabled]="loginForm.invalid">
                     Login/Signup
