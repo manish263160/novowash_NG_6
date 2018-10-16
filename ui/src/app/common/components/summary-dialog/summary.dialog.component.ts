@@ -52,11 +52,13 @@ export class SummaryDialogComponent implements OnInit {
         couponCode = couponCode ? couponCode.trim() : "";
         if (!couponCode || !couponCode.length) {
             this.noCouponEntered = true;
+            this.noValidCouponCode = false;
             return;
         }
         this.packageSub = this.servicesService.getCouponValidity(couponCode)
                 .catch((err) => {
                     this.noValidCouponCode = true;
+                    this.noCouponEntered = false;
                     return null;
                 })
                 .subscribe((val) => {
@@ -67,6 +69,7 @@ export class SummaryDialogComponent implements OnInit {
                     this.selectedServices.couponDiscount = this.couponDiscount;
                     this.selectedServices.totalAmountOriginal = this.selectedServices.totalAmount;
                     this.selectedServices.totalAmount = this.selectedServices.totalAmountOriginal - this.couponDiscount;
+                    this.noCouponEntered =  this.noValidCouponCode= false;
                     return;
                 });
     }
