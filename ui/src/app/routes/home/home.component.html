@@ -12,54 +12,13 @@
                     <mat-autocomplete #auto="matAutocomplete" [class]="'ac-search'"
                         (optionSelected)="onSearchItemClicked($event);" [displayWith]="displayWithSearch">
                     <mat-option *ngFor="let option of filteredOptions" [value]="option">
-                        <div fxLayout="row" fxLayoutGap="10px" class="option-main">
+                        <div fxLayout="row" fxLayoutGap="10px" class="option-search">
                             <span class="service-icon" [style.backgroundImage]="getBackground(option.imageUrl)"></span>
                             <span class="option-title">{{ option.serviceName }}</span>
                         </div>
                     </mat-option>
                     </mat-autocomplete>
                 </mat-form-field>
-                <!-- <form>
-                </form> -->
-                <!-- <mat-form-field class="select-loc" floatLabel="never">
-                    <mat-select placeholder="Select city">
-                        <mat-option *ngFor="let city of cities" [value]="city.value">
-                            {{city.viewValue}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field> -->
-                <!-- <mat-form-field floatLabel="never" class="search-text">
-                    <input type="text" matInput placeholder="Search for a service"
-                         #txtSearch autocomplete="off" (keyup)="getSearchResult(txtSearch.value)">
-                    <mat-icon matSuffix>keyboard_arrow_down</mat-icon>
-                </mat-form-field>
-                <div class="option-container" *ngIf="txtSearch.value && txtSearch.value.length > 2">
-                    <ul class="option-list">
-                        <ng-container *ngIf="noItems else showListTempl">
-                            <li>
-                                <div fxLayout="column" class="option-wrap">
-                                    <div fxLayout="row" fxLayoutGap="10px" class="option-main">
-                                        <span class="option-title">No items found. Try entering a different text.</span>
-                                    </div>
-                                </div>
-                            </li>
-                        </ng-container>
-                        <ng-template #showListTempl>
-                            <li *ngFor="let item of searchItems" (click)="onItemClick(item)">
-                                <div fxLayout="column" class="option-wrap">
-                                    <div fxLayout="row" fxLayoutGap="10px" class="option-main">
-                                        <span class="service-icon" [style.backgroundImage]="getBackground(item.imageUrl)"></span>
-                                        <span class="option-title">{{ item.serviceName }}</span>
-                                    </div>
-                                </div>
-                            </li>
-                        </ng-template>
-                    </ul>
-                </div> -->
-                <!-- <button mat-raised-button class="btn-search-serv">
-                    <mat-icon>search</mat-icon>
-                    <span>Search</span>
-                </button> -->
             </div>
         </div>
     </div>
