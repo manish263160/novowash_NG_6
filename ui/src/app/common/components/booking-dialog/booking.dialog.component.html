@@ -32,7 +32,7 @@
                 </ng-container>
                 <ng-template #nrmlTmpl1>
                     <div cdkFocusRegionstart class="bd-service-list" fxLayout="column" fxLayoutGap="20px"
-                        [ngClass]="{'li-mh-60': serviceItems?.length > 8, 'li-mh-40': commonService.getViewPort() === 'mobile'}">
+                        [ngClass]="{'li-mh-60': serviceItems?.length > 8}">
                         <div class="bd-service-list-item" fxLayout="row"
                             [ngClass]="{'selected': service.id === selectedServiceId}"
                             *ngFor="let service of serviceItems; let i = index"

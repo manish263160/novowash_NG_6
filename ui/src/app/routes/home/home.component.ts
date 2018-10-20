@@ -99,7 +99,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
         if (commonService.getViewPort() === "mobile") {
             this.slideHListConfig = {"slidesToShow": 3, "slidesToScroll": 3, dots: true};
-            this.slideConfig = {"slidesToShow": 1, "slidesToScroll": 1, dots: true};
+            this.slideConfig = {"slidesToShow": screen.width < 600 ? 1 : 2, "slidesToScroll": screen.width < 600 ? 1 : 2, dots: true};
         }
     }
     

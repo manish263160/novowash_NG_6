@@ -23,16 +23,30 @@
         <!-- slide 2 -->
         <div class="containerX dialog-container" *ngIf="slide === 2"
             [ngClass]="{'sidenav-fi': slide === 2, 'sidenav-fo': slide !== 2}">
-            <div fxLayout="row" class="bd-content-1-wrap">
-                <div class="bd-service-list" fxLayout="column" fxLayoutGap="12px"
-                    [ngClass]="{'li-mh-60': allSubServices?.length > 8}">
-                    <div class="bd-service-list-item" fxLayout="row" [id]="'sub' + service.id"
-                        [ngClass]="{'selected': service.id === highlightedSubServiceId}"
-                        *ngFor="let service of allSubServices; let i = index"
-                        (click)="onClickSubService1(service.id)">
-                        <span class="service-name">{{ service.packageName }}</span>
+            <div fxLayout="row" fxLayout.lt-sm="column" class="bd-content-1-wrap">
+                <ng-container *ngIf="commonService.getViewPort() === 'mobile' else nrmlTmpl2">
+                    <div cdkFocusRegionstart class="bd-service-list-mob" fxLayout="column">
+                        <label class="lbl-service-select">Service</label>
+                        <mat-form-field [floatLabel]="'never'">
+                            <mat-select placeholder="Select" (selectionChange)="onSubServiceSelection($event)" [value]="highlightedSubServiceId">
+                                <mat-option *ngFor="let service of allSubServices; let i = index" [value]="service.id">
+                                {{ service.packageName }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
                     </div>
-                </div>
+                </ng-container>
+                <ng-template #nrmlTmpl2>
+                    <div class="bd-service-list" fxLayout="column" fxLayoutGap="12px"
+                        [ngClass]="{'li-mh-60': allSubServices?.length > 8}">
+                        <div class="bd-service-list-item" fxLayout="row" [id]="'sub' + service.id"
+                            [ngClass]="{'selected': service.id === highlightedSubServiceId}"
+                            *ngFor="let service of allSubServices; let i = index"
+                            (click)="onClickSubService1(service.id)">
+                            <span class="service-name">{{ service.packageName }}</span>
+                        </div>
+                    </div>
+                </ng-template>
                 <div class="right-wrap bd-service-sub-list">
                     <ng-container *ngIf="mainServiceType === 1">
                         <div class="sub-wrap mst2 mstb1" fxLayout="column" fxLayoutGap="20px">
@@ -46,8 +60,9 @@
                                     </mat-button-toggle>
                                 </mat-button-toggle-group>
                             </label>
-                            <div fxLayout="row" fxLayoutGap="16px" class="fwrap">
-                                <div class="control-ud-pm" fxLayout="column" fxLayoutGap="12px"
+                            <div fxLayout="row" fxLayoutGap="16px" fxLayoutGap.lt-sm="0" class="fwrap" fxLayoutAlign.lt-sm="space-evenly start">
+                                <div class="control-ud-pm" [ngClass]="{'ctrl-compact': commonService.getViewPort() === 'mobile'}"
+                                    fxLayout="column" fxLayoutGap="12px"
                                     *ngFor="let mainPack of categorisedPackages[group1.value]?.mainPackages; let mi = index">
                                     <span class="ud-label">{{ mainPack?.userInputs }}</span>
                                     <div class="control-pm" fxLayout="row">

@@ -51,7 +51,7 @@
             <div ngxSlickItem *ngFor="let slide of recommendedServiceItems" class="slide with-bg-r"
                 (click)="openRecommendedServiceBookDlg(slide)">
                 <div class="slide-item" fxLayout="row">
-                    <span>{{ slide.serviceName }}</span>
+                    <span class="text-center">{{ slide.serviceName }}</span>
                 </div>
                 <!-- <ng-container *ngIf="(slide.imageUrl && slide.imageUrl !== 'null') else noPImgTmpl">
                     <img src="{{ slide.imageUrl }}" alt="" width="100%">
@@ -74,7 +74,7 @@
                 </ng-container>
                 <ng-template #noPImgTmpl>
                     <div class="slide-item" fxLayout="row">
-                        <span>{{ slide.packageName }}</span>
+                        <span class="text-center">{{ slide.packageName }}</span>
                     </div>
                 </ng-template>
             </div>

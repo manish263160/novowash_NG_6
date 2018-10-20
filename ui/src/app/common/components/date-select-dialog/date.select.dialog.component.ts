@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnDestroy, OnInit, Input, Output, ViewEncapsul
 import { MatDialogRef } from "@angular/material";
 import * as moment from "moment";
 import { Observable, Subscription, Subscriber } from "rxjs";
+import { CommonService } from "../../../common/services/common.service";
 import { ValidatorService } from "../../../common/services/validator.service";
 import { ServicesService } from "../../../core/services/services.service";
 import { every } from "rxjs/operators";
@@ -27,6 +28,7 @@ export class DateSelectDialogComponent implements OnDestroy, OnInit {
     public selectedTimeIndex: number = -1
 
     constructor(
+        public commonService: CommonService,
         private dialogRef: MatDialogRef<DateSelectDialogComponent>,
         private servicesService: ServicesService,
     ) {}

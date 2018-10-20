@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Input, Output, ViewEncapsulation } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Observable, Subscription, Subscriber } from "rxjs";
+import { CommonService } from "../../../common/services/common.service";
 import { ValidatorService } from "../../../common/services/validator.service";
 import { Address } from "../../../model/address";
 
@@ -20,6 +21,7 @@ export class AddressChangeDialogComponent implements OnDestroy, OnInit {
     public cities: any[];
     
     constructor(
+        public commonService: CommonService,
         private fb: FormBuilder,
     ) {}
 

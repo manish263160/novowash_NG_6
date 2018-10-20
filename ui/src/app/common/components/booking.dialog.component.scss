@@ -194,6 +194,9 @@
                                         width: 148px;
                                         height: 128px;
                                         justify-content: center;
+                                        &.ctrl-compact {
+                                            width: 120px;
+                                        }
                                     }
                                 }
                                 &.mst5 {
@@ -581,6 +584,9 @@
             transition: all .25s ease-in;
             border-radius: 8px;
             margin: 0 8px 0 0;
+            &:last-of-type {
+                margin: 0;
+            }
             .mat-button-toggle-button {
                 width: 100%;
                 height: 100%;
@@ -699,9 +705,12 @@
     .spacer-addr-1 {
         display: none;
     }
-    .dialog-panel-booking .mat-dialog-container .booking-dialog-wrap.bd-wrap-summary .mat-dialog-content .bd-content-1-wrap .summary-sec-wrap .summary-sec {
-        width: 100%;
-        max-width: 96%;
+    .dialog-panel-booking {
+        max-width: 100vw !important;
+        .mat-dialog-container .booking-dialog-wrap.bd-wrap-summary .mat-dialog-content .bd-content-1-wrap .summary-sec-wrap .summary-sec {
+            width: 100%;
+            max-width: 96%;
+        }
     }
     .bd-card.bd-card-coupon {
         max-width: 96%;

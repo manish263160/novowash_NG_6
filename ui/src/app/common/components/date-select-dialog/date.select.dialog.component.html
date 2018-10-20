@@ -41,7 +41,7 @@
                         <input matInput placeholder="Choose a date" (dateChange)="onPDateChange($event)" (click)="picker.open()"
                             [min]="calendarData.minDate" [max]="calendarData.maxDate" [matDatepicker]="picker" readonly>
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-datepicker #picker [touchUi]="commonService.getViewPort() === 'mobile'"></mat-datepicker>
                     </mat-form-field>
                 </div>
             </ng-container>

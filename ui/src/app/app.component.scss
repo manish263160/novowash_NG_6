@@ -1451,6 +1451,9 @@ mat-toolbar.mat-toolbar:not([color]).toolbar-primary {
   z-index: 2;
   background-color: rgba(243, 243, 243, 1);
   &.mh-tp {
+    .logo {
+      filter: brightness(120%);
+    }
     & > button {
       color: $white-color !important;
     }
@@ -3328,4 +3331,8 @@ mat-dialog-container.mat-dialog-container {
   p {
     margin: 4px;
   }
+}
+
+.mat-datepicker-content-touch {
+  margin: 0 !important;
 }
