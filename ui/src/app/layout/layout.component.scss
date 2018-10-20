@@ -122,7 +122,10 @@
   .page-sidenav-content {
     mat-toolbar.mat-toolbar:not([color]).toolbar-primary {
       max-width: 100%;
-      width: inherit;
+      width: 100;
+      &.mh-mob {
+        background-color: #f3f3f3;
+      }
       .logo {
         width: 136px;
         flex: 1 1 100%;

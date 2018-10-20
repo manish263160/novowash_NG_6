@@ -14,7 +14,7 @@
     <div mat-dialog-content>
         <div class="containerX dialog-container">
             <div class="bd-content-1-wrap" fxLayout="column" fxLayoutGap="8px">
-                <div fxLayout="row" class="summary-sec-wrap">
+                <div fxLayout="row" fxLayout.lt-sm="column" class="summary-sec-wrap">
                     <!-- service details -->
                     <ng-container *ngIf="!isForPackage else packTmpl">
                         <div class="summary-sec" fxLayout="column">
@@ -44,7 +44,7 @@
                         </span>
                     </div>
                 </div>
-                <div fxLayout="row" class="summary-sec-wrap">
+                <div fxLayout="row" fxLayout.lt-sm="column" class="summary-sec-wrap">
                     <!-- contact -->
                     <div class="summary-sec" fxLayout="column">
                         <span class="header">Contact Details</span>

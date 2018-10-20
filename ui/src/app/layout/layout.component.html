@@ -1,5 +1,5 @@
 <div class="page-sidenav-content" [ngClass]="commonService.browserClasses">
-    <mat-toolbar class="toolbar-primary" id="main-header">
+    <mat-toolbar class="toolbar-primary" id="main-header" [ngClass]="{'mh-mob': commonService.getViewPort() === 'mobile'}">
         <a class="logo" href="/app"></a>
         <span class="fill-remaining-space"></span>
         <!-- <button mat-button (click)="goToPage('about-us')" class="btn-top-menu">

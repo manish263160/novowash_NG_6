@@ -103,6 +103,12 @@
                                 }
                             }
                         }
+                        .bd-service-list-mob {
+                            padding: 12px 28px 0;
+                            .lbl-service-select {
+                                font-size: 14px;
+                            }
+                        }
                         .right-wrap {
                             flex: 1 1 68%;
                             .right-header {
@@ -684,4 +690,34 @@
 .dp-package-time {
     max-width: 200px;
     margin-top: 12px;
+}
+
+@media screen and (max-width: 768px) {
+    .bd-service-sub-list .sub-wrap .control-ud-pm {
+        margin-bottom: 12px;
+    }
+    .spacer-addr-1 {
+        display: none;
+    }
+    .dialog-panel-booking .mat-dialog-container .booking-dialog-wrap.bd-wrap-summary .mat-dialog-content .bd-content-1-wrap .summary-sec-wrap .summary-sec {
+        width: 100%;
+        max-width: 96%;
+    }
+    .bd-card.bd-card-coupon {
+        max-width: 96%;
+        margin-bottom: 12px;
+        .header-seg {
+            .header {
+                margin-top: 0;
+            }
+            .text {
+                font-size: 0.75rem;
+            }
+            .mat-form-field {
+                &.in-coupon {
+                    max-width: 96%;
+                }
+            }
+        }
+    }
 }

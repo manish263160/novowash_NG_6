@@ -137,7 +137,6 @@ export class ServicesService {
                 return res.data || {};
             }))
             .catch(err => {
-                debugger;
                 throw err;
             })
 

@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms"
 import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material";
 import * as moment from "moment";
 import { Observable, Subscription, Subscriber } from "rxjs";
+import { CommonService } from "../../../common/services/common.service";
 import { DialogService } from "../../../common/services/dialog.service";
 import { ValidatorService } from "../../../common/services/validator.service";
 import { ServicesService } from "../../../core/services/services.service";
@@ -36,6 +37,7 @@ export class DateUserDetailsDialogComponent implements OnDestroy, OnInit {
     private subServiceSub: any;
     
     constructor(
+        public commonService: CommonService,
         private dialog: MatDialog ,
         private dialogRef: MatDialogRef<DateUserDetailsDialogComponent>,
         private dialogRefLogin: MatDialogRef<LoginComponent>,
@@ -195,9 +197,14 @@ export class DateUserDetailsDialogComponent implements OnDestroy, OnInit {
             dlEl.classList.add("hidden");
         }
         const config = new MatDialogConfig();
-        config.width = "75%";
-        config.disableClose = true;
-        config.panelClass = "dialog-panel-booking";
+        if (this.commonService.getViewPort() === "mobile") {
+            config.width = "100%";
+            config.height = "100%";
+            config.panelClass = ["dialog-panel-booking", "dp-booking-mobile"];
+        } else {
+            config.width = "75%";
+            config.panelClass = ["dialog-panel-booking"];
+        }
         config.position = {
             bottom: "",
             left: "",

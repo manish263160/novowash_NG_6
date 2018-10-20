@@ -109,14 +109,14 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     @HostListener('window:scroll', ['$event'])
     checkScroll() {
-        const scrollPosition = window.pageYOffset;
-        this.headerEl[this.styleStr][this.bgStr] = "rgba(243, 243, 243, " + (scrollPosition - 10)/100 + ")";
-        if (scrollPosition > 50) {
-            this.headerEl.classList.remove("mh-tp");
-        } else if(!this.headerEl.classList.contains("mh-tp")) {
-            this.headerEl.classList.add("mh-tp");
-        }
         if (this.commonService.getViewPort() !== "mobile") {
+            const scrollPosition = window.pageYOffset;
+            this.headerEl[this.styleStr][this.bgStr] = "rgba(243, 243, 243, " + (scrollPosition - 10)/100 + ")";
+            if (scrollPosition > 50) {
+                this.headerEl.classList.remove("mh-tp");
+            } else if(!this.headerEl.classList.contains("mh-tp")) {
+                this.headerEl.classList.add("mh-tp");
+            }
             if (scrollPosition >= 212) {
                 if (!this.searchWrapEl.classList.contains("fixed")) {
                     this.searchWrapEl.classList.add("fixed");
@@ -130,10 +130,12 @@ export class HomeComponent implements OnInit, OnDestroy {
     public ngOnInit() {
         this.searchWrapEl = document.getElementById("searchWrap");
         this.headerEl = document.getElementById("main-header");
-        if(!this.headerEl.classList.contains("mh-tp")) {
-            this.headerEl.classList.add("mh-tp");
+        if (this.commonService.getViewPort() !== "mobile") {
+            if(!this.headerEl.classList.contains("mh-tp")) {
+                this.headerEl.classList.add("mh-tp");
+            }
+            this.headerEl[this.styleStr][this.bgStr] = "rgba(243, 243, 243, 0)";
         }
-        this.headerEl[this.styleStr][this.bgStr] = "rgba(243, 243, 243, 0)";
         const cWrapEl = document.getElementsByClassName("content-wrapper")[0];
         if (cWrapEl) {
             cWrapEl.classList.add("no-padding");

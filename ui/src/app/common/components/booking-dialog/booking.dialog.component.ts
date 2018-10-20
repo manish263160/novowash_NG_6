@@ -250,6 +250,12 @@ export class BookingDialogComponent implements OnDestroy, OnInit {
         })
     }
 
+    public onServiceCatSelection(event) {
+        try {
+            this.onClickMainService(event.source.selected.value, event.source.selected.viewValue);
+        } catch (e) {}
+    }
+
     public onClickMainService(serviceId, serviceName){
         this.totalAmount = 0;
         this.selectedServiceId = serviceId;
@@ -262,6 +268,12 @@ export class BookingDialogComponent implements OnDestroy, OnInit {
         this.slide = 2;
         this.serviceDesc = "SAMPLE DESCRIPTION";
         // this.onClickSubService1(serviceId);
+    }
+
+    public onSubServiceSelection(event) {
+        try {
+            this.onClickSubService1(event.source.selected.value);
+        } catch (e) {}
     }
 
     public onClickSubService1(serviceId) {

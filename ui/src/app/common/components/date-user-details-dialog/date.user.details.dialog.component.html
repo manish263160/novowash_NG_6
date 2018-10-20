@@ -58,12 +58,12 @@
                             Address is required
                         </mat-error>
                     </mat-form-field>
-                    <span class="spacer"></span>
-                    <div fxLayout="row" fxLayoutGap="24px">
-                        <mat-form-field fxFlex="1 1 30%">
+                    <span class="spacer" class="spacer-addr-1"></span>
+                    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="24px">
+                        <mat-form-field fxFlex="1 1 30%" fxFlex.lt-sm="1 1 100%">
                             <input matInput formControlName="landmark" type="text" placeholder="Landmark (optional)">
                         </mat-form-field>
-                        <mat-form-field fxFlex="1 1 30%">
+                        <mat-form-field fxFlex="1 1 30%" fxFlex.lt-sm="1 1 100%">
                             <mat-select placeholder="City" required formControlName="city">
                                 <mat-option *ngFor="let city of cities" [value]="city.value">
                                 {{ city.viewValue }}
@@ -73,7 +73,7 @@
                                 City is required
                             </mat-error>
                         </mat-form-field>
-                        <mat-form-field fxFlex="1 1 30%">
+                        <mat-form-field fxFlex="1 1 30%" fxFlex.lt-sm="1 1 100%">
                             <input matInput formControlName="pincode" required type="text" placeholder="PIN Code">
                             <mat-error *ngIf="(addressForm.controls.pincode.errors | firstKey) === 'required' && addressForm.controls['pincode'].touched">
                                 PIN Code is required
