@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { CommonService } from "./common/services/common.service";
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -8,4 +9,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 })
 export class AppComponent {
   title = 'Novowash App!';
+  public constructor (
+    public commonService: CommonService,
+  ) {}
 }

@@ -28,6 +28,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
     public helpForm: FormGroup;
     public pattern = "^(([^<>()\\[\\]\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\\.)+[a-zA-Z]{2,}))$";
 
+    @ViewChild("helpTrigger") public helpTrigger: MatMenuTrigger;
+
     private dialogRef: MatDialogRef<LoginComponent>;
     private config: MatDialogConfig;
     private hSub: Subscription;
@@ -101,7 +103,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
         });
     }
 
-    public onClickHelpSubmit(helpTrigger: MatMenuTrigger) {
+    public onClickHelpSubmit() {
         if (this.helpForm.invalid) {
             return;
         }
@@ -109,7 +111,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
             .subscribe((res) => {
                 console.log(`RES from help register:::: ${res}`);
                 if (res === true || res === "true") {
-                    helpTrigger.closeMenu();
+                    this.helpTrigger.closeMenu();
                     this.openSnackBar("Thank you. We will get back to you soon.", "success");
                 }
             });

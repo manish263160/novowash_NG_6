@@ -138,20 +138,21 @@ mat-sidenav {
 
 .loader-wrapper {
   display: inline-flex;
-  background: $primary-color;
-  border-radius: 50%;
-  padding: 5px;
-  box-sizing: content-box;
-  box-shadow: 1px 1px 2px 0 $custom-color-bcd6bf;
+  // background: $primary-color;
+  // border-radius: 50%;
+  // padding: 5px;
+  // box-sizing: content-box;
+  // box-shadow: 1px 1px 2px 0 $custom-color-bcd6bf;
 }
 
 .loader:not(.iframe-container) {
-  border: 3px solid $primary-color; /* Light grey */
-  border-top: 3px solid $white-color; /* Blue */
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  animation: spin 1s linear infinite;
+  background-image: url(/assets/img/icon.png);
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  width: 40px;
+  height: 40px;
+  animation: rotate3D 1.5s linear infinite;
   display: inline-block;
   box-sizing: content-box;
 }
@@ -162,6 +163,15 @@ mat-sidenav {
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate3D {
+  0% {
+    transform: rotate3d(0, 1, 0, 0deg);
+  }
+  100% {
+    transform: rotate3d(0, 1, 0, 360deg);
   }
 }
 

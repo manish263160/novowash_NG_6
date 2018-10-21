@@ -38,6 +38,7 @@ import { ITMenuService } from "./common/services/it-menu-service";
 import { DeactivateGuardService } from "./common/services/deactivate-guard.service";
 import { DialogService } from "./common/services/dialog.service";
 import { ITDatepickerService } from "./common/services/it-datepicker-service";
+import { CustomHttpInterceptor } from "./core/custom.http.interceptor";
 import { SharedModule } from "./shared.module";
 
 import { StarRatingModule } from 'angular-star-rating';
@@ -83,6 +84,11 @@ import { StarRatingModule } from 'angular-star-rating';
         CoreModule.forRoot(),
     ],
     providers: [
+        {
+            multi: true,
+            provide: HTTP_INTERCEPTORS,
+            useClass: CustomHttpInterceptor,
+        },
         DeactivateGuardService,
         DialogService,
         ITDatepickerService,

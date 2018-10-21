@@ -11,6 +11,8 @@ export class CommonService {
     public isBlink = false;
     public browserClasses = {};
 
+    public showLoader: boolean = false;
+
     constructor() {
         this.detectBrowser();
     }
