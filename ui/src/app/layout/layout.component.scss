@@ -126,12 +126,21 @@
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center center;
-      margin-left: 36px;
     }  
   }
 }
 
-@media (max-width: 768px) {
+@media (min-width: 960px) {
+  .page-sidenav-content {
+    mat-toolbar.mat-toolbar:not([color]).toolbar-primary {
+      .logo {
+        margin-left: 36px;
+      }  
+    }
+  }
+}
+
+@media (max-width: 767px) {
   .page-sidenav-content {
     mat-toolbar.mat-toolbar:not([color]).toolbar-primary {
       max-width: 100%;
@@ -147,8 +156,6 @@
       .logo {
         width: 136px;
         height: 56px;
-        // flex: 1 1 100%;
-        margin-left: 0;
       }  
     }
   }

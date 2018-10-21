@@ -104,7 +104,7 @@
                                     margin-top: 20px;
                                     font-size: .875rem;
                                     .sp-detail-sec{
-                                        height: 24px;
+                                        min-height: 24px;
                                         align-items: center;
                                         .spdc-label {
                                             width: 200px;
@@ -143,6 +143,75 @@
                                         }
                                         .as-value {
                                             line-height: 20px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.mat-menu-panel.mm-profile {
+    .mat-menu-content {
+        [mat-menu-item].mat-menu-item {
+            &[disabled] {
+                background-color: transparent;
+            }
+            &:not(.menu-item-for-lbl) {
+                padding-left: 28px;
+            }
+        }
+    }
+}
+@media (max-width: 767px) {
+    .user-profile-outer-wrap {
+        .user-profile-wrap {
+            .content-wrap {
+                .content-inner-wrap {
+                    .right-side {
+                        width: 100%;
+                        .rs-content-wrap {
+                            &.bserv {
+                                .bd-card {
+                                    .middle-seg {
+                                        font-size: .875rem;
+                                        margin-top: 8px;
+                                        .sp-detail-sec {
+                                            .spdc-label {
+                                                width: 120px;
+                                            }
+                                            .spdc-value {
+                                                &:not(.value-status) {
+                                                    width: 160px;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    .action-seg {
+                                        padding-top: 12px;
+                                    }
+                                }
+                            }
+                            &.profile {
+                                .bd-card {
+                                    .middle-seg {
+                                        font-size: .875rem;
+                                        margin-top: 8px;
+                                        .profile-sec {
+                                            .ps-label {
+                                                width: 120px;
+                                            }
+                                            .ps-value {
+                                                width: 160px;
+                                            }
+                                            .mat-form-field {
+                                                &.in-profile-edit {
+                                                    width: 160px;
+                                                }
+                                            }
                                         }
                                     }
                                 }

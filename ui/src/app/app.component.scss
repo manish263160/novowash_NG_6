@@ -419,6 +419,9 @@ td > [mat-icon-button].mat-icon-button:not(.mat-raised-button),
 .mat-menu-panel.more-menu {
   min-width: 172px;
   max-width: 200px; // required for firefox
+  &.unset-mh {
+    max-width: 280px;
+  }
   [mat-menu-item].mat-menu-item {
       line-height: 40px;
       height: 40px;
@@ -442,6 +445,7 @@ td > [mat-icon-button].mat-icon-button:not(.mat-raised-button),
        }
   }
 }
+
 
 // .search-container {
 //     .mat-form-field.md-search {
@@ -3272,7 +3276,7 @@ mat-dialog-container.mat-dialog-container {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   mat-dialog-container.mat-dialog-container .dialog-header {
     padding-left: 16px;
     padding-right: 16px;

@@ -65,9 +65,9 @@ export class CommonService {
 
     public getViewPort() {
         let viewPort;
-        if (screen.width <= 768) {
+        if (screen.width < 768) {
             viewPort = "mobile";
-        } else if (screen.width > 768 && screen.width < 960) {
+        } else if (screen.width >= 768 && screen.width < 960) {
             viewPort = "tablet";
         } else {
             viewPort = "desktop";

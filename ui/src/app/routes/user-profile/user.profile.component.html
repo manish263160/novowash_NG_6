@@ -1,14 +1,45 @@
 <div class="user-profile-outer-wrap">
     <ng-container *ngIf="(ropcService && ropcService.user) else noUserTmpl">
         <div class="user-profile-wrap" fxLayout="column">
-            <div class="header-wrap" fxLayout="column">
-                <h4 class="my-profile-header">My Profile</h4>
-                <div class="header-subtext txt-faded">{{ userEmailString }}</div>
-            </div>
+            <ng-container *ngIf="commonService.getViewPort() === 'mobile' else nrmlTmpl1">
+                <div class="header-wrap" fxLayout="row" fxLayoutAlign="start baseline">
+                    <div class="header-sec" fxLayout="column" fxFlex="flex">
+                        <h4 class="my-profile-header">My Profile</h4>
+                        <div class="header-subtext txt-faded">{{ userEmailString }}</div>
+                    </div>
+                    <button mat-icon-button color="primary" (onMenuOpen)="itMenuService.onMenuOpen(trigger);"
+                        [matMenuTriggerFor]="profileMoreMenu" #trigger="matMenuTrigger" class="btn-sp-menu" fxFlex="none">
+                        <mat-icon>menu</mat-icon>
+                    </button>
+                </div>
+                <mat-menu #profileMoreMenu="matMenu" class="more-menu mm-profile">
+                    <button mat-menu-item class="menu-item-for-lbl" [disabled]="true">
+                        My Account
+                    </button>
+                    <button mat-menu-item (click)="onClickLeftMenu('profile');">
+                        Profile
+                    </button>
+                    <button mat-menu-item class="menu-item-for-lbl" [disabled]="true">
+                        My Bookings
+                    </button>
+                    <button mat-menu-item (click)="onClickLeftMenu('booked-services');">
+                        Booked Services
+                    </button>
+                    <button mat-menu-item (click)="onClickLeftMenu('booked-packages');">
+                        Booked Packages
+                    </button>
+                </mat-menu>
+            </ng-container>
+            <ng-template #nrmlTmpl1>
+                <div class="header-wrap" fxLayout="column">
+                    <h4 class="my-profile-header">My Profile</h4>
+                    <div class="header-subtext txt-faded">{{ userEmailString }}</div>
+                </div>
+            </ng-template>
             <div class="content-wrap">
                 <div class="content-inner-wrap" fxLayout="row">
                     <!-- left side -->
-                    <div class="left-side" fxLayout="column">
+                    <div class="left-side" fxLayout="column" *ngIf="commonService.getViewPort() !== 'mobile'">
                         <div class="menu-section" fxLayout="column">
                             <div class="ms-header">My Account</div>
                             <div class="ms-item" (click)="onClickLeftMenu('profile');" [ngClass]="{'active': slide === 'profile'}">
@@ -41,7 +72,7 @@
                                         <div class="profile-sec" fxLayout="row">
                                             <span class="ps-label">Name</span>
                                             <span class="ps-value" *ngIf="!isUserDetailEdit">{{ ropcService.user.username }}</span>
-                                            <mat-form-field floatLabel="never" *ngIf="isUserDetailEdit">
+                                            <mat-form-field floatLabel="never" *ngIf="isUserDetailEdit" class="in-profile-edit">
                                                 <input type="text" matInput placeholder="Name" formControlName="name" novalidate>
                                                 <mat-error *ngIf="(userForm.controls['name'].errors | firstKey) ==='required' && userForm.controls['name'].touched">
                                                     Name is required
@@ -58,7 +89,7 @@
                                         <div class="profile-sec" fxLayout="row">
                                             <span class="ps-label">E-mail id</span>
                                             <span class="ps-value" *ngIf="!isUserDetailEdit">{{ userEmailString }}</span>
-                                            <mat-form-field floatLabel="never" *ngIf="isUserDetailEdit">
+                                            <mat-form-field floatLabel="never" *ngIf="isUserDetailEdit" class="in-profile-edit">
                                                 <input type="email" matInput placeholder="Email" formControlName="email" novalidate>
                                                 <mat-error *ngIf="(userForm.controls['email'].errors | firstKey) ==='required' && userForm.controls['email'].touched">
                                                     Email is required
@@ -99,7 +130,7 @@
                                             [matMenuTriggerFor]="serviceMoreMenu" #trigger="matMenuTrigger" class="btn-sp-menu">
                                             <mat-icon>more_vert</mat-icon>
                                         </button>
-                                        <mat-menu #serviceMoreMenu="matMenu" class="more-menu">
+                                        <mat-menu #serviceMoreMenu="matMenu" class="more-menu unset-mh">
                                             <button mat-menu-item (click)="onClickServiceChangeTime(bi, service)">
                                                     {{ service.bookingDate ? 'Change Date and Time' : 'Select Date and Time'}}
                                             </button>
@@ -167,7 +198,7 @@
                                             [matMenuTriggerFor]="serviceMoreMenu" #trigger="matMenuTrigger" class="btn-sp-menu">
                                             <mat-icon>more_vert</mat-icon>
                                         </button>
-                                        <mat-menu #serviceMoreMenu="matMenu" class="more-menu">
+                                        <mat-menu #serviceMoreMenu="matMenu" class="more-menu unset-mh">
                                             <button mat-menu-item (click)="onClickPackageChangeTime(bi, service)">
                                                 {{ service.lastBookingDate ? 'Change Date and Time' : 'Select Date and Time'}}
                                             </button>
