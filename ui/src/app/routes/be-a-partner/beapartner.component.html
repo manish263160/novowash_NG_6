@@ -1,0 +1,82 @@
+<div class="beapartner-wrap">
+    <div fxLayout="column" class="beapartner-content-wrap">
+        <div class="form-section">
+            <div fxLayout="row" fxLayout.sm="column" fxLayoutGap="12px">
+                <div class="sec-form-left" fxFlex="1 1 50%" fxFlex.lt-sm="1 1 100%" fxLayout="column">
+                    <span class="caption">Expand Business</span>
+                    <span class="caption">Increase Earnings!</span>
+                </div>
+                <div class="sec-form-right" fxFlex="1 1 50%" fxFlex.lt-sm="1 1 100%">
+                    <h2 class="sec-header">Become a Novowash Partner within minutes</h2>
+                    <form [formGroup]="partnerForm" novalidate>
+                        <div fxLayout="column" fxLayoutGap="12px" class="form-el-wrap">
+                            <mat-form-field floatLabel="never">
+                                <input type="text" placeholder="Select your service" 
+                                    matInput [matAutocomplete]="auto" formControlName="service" novalidate
+                                    #txtSearch autocomplete="off" (keyup)="getSearchResult(txtSearch.value)">
+                                    <mat-error *ngIf="(partnerForm.controls['service'].errors | firstKey) ==='required' && partnerForm.controls['service'].touched">
+                                        Service is required
+                                    </mat-error>
+                                <mat-icon matSuffix>keyboard_arrow_down</mat-icon>
+                                <mat-autocomplete #auto="matAutocomplete" [class]="'ac-search'"
+                                    (optionSelected)="onSearchItemClicked($event);" [displayWith]="displayWithSearch">
+                                <mat-option *ngFor="let option of filteredOptions" [value]="option">
+                                    <div fxLayout="row" fxLayoutGap="10px" class="option-search">
+                                        <span class="service-icon" [style.backgroundImage]="getBackground(option.imageUrl)"></span>
+                                        <span class="option-title">{{ option.serviceName }}</span>
+                                    </div>
+                                </mat-option>
+                                </mat-autocomplete>
+                            </mat-form-field>
+                            <mat-form-field floatLabel="never">
+                                <input type="text" matInput placeholder="Name" formControlName="name" novalidate>
+                                <mat-error *ngIf="(partnerForm.controls['name'].errors | firstKey) ==='required' && partnerForm.controls['name'].touched">
+                                    Name is required
+                                </mat-error>
+                                <mat-error *ngIf="(partnerForm.controls['name'].errors | firstKey) === 'pattern' && partnerForm.controls['name'].touched">
+                                    Please enter a valid name
+                                </mat-error>
+                            </mat-form-field>
+                            <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="12px">
+                                <mat-form-field floatLabel="never">
+                                    <input type="email" matInput placeholder="Email" formControlName="email" novalidate>
+                                    <mat-error *ngIf="(partnerForm.controls['email'].errors | firstKey) ==='required' && partnerForm.controls['email'].touched">
+                                        Email is required
+                                    </mat-error>
+                                    <mat-error *ngIf="(partnerForm.controls['email'].errors | firstKey) ==='pattern' && partnerForm.controls['email'].touched">
+                                        Not a valid email id
+                                    </mat-error>
+                                </mat-form-field>
+                                <mat-form-field floatLabel="never">
+                                    <span matPrefix>+91 &nbsp;</span>
+                                    <input type="tel" matInput placeholder="Contact Number" formControlName="number" novalidate>
+                                    <mat-error *ngIf="(partnerForm.controls['number'].errors | firstKey) ==='required' && partnerForm.controls['number'].touched">
+                                        Mobile number is required
+                                    </mat-error>
+                                    <mat-error *ngIf="(partnerForm.controls['number'].errors | firstKey) === 'invalidNumber' && partnerForm.controls['number'].touched">
+                                        Not a valid contact number
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <button mat-raised-button color="primary" (click)="submitPartnerForm()" [disabled]="partnerForm.invalid">
+                                Submit
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="why-section">
+            <div fxLayout="column" fxLayoutGap="8px">
+                <div class="sec-why-content" fxFlex="1 1 100%">
+                    <h2 class="sec-header">Why Us?</h2>
+                    <div class="why-img-wrap" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap.lt-sm="12px">
+                        <div class="why-img one"></div>
+                        <div class="why-img two"></div>
+                        <div class="why-img three"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

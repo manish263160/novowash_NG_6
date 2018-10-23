@@ -15,6 +15,10 @@ export const routes: Routes = [
                 path: "about-us",
             },
             {
+                loadChildren: "./routes/be-a-partner/beapartner.module#BeAPartnerModule",
+                path: "be-a-partner",
+            },
+            {
                 loadChildren: "./routes/home/home.module#HomeModule",
                 path: "home",
             },
