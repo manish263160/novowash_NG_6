@@ -3,3 +3,9 @@
         font-weight: 400 !important;
     }
 }
+
+.dialog-panel-booking .mat-dialog-container .booking-dialog-wrap .mat-dialog-content .dialog-container {
+    &.dc-login-booking {
+        padding: 8px 48px;
+    }
+}

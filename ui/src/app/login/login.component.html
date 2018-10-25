@@ -22,10 +22,10 @@
         </div>
     </div>
 </div>
-<div>
+<div class="login-dialog-wrap" [ngClass]="{'booking-dialog-wrap': isForBooking, 'dialog-sans-actions': isForBooking}">
     <form [formGroup]="loginForm" novalidate>
     <div class="mat-dialog-content">
-        <div class="containerX dialog-container">
+        <div class="containerX dialog-container" [ngClass]="{'dc-login-booking': isForBooking}">
             <div fxLayout="column" fxLayoutGap="16px">
                 <div *ngIf="isForBooking" class="msg-booking-login">
                     <h1>Almost there!</h1>
