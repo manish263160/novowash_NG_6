@@ -5,10 +5,10 @@
             <p class="p-sub">Intelligent Interior Care!</p>
             <div fxLayout="row" fxLayoutGap="16px" id="searchWrap">
                 <mat-form-field floatLabel="never" class="search-text">
-                    <input type="text" placeholder="Search for a service" 
+                    <input type="text" placeholder="Search for a service"
                         matInput [matAutocomplete]="auto"
                         #txtSearch autocomplete="off" (keyup)="getSearchResult(txtSearch.value)">
-                    <mat-icon matSuffix>keyboard_arrow_down</mat-icon>
+                    <!-- <mat-icon matSuffix>keyboard_arrow_down</mat-icon> -->
                     <mat-autocomplete #auto="matAutocomplete" [class]="'ac-search'"
                         (optionSelected)="onSearchItemClicked($event);" [displayWith]="displayWithSearch">
                     <mat-option *ngFor="let option of filteredOptions" [value]="option">

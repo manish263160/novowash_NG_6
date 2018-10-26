@@ -21,14 +21,30 @@ export class CustomHttpInterceptor implements HttpInterceptor {
     ) {
         this.nonLoaderUrls = [
             `/common/api/auth/token`,
+            `/permitall/search/getSearch/`,
+
         ];
     }
 
+    /**
+     * checkStringMatchInArray
+strName: string     */
+    public checkStringMatchInArray(strName: string): boolean {
+        let bool = false;
+     this.nonLoaderUrls.forEach(element => {
+          if(strName.indexOf(element) > -1){
+            bool = true;
+          }
+     });
+     return bool;
+    }
     public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        ((request) => {
+      ((request) => {
+        // console.log("==========",this.checkStringMatchInArray(request.url));
             setTimeout(() => {
                 if (
-                    this.nonLoaderUrls.indexOf(request.url) === -1
+                    // this.nonLoaderUrls.indexOf(request.url) === -1
+                    !this.checkStringMatchInArray(request.url)
                 ) {
                     if (this.requestUrls.indexOf(request.url) === -1) {
                         this.requestCount++;
@@ -77,7 +93,7 @@ export class CustomHttpInterceptor implements HttpInterceptor {
             }
         }).catch((err) => {
             this.commonService.showLoader = false;
-            if (err instanceof HttpErrorResponse) {                
+            if (err instanceof HttpErrorResponse) {
                 console.log("SOMETHING WENT WRONG:::", err);
             }
             return Observable.throw(err);

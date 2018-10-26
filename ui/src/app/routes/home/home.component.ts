@@ -99,13 +99,13 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 
 
-        if (commonService.getViewPort() === "mobile") {            
+        if (commonService.getViewPort() === "mobile") {
             this.slideConfig = {"slidesToShow": screen.width < 600 ? 1 : 2, "slidesToScroll": screen.width < 600 ? 1 : 2, dots: true};
         } else if (commonService.getViewPort() === 'tablet') {
             this.slideHListConfig = {"slidesToShow": 3, "slidesToScroll": 3, dots: true};
         }
     }
-    
+
     public afterChange(e) {
         console.log('afterChange');
     }
@@ -178,7 +178,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     public getSearchResult(searchText) {
         const filterValue = searchText.toLowerCase();
-        if (filterValue && filterValue.length > 2) {
+        if (filterValue && filterValue.length > 0) {
             this.searchSub = this.servicesService.getSearchResult(filterValue)
                 .subscribe((val) => {
                     this.filteredOptions = val;
@@ -196,13 +196,13 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     private filterSearch(value: string) {
         const filterValue = value.toLowerCase();
-        if (filterValue && filterValue.length > 2) {
+        if (filterValue && filterValue.length > 0) {
             this.searchSub = this.servicesService.getSearchResult(filterValue)
                 .subscribe((val) => {
                     this.filteredOptions = val;
                 })
         }
-    
+
         // return this.options.filter(option => option.toLowerCase().includes(filterValue));
     }
 
@@ -326,7 +326,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             this.dialogRef = this.dialog.open(BookingEndDialogComponent, this.config);
             this.dialogRef.componentInstance.isSuccess = isSuccess;
             this.dialogRef.componentInstance.totalAmount = this.selectedServices.totalAmount;
-    
+
             this.dialogRef.componentInstance.onBookingEndClosed.subscribe(() => {
                 console.log("onBookingEndClosed()");
                 this.dialogRef.close();

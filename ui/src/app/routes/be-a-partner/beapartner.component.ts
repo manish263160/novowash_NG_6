@@ -55,7 +55,7 @@ export class BeAPartnerComponent implements OnInit, OnDestroy {
 
     public getSearchResult(searchText) {
         const filterValue = searchText.toLowerCase();
-        if (filterValue && filterValue.length > 2) {
+        if (filterValue && filterValue.length > 0) {
             this.searchSub = this.servicesService.getSearchResult(filterValue)
                 .subscribe((val) => {
                     this.filteredOptions = val;
