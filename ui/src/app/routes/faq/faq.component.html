@@ -1,0 +1,21 @@
+<div class="faq-wrap" *ngIf="faqs?.length">
+    <div fxLayout="column" class="faq-content-wrap">
+        <h1 class="faq-header">
+            FAQ
+        </h1>
+        <div class="faq-qsec" fxLayout="row" fxLayoutGap="16px"
+            *ngFor="let faq of faqs; let i = index;">
+            <div class="faq-serials">
+                <span class="serial-number">{{ (i + 1) | number : '2.0-0' }}</span>
+            </div>
+            <div class="faq-qa" fxLayout="column" fxLayoutGap="12px">
+                <p class="faq-q">
+                    {{ faq.question }}
+                </p>
+                <p class="faq-a">
+                    {{ faq.answer }}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

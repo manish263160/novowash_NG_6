@@ -1,12 +1,12 @@
 <div class="beapartner-wrap">
     <div fxLayout="column" class="beapartner-content-wrap">
         <div class="form-section">
-            <div fxLayout="row" fxLayout.sm="column" fxLayoutGap="12px">
-                <div class="sec-form-left" fxFlex="1 1 50%" fxFlex.lt-sm="1 1 100%" fxLayout="column">
+            <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="12px" fxLayoutGap.lt-sm="40px">
+                <div class="sec-form-left" fxFlex="1 1 60%" fxFlex.lt-sm="1 1 100%" fxLayout="column">
                     <span class="caption">Expand Business</span>
                     <span class="caption">Increase Earnings!</span>
                 </div>
-                <div class="sec-form-right" fxFlex="1 1 50%" fxFlex.lt-sm="1 1 100%">
+                <div class="sec-form-right" fxFlex="1 1 40%" fxFlex.lt-sm="1 1 100%">
                     <h2 class="sec-header">Become a Novowash Partner within minutes</h2>
                     <form [formGroup]="partnerForm" novalidate>
                         <div fxLayout="column" fxLayoutGap="12px" class="form-el-wrap">
@@ -37,7 +37,7 @@
                                     Please enter a valid name
                                 </mat-error>
                             </mat-form-field>
-                            <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="12px">
+                            <!-- <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="12px">
                                 <mat-form-field floatLabel="never">
                                     <input type="email" matInput placeholder="Email" formControlName="email" novalidate>
                                     <mat-error *ngIf="(partnerForm.controls['email'].errors | firstKey) ==='required' && partnerForm.controls['email'].touched">
@@ -47,17 +47,17 @@
                                         Not a valid email id
                                     </mat-error>
                                 </mat-form-field>
-                                <mat-form-field floatLabel="never">
-                                    <span matPrefix>+91 &nbsp;</span>
-                                    <input type="tel" matInput placeholder="Contact Number" formControlName="number" novalidate>
-                                    <mat-error *ngIf="(partnerForm.controls['number'].errors | firstKey) ==='required' && partnerForm.controls['number'].touched">
-                                        Mobile number is required
-                                    </mat-error>
-                                    <mat-error *ngIf="(partnerForm.controls['number'].errors | firstKey) === 'invalidNumber' && partnerForm.controls['number'].touched">
-                                        Not a valid contact number
-                                    </mat-error>
-                                </mat-form-field>
-                            </div>
+                            </div> -->
+                            <mat-form-field floatLabel="never">
+                                <span matPrefix>+91 &nbsp;</span>
+                                <input type="tel" matInput placeholder="Contact Number" formControlName="number" novalidate>
+                                <mat-error *ngIf="(partnerForm.controls['number'].errors | firstKey) ==='required' && partnerForm.controls['number'].touched">
+                                    Mobile number is required
+                                </mat-error>
+                                <mat-error *ngIf="(partnerForm.controls['number'].errors | firstKey) === 'invalidNumber' && partnerForm.controls['number'].touched">
+                                    Not a valid contact number
+                                </mat-error>
+                            </mat-form-field>
                             <button mat-raised-button color="primary" (click)="submitPartnerForm()" [disabled]="partnerForm.invalid">
                                 Submit
                             </button>
@@ -74,6 +74,51 @@
                         <div class="why-img one"></div>
                         <div class="why-img two"></div>
                         <div class="why-img three"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="request-section">
+            <div fxLayout="column" fxLayoutGap="8px">
+                <div class="sec-request-content" fxFlex="1 1 100%" fxLayout="column" fxLayoutGap="58px">
+                    <h2 class="sec-header">How to accept requests?</h2>
+                    <div class="request-block-wrap rbw-1" fxLayout="row" fxLayout.lt-sm="column">
+                        <div class="request-left-sec" fxFlex="1 1 50%" fxFlex.lt-sm="1 1 100%">
+                            <div class="img-left"></div>
+                        </div>
+                        <div class="request-right-sec" fxFlex="1 1 50%" fxFlex.lt-sm="1 1 100%">
+                            <div class="request-text-block" fxLayout="column">
+                                <span class="text">
+                                    Log in and Accept: Just log on to your account and accept orders which are sent to you.
+                                    You will have a limited time to accept the bookings.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="request-block-wrap rbw-2" fxLayout="row" fxLayout.lt-sm="column">
+                        <div class="request-left-sec" fxFlex="1 1 50%" fxFlex.lt-sm="1 1 100%">
+                            <div class="img-left"></div>
+                        </div>
+                        <div class="request-right-sec" fxFlex="1 1 50%" fxFlex.lt-sm="1 1 100%">
+                            <div class="request-text-block" fxLayout="column">
+                                <span class="text">
+                                    Choose requests on your terms: Check your schedule, availibility and accept
+                                    only those requests which suit your business requirements.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="request-block-wrap rbw-3" fxLayout="row" fxLayout.lt-sm="column">
+                        <div class="request-left-sec" fxFlex="1 1 50%" fxFlex.lt-sm="1 1 100%">
+                            <div class="img-left"></div>
+                        </div>
+                        <div class="request-right-sec" fxFlex="1 1 50%" fxFlex.lt-sm="1 1 100%">
+                            <div class="request-text-block" fxLayout="column">
+                                <span class="text">
+                                    Instant Payment: Finish your service and get instant payment in your account!
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

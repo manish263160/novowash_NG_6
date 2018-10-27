@@ -7,7 +7,11 @@ export class AuthGuard implements CanActivate {
 
     private nonSecuredUrls = [
         "/app/about-us",
+        "/app/faq",
         "/app/home",
+        "/app/be-a-partner",
+        "/app/privacy-policy",
+        "/app/terms-of-use"
     ];
 
     constructor(

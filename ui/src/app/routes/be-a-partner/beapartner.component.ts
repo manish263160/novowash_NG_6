@@ -38,7 +38,7 @@ export class BeAPartnerComponent implements OnInit, OnDestroy {
 
     public initPartnerForm() {
         this.partnerForm = this.fb.group({
-            email: ["", Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])],
+            // email: ["", Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])],
             name: ["", Validators.compose([Validators.required, Validators.pattern(this.namePattern)])],
             number: ["", Validators.compose([Validators.required, ValidatorService.phoneValidator])],
             service: ["", Validators.compose([Validators.required])],

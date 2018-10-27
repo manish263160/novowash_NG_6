@@ -69,6 +69,9 @@ export class LayoutComponent implements OnInit, OnDestroy {
             page: "about-us",
             text: "About Us"
         }, {
+            page: "be-a-partner",
+            text: "Be A Partner"
+        }, {
             page: "faq",
             text: "Frequently Asked Questions"
         }, {

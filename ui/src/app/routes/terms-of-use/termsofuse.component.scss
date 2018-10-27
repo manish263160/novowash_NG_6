@@ -1,0 +1,63 @@
+.tou-wrap {
+    max-width: 1170px;
+    margin-left: auto;
+    margin-right: auto;
+    .tou-content-wrap {
+        padding-right: 15px;
+        padding-left: 15px;
+        .tou-header {
+            text-align: center;
+            font-size: 40px;
+            line-height: 3em;
+        }
+        .tou-qsec {
+            margin-bottom: 30px;
+            color: #999999;
+            .tou-serials {
+                .serial-number {
+                    width: 50px;
+                    text-align: center;
+                    font-size: 24px;
+                    display: block;
+                }
+                &.tou-intro-serials {
+                    opacity: 0;
+                }
+            }
+            .tou-qa {
+                & > * {
+                    margin: 0;
+                }
+                .tou-q {
+                    font-size: 21px;
+                    text-align: justify;
+                    font-weight: 700;
+                }
+                .tou-a {
+                    text-align: justify;
+                    line-height: 30px;
+                }
+            }
+        }
+    }
+    // .faq-content-wrap {
+    //     & > div {
+    //         padding: 65px;
+    //     }
+    // }
+}
+
+@media (max-width: 767px) {
+    .tou-wrap {
+        max-width: 96vw;
+        .tou-content-wrap {
+            padding-right: 0;
+            padding-left: 0;
+        }
+        // .faq-content-wrap {
+        //     & > div {
+        //         padding: 24px 0;
+        //     }
+        // }
+    }
+}

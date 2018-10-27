@@ -69,3 +69,25 @@
         }
     }
 }
+
+@media (max-width: 767px) {
+    .about-us-wrap {
+        margin-left: 0;
+        margin-right: 0;
+        .about-us-content-wrap {
+            & > div {
+                padding: 24px 0;
+            }
+            .sec-vision-img {
+                height: 288px;
+            }
+            .founders-section {
+                .sec-vision-content {
+                    .sec-text {
+                        padding: 0 12px;
+                    }
+                }
+            }
+        }
+    }
+}

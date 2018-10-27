@@ -1,0 +1,47 @@
+<div class="tou-wrap" *ngIf="touItems?.length">
+    <div fxLayout="column" class="tou-content-wrap">
+        <h1 class="tou-header">
+            Terms of Use
+        </h1>
+        <div class="tou-qsec" fxLayout="row" fxLayoutGap="16px">
+            <div class="tou-serials tou-intro-serials">
+                <span class="serial-number">{{ 0 | number : '2.0-0' }}</span>
+            </div>
+            <div class="tou-qa" fxLayout="column" fxLayoutGap="12px">
+                <p class="tou-q">
+                    {{ touIntro.question }}
+                </p>
+                <p class="tou-a">
+                    {{ touIntro.answer }}
+                </p>
+            </div>
+        </div>
+        <div class="tou-qsec" fxLayout="row" fxLayoutGap="16px"
+            *ngFor="let touItem of touItems; let i = index;">
+            <div class="tou-serials">
+                <span class="serial-number">{{ (i + 1) | number : '2.0-0' }}</span>
+            </div>
+            <div class="tou-qa" fxLayout="column" fxLayoutGap="12px">
+                <p class="tou-q">
+                    {{ touItem.question }}
+                </p>
+                <ng-container *ngIf="i === 0 else normalTmpl">
+                    <p class="tou-a">
+                        {{ touItem.preanswer }}
+                    </p>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <p class="tou-a">
+                        {{ touItem.answer }}
+                    </p>
+                </ng-container>
+                <ng-template #normalTmpl>
+                    <p class="tou-a">
+                        {{ touItem.answer }}
+                    </p>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>

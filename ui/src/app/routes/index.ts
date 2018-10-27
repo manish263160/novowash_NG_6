@@ -23,6 +23,18 @@ export const routes: Routes = [
                 path: "home",
             },
             {
+                loadChildren: "./routes/faq/faq.module#FAQModule",
+                path: "faq",
+            },
+            {
+                loadChildren: "./routes/privacy-policy/privacypolicy.module#PrivacyPolicyModule",
+                path: "privacy-policy",
+            },
+            {
+                loadChildren: "./routes/terms-of-use/termsofuse.module#TermsOfUseModule",
+                path: "terms-of-use",
+            },
+            {
                 loadChildren: "./routes/booking-detail/booking-detail.module#BookingDetailModule",
                 path: "mybookings/:id",
             },
