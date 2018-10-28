@@ -16,19 +16,22 @@
             <form [formGroup]="addressForm" novalidate>
                 <div class="bd-content-1-wrap" fxLayout="column" fxLayoutGap="32px" fxLayoutGap.lt-sm="24px">
                     <span class="spacer"></span>
-                    <mat-form-field fxFlex="1 1 100%">
-                        <input matInput formControlName="addressLine" required type="text" placeholder="Address">
+                    <mat-form-field appearance="outline" fxFlex="1 1 100%">
+                        <mat-label>Address</mat-label>
+                        <input matInput formControlName="addressLine" required type="text">
                         <mat-error *ngIf="(addressForm.controls.addressLine.errors | firstKey) === 'required' && addressForm.controls['addressLine'].touched">
                             Address is required
                         </mat-error>
                     </mat-form-field>
-                    <span class="spacer" class="spacer-addr-1"></span>
+                    <mat-form-field fxFlex="1 1 100%" appearance="outline">
+                        <mat-label>Landmark (optional)</mat-label>
+                        <input matInput formControlName="landmark" type="text">
+                    </mat-form-field>
+                    <!-- <span class="spacer" class="spacer-addr-1"></span> -->
                     <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="24px">
-                        <mat-form-field fxFlex="1 1 30%" fxFlex.lt-sm="1 1 100%">
-                            <input matInput formControlName="landmark" type="text" placeholder="Landmark (optional)">
-                        </mat-form-field>
-                        <mat-form-field fxFlex="1 1 30%" fxFlex.lt-sm="1 1 100%">
-                            <mat-select placeholder="City" required formControlName="city">
+                        <mat-form-field fxFlex="1 1 50%" fxFlex.lt-sm="1 1 100%" appearance="outline">
+                            <mat-label>City</mat-label>
+                            <mat-select required formControlName="city">
                                 <mat-option *ngFor="let city of cities" [value]="city.value">
                                 {{ city.viewValue }}
                                 </mat-option>
@@ -37,8 +40,9 @@
                                 City is required
                             </mat-error>
                         </mat-form-field>
-                        <mat-form-field fxFlex="1 1 30%" fxFlex.lt-sm="1 1 100%">
-                            <input matInput formControlName="pincode" required type="text" placeholder="PIN Code">
+                        <mat-form-field fxFlex="1 1 50%" fxFlex.lt-sm="1 1 100%" appearance="outline">
+                            <mat-label>PIN Code</mat-label>
+                            <input matInput formControlName="pincode" required type="text">
                             <mat-error *ngIf="(addressForm.controls.pincode.errors | firstKey) === 'required' && addressForm.controls['pincode'].touched">
                                 PIN Code is required
                             </mat-error>

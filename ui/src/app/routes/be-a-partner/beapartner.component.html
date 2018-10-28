@@ -10,8 +10,9 @@
                     <h2 class="sec-header">Become a Novowash Partner within minutes</h2>
                     <form [formGroup]="partnerForm" novalidate>
                         <div fxLayout="column" fxLayoutGap="12px" class="form-el-wrap">
-                            <mat-form-field floatLabel="never">
-                                <input type="text" placeholder="Select your service" 
+                            <mat-form-field appearance="outline">
+                                <mat-label>Select your service*</mat-label>
+                                <input type="text" placeholder="Type to find your service..." 
                                     matInput [matAutocomplete]="auto" formControlName="service" novalidate
                                     #txtSearch autocomplete="off" (keyup)="getSearchResult(txtSearch.value)">
                                     <mat-error *ngIf="(partnerForm.controls['service'].errors | firstKey) ==='required' && partnerForm.controls['service'].touched">
@@ -28,8 +29,9 @@
                                 </mat-option>
                                 </mat-autocomplete>
                             </mat-form-field>
-                            <mat-form-field floatLabel="never">
-                                <input type="text" matInput placeholder="Name" formControlName="name" novalidate>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Name*</mat-label>
+                                <input type="text" matInput placeholder="Your name" formControlName="name" novalidate>
                                 <mat-error *ngIf="(partnerForm.controls['name'].errors | firstKey) ==='required' && partnerForm.controls['name'].touched">
                                     Name is required
                                 </mat-error>
@@ -48,9 +50,9 @@
                                     </mat-error>
                                 </mat-form-field>
                             </div> -->
-                            <mat-form-field floatLabel="never">
-                                <span matPrefix>+91 &nbsp;</span>
-                                <input type="tel" matInput placeholder="Contact Number" formControlName="number" novalidate>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Mobile Number*</mat-label>
+                                <input type="tel" matInput placeholder="Your 10-digit mobile number" formControlName="number" novalidate>
                                 <mat-error *ngIf="(partnerForm.controls['number'].errors | firstKey) ==='required' && partnerForm.controls['number'].touched">
                                     Mobile number is required
                                 </mat-error>

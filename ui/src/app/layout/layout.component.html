@@ -62,16 +62,18 @@
                 (click)="$event.stopPropagation(); $event.preventDefault();">
                 <h4 class="help-header">Need Help?</h4>
                 <h6 class="help-sub-header">We will get in touch with you in 24 hours</h6>
-                <span class="spacer" style="height: 8px"></span>
-                <mat-form-field>
-                    <input matInput formControlName="name" type="text" placeholder="Name*">
+                <span class="spacer" style="height: 16px"></span>
+                <mat-form-field appearance="outline">
+                    <mat-label>Name*</mat-label>
+                    <input matInput formControlName="name" type="text" placeholder="Your name">
                     <mat-error *ngIf="(helpForm.controls.name.errors | firstKey) === 'required' && helpForm.controls['name'].touched">
                         Name is required
                     </mat-error>
                 </mat-form-field>
                 <span class="spacer" style="height: 4px"></span>
-                <mat-form-field>
-                    <input type="tel" cdkFocusRegionstart matInput placeholder="Mobile*" formControlName="number" novalidate>
+                <mat-form-field appearance="outline">
+                    <mat-label>Mobile Number*</mat-label>
+                    <input type="tel" cdkFocusRegionstart matInput placeholder="Your 10-digit mobile number" formControlName="number" novalidate>
                     <mat-error *ngIf="(helpForm.controls['number'].errors | firstKey) ==='required' && helpForm.controls['number'].touched">
                         Mobile number is required
                     </mat-error>
@@ -79,7 +81,7 @@
                         Please enter a valid mobile number
                     </mat-error>
                 </mat-form-field>
-                <span class="spacer" style="height: 20px"></span>
+                <span class="spacer" style="height: 12px"></span>
                 <button mat-raised-button color="primary" (click)="onClickHelpSubmit()"
                     [disabled]="helpForm.invalid">
                     Submit

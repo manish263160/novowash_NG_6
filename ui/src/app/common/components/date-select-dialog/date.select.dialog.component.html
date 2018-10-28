@@ -37,8 +37,9 @@
             </ng-container>
             <ng-container *ngIf="type === 'package'">
                 <div fxLayout="column" class="bd-content-1-wrap" fxLayout="column" fxLayoutGap="24px" *ngIf="calendarData">
-                    <mat-form-field class="dp-disabled dp-package-time">
-                        <input matInput placeholder="Choose a date" (dateChange)="onPDateChange($event)" (click)="picker.open()"
+                    <mat-form-field class="dp-disabled dp-package-time" appearance="outline">
+                        <mat-label>Choose a date</mat-label>
+                        <input matInput (dateChange)="onPDateChange($event)" (click)="picker.open()"
                             [min]="calendarData.minDate" [max]="calendarData.maxDate" [matDatepicker]="picker" readonly>
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker [touchUi]="commonService.getViewPort() === 'mobile'"></mat-datepicker>

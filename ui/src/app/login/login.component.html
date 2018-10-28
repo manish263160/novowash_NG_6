@@ -31,19 +31,9 @@
                     <h1>Almost there!</h1>
                     <h3>Please login/signup to continue</h3>
                 </div>
-                <mat-form-field floatLabel="never" *ngIf="isNewUser">
-                    <span matPrefix>+91 &nbsp;</span>
-                    <input type="text" matInput placeholder="Name" formControlName="name" novalidate>
-                    <mat-error *ngIf="(loginForm.controls['name'].errors | firstKey) ==='required' && loginForm.controls['name'].touched">
-                        Name is required
-                    </mat-error>
-                    <mat-error *ngIf="(loginForm.controls['name'].errors | firstKey) === 'pattern' && loginForm.controls['name'].touched">
-                        Please enter a valid name
-                    </mat-error>
-                </mat-form-field>
-                <mat-form-field floatLabel="never">
-                    <span matPrefix>+91 &nbsp;</span>
-                    <input type="tel" cdkFocusRegionstart matInput placeholder="Mobile Number" formControlName="number" novalidate>
+                <mat-form-field appearance="outline">
+                    <mat-label>Mobile Number</mat-label>
+                    <input type="tel" cdkFocusRegionstart matInput formControlName="number" novalidate placeholder="Your 10-digit mobile number">
                     <mat-error *ngIf="(loginForm.controls['number'].errors | firstKey) ==='required' && loginForm.controls['number'].touched">
                         Mobile number is required
                     </mat-error>
@@ -51,8 +41,9 @@
                         Please enter a valid mobile number
                     </mat-error>
                 </mat-form-field>
-                <mat-form-field floatLabel="never" *ngIf="isExistingUser">
-                    <input type="text" matInput placeholder="Enter 6 digit OTP" formControlName="otp" novalidate>
+                <mat-form-field appearance="outline" *ngIf="isExistingUser">
+                    <mat-label>OTP</mat-label>
+                    <input type="text" matInput placeholder="Enter 6-digit OTP" formControlName="otp" novalidate>
                     <mat-error *ngIf="(loginForm.controls['otp'].errors | firstKey) ==='required' && loginForm.controls['otp'].touched">
                         OTP is required
                     </mat-error>
@@ -61,15 +52,6 @@
                     </mat-error>
                     <mat-error *ngIf="(loginForm.controls['otp'].errors | firstKey) ==='maxLength' && loginForm.controls['otp'].touched">
                         Please enter valid 6-digit OTP
-                    </mat-error>
-                </mat-form-field>
-                <mat-form-field floatLabel="never" *ngIf="isNewUser">
-                    <input type="email" matInput placeholder="Email" formControlName="email" novalidate>
-                    <mat-error *ngIf="(loginForm.controls['email'].errors | firstKey) ==='required' && loginForm.controls['email'].touched">
-                        Email is required
-                    </mat-error>
-                    <mat-error *ngIf="(loginForm.controls['email'].errors | firstKey) ==='pattern' && loginForm.controls['email'].touched">
-                        Please enter valid email id
                     </mat-error>
                 </mat-form-field>
                 <span class="spacer" style="height: 24px;"></span>

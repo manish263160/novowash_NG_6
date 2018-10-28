@@ -3350,3 +3350,7 @@ mat-dialog-container.mat-dialog-container {
 .mat-datepicker-content-touch {
   margin: 0 !important;
 }
+
+.mat-form-field-appearance-outline.mff-prefix-zero .mat-form-field-prefix {
+  top: 0;
+}

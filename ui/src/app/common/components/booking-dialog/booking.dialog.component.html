@@ -103,12 +103,12 @@
                                 *ngFor="let mainPack of mainPackages; let mi = index">
                                 <span class="lr-label">{{ mainPack?.userInputs }}</span>
                                 <div class="control-pm" fxLayout="row">
-                                    <button mat-raised-button mat-icon-button class="btn-control plus"
+                                    <button mat-button class="btn-control plus"
                                         (click)="updatePackageSelection(1, mainPack)">
                                         <mat-icon>add</mat-icon>
                                     </button>
                                     <span class="value">{{ mainPack?.selectedValue }}</span>
-                                    <button mat-raised-button mat-icon-button class="btn-control minus"
+                                    <button mat-button class="btn-control minus"
                                         (click)="updatePackageSelection(-1, mainPack)">
                                         <mat-icon>remove</mat-icon>
                                     </button>
@@ -122,12 +122,12 @@
                                         <span class="service-icon" [style.backgroundImage]="getBackground(extraPack.imageUrl)"></span>
                                         <span class="ud-label small">{{ extraPack?.userInputs }}</span>
                                         <div class="control-pm small" fxLayout="row">
-                                            <button mat-raised-button mat-icon-button class="btn-control plus"
+                                            <button mat-button class="btn-control plus"
                                                 (click)="updatePackageSelection(1, extraPack)">
                                                 <mat-icon>add</mat-icon>
                                             </button>
                                             <span class="value">{{ extraPack?.selectedValue }}</span>
-                                            <button mat-raised-button mat-icon-button class="btn-control minus"
+                                            <button mat-button class="btn-control minus"
                                                 (click)="updatePackageSelection(-1, extraPack)">
                                                 <mat-icon>remove</mat-icon>
                                             </button>
@@ -144,12 +144,12 @@
                                 <span class="service-icon" [style.backgroundImage]="getBackground(mainPack.imageUrl)" *ngIf="mainServiceType === 5"></span>
                                 <span class="ud-label">{{ mainPack?.userInputs }}</span>
                                 <div class="control-pm" fxLayout="row">
-                                    <button mat-raised-button mat-icon-button class="btn-control plus"
+                                    <button mat-button class="btn-control plus"
                                         (click)="updatePackageSelection(1, mainPack)">
                                         <mat-icon>add</mat-icon>
                                     </button>
                                     <span class="value">{{ mainPack?.selectedValue }}</span>
-                                    <button mat-raised-button mat-icon-button class="btn-control minus"
+                                    <button mat-button class="btn-control minus"
                                         (click)="updatePackageSelection(-1, mainPack)">
                                         <mat-icon>remove</mat-icon>
                                     </button>
@@ -171,12 +171,12 @@
                                 <span class="service-icon"></span>
                                 <span class="ud-label">{{ categorisedPackages[0].items[0].unitName }}</span>
                                 <div class="control-pm" fxLayout="row">
-                                    <button mat-raised-button mat-icon-button class="btn-control plus"
+                                    <button mat-button class="btn-control plus"
                                         (click)="updatePackageSelection(1, group3.value)">
                                         <mat-icon>add</mat-icon>
                                     </button>
                                     <span class="value">{{ group3.value.selectedValue }}</span>
-                                    <button mat-raised-button mat-icon-button class="btn-control minus"
+                                    <button mat-button class="btn-control minus"
                                         (click)="updatePackageSelection(-1, group3.value)">
                                         <mat-icon>remove</mat-icon>
                                     </button>
