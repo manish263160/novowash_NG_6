@@ -63,7 +63,7 @@
                             <div fxLayout="row" fxLayoutGap="16px" fxLayoutGap.lt-sm="0" class="fwrap" fxLayoutAlign.lt-sm="space-evenly start">
                                 <div class="control-ud-pm" [ngClass]="{'ctrl-compact': commonService.getViewPort() === 'mobile'}"
                                     fxLayout="column" fxLayoutGap="12px"
-                                    *ngFor="let mainPack of categorisedPackages[group1.value]?.mainPackages; let mi = index">
+                                    *ngFor="let mainPack of ((group1 && group1.value) ? categorisedPackages[group1.value]?.mainPackages : categorisedPackages[packageCategories[0]].mainPackages); let mi = index">
                                     <span class="ud-label">{{ mainPack?.userInputs }}</span>
                                     <div class="control-pm" fxLayout="row">
                                         <button mat-button class="btn-control plus"
@@ -93,7 +93,7 @@
                                 </mat-button-toggle-group>
                             </label>
                             <div class="control-lr-pm" fxLayout="row" fxLayoutGap="12px"
-                                *ngFor="let mainPack of categorisedPackages[group2.value]?.mainPackages; let mi = index">
+                                *ngFor="let mainPack of ((group2 && group2.value) ? categorisedPackages[group2.value]?.mainPackages : categorisedPackages[packageCategories[0]]?.mainPackages); let mi = index">
                                 <span class="lr-label">{{ mainPack?.userInputs }}</span>
                                 <div class="control-pm" fxLayout="row">
                                     <button mat-button class="btn-control plus"
@@ -154,23 +154,21 @@
                                 </mat-button-toggle-group>
                             </label>
                             <span class="spacer"></span>
-                            <ng-container *ngIf="categorisedPackages[group3.value] && categorisedPackages[group3.value][group4.value]">
-                                <div class="control-lr-pm" fxLayout="row" fxLayoutGap="12px"
-                                    *ngFor="let mainPack of categorisedPackages[group3.value][group4.value].mainPackages; let mi = index">
-                                    <span class="lr-label">{{ mainPack?.unitName }}</span>
-                                    <div class="control-pm" fxLayout="row">
-                                        <button mat-button class="btn-control plus"
-                                            (click)="updatePackageSelection(1, mainPack)">
-                                            <mat-icon>add</mat-icon>
-                                        </button>
-                                        <span class="value">{{ mainPack?.selectedValue }}</span>
-                                        <button mat-button class="btn-control minus"
-                                            (click)="updatePackageSelection(-1, mainPack)">
-                                            <mat-icon>remove</mat-icon>
-                                        </button>
-                                    </div>
+                            <div class="control-lr-pm" fxLayout="row" fxLayoutGap="12px"
+                                *ngFor="let mainPack of ((group3 && group4 && group3.value && group4.value) ? categorisedPackages[group3.value][group4.value].mainPackages : categorisedPackages[packageCategories[0]][subPackageCategories[0]].mainPackages); let mi = index">
+                                <span class="lr-label">{{ mainPack?.unitName }}</span>
+                                <div class="control-pm" fxLayout="row">
+                                    <button mat-button class="btn-control plus"
+                                        (click)="updatePackageSelection(1, mainPack)">
+                                        <mat-icon>add</mat-icon>
+                                    </button>
+                                    <span class="value">{{ mainPack?.selectedValue }}</span>
+                                    <button mat-button class="btn-control minus"
+                                        (click)="updatePackageSelection(-1, mainPack)">
+                                        <mat-icon>remove</mat-icon>
+                                    </button>
                                 </div>
-                            </ng-container>
+                            </div>
 
                             <!-- <div class="control-ud-pm" fxLayout="column" fxLayoutGap="12px">
                                 <span class="service-icon"></span>
