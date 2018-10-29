@@ -21,9 +21,9 @@ export class NovoUserAddressPipe implements PipeTransform {
         let address = "";
         try {
             let addrObj = JSON.parse(input.userAddress);
-            address = 
-                addrObj.addressLine + ", " + 
-                ((addrObj.landmark && addrObj.landmark.length) ? (addrObj.landmark + ", ") : "" ) + 
+            address =
+                addrObj.addressLine + ", " +
+                ((addrObj.landmark && addrObj.landmark.length) ? (addrObj.landmark + ", ") : "" ) +
                 input.city + " " + addrObj.pincode;
         } catch (e) {}
         return address;
@@ -105,10 +105,10 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         this.initUserForm();
         this.onClickLeftMenu('profile');
         if (this.ropcService.user) {
-            this.userEmailString = 
+            this.userEmailString =
                 (this.ropcService.user.email && this.ropcService.user.email.length) ? this.ropcService.user.email : "<user email id not available>";
             this.getBookedItems("service");
-            this.getBookedItems("package");            
+            this.getBookedItems("package");
         }
     }
 
@@ -128,15 +128,15 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
     public initUserForm() {
         this.userForm = this.fb.group({
-            email: [this.ropcService.user.email, Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])],
-            name: [this.ropcService.user.username, Validators.compose([Validators.required, Validators.pattern(this.namePattern)])],
+            email: [this.ropcService.user ? this.ropcService.user.email: '' , Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])],
+            name: [this.ropcService.user ? this.ropcService.user.username : '', Validators.compose([Validators.required, Validators.pattern(this.namePattern)])],
         });
     }
 
     public saveUserDetailEdit() {
         this.userUpdateSub = this.profileService.updateUserDetails(
-            this.ropcService.user.id, 
-            this.userForm.controls.name.value, 
+            this.ropcService.user.id,
+            this.userForm.controls.name.value,
             this.userForm.controls.email.value
         ).subscribe((res) => {
                 if (res === true) {

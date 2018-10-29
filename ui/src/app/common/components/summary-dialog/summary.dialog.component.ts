@@ -16,6 +16,7 @@ export class SummaryDialogComponent implements OnInit {
     @Input() public isForPackage: boolean = false;
     @Output() public onSummaryCancelled: EventEmitter<any> = new EventEmitter();
     @Output() public onSummaryConfirmed: EventEmitter<any> = new EventEmitter();
+    @Output() public onCashOndelivery: EventEmitter<any> = new EventEmitter();
 
     public noCouponEntered: boolean;
     public noValidCouponCode: boolean;
@@ -33,6 +34,10 @@ export class SummaryDialogComponent implements OnInit {
         if (!this.selectedServices) {
             this.selectedServices = {};
         }
+    }
+
+    public cashOndelivery(){
+      this.onCashOndelivery.emit();
     }
 
     public submitSummary() {

@@ -103,13 +103,17 @@
             <span class="amount">{{ selectedServices?.totalAmount | number }}</span>
         </div>
         <span fxFlex></span>
+        <button mat-raised-button class="btn-p-next"
+            (click)="cashOndelivery()">
+            Cash On delivery
+        </button>
         <button mat-raised-button class="btn-p-next" color="primary"
             (click)="submitSummary()">
-            Proceed to Pay
+            Pay Online
         </button>
         <!-- <span fxFlex></span>
         <button cdkFocusRegionstart mat-raised-button class="btn-p-proceed" color="primary"
-            (click)="submitSummary()">        
+            (click)="submitSummary()">
             <span class="spn-amount">Rs. {{ selectedServices?.totalAmount | number }}</span>
             <span class="fill-remaining-space"></span>
             <span class="spn-text">Proceed to Pay</span>

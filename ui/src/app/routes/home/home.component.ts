@@ -303,6 +303,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
         this.dialogRef.componentInstance.onSummaryCancelled.subscribe(() => {
             console.log("onSummaryCancelled()");
+            const isCanceled = true;
+          this.submitCashOndelivery(isCanceled);
             this.dialogRef.close();
         });
         this.dialogRef.componentInstance.onSummaryConfirmed.subscribe(() => {
@@ -311,6 +313,14 @@ export class HomeComponent implements OnInit, OnDestroy {
             this.dialogRef.close();
             // this.proceedToPayment();
         });
+        this.dialogRef.componentInstance.onCashOndelivery.subscribe(() => {
+          console.log("onCashOndelivery()");
+          const isCanceled = false;
+          this.submitCashOndelivery(isCanceled);
+          this.dialogRef.close();
+          // this.proceedToPayment();
+      });
+
         // this.dialogRef.afterClosed().subscribe((result) => {
         //     this.dialogRef = null;
         // });
@@ -341,6 +351,44 @@ export class HomeComponent implements OnInit, OnDestroy {
         // });
     }
 
+    public submitCashOndelivery(isCanceled: boolean=false) {
+      const rUser = this.ropcService.user;
+      let emailId: string;
+      try {
+          emailId = rUser.email ? rUser.email : this.selectedServices.dateUserDetails.contactDetails.email;
+      } catch (e) {
+          emailId = "sample@abc.com";
+      }
+      this.selectedServices.userid = rUser.id;
+      const payload = {
+          name: rUser.username,
+          email: emailId,
+          phone: rUser.mobile_number,
+          currency: "INR",
+          amount: this.selectedServices.totalAmount,
+          description: "For Novowash Service Booking",
+          successUrl: `${location.href}?p=success`,
+          failUrl: `${location.href}?p=fail`,
+          selectedServices: this.selectedServices,
+          paymentMode: isCanceled ? 'CANCELED' : 'CASHON_DELIVERY',
+      };
+
+          this.pSub = this.servicesService.getPaymentUrl(payload)
+              .subscribe((res) => {
+              if(!isCanceled){
+                  this.dialogRef = this.dialog.open(BookingEndDialogComponent, this.config);
+                  // if(res.status === 'SUCCESS')
+                  this.dialogRef.componentInstance.isSuccess = true;
+                  this.dialogRef.componentInstance.totalAmount = this.selectedServices.totalAmount;
+                  this.dialogRef.componentInstance.isChashOn = true;
+                  this.dialogRef.componentInstance.onBookingEndClosed.subscribe(() => {
+                      console.log("onBookingEndClosed()");
+                      this.dialogRef.close();
+                  });
+                }
+              });
+  }
+
     public getPaymentUrl(isForPackage: boolean = false) {
         const rUser = this.ropcService.user;
         let emailId: string;
@@ -360,6 +408,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             successUrl: `${location.href}?p=success`,
             failUrl: `${location.href}?p=fail`,
             selectedServices: this.selectedServices,
+            paymentMode: 'ONLINE',
         };
         if (isForPackage) {
             this.pSub = this.servicesService.getPackagePaymentUrl(payload)

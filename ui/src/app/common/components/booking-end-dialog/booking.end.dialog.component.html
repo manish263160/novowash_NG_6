@@ -20,6 +20,12 @@
                     <mat-icon *ngIf="!isSuccess">error_outline</mat-icon>
                     <h3>{{ isSuccess ? 'Thank You' : 'Something went wrong'}}</h3>
                 </div>
+                <ng-container *ngIf="isChashOn else withOutCashOn"  >
+                    <div class="be-content">
+                        You have selected cashon delivery. We will call you soon.
+                    </div>
+                </ng-container>
+                <ng-template #withOutCashOn >
                 <div class="be-content">
                     <ng-container *ngIf="isSuccess else errorTmpl">
                         Payment of Rs. {{ totalAmount }} made successfully,
@@ -32,6 +38,7 @@
                         You can always retry booking the service(s) you require.
                     </ng-template>
                 </div>
+              </ng-template>
             </div>
         </div>
     </div>

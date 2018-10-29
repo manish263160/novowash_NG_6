@@ -172,6 +172,13 @@
                                                 <span *ngSwitchDefault class="spdc-value value-status">{{ service.bookingStatus }}</span>
                                             </ng-container>
                                         </div>
+                                        <div class="sp-detail-sec" fxLayout="row">
+                                            <span class="spdc-label">Payment Mode</span>
+                                            <ng-container [ngSwitch]="service.paymentMode">
+                                                <span *ngSwitchCase="'CASHON_DELIVERY'" class="spdc-value value-status success">Cash On Delivery</span>
+                                                <span *ngSwitchCase="'ONLINE'" class="spdc-value value-status success">Online</span>
+                                            </ng-container>
+                                        </div>
                                     </div>
                                     <div class="action-seg" fxLayout="row" fxLayoutGap="8px">
                                         <div class="as-sec" fxLayout="column">
@@ -271,7 +278,7 @@
     </ng-container>
     <ng-template #noUserTmpl>
         <div class="user-profile-wrap" fxLayout="column">
-            <h1>Not Logged In</h1>
+            <h1>You Are Not Logged In</h1>
             <p>Please log in to see profile information</p>
         </div>
     </ng-template>

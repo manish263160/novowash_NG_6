@@ -10,6 +10,7 @@ import { ROPCService } from "../../../../app/auth/ropc.service";
 })
 export class BookingEndDialogComponent implements OnInit {
     @Input() public isSuccess: boolean;
+    @Input() public isChashOn: boolean;
     @Input() public totalAmount: any;
     @Output() public onBookingEndClosed: EventEmitter<any> = new EventEmitter();
 

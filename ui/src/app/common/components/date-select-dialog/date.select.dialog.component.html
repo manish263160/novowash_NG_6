@@ -16,16 +16,19 @@
             <ng-container *ngIf="type === 'service'">
                 <div fxLayout="column" class="bd-content-1-wrap" fxLayout="column" fxLayoutGap="24px" *ngIf="dateTimeSlots && dateTimeSlots.length">
                     <span class="spacer"></span>
-                    <label class="lbl-date-time date">Date</label>
+                    <label class="lbl-date-time date">Select date for service</label>
                     <div fxLayout="row" class="date-time-box-wrap date" fxLayoutGap="12px">
                         <div class="date-time-box" *ngFor="let dateTimeSlot of dateTimeSlots; let i = index"
                             [ngClass]="{'selected': i === selectedDateIndex, 'blocked': dateTimeSlot.isBlocked}"
                             (click)="selectDateIndex(i)">
-                            <span>{{ dateTimeSlot.dateText }}</span>
+                            <div class="date-box">
+                            <span class="day-text">{{ dateTimeSlot.dayText}}</span>
+                            <span class="date">{{ dateTimeSlot.dateText }}</span>
+                          </div>
                         </div>
                     </div>
                     <span class="spacer"></span>
-                    <label class="lbl-date-time">Select Time Slots</label>
+                    <label class="lbl-date-time">Select time slots</label>
                     <div fxLayout="row" class="date-time-box-wrap" fxLayoutGap="20px">
                         <div class="date-time-box time-box" *ngFor="let timeSlot of dateTimeSlots[selectedDateIndex]?.timeSlots; let j = index"
                             [ngClass]="{'selected': j === selectedTimeIndex, 'blocked': timeSlot.isBlocked}"

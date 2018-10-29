@@ -65,7 +65,10 @@ export class DateSelectDialogComponent implements OnDestroy, OnInit {
                     this.dateTimeSlots = [];
                     Object.keys(dtObject).forEach((key) => {
                         const dA = key.split("##");
-                        const b = {date: dA[0], dateText: dA[0].split("-")[2], isBlocked: (dA[1] === "false" ? true : false), timeSlots: []};
+                        const day = dA[0] !== undefined ? new Date(dA[0]).getDay() : null;
+                        const daysArray = ['Sun','Mon','Tue','Wed','Thur','Fri','Sat'];
+                        // console.log("----",day,"============"+daysArray[0]);
+                        const b = {date: dA[0], dateText: dA[0].split("-")[2], isBlocked: (dA[1] === "false" ? true : false), timeSlots: [], dayText : day ? daysArray[day]: ''};
                         const tO = dtObject[key];
                         if (tO) {
                             Object.keys(tO).forEach((tKey) => {

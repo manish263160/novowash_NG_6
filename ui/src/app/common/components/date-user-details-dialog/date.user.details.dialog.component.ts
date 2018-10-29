@@ -35,7 +35,7 @@ export class DateUserDetailsDialogComponent implements OnDestroy, OnInit {
     public pattern = "^(([^<>()\\[\\]\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\\.)+[a-zA-Z]{2,}))$";
 
     private subServiceSub: any;
-    
+
     constructor(
         public commonService: CommonService,
         private dialog: MatDialog ,
@@ -96,7 +96,10 @@ export class DateUserDetailsDialogComponent implements OnDestroy, OnInit {
                     this.dateTimeSlots = [];
                     Object.keys(dtObject).forEach((key) => {
                         const dA = key.split("##");
-                        const b = {date: dA[0], dateText: dA[0].split("-")[2], isBlocked: (dA[1] === "false" ? true : false), timeSlots: []};
+                        const day:number = dA[0] !== undefined ? new Date(dA[0]).getDay() : null;
+                        let daysArray = ['Sun','Mon','Tue','Wed','Thur','Fri','Sat'];
+                        // console.log("----",day,"============"+daysArray[0]);
+                        const b = {date: dA[0], dateText: dA[0].split("-")[2], isBlocked: (dA[1] === "false" ? true : false), timeSlots: [] , dayText : day!=null ? daysArray[day]: ''} ;
                         const tO = dtObject[key];
                         if (tO) {
                             Object.keys(tO).forEach((tKey) => {
@@ -117,7 +120,7 @@ export class DateUserDetailsDialogComponent implements OnDestroy, OnInit {
                 this.allSubscriptions = sub;
             }
         }
-        this.selectedDateIndex = 
+        this.selectedDateIndex =
             (this.selectedDateTimeIndex && this.selectedDateTimeIndex[0]) ?
             this.selectedDateTimeIndex[0] : 0;
     }
