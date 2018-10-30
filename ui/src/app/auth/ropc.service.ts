@@ -9,6 +9,7 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 @Injectable()
 export class ROPCService {
   private _user: any;
+  public otp: any;
 
   constructor(private httpClient: HttpClient, private oauthService: OAuthService) {}
 
@@ -38,6 +39,7 @@ export class ROPCService {
         if (res) {
           localStorage.setItem("access_token", res.access_token);
           localStorage.setItem("refreshToken", res.refresh_token);
+          this.otp = password;
           const jwtHelper = new JwtHelperService();
           this.user = jwtHelper.decodeToken(res.access_token);
           if (this.user && !Object.keys(this.user).length) {
@@ -74,6 +76,37 @@ export class ROPCService {
     // return this.httpClient
     //   .delete(his.oauthService.tokenEndpoint, )
   }
+
+  // public getToken(username: string) {
+  //   const password = localStorage.getItem("otp");
+  //   const url = this.oauthService.tokenEndpoint
+  //     + `?grant_type=${environment.auth.grantType}&username=${username}&password=${password}`;
+
+    
+  //   const headers = new HttpHeaders()
+  //     .set("Content-type", "application/json")
+  //     .set("Authorization", "Basic " + btoa("novo-client:novo-secret"));
+
+  //   return this.httpClient
+  //     .post(url, "", {headers})
+  //     .pipe(map((res: { access_token: string, refresh_token: string }) => {
+  //       if (res) {
+  //         localStorage.setItem("access_token", res.access_token);
+  //         localStorage.setItem("refreshToken", res.refresh_token);
+  //         const jwtHelper = new JwtHelperService();
+  //         this.user = jwtHelper.decodeToken(res.access_token);
+  //         if (this.user && !Object.keys(this.user).length) {
+  //           this.user = null;
+  //         }
+  //         return this.user;
+  //       } else {
+  //         // this.user = {};
+  //         // return {};
+  //         this.user = null;
+  //         return null;
+  //       }
+  //     }));
+  // }
 
   public getLoggedInUser() {
     const access_token = localStorage.getItem("access_token");

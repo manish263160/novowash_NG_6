@@ -140,7 +140,10 @@ export class UserProfileComponent implements OnInit, OnDestroy {
             this.userForm.controls.email.value
         ).subscribe((res) => {
                 if (res === true) {
-                    location.reload();
+                    const loginSub = this.ropcService.login(this.ropcService.user.mobile_number, this.ropcService.otp)
+                        .subscribe((res) => {
+                                location.reload();
+                            });
                 }
             });
     }

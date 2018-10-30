@@ -213,6 +213,12 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
     public logout() {
         const user = this.ropcService.logOut();
+        if (this.router.url !== "/app/home") {
+            this.goToPage("home");
+        }
+        setTimeout(() => {
+            this.openLoginSignUpDialog();
+        }, 500);
         // this.user = null;
     }
 
