@@ -102,9 +102,9 @@
                     <!-- <h3>Please enter your contact details</h3> -->
                     <!-- <span class="spacer"></span> -->
                     <span class="spacer"></span>
-                    <mat-form-field>
-                        <span matPrefix>+91 &nbsp;</span>
-                        <input type="tel" matInput placeholder="Mobile Number" formControlName="number" novalidate>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Mobile Number*</mat-label>
+                        <input type="tel" matInput placeholder="Your 10-digit mobile number" formControlName="number" novalidate>
                         <mat-error *ngIf="(userForm.controls['number'].errors | firstKey) ==='required' && userForm.controls['number'].touched">
                             Mobile number is required
                         </mat-error>
@@ -112,8 +112,9 @@
                             Please enter a valid mobile number
                         </mat-error>
                     </mat-form-field>
-                    <mat-form-field>
-                        <input type="email" matInput placeholder="Email" formControlName="email" novalidate>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email*</mat-label>
+                        <input type="email" matInput placeholder="abc@xyz.com" formControlName="email" novalidate>
                         <mat-error *ngIf="(userForm.controls['email'].errors | firstKey) ==='required' && userForm.controls['email'].touched">
                             Email ID is required
                         </mat-error>

@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Input, Output, ViewEncapsulation } fro
 import { Observable, Subscription } from "rxjs";
 import 'rxjs/add/operator/catch';
 import { ROPCService } from "../../../../app/auth/ropc.service";
+import { CommonService } from "../../../common/services/common.service";
 import { ServicesService } from "../../../core/services/services.service";
 
 @Component({
@@ -26,6 +27,7 @@ export class SummaryDialogComponent implements OnInit {
     public packageSub: Subscription;
 
     constructor(
+        public commonService: CommonService,
         public servicesService: ServicesService,
         public ropcService: ROPCService,
     ) {}

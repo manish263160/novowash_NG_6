@@ -103,14 +103,27 @@
             <span class="amount">{{ selectedServices?.totalAmount | number }}</span>
         </div>
         <span fxFlex></span>
-        <button mat-raised-button class="btn-p-next"
-            (click)="cashOndelivery()">
-            Cash On delivery
-        </button>
-        <button mat-raised-button class="btn-p-next" color="primary"
-            (click)="submitSummary()">
-            Pay Online
-        </button>
+        <ng-container *ngIf="commonService.getViewPort() === 'mobile' else nrmTmpl1">
+            <button cdkFocusRegionstart mat-raised-button class="btn-p-next" color="primary"
+                [matMenuTriggerFor]="menu">
+                <span>Proceed to Pay</span>
+                <mat-icon>keyboard_arrow_down</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="cashOndelivery()">Cash On Delivery</button>
+                <button mat-menu-item (click)="submitSummary()">Pay Online</button>
+            </mat-menu>
+        </ng-container>
+        <ng-template #nrmTmpl1>
+            <button mat-raised-button class="btn-p-next"
+                (click)="cashOndelivery()">
+                Cash On Delivery
+            </button>
+            <button mat-raised-button class="btn-p-next" color="primary"
+                (click)="submitSummary()">
+                Pay Online
+            </button>
+        </ng-template>
         <!-- <span fxFlex></span>
         <button cdkFocusRegionstart mat-raised-button class="btn-p-proceed" color="primary"
             (click)="submitSummary()">
