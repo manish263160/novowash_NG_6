@@ -142,6 +142,14 @@ export class ServicesService {
 
     }
 
+    public submitBEApartner(payload): Observable<any> {
+      return this.http
+            .post(`${this.urlCommonPart}/permitall/partner/addPartner`, payload)
+            .pipe(map((res: any) => {
+                return res || {};
+            }));
+  }
+
     public getService(id): Observable<Service> {
         // return this.http
         //     .get(`/api/getService?id=${id}`)

@@ -23,6 +23,10 @@ export class BeAPartnerComponent implements OnInit, OnDestroy {
     public filteredOptions = [];
 
     private searchSub: any;
+    private serviceMasterId: any;
+    private serviceName: string;
+
+    private submit: Subscription;
 
     constructor(
         public snackBar: MatSnackBar,
@@ -46,11 +50,33 @@ export class BeAPartnerComponent implements OnInit, OnDestroy {
     }
 
     public submitPartnerForm() {
-        //
+      if (this.partnerForm.invalid) {
+        return;
+    }
+      console.log("this.partnerForm==",this.partnerForm.value);
+
+      const payload ={
+        partnerName: this.partnerForm.value.name ? this.partnerForm.value.name : '',
+        serviceMasterId: this.serviceMasterId ,
+        serviceName: this.serviceName ,
+        contactNumber: this.partnerForm.value.number ? this.partnerForm.value.number : '',
+      }
+
+      this.submit = this.servicesService.submitBEApartner(payload)
+            .subscribe((res) => {
+                console.log(`RES from help register:::: res==`,res);
+              if(res.status === 'SUCCESS'){
+
+                this.openSnackBar("Thank you for your interest. We will get back to you soon.", "success");
+              }
+            });
     }
 
     public onSearchItemClicked(event) {
         //
+        console.log("event==",event);
+        this.serviceMasterId = event.option.value.id;
+        this.serviceName = event.option.value.serviceName;
     }
 
     public getSearchResult(searchText) {
