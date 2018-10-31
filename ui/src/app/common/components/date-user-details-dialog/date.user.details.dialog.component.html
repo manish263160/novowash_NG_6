@@ -37,7 +37,7 @@
                 </div>
                 <span class="spacer"></span>
                 <label class="lbl-date-time">Select time slots</label>
-                <div fxLayout="row" class="date-time-box-wrap" fxLayoutGap="20px">
+                <div fxLayout="row" class="date-time-box-wrap">
                     <div class="date-time-box time-box" *ngFor="let timeSlot of dateTimeSlots[selectedDateIndex]?.timeSlots; let j = index"
                         [ngClass]="{'selected': (selectedDateTimeIndex && j === selectedDateTimeIndex[1]), 'blocked': timeSlot.isBlocked}"
                         (click)="selectTimeIndex(j)">

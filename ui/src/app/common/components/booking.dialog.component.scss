@@ -250,14 +250,15 @@
                                 cursor: pointer;
                                 width: 130px; // 160px;
                                 // box-shadow: 0 3px 3px rgba(56, 55, 55, 0.4);
-                                box-shadow: 0 0 2px 2px rgba(56, 55, 55, 0.4);
-                                border-radius: 4px;
+                                // box-shadow: 0 0 2px 2px rgba(56, 55, 55, 0.4);
+                                border-radius: 3px;
+                                border: 1px solid #ccc;
                                 cursor: pointer;
                                 transition: .2s ease-out!important;
                                 .service-icon {
                                     // height: 24px;
                                     width: 100%;
-                                    background-size: auto;
+                                    background-size: contain;
                                     background-repeat: no-repeat;
                                     background-position: center center;
                                     // margin: 0 20px 0 4px;
@@ -318,7 +319,11 @@
                                 &.selected {
                                     background: #6480f7;
                                     color: #fff;
-                                    // border: 1px solid #6480f7;
+                                    .date-box{
+                                        .day-text{
+                                          color: #fff;
+                                        }
+                                    }
                                 }
                                 &.blocked {
                                     opacity: 0.3;
@@ -326,17 +331,17 @@
                                     pointer-events: none;
                                 }
                                 &.time-box {
-                                    // height: 48px;
-                                    // width: 164px;
-                                    border: 1.5px solid #b6b6b9;
-                                    border-radius: 10px;
-                                    width: 92px;
-                                    font-size: 14px;
-                                    height: 50px;
-                                    justify-content: flex-start;
-                                    padding-top: 12px;
+                                    border: 1px solid #d7d7d7;
+                                    width: 112px;
+                                    -ms-flex-pack: start;
                                     white-space: normal;
-                                    // background-color: #c9cfe2;
+                                    border-radius: 2px;
+                                    display: flex;
+                                    height: 36px;
+                                    align-items: center;
+                                    justify-content: center;
+                                    font-size: 14px;
+                                    margin-right: 20px;
                                     &.selected {
                                         box-shadow: none;
                                         background-color: #6480f7;
@@ -358,6 +363,7 @@
                                   border-radius: 5%;
                                   .day-text{
                                     font-size: 12px;
+                                    color: #9e9e9e;
                                   }
                                 }
                             }
