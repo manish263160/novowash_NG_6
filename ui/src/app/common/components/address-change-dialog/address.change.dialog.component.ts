@@ -19,7 +19,7 @@ export class AddressChangeDialogComponent implements OnDestroy, OnInit {
     public allSubscriptions: Subscription;
     public addressForm: FormGroup;
     public cities: any[];
-    
+
     constructor(
         public commonService: CommonService,
         private fb: FormBuilder,
@@ -40,8 +40,8 @@ export class AddressChangeDialogComponent implements OnDestroy, OnInit {
     public loadCities() {
         this.cities = [
             {value: 'ncr-0', viewValue: 'Delhi-NCR'},
-            {value: 'mumbai-1', viewValue: 'Mumbai'},
-            {value: 'bangalore-2', viewValue: 'Bangalore'}
+           /*  {value: 'mumbai-1', viewValue: 'Mumbai'},
+            {value: 'bangalore-2', viewValue: 'Bangalore'} */
         ];
     }
 
@@ -58,7 +58,7 @@ export class AddressChangeDialogComponent implements OnDestroy, OnInit {
         try {
             const addr = JSON.parse(this.selectedService.userAddress);
             this.addressForm.patchValue(addr);
-        } catch (e) {} 
+        } catch (e) {}
     }
 
     public getCityName() {

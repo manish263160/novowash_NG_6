@@ -38,8 +38,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     public recommendedServiceItems = [];
     public cities = [
         {value: 'ncr-0', viewValue: 'Delhi-NCR'},
-        {value: 'mumbai-1', viewValue: 'Mumbai'},
-        {value: 'bangalore-2', viewValue: 'Bangalore'}
+       /*  {value: 'mumbai-1', viewValue: 'Mumbai'},
+        {value: 'bangalore-2', viewValue: 'Bangalore'} */
     ];
     public slideConfig: any = {"slidesToShow": 4, "slidesToScroll": 1, dots: true};
     public slideHListConfig: any = {"slidesToShow": 8, "slidesToScroll": 1};

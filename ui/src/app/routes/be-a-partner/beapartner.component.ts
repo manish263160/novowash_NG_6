@@ -66,7 +66,7 @@ export class BeAPartnerComponent implements OnInit, OnDestroy {
             .subscribe((res) => {
                 console.log(`RES from help register:::: res==`,res);
               if(res.status === 'SUCCESS'){
-
+                this.partnerForm.reset();
                 this.openSnackBar("Thank you for your interest. We will get back to you soon.", "success");
               }
             });

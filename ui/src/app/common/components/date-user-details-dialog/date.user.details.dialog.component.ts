@@ -73,8 +73,8 @@ export class DateUserDetailsDialogComponent implements OnDestroy, OnInit {
     public loadCities() {
         this.cities = [
             {value: 'ncr-0', viewValue: 'Delhi-NCR'},
-            {value: 'mumbai-1', viewValue: 'Mumbai'},
-            {value: 'bangalore-2', viewValue: 'Bangalore'}
+           /*  {value: 'mumbai-1', viewValue: 'Mumbai'},
+            {value: 'bangalore-2', viewValue: 'Bangalore'} */
         ];
     }
 
@@ -156,8 +156,8 @@ export class DateUserDetailsDialogComponent implements OnDestroy, OnInit {
         let cityName = "";
         this.cities = [
             {value: 'ncr-0', viewValue: 'Delhi-NCR'},
-            {value: 'mumbai-1', viewValue: 'Mumbai'},
-            {value: 'bangalore-2', viewValue: 'Bangalore'}
+            /* {value: 'mumbai-1', viewValue: 'Mumbai'},
+            {value: 'bangalore-2', viewValue: 'Bangalore'} */
         ];
         const selectedCity = this.cities.filter(city => city.value === this.addressForm.controls.city.value);
         if (selectedCity && selectedCity.length) {
