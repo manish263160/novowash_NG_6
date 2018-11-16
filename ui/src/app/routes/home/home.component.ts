@@ -33,6 +33,11 @@ export class HomeComponent implements OnInit, OnDestroy {
         {img: "http://placehold.it/350x150/666666"},
         {img: "http://placehold.it/350x150/777777"}
     ];
+    public offers = [
+      {img: "/assets/images/offers/offer_banner_1.png"},
+      {img: "/assets/images/offers/offer_banner_2.png"},
+
+  ];
     public serviceItems = [];
     public packageItems = [];
     public recommendedServiceItems = [];

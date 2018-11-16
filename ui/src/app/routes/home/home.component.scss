@@ -13,7 +13,7 @@
         max-width: 100%;
         width: 100%;
         padding-bottom: 0;
-        background-color: rgba(77, 77, 77, 0.5);
+        // background-color: rgba(77, 77, 77, 0.5);
         height: 130px;
         .slick-slider {
             max-width: 60%;
@@ -27,7 +27,7 @@
                         height: 100%;
                         .service-hlist-item {
                           height: 90px!important;
-                          width: 90px!important;
+                          width: 127px!important;
                           padding: 4px 0;
                           border-radius: 4.8px!important;
                           background-color: #fff!important;
@@ -40,12 +40,12 @@
                                 transform: scale(1.05);
                             }
                             .service-icon {
-                              width: 52px;
+                              width: 90px;
                               height: 52px;
-                              background-size: contain;
+                              background-size: 100%;
                               background-repeat: no-repeat;
                               background-position: center center;
-                              margin-bottom: 8px;
+                              // margin-bottom: 8px;
                               box-sizing: border-box;
                               flex: 1 1 100%;
                               -webkit-box-flex: 1;
@@ -80,17 +80,18 @@
     }
 }
 .banner-wrap {
-    background-image: url("/assets/img/title_image2.jpg");
+    background-image: url("/assets/img/novowash_heroimage.png");
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center center;
-    background-attachment: fixed;
+    background-position: initial;
+    // background-attachment: fixed;
     height: 520px;
     .search-wrap {
-        background-color: rgba(77,77,77,.5);
+        // background-color: rgba(77,77,77,.5);
         align-items: center;
         justify-content: center;
-        height: calc(100% - 130px);
+        // height: calc(100% - 130px);
+        height: 100%;
         p {
             color: #fff;
             margin: 0;
@@ -116,8 +117,8 @@
             width: 170px;
             height: 48px;
             margin-top: 0;
-            background-color: #fff;
-            box-shadow: none;
+            background-color: #f6f6f6;
+            box-shadow: 3px 3px 3px lightgrey;
             border: 1px solid transparent;
             padding: 0 8px;
             line-height: 16px;
@@ -163,7 +164,7 @@
                 }
             }
             &.search-text {
-                width: 438px;
+                width: 50em;
                 box-sizing: border-box;
                 padding: 0;
                 border: 0;
@@ -217,61 +218,64 @@
                 .search-text {
                     width: 90vw;
                     max-width: 300px;
-                }                
-            }
-            .carousel-wrap.service-hlist-wrap {
-                background: #fff;
-                height: 216px;
-                height: 100%;
-                .service-cat-list-mob {
-                    flex-wrap: wrap;
-                    .service-cat-list-item {
-                        width: 33.3%;
-                        height: 108px;
-                        border: 1px solid #eee;
-                        .service-icon {
-                            width: 36px;
-                            height: 36px;
-                            background-size: contain;
-                            background-repeat: no-repeat;
-                            background-position: center center;
-                            margin-bottom: 8px;
-                            box-sizing: border-box;
-                            flex: 1 1 100%;
-                            -webkit-box-flex: 1;
-                            margin-bottom: 7px;
-                            display: flex;
-                            flex-direction: column;
-                            -webkit-box-orient: vertical;
-                            -webkit-box-direction: normal;
-                            place-content: center flex-end;
-                            align-items: center;
-                            -webkit-box-pack: end;
-                            -webkit-box-align: center;
-                            max-height: 60%;
-                        }
-                        .service-name {
-                            font-size: 10px;
-                            font-weight: 400;
-                            font-style: normal;
-                            font-stretch: normal;
-                            line-height: 1.2;
-                            letter-spacing: 1.2px;
-                            text-align: center;
-                            text-transform: uppercase;
-                            white-space: initial;
-                            width: 80px;
-                        }
-                    }
                 }
             }
+
         }
     }
+
+    .carousel-wrap.service-hlist-wrap {
+      background: #fff;
+      height: 216px;
+      height: 100%;
+      .service-cat-list-mob {
+          flex-wrap: wrap;
+          .service-cat-list-item {
+              width: 33.3%;
+              height: 108px;
+              border: 1px solid #eee;
+              .service-icon {
+                  width: 36px;
+                  height: 36px;
+                  background-size: contain;
+                  background-repeat: no-repeat;
+                  background-position: center center;
+                  margin-bottom: 8px;
+                  box-sizing: border-box;
+                  flex: 1 1 100%;
+                  -webkit-box-flex: 1;
+                  margin-bottom: 7px;
+                  display: flex;
+                  flex-direction: column;
+                  -webkit-box-orient: vertical;
+                  -webkit-box-direction: normal;
+                  place-content: center flex-end;
+                  align-items: center;
+                  -webkit-box-pack: end;
+                  -webkit-box-align: center;
+                  max-height: 60%;
+              }
+              .service-name {
+                  font-size: 10px;
+                  font-weight: 400;
+                  font-style: normal;
+                  font-stretch: normal;
+                  line-height: 1.2;
+                  letter-spacing: 1.2px;
+                  text-align: center;
+                  text-transform: uppercase;
+                  white-space: initial;
+                  width: 80px;
+              }
+          }
+      }
+  }
 }
 
 .mat-autocomplete-panel {
     &.ac-search {
-        width: 438px;
+        // width: 438px;
+        width: 100%;
         margin-top: 4px;
         .mat-option {
             &:not(:last-of-type) {

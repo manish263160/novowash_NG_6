@@ -61,7 +61,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
             this.router.navigate(["/app/home"]);
         }
     }
-    
+
     public ngOnInit(): void {
         this.checkIsLoggedIn();
         this.initHelpForm();
@@ -161,7 +161,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
                 }
             } catch (e) {}
             // const unStr = "user_name";
-            // if (Object.keys(user).length) {                
+            // if (Object.keys(user).length) {
             //     this.user = user;
             //     this.user.full_name = this.user[unStr];
             //     this.user.full_name = this.user.full_name.replace("User [", "");

@@ -1,7 +1,7 @@
 {
   "/auth/": {
     "target":  {
-      "host": "13.59.141.30",
+      "host": "localhost",
       "protocol": "http:",
       "port": 8080
     },
@@ -11,7 +11,7 @@
   },
   "/common/": {
     "target":  {
-      "host": "13.59.141.30",
+      "host": "localhost",
       "protocol": "http:",
       "port": 8080
     },

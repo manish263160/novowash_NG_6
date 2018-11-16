@@ -19,9 +19,10 @@
 }
 
 .fsec-wrapper {
-  background-color: #252525;
+  background-color: rgb(250, 251, 252);
+  // color: #696B79;
   .light-dark {
-    background-color: #252525;
+    background-color: rgb(250, 251, 252);
   }
   .dark {
     background-color: #141414;
@@ -38,7 +39,7 @@
         height: 40px;
         font-size: 18px;
         line-height: 40px;
-        color: #fff;
+        color: #696e79;
         -webkit-transform: translateZ(0);
         transform: translateZ(0);
         text-align: center;
@@ -55,9 +56,11 @@
       flex: 1 1 100%;
       padding: 0 12px;
       .fsec-block-header {
-        color: #fff;
-        font-family: "Open Sans",sans-serif;
+        color: #7f7f7f;
+        font-family: "Titillium Web",sans-serif;
         margin-top: 0;
+        text-transform: uppercase;
+        font-size: 15px;
       }
       .fsec-block-content {
         line-height: 22px;
@@ -126,7 +129,7 @@
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center center;
-    }  
+    }
   }
 }
 
@@ -135,7 +138,7 @@
     mat-toolbar.mat-toolbar:not([color]).toolbar-primary {
       .logo {
         margin-left: 36px;
-      }  
+      }
     }
   }
 }
@@ -156,7 +159,7 @@
       .logo {
         width: 136px;
         height: 56px;
-      }  
+      }
     }
   }
   .dialog-panel-login {

@@ -8,7 +8,7 @@
         <button mat-button (click)="goToPage('be-a-partner')" class="btn-top-menu">
             Be A Partner
         </button> -->
-        <ng-container *ngIf="!ropcService.user else userTmpl">            
+        <ng-container *ngIf="!ropcService.user else userTmpl">
             <button id="mh-btn-login" mat-stroked-button color="primary"
                 class="btn-login" (click)="openLoginSignUpDialog()">
                 <mat-icon>person</mat-icon>
@@ -21,7 +21,7 @@
                     (onMenuOpen)="itMenuService.onMenuOpen(userTrigger);onMenuOpen();" (onMenuClose)="onMenuClose();">
                     <span>{{ getInitials() }}</span>
                     <mat-icon>arrow_drop_down</mat-icon>
-                </button>                
+                </button>
             </ng-container>
             <ng-template #smallTmpl1>
                 <button id="mh-btn-loggedin" mat-stroked-button color="primary" class="btn-login"
@@ -43,7 +43,7 @@
                 [matMenuTriggerFor]="helpMenu" #helpTrigger="matMenuTrigger"
                 (onMenuOpen)="itMenuService.onMenuOpen(helpTrigger);onMenuOpen();" (onMenuClose)="onMenuClose();">
                 <mat-icon>help_outline</mat-icon>
-            </button>    
+            </button>
         </ng-template>
     </mat-toolbar>
     <mat-menu #userMenu="matMenu" class="custom-menu menu-user" [overlapTrigger]="false">
@@ -92,6 +92,7 @@
     <div class="content-wrapper">
         <router-outlet></router-outlet>
     </div>
+    <div class="separator-1"></div>
     <footer class="footer footer-primary">
         <div fxLayout="column" fxLayoutAlign="baseline center" class="fsec-wrapper">
             <div fxLayout="row" fxLayoutAlign="center center" class="light-dark fsec-social-wrap">
@@ -106,18 +107,18 @@
             <div class="fsec-content-wrap light-dark" fxLayout="row" fxLayout.lt-sm="column">
                 <!-- about us -->
                 <div class="content-block">
-                    <h3 class="fsec-block-header">About Us</h3>
+                    <h3 class="fsec-block-header">Quick Booking</h3>
                     <div class="fsec-block-content">
-                        <p class="p-about">
-                            Novowash was founded by a team of passionate IITians,
-                            looking to provide highly standardized and ultra premium
-                            services to consumers and clients on a PAN India basis.
-                        </p>
+                    <ul class="fsec-content-list">
+                        <li *ngFor="let item of companyQItems">
+                            <a href="javascript:void(0)" (click)="goToPage(item.page)">{{ item.text }}</a>
+                        </li>
+                      </ul>
                     </div>
                 </div>
                 <!-- company -->
                 <div class="content-block">
-                    <h3 class="fsec-block-header">Company</h3>
+                    <h3 class="fsec-block-header">Useful Links</h3>
                     <div class="fsec-block-content">
                         <ul class="fsec-content-list">
                             <li *ngFor="let item of companyQItems">
