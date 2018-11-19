@@ -79,6 +79,9 @@
         }
     }
 }
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: 'Titillium Web',sans-serif;
+}
 .banner-wrap {
     background-image: url("/assets/img/novowash_heroimage.png");
     background-repeat: no-repeat;
@@ -86,6 +89,7 @@
     background-position: initial;
     // background-attachment: fixed;
     height: 520px;
+    box-shadow: 0 0 0 0.2px grey;
     .search-wrap {
         // background-color: rgba(77,77,77,.5);
         align-items: center;

@@ -3,6 +3,7 @@
         <div fxLayout="column" fxLayoutAlign="baseline center">
             <!-- <p class="p-prime">Novowash presents</p>
             <p class="p-sub">Intelligent Interior Care!</p> -->
+            <img src="/assets/img/logo.png" alt="logo_imgae" class="logo_on_search" style="width: 20%">
             <div fxLayout="row" fxLayoutGap="16px" id="searchWrap">
                 <mat-form-field floatLabel="never" class="search-text">
                     <input type="text" placeholder="What are you looking for?"
@@ -23,7 +24,6 @@
         </div>
     </div>
   </div>
-  <div class="separator-1"></div>
       <div class="carousel-wrap service-hlist-wrap">
           <ng-container *ngIf="commonService.getViewPort() === 'mobile' else nrmlTmplSlist">
               <div class="service-cat-list-mob" fxLayout="row">

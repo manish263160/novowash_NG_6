@@ -110,8 +110,8 @@
                     <h3 class="fsec-block-header">Quick Booking</h3>
                     <div class="fsec-block-content">
                     <ul class="fsec-content-list">
-                        <li *ngFor="let item of companyQItems">
-                            <a href="javascript:void(0)" (click)="goToPage(item.page)">{{ item.text }}</a>
+                        <li *ngFor="let item of bookingService.serviceItems">
+                            <a href="javascript:void(0)" (click)="bookingService.openServiceBookDlg(item.id, item.catName)">{{ item.catName }}</a>
                         </li>
                       </ul>
                     </div>

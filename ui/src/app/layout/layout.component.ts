@@ -14,12 +14,14 @@ import { ServicesService } from "../core/services/services.service";
 import { UserService } from "../core/services/user.service";
 import { map } from 'rxjs/operators';
 import { User } from "../model/user";
+import { BookingService } from '../common/services/booking.service';
 
 @Component({
     encapsulation: ViewEncapsulation.None,
     selector: "novowash-layout",
     styleUrls: ["./layout.component.scss"],
     templateUrl: "./layout.component.html",
+    providers : [BookingService]
 })
 
 export class LayoutComponent implements OnInit, OnDestroy {
@@ -44,6 +46,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
         private fb: FormBuilder,
         public snackBar: MatSnackBar,
         public commonService: CommonService,
+        public bookingService: BookingService
     ) {
         this.config = new MatDialogConfig();
         // this.config.backdropClass = "cdk-overlay-custom-backdrop";
