@@ -52,8 +52,8 @@
                         </div> -->
                         <div class="bd-service-sub-list-item" fxLayout="column"
                             *ngFor="let sub of subList; let j = index"
-                            (click)="onClickSubServiceGetDesc(sub.id)">
-                            <span class="service-icon" [style.backgroundImage]="getBackground(sub.imageUrl)"></span>
+                            (click)="onClickSubServiceGetDesc(sub.id)" >
+                            <span  class="service-icon" [style.backgroundImage]="!sub.localVar ? getBackground(sub.bwImageUrl) : getBackground(sub.imageUrl)"  (mouseover)="sub.localVar = true" (mouseout)="sub.localVar = false" ></span>
                             <span class="service-name">{{ sub.serviceName }}</span>
                         </div>
                     </div>
@@ -271,7 +271,7 @@
             </button>
             <!-- <ng-container *ngIf="totalAmount > 0 else emptyCartTmpl">
                 <button mat-raised-button class="btn-p-proceed" color="primary"
-                    (click)="submitServiceSelection()">        
+                    (click)="submitServiceSelection()">
                     <span class="spn-amount">Rs. {{ totalAmount | number }}</span>
                     <span class="fill-remaining-space"></span>
                     <span class="spn-text">Proceed</span>
@@ -279,7 +279,7 @@
                 </button>
             </ng-container>
             <ng-template #emptyCartTmpl>
-                <button mat-raised-button class="btn-p-proceed" disabled>        
+                <button mat-raised-button class="btn-p-proceed" disabled>
                     <span class="spn-amount">Rs. {{ totalAmount | number }}</span>
                     <span class="fill-remaining-space"></span>
                     <span class="spn-text">Add a service to proceed</span>

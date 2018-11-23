@@ -38,7 +38,7 @@ export class BookingDialogComponent implements OnDestroy, OnInit {
     public type3Object: {};
     public selectedObj = {
         mainService: null,
-        subService: null, 
+        subService: null,
         mainPackages: [],
         extraPackages: [],
         type: null,
@@ -46,9 +46,9 @@ export class BookingDialogComponent implements OnDestroy, OnInit {
         totalAmount: 0,
         couponApplied: null,
     };
-
+public hoverval: false;
     // private subServiceSub: any;
-    
+
     constructor(
         public commonService: CommonService,
         private dialog: MatDialog ,
@@ -107,7 +107,7 @@ export class BookingDialogComponent implements OnDestroy, OnInit {
         let subServ = this.allSubServices.filter((sub) => sub.id === this.highlightedSubServiceId);
         this.selectedObj = {
             mainService: (mainServ && mainServ.length) ? mainServ[0] : null,
-            subService: (subServ && subServ.length) ? subServ[0] : null, 
+            subService: (subServ && subServ.length) ? subServ[0] : null,
             mainPackages: [],
             extraPackages: [],
             type: null,
@@ -339,7 +339,7 @@ export class BookingDialogComponent implements OnDestroy, OnInit {
         const cardEl = document.getElementById(`card${serviceId}`);
         if (cardEl) {
             cardEl.scrollIntoView();
-        } 
+        }
     }
 
     public getBackground(image) {
