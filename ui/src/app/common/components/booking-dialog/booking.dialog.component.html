@@ -1,9 +1,10 @@
 <div class="containerX" >
     <div fxLayout="row" class="dialog-header">
         <div fxFlex="flex">
-            <h5 *ngIf="slide === 1">Book A Service</h5>
-            <h5 *ngIf="slide === 2">{{ getSelectedSubServiceName() }}</h5>
-            <h5 *ngIf="slide === 3">Service Details</h5>
+            <h5 *ngIf="slide === 1">Book a service</h5>
+            <!-- <h5 *ngIf="slide === 2">{{ getSelectedSubServiceName() }}</h5> -->
+            <h5 *ngIf="slide === 2">Scope of the service</h5>
+            <h5 *ngIf="slide === 3">Service customization & Price</h5>
         </div>
         <div fxFlex="none">
             <button mat-icon-button class="close-icon" (click)="closeDialog()">
@@ -44,6 +45,7 @@
                 </ng-template>
                 <div class="right-wrap" fxLayout="column">
                     <h3 class="right-header">{{ selectedServiceName }}</h3>
+                    <span>Please select the required service  from among the below options:</span>
                     <div class="bd-service-sub-list" fxLayout="row">
                         <!-- <div class="bd-service-sub-list-item" fxLayout="row"
                             *ngFor="let sub of subList; let j = index"
@@ -72,6 +74,7 @@
         <!-- slide 3 -->
         <div class="containerX dialog-container" *ngIf="slide === 3"
             [ngClass]="{'sidenav-fi': slide === 3, 'sidenav-fo': slide !== 3}">
+
             <div fxLayout="row" fxLayout.lt-sm="column" class="bd-content-1-wrap">
                 <ng-container *ngIf="commonService.getViewPort() === 'mobile' else nrmlTmpl2">
                     <div cdkFocusRegionstart class="bd-service-list-mob" fxLayout="column">
@@ -97,6 +100,7 @@
                     </div>
                 </ng-template>
                 <div class="right-wrap bd-service-sub-list">
+                    <span class="costomize-msg">Customize your service according to your requirements: </span>
                     <ng-container *ngIf="mainServiceType === 1">
                         <div class="sub-wrap mst1" fxLayout="column" fxLayoutGap="16px">
                             <div class="control-lr-pm" fxLayout="row" fxLayoutGap="12px"
@@ -115,7 +119,7 @@
                                 </div>
                             </div>
                             <ng-container *ngIf="extraPackages?.length">
-                                <h3 class="sub-header-extra">Extras</h3>
+                                <h3 class="sub-header-extra">Extras<br/><span style="font-size: 15px;">Add extra services to your current booking:</span></h3>
                                 <div class="extra-wrap" fxLayout="row" fxLayoutGap="16px">
                                     <div class="control-ud-pm" fxLayout="column" fxLayoutGap="8px"
                                         *ngFor="let extraPack of extraPackages; let ei = index">

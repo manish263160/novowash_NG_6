@@ -1,7 +1,7 @@
 <div class="containerX" >
     <div fxLayout="row" class="dialog-header">
         <div fxFlex="flex">
-            <h5>Booking Summary</h5>
+            <h5>Booking summary & Payment</h5>
         </div>
         <div fxFlex="none">
             <button mat-icon-button class="close-icon" (click)="closeDialog()">
@@ -25,14 +25,14 @@
                     </ng-container>
                     <ng-template #packTmpl>
                         <div class="summary-sec" fxLayout="column">
-                            <span class="header">Selected {{ isForPackage ? 'Package' : 'Service'}}</span>
+                            <span class="header">{{ isForPackage ? 'Package' : 'Service'}} Selected </span>
                             <span class="text">{{ selectedServices?.mainService?.packageName }}</span>
                             <span class="text sub">{{ selectedServices?.subService?.packageName }}</span>
                         </div>
                     </ng-template>
                     <!-- address -->
                     <div class="summary-sec" fxLayout="column">
-                        <span class="header">{{ isForPackage ? 'Services Of Package' : 'Service'}} Required At</span>
+                        <span class="header">{{ isForPackage ? 'Services Of Package' : 'Service'}} Location</span>
                         <span class="text">
                             {{ selectedServices?.dateUserDetails?.address?.addressLine }}
                         </span>
@@ -53,7 +53,7 @@
                     </div>
                     <!-- time slot -->
                     <div class="summary-sec" fxLayout="column" *ngIf="!isForPackage">
-                        <span class="header">Selected Time Slot</span>
+                        <span class="header">Service Schedule</span>
                         <span class="text">
                             Between {{ selectedServices?.dateUserDetails?.time }} on {{ selectedServices?.dateUserDetails?.date }}
                         </span>

@@ -5,9 +5,9 @@
             <mat-icon>arrow_back</mat-icon>
         </button> -->
         <div fxFlex="flex">
-            <h5 *ngIf="slide === 1">When do you want the service?</h5>
-            <h5 *ngIf="slide === 2">Where do you want the service?</h5>
-            <h5 *ngIf="slide === 3">Please enter your contact details</h5>
+            <h5 *ngIf="slide === 1">Schedule selected service</h5>
+            <h5 *ngIf="slide === 2">Service location</h5>
+            <h5 *ngIf="slide === 3">Contact details</h5>
         </div>
         <div fxFlex="none">
             <button mat-icon-button class="close-icon" (click)="closeDialog()">
@@ -23,8 +23,8 @@
             [ngClass]="{'sidenav-fi': slide === 1, 'sidenav-fo': slide !== 1}">
             <div fxLayout="column" class="bd-content-1-wrap" fxLayout="column" fxLayoutGap="24px" *ngIf="dateTimeSlots && dateTimeSlots.length">
                 <span class="spacer"></span>
-                <label class="lbl-date-time date">Select date for service</label>
-                <div fxLayout="row" class="date-time-box-wrap date" fxLayoutGap="12px">
+                <label class="lbl-date-time date">Select the date for scheduling your service</label>
+                <div fxLayout="row" class="date-time-box-wrap date" fxLayoutGap="6px">
                     <div class="date-time-box" *ngFor="let dateTimeSlot of dateTimeSlots; let i = index"
                         [ngClass]="{'selected': (selectedDateTimeIndex && i === selectedDateTimeIndex[0]), 'blocked': dateTimeSlot.isBlocked}"
                         (click)="selectDateIndex(i)">
@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <span class="spacer"></span>
-                <label class="lbl-date-time">Select time slots</label>
+                <label class="lbl-date-time">Select the time-slot for your service</label>
                 <div fxLayout="row" class="date-time-box-wrap">
                     <div class="date-time-box time-box" *ngFor="let timeSlot of dateTimeSlots[selectedDateIndex]?.timeSlots; let j = index"
                         [ngClass]="{'selected': (selectedDateTimeIndex && j === selectedDateTimeIndex[1]), 'blocked': timeSlot.isBlocked}"
@@ -50,13 +50,14 @@
         <!-- slide 2 -->
         <div class="containerX dialog-container" *ngIf="slide === 2"
             [ngClass]="{'sidenav-fi': slide === 2, 'sidenav-fo': slide !== 2}">
+            <span>Please fill the details below as per your service address:</span>
             <form [formGroup]="addressForm" novalidate>
                 <div class="bd-content-1-wrap" fxLayout="column" fxLayoutGap="32px">
                     <!-- <h3>Where do you require the service?</h3> -->
                     <!-- <span class="spacer"></span> -->
                     <span class="spacer"></span>
                     <mat-form-field fxFlex="1 1 100%" appearance="outline">
-                        <mat-label>Address</mat-label>
+                        <mat-label>Complete Address</mat-label>
                         <input matInput formControlName="addressLine" required type="text">
                         <mat-error *ngIf="(addressForm.controls.addressLine.errors | firstKey) === 'required' && addressForm.controls['addressLine'].touched">
                             Address is required
@@ -64,7 +65,7 @@
                     </mat-form-field>
                     <!-- <span class="spacer" class="spacer-addr-1"></span> -->
                     <mat-form-field fxFlex="1 1 100%" appearance="outline">
-                        <mat-label>Landmark (optional)</mat-label>
+                        <mat-label>Closest Landmark</mat-label>
                         <input matInput formControlName="landmark" type="text">
                     </mat-form-field>
                     <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="24px">
@@ -80,7 +81,7 @@
                             </mat-error>
                         </mat-form-field>
                         <mat-form-field fxFlex="1 1 50%" fxFlex.lt-sm="1 1 100%" appearance="outline">
-                            <mat-label>PIN Code</mat-label>
+                            <mat-label>Pin-code</mat-label>
                             <input matInput formControlName="pincode" required type="text">
                             <mat-error *ngIf="(addressForm.controls.pincode.errors | firstKey) === 'required' && addressForm.controls['pincode'].touched">
                                 PIN Code is required
@@ -99,7 +100,7 @@
             [ngClass]="{'sidenav-fi': slide === 3, 'sidenav-fo': slide !== 3}">
             <form [formGroup]="userForm" novalidate>
                 <div class="bd-content-1-wrap" fxLayout="column" fxLayoutGap="32px">
-                    <!-- <h3>Please enter your contact details</h3> -->
+                    <h3>Enter your email id and phone number:</h3>
                     <!-- <span class="spacer"></span> -->
                     <span class="spacer"></span>
                     <mat-form-field appearance="outline">
@@ -113,7 +114,7 @@
                         </mat-error>
                     </mat-form-field>
                     <mat-form-field appearance="outline">
-                        <mat-label>Email*</mat-label>
+                        <mat-label>Email Address*</mat-label>
                         <input type="email" matInput placeholder="abc@xyz.com" formControlName="email" novalidate>
                         <mat-error *ngIf="(userForm.controls['email'].errors | firstKey) ==='required' && userForm.controls['email'].touched">
                             Email ID is required

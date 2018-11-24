@@ -1,7 +1,7 @@
 <div class="containerX" >
     <div fxLayout="row" class="dialog-header">
         <div fxFlex="flex">
-            <h5>When do you want the service?</h5>
+            <h5>Schedule selected service</h5>
         </div>
         <div fxFlex="none">
             <button mat-icon-button class="close-icon" (click)="closeDialog()">
@@ -17,7 +17,7 @@
                 <div fxLayout="column" class="bd-content-1-wrap" fxLayout="column" fxLayoutGap="24px" *ngIf="dateTimeSlots && dateTimeSlots.length">
                     <span class="spacer"></span>
                     <label class="lbl-date-time date">Select date for service</label>
-                    <div fxLayout="row" class="date-time-box-wrap date" fxLayoutGap="12px">
+                    <div fxLayout="row" class="date-time-box-wrap date" fxLayoutGap="6px">
                         <div class="date-time-box" *ngFor="let dateTimeSlot of dateTimeSlots; let i = index"
                             [ngClass]="{'selected': i === selectedDateIndex, 'blocked': dateTimeSlot.isBlocked}"
                             (click)="selectDateIndex(i)">
@@ -29,7 +29,7 @@
                     </div>
                     <span class="spacer"></span>
                     <label class="lbl-date-time">Select time slots</label>
-                    <div fxLayout="row" class="date-time-box-wrap" fxLayoutGap="20px">
+                    <div fxLayout="row" class="date-time-box-wrap time" fxLayoutGap="20px">
                         <div class="date-time-box time-box" *ngFor="let timeSlot of dateTimeSlots[selectedDateIndex]?.timeSlots; let j = index"
                             [ngClass]="{'selected': j === selectedTimeIndex, 'blocked': timeSlot.isBlocked}"
                             (click)="selectTimeIndex(j)">

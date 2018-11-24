@@ -15,6 +15,7 @@ import { UserService } from "../core/services/user.service";
 import { map } from 'rxjs/operators';
 import { User } from "../model/user";
 import { BookingService } from '../common/services/booking.service';
+import { SuccesMsgComponent } from '../common/components/succes-msg.component';
 
 @Component({
     encapsulation: ViewEncapsulation.None,
@@ -33,6 +34,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
     @ViewChild("helpTrigger") public helpTrigger: MatMenuTrigger;
 
     private dialogRef: MatDialogRef<LoginComponent>;
+    private successRef: MatDialogRef<SuccesMsgComponent>;
     private config: MatDialogConfig;
     private hSub: Subscription;
 
@@ -118,7 +120,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
                 console.log(`RES from help register:::: ${res}`);
                 if (res === true || res === "true") {
                     this.helpTrigger.closeMenu();
-                    this.openSnackBar("Thank you. We will get back to you soon.", "success");
+                    // this.openSnackBar("Thank you. We will get back to you soon.", "success");
+                    this.successRef = this.dialog.open(SuccesMsgComponent);
                 }
             });
     }

@@ -55,11 +55,11 @@
                     </mat-error>
                 </mat-form-field>
                 <span class="spacer" style="height: 24px;"></span>
-                <button mat-raised-button color="primary" (click)="onClickGetOTP()"
+                <button mat-raised-button class="login-button" (click)="onClickGetOTP()"
                     *ngIf="!isExistingUser && !isNewUser" [disabled]="loginForm.invalid">
                     Login/Signup
                 </button>
-                <button mat-raised-button color="primary" (click)="onClickLogin()"
+                <button mat-raised-button class="login-button" (click)="onClickLogin()"
                     *ngIf="isExistingUser" [disabled]="loginForm.invalid">
                     Verify & Login
                 </button>

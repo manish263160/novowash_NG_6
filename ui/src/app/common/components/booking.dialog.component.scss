@@ -3,10 +3,10 @@
     .mat-dialog-container {
         border-radius: 12px !important;
         .dialog-header {
-            background-color: #6480f7;
-            color: #fff;
+            background-color: #ffffff;
+            color: black;
             h5 {
-                color: #fff;
+                color: black;
             }
         }
         .booking-dialog-wrap {
@@ -19,6 +19,7 @@
                     padding: 0;
                     flex: 1 1 100%;
                     max-height: inherit;
+                    background-color: #f6f6f6;
                     .bd-content-1-wrap {
                         color: #464646;
                         max-height: inherit;
@@ -43,16 +44,23 @@
                                 justify-content: center;
                                 // min-height: 66px;
                                 border: 1px solid #b6b6b9;
+                                background-color: #ffffff;
                                 cursor: pointer;
                                 text-align: center;
                                 font-size: 15px;
                                 text-transform: capitalize;
                                 border-radius: 8px;
                                 box-shadow: 0 1px 2px rgba(0,0,0,0.07);
-                                background-image: linear-gradient(to bottom, transparent, transparent 50%, #6480f7 50%, #6480f7);
+                                background-image: linear-gradient(to bottom, transparent, transparent 50%, #0c21dc 50%, #0c21dc);
                                 background-position: 100% 200%;
                                 background-size: 100% 200%;
                                 transition: all .25s ease-in;
+                                &:hover{
+                                  opacity: 1;
+                                  -webkit-transform: scale(1.05);
+                                  -ms-transform: scale(1.05);
+                                  transform: scale(1.05);
+                                }
                                 &:first-of-type {
                                     margin-top: 20px;
                                 }
@@ -74,8 +82,8 @@
                                     // background-color: #eeeeee;
                                     // background-color: #fff;
                                     // font-weight: 500;
-                                    // background-color: #6480f7;
-                                    border-color: #6480f7;
+                                    // background-color: #0c21dc;
+                                    border-color: #0c21dc;
                                     color: #fff;
                                     background-position: 100% 100%;
                                     // color: #fff;
@@ -113,7 +121,10 @@
                             flex: 1 1 68%;
                             .right-header {
                                 text-align: center;
-                                margin: 32px 0;
+                                margin: 24px 0px 0px 0px;
+                            }
+                            .costomize-msg{
+                              font-size: 15px;
                             }
                         }
                         .bd-service-sub-list {
@@ -136,12 +147,12 @@
                                     button.btn-control {
                                         background-color: transparent;
                                         box-shadow: none !important;
-                                        color: #6480f7;
+                                        color: #0c21dc;
                                         height: 42px;
                                         width: 42px;
                                         padding: 0.75rem .5rem;
                                         // &.plus {
-                                        //     background-color: #6480f7;
+                                        //     background-color: #0c21dc;
                                         // }
                                     }
                                     .value {
@@ -255,6 +266,7 @@
                                 border: 1px solid #ccc;
                                 cursor: pointer;
                                 transition: .2s ease-out!important;
+                                background-color: #ffffff;
                                 .service-icon {
                                     // height: 24px;
                                     width: 100%;
@@ -283,7 +295,7 @@
                                     // background-color: #eee;
                                     // background-color: #222;
                                     background-color: #ffffff;
-                                    color: #6480f7;
+                                    color: #0c21dc;
                                      transform: scale(1.05);
                                     .service-icon {
                                         // -webkit-filter: invert(100%); /* Safari 6.0 - 9.0 */
@@ -297,8 +309,10 @@
                             flex-wrap: wrap;
                             align-items: baseline;
                             &.date {
+                              height: 60px;
                                 padding-left: 20px;
-                                padding-right: 20px;
+                                // padding-right: 20px;
+
                             }
                             .date-time-box {
                                 // width: 121px;
@@ -309,15 +323,18 @@
                                 width: 50px;
                                 height: 44px;
                                 border-radius: 5%;
-                                font-size: 20px;
+                                font-size: 15px;
                                 cursor: pointer;
                                 margin-bottom: 8px;
                                 display: flex;
                                 flex-direction: column;
                                 justify-content: center;
                                 box-sizing: border-box;
+                                &:hover{
+                                  transform: scale(1.01);
+                                }
                                 &.selected {
-                                    background: #6480f7;
+                                    background: #0c21dc;
                                     color: #fff;
                                     .date-box{
                                         .day-text{
@@ -344,8 +361,8 @@
                                     margin-right: 10px;
                                     &.selected {
                                         box-shadow: none;
-                                        background-color: #6480f7;
-                                        border-color: #6480f7;
+                                        background-color: #0c21dc;
+                                        border-color: #0c21dc;
 
                                     }
                                 }
@@ -361,6 +378,9 @@
                                   text-align: center;
                                   // border: 1px solid ;
                                   border-radius: 5%;
+                                  &:hover{
+                                    transform: scale(1.05);
+                                  }
                                   .day-text{
                                     font-size: 12px;
                                     color: #9e9e9e;
@@ -449,7 +469,7 @@
         }
     }
     [mat-raised-button].mat-raised-button.mat-primary {
-        background-color: #6480f7;
+        background-color: #0c21dc;
     }
     &.dp-booking-mobile {
         mat-dialog-container {
@@ -576,9 +596,9 @@
                         margin: 4px 0;
                         font-size: 14px;
                         color: #5f5c5c;
-                        &.sub {
+                       /*  &.sub {
                             font-style: italic;
-                        }
+                        } */
                     }
                 }
                 .summary-sec-wrap {
@@ -613,7 +633,7 @@
             flex: 1 1;
             border: 1px solid #9ba5c9;
             text-align: center;
-            background-image: linear-gradient(to left, transparent, transparent 50%, #6480f7 50%, #6480f7);
+            background-image: linear-gradient(to left, transparent, transparent 50%, #0c21dc 50%, #0c21dc);
             background-position: 99% 0;
             background-size: 202% 100%;
             transition: all .25s ease-in;
@@ -646,7 +666,7 @@
             &.mat-button-toggle-checked {
                     /* border: 1px solid grey; */
                     border-radius: 8px;
-                    border-color: #6480f7;
+                    border-color: #0c21dc;
                     /* background-color: #f8e71c; */
                     color: inherit;
                     background-position: 0 0;
@@ -662,9 +682,10 @@
     line-height: 2.25rem;
     padding: 0 1rem;
     border-radius: 6px;
-    background-color: #6480f7;
-    border: 1px solid grey;
-    color: #ffffff;
+    background-color: #ffdd00;
+    border: 1px solid #000000;
+    color:#000000;
+    font-weight: 600;
     .amount {
         max-width: 200px;
         overflow: hidden;

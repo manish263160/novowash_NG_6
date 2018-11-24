@@ -108,7 +108,7 @@
                                 </div>
                             </div>
                             <ng-container *ngIf="extraPackages?.length">
-                                <h3 class="sub-header-extra">Extras</h3>
+                                <h3 class="sub-header-extra">Extras <br/><span style="font-size: 15px;">Add extra services to your current booking:</span></h3>
                                 <div class="extra-wrap" fxLayout="row" fxLayoutGap="12px">
                                     <div class="control-ud-pm" fxLayout="column" fxLayoutGap="8px"
                                         *ngFor="let extraPack of extraPackages; let ei = index">
@@ -129,7 +129,7 @@
                                 </div>
                             </ng-container>
                         </div>
-                    </ng-container>                    
+                    </ng-container>
                     <ng-container *ngIf="mainServiceType === 3 || mainServiceType === 4">
                         <div class="sub-wrap mstb3" fxLayout="column" fxLayoutGap="20px">
                             <label class="lbl-toggle">

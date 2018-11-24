@@ -214,3 +214,9 @@
         }
     }
 }
+
+[mat-raised-button].mat-raised-button.mat-primary[disabled]{
+  opacity: 0.5;
+    background-color: #0c21dc;
+    color: #ffffff;
+}

@@ -17,6 +17,7 @@ $primary-contrast-10: mat-contrast($primary, 10);
 $custom-color-bcd6bf: #bcd6bf;
 $custom-color-e8e8e8: #e8e8e8;
 $border-radius-round: 4px;
+$primary-color:#0c21dc;
 
 html, body, oms-app {
   margin: 0;
@@ -3278,6 +3279,10 @@ mat-dialog-container.mat-dialog-container {
   &.hidden {
     display: none !important;
   }
+}
+
+.cdk-overlay-dark-backdrop{
+  background :rgba(0,0,0,.75) !important;
 }
 
 [mat-icon-button].mat-icon-button:not(.mat-raised-button) {
