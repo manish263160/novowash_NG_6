@@ -16,7 +16,7 @@
         // background-color: rgba(77, 77, 77, 0.5);
         height: 130px;
         .slick-slider {
-            max-width: 60%;
+            max-width: 836px;
             height: 100%;
             margin: 0 auto;
             .slick-list {
@@ -96,6 +96,14 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
         justify-content: center;
         // height: calc(100% - 130px);
         height: 100%;
+        .logo_on_search {
+            background-image: url("/assets/img/logo.png");
+            width: 58.5vw;
+            height: 63px;
+            background-position: -14px center;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
         p {
             color: #fff;
             margin: 0;
@@ -168,7 +176,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
                 }
             }
             &.search-text {
-                width: 50em;
+                width: 58.5vw;
                 box-sizing: border-box;
                 padding: 0;
                 border: 0;
@@ -182,6 +190,11 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
                         vertical-align: middle;
                         height: 30px;
                         cursor: pointer;
+                    }
+                }
+                .mat-form-field-label-wrapper {
+                    .mat-form-field-label {
+                        height: 30px;
                     }
                 }
             }
@@ -276,6 +289,16 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   }
 }
 
+@media (min-width: 960px) and (max-width: 1200px) {
+    #searchWrap {
+        &.fixed {
+            .search-text {
+                width: 44vw;
+            }
+        }
+    }
+}
+
 .mat-autocomplete-panel {
     &.ac-search {
         // width: 438px;
@@ -293,6 +316,95 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
                     background-size: contain;
                     background-repeat: no-repeat;
                     background-position: center center;
+                }
+            }
+        }
+    }
+}
+
+.slide-item {
+    &.si-cust-review {
+        height: 400px;
+        border-radius: 4px;
+        padding: 30px;
+        border: 1px solid hsla(0,0%,61%,.4);
+        .user-info {
+            align-items: center;
+            .user-pic {
+                width: 48px;
+                height: 48px;
+                border-radius: 50%;
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center center;
+                margin-right: 20px;
+            }
+            .user-name {
+                font-size: 16px;
+                font-weight: bold;
+            }
+        }
+        .review-message {
+            font-size: 16px;
+            line-height: 1.56;
+            height: 151px;
+            margin-top: 17px;
+            margin-bottom: 10px;
+            color: #646464;
+        }
+        .in-review-separator {
+            border-top: 1px solid hsla(0,0%,61%,.4);
+        }
+        .hired-header {
+            margin: 0;
+            letter-spacing: .9px;
+            color: #949494;
+            margin-top: 20px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .bservice-info {
+            margin-top: 18px;
+            .bservice-pic {
+                width: 48px;
+                height: 48px;
+                border-radius: 50%;
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center center;
+                margin-right: 20px;
+            }
+            .bservice-detail {
+                .bservice-name {
+
+                }
+                .bservice-star {
+                    border-radius: 2px;
+                    background-color: #4caf50;
+                    color: #fff;
+                    font-size: 14px;
+                    padding: 0 4px;
+                    font-weight: 700;
+                    width: 36px;
+                    height: 20px;
+                    line-height: 20px;
+                    position: relative;
+                    &:after {
+                        font-family: "Material Icons";
+                        text-rendering: optimizeLegibility;
+                        -webkit-font-feature-settings: 'liga' 1;
+                        font-feature-settings: 'liga' 1;
+                        font-style: normal;
+                        text-transform: none;
+                        font-size: 12px;
+                        width: 18px;
+                        height: 20px;
+                        -webkit-font-smoothing: antialiased;
+                        position: absolute;
+                        content: "star_rate";
+                        right: 0;
+                    }
                 }
             }
         }

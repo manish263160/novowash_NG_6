@@ -21,13 +21,15 @@ import { SuccesMsgComponent } from '../common/components/succes-msg.component';
     encapsulation: ViewEncapsulation.None,
     selector: "novowash-layout",
     styleUrls: ["./layout.component.scss"],
-    templateUrl: "./layout.component.html",
-    providers : [BookingService]
+    templateUrl: "./layout.component.html"
 })
 
 export class LayoutComponent implements OnInit, OnDestroy {
     public companyQItems: any[] = [];
     public servingItems: any[] = [];
+    public socialItems: any[] = [];
+    public qualityItems: any[] = [];
+    public countItems: any[] = [];
     public helpForm: FormGroup;
     public pattern = "^(([^<>()\\[\\]\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\\.)+[a-zA-Z]{2,}))$";
 
@@ -100,8 +102,59 @@ export class LayoutComponent implements OnInit, OnDestroy {
             "East Delhi",
             "Noida",
         ];
+        // <a href="https://www.facebook.com/novowashservices"><i class="fa fa-facebook"></i></a>
+        // <a href="https://twitter.com/novowash"><i class="fa fa-twitter"></i></a>
+        // <a href="https://www.linkedin.com/company/novowash"><i class="fa fa-linkedin"></i></a>
+        // <a href="http://www.instagram.com/novowashindia"><i class="fa fa-instagram"></i></a>
+        // <a href="https://www.youtube.com/channel/UC0vTJsbwupvVvEzY5BfIVBA"><i class="fa fa-youtube"></i></a>
+        // <a href="https://plus.google.com/u/0/105957726178174805323"><i class="fa fa-google-plus"></i></a>
         this.servingItems[0] = servingItemsTotal.splice(0, servingItemsTotal.length/2);
         this.servingItems[1] = servingItemsTotal;
+        this.socialItems = [{
+            classes: "fa fa-facebook",
+            link: "https://www.facebook.com/novowashservices"
+        }, {
+            classes: "fa fa-twitter",
+            link: "https://twitter.com/novowash"
+        }, {
+            classes: "fa fa-linkedin",
+            link: "https://www.linkedin.com/company/novowash"
+        }, {
+            classes: "fa fa-instagram",
+            link: "http://www.instagram.com/novowashindia"
+        }, {
+            classes: "fa fa-youtube",
+            link: "https://www.youtube.com/channel/UC0vTJsbwupvVvEzY5BfIVBA"
+        }, {
+            classes: "fa fa-google-plus",
+            link: "https://plus.google.com/u/0/105957726178174805323"
+        }];
+        this.qualityItems = [{
+            classes: "hundred-percent",
+            message: "guarantee for all products at myntra.com",
+            strongPart: "100% ORIGINAL"
+        }, {
+            classes: "return",
+            message: "of receiving your order",
+            strongPart: "Return within 30days"
+        }, {
+            classes: "delivery",
+            message: "Get free delivery",
+            strongPart: "for every order above Rs. 1199"
+        }];
+        this.countItems = [{
+            label: "WORKING HOURS",
+            count: "10000+",
+            icon: "access_time"
+        }, {
+            label: "HAPPY CUSTOMERS",
+            count: "1500+",
+            icon: "favorite_border"
+        }, {
+            label: "POSITIVE FEEDBACK",
+            count: "99%",
+            icon: "star_border"
+        }]
     }
 
     public initHelpForm() {

@@ -1464,7 +1464,10 @@ mat-tooltip-component div.mat-tooltip.itn-custom-tooltip {
 mat-toolbar.mat-toolbar:not([color]).toolbar-primary {
   position: fixed;
   z-index: 2;
-  background-color: rgba(243, 243, 243, 1);
+  // height: 50px;
+  // min-height: 50px;
+  border-bottom: 0.1px solid rgb(221, 221, 221);
+  background: rgb(255, 255, 255);
   &.mh-tp {
     .logo {
       filter: brightness(120%);
@@ -3225,10 +3228,11 @@ star-rating {
 }
 
 .separator-1 {
-  max-width: 90%;
+  max-width: 100%;
   margin: 0 auto;
   padding: 12px 0;
-  border-bottom: 1px solid rgba(170, 170, 170, 1);
+  // border-bottom: 1px solid rgba(170, 170, 170, 1);
+  border-bottom: 1px solid rgba(127, 127, 127, .1)
 }
 
 .mat-snack-bar-container {

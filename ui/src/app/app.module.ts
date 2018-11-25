@@ -11,6 +11,9 @@ import { AppRoutingModule } from "./app.routing";
 import { ConfirmDialogComponent } from "./common/components/confirm-dialog.component";
 import { ErrorDialogComponent } from "./common/components/error.dialog.component";
 import { SuccesMsgComponent } from './common/components/succes-msg.component';
+// import { FirstKeyPipe } from "./common/pipes/first.key.pipe";
+import { environment } from "../environments/environment";
+import { BookingService } from "./common/services/booking.service";
 import { CommonService } from "./common/services/common.service";
 import { DeactivateGuardService } from "./common/services/deactivate-guard.service";
 import { DialogService } from "./common/services/dialog.service";
@@ -80,6 +83,7 @@ import { SharedModule } from "./shared.module";
         DialogService,
         ITDatepickerService,
         ITMenuService,
+        BookingService,
         CommonService,
     ],
 })

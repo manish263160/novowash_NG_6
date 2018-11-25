@@ -95,15 +95,19 @@
     <div class="separator-1"></div>
     <footer class="footer footer-primary">
         <div fxLayout="column" fxLayoutAlign="baseline center" class="fsec-wrapper">
-            <div fxLayout="row" fxLayoutAlign="center center" class="light-dark fsec-social-wrap">
-                <a href="https://www.facebook.com/novowashservices"><i class="fa fa-facebook"></i></a>
-                <a href="https://twitter.com/novowash"><i class="fa fa-twitter"></i></a>
-                <a href="https://www.linkedin.com/company/novowash"><i class="fa fa-linkedin"></i></a>
-                <a href="http://www.instagram.com/novowashindia"><i class="fa fa-instagram"></i></a>
-                <a href="https://www.youtube.com/channel/UC0vTJsbwupvVvEzY5BfIVBA"><i class="fa fa-youtube"></i></a>
-                <a href="https://plus.google.com/u/0/105957726178174805323"><i class="fa fa-google-plus"></i></a>
+            <div fxLayout="row" fxLayoutAlign="space-evenly center" class="light-dark fsec-social-wrap">
+                <div class="count-wrap" fxLayout="column"
+                    *ngFor="let cItem of countItems">
+                    <div class="count-first" fxLayout="row">
+                        <mat-icon>{{ cItem.icon }}</mat-icon>
+                        <span class="count-number">{{ cItem.count }}</span>
+                    </div>
+                    <div class="count-second" fxLayout="row">
+                        <span class="count-label">{{ cItem.label }}</span>
+                    </div>
+                </div>
             </div>
-            <div class="fsec-divider"></div>
+            <!-- <div class="fsec-divider"></div> -->
             <div class="fsec-content-wrap light-dark" fxLayout="row" fxLayout.lt-sm="column">
                 <!-- about us -->
                 <div class="content-block">
@@ -127,16 +131,26 @@
                         </ul>
                     </div>
                 </div>
-                <!-- address -->
+                <!-- stay connected -->
                 <div class="content-block">
-                    <h3 class="fsec-block-header">Address</h3>
+                    <h3 class="fsec-block-header">Keep in Touch</h3>
+                    <div class="fsec-block-content">
+                        <ul class="fsec-content-list list-socials">
+                            <li *ngFor="let item of socialItems">
+                                <a [href]="item.link">
+                                    <i [ngClass]="item.classes"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <h3 class="fsec-block-header">Contact Us</h3>
                     <div class="fsec-block-content">
                         <ul class="fsec-content-list">
                             <li>
-                                <span><b>Corporate Office:</b></span>
+                                <span>C-10, Main Market</span>
                             </li>
                             <li>
-                                <span>C-10, Main Market, Malviyanagar, Delhi : 110017</span>
+                                <span>Malviyanagar, Delhi : 110017</span>
                             </li>
                             <li>
                                 <span>Ph: +91-7505100200</span>
@@ -147,8 +161,27 @@
                         </ul>
                     </div>
                 </div>
-                <!-- serving 1 -->
+                <!-- quality sec -->
                 <div class="content-block">
+                    <div class="fsec-block-content">
+                        <ul class="fsec-content-list list-quality">
+                            <li *ngFor="let item of qualityItems">
+                                <div class="quality-wrap" fxLayout="row">
+                                    <div class="quality-img" [ngClass]="item.classes"></div>
+                                    <span class="quality-msg">
+                                        <strong>{{ item.strongPart }}&nbsp;</strong>
+                                        {{ item.message }}
+                                    </span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- address -->
+                <!-- <div class="content-block">
+                </div> -->
+                <!-- serving 1 -->
+                <!-- <div class="content-block">
                     <h3 class="fsec-block-header">Serving In</h3>
                     <div class="fsec-block-content">
                         <ul class="fsec-content-list">
@@ -157,9 +190,9 @@
                             </li>
                         </ul>
                     </div>
-                </div>
+                </div> -->
                 <!-- serving 2 -->
-                <div class="content-block">
+                <!-- <div class="content-block">
                     <h3 class="fsec-block-header">&nbsp;</h3>
                     <div class="fsec-block-content">
                         <ul class="fsec-content-list">
@@ -168,7 +201,7 @@
                             </li>
                         </ul>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </footer>

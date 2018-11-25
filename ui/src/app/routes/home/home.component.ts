@@ -34,19 +34,21 @@ export class HomeComponent implements OnInit, OnDestroy {
         {img: "http://placehold.it/350x150/777777"}
     ];
     public offers = [
-      {img: "/assets/images/offers/offer_banner_1.png"},
-      {img: "/assets/images/offers/offer_banner_2.png"},
-
-  ];
+        {img: "/assets/images/offers/offer_banner_1.png"},
+        {img: "/assets/images/offers/offer_banner_2.png"},
+    ];
     public serviceItems = [];
     public packageItems = [];
     public recommendedServiceItems = [];
+    public reviews = [];
     public cities = [
         {value: 'ncr-0', viewValue: 'Delhi-NCR'},
        /*  {value: 'mumbai-1', viewValue: 'Mumbai'},
         {value: 'bangalore-2', viewValue: 'Bangalore'} */
     ];
     public slideConfig: any = {"slidesToShow": 4, "slidesToScroll": 1, dots: true};
+    public slideCRConfig: any = {"slidesToShow": 3, "slidesToScroll": 1, dots: true};
+    public slideOffersConfig: any = {"slidesToShow": 1, "slidesToScroll": 1, dots: true, autoplay: true};
     public slideHListConfig: any = {"slidesToShow": 8, "slidesToScroll": 1};
 
     public searchControl = new FormControl();
@@ -105,9 +107,12 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 
         if (commonService.getViewPort() === "mobile") {
+            this.slideCRConfig = {"slidesToShow": 1, "slidesToScroll": 1, dots: true};
             this.slideConfig = {"slidesToShow": screen.width < 600 ? 1 : 2, "slidesToScroll": screen.width < 600 ? 1 : 2, dots: true};
         } else if (commonService.getViewPort() === 'tablet') {
             this.slideHListConfig = {"slidesToShow": 3, "slidesToScroll": 3, dots: true};
+        } else if (commonService.getViewPort() === 'desktop' && screen.width < 1200) {
+            this.slideHListConfig = {"slidesToShow": 4, "slidesToScroll": 2, dots: true};
         }
     }
 
@@ -119,12 +124,12 @@ export class HomeComponent implements OnInit, OnDestroy {
     checkScroll() {
         if (this.commonService.getViewPort() !== "mobile") {
             const scrollPosition = window.pageYOffset;
-            this.headerEl[this.styleStr][this.bgStr] = "rgba(243, 243, 243, " + (scrollPosition - 10)/100 + ")";
-            if (scrollPosition > 50) {
-                this.headerEl.classList.remove("mh-tp");
-            } else if(!this.headerEl.classList.contains("mh-tp")) {
-                this.headerEl.classList.add("mh-tp");
-            }
+            // this.headerEl[this.styleStr][this.bgStr] = "rgba(243, 243, 243, " + (scrollPosition - 10)/100 + ")";
+            // if (scrollPosition > 50) {
+            //     this.headerEl.classList.remove("mh-tp");
+            // } else if(!this.headerEl.classList.contains("mh-tp")) {
+            //     this.headerEl.classList.add("mh-tp");
+            // }
             if (scrollPosition >= 212) {
                 if (!this.searchWrapEl.classList.contains("fixed")) {
                     this.searchWrapEl.classList.add("fixed");
@@ -138,15 +143,16 @@ export class HomeComponent implements OnInit, OnDestroy {
     public ngOnInit() {
         this.searchWrapEl = document.getElementById("searchWrap");
         this.headerEl = document.getElementById("main-header");
-        if (this.commonService.getViewPort() !== "mobile") {
-            if(!this.headerEl.classList.contains("mh-tp")) {
-                this.headerEl.classList.add("mh-tp");
-            }
-            this.headerEl[this.styleStr][this.bgStr] = "rgba(243, 243, 243, 0)";
-        }
+        // if (this.commonService.getViewPort() !== "mobile") {
+        //     if(!this.headerEl.classList.contains("mh-tp")) {
+        //         this.headerEl.classList.add("mh-tp");
+        //     }
+        //     this.headerEl[this.styleStr][this.bgStr] = "rgba(243, 243, 243, 0)";
+        // }
         const cWrapEl = document.getElementsByClassName("content-wrapper")[0];
         if (cWrapEl) {
             cWrapEl.classList.add("no-padding");
+            cWrapEl.classList.add("cw-home");
         }
         this.allSubscriptions = this.servicesService.getServices()
             .subscribe((val) => {
@@ -160,6 +166,40 @@ export class HomeComponent implements OnInit, OnDestroy {
             .subscribe((val) => {
                 this.recommendedServiceItems = val;
             })
+        this.reviews = [{
+            user: {
+                name: "Sonia Kapoor",
+                imageUrl: "assets/img/user.png"
+            },
+            message: "Booked service on novowash. Amazing experience.",
+            bservice: {
+                name: "Home Cleaning Services",
+                imageUrl: "assets/img/serviceImg/home_cleaning.svg",
+                rating: 4.2
+            }
+        }, {
+            user: {
+                name: "Raj Shekhar",
+                imageUrl: "assets/img/user.png"
+            },
+            message: "Booked car cleaning service on novowash. Amazing experience.",
+            bservice: {
+                name: "Car Cleaning",
+                imageUrl: "assets/img/serviceImg/car_cleaning.svg",
+                rating: 4.6
+            }
+        }, {
+            user: {
+                name: "Aisha Singh",
+                imageUrl: "assets/img/user.png"
+            },
+            message: "Got my sofa cleaned by novowash personnels. Amazing experience.",
+            bservice: {
+                name: "Sofa Cleaning",
+                imageUrl: "assets/img/serviceImg/subcat/icons_sofa_cleaning.png",
+                rating: 4.2
+            }
+        }];
     }
 
     public ngOnDestroy() {
@@ -176,9 +216,10 @@ export class HomeComponent implements OnInit, OnDestroy {
         const cWrapEl = document.getElementsByClassName("content-wrapper")[0];
         if (cWrapEl) {
             cWrapEl.classList.remove("no-padding");
+            cWrapEl.classList.remove("cw-home");
         }
-        this.headerEl[this.styleStr][this.bgStr] = "";
-        this.headerEl.classList.remove("mh-tp");
+        // this.headerEl[this.styleStr][this.bgStr] = "";
+        // this.headerEl.classList.remove("mh-tp");
     }
 
     public getSearchResult(searchText) {

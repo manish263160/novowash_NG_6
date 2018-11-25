@@ -3,7 +3,7 @@
         <div fxLayout="column" fxLayoutAlign="baseline center">
             <!-- <p class="p-prime">Novowash presents</p>
             <p class="p-sub">Intelligent Interior Care!</p> -->
-            <img src="/assets/img/logo.png" alt="logo_imgae" class="logo_on_search" style="width: 20%">
+            <div class="logo_on_search"></div>
             <div fxLayout="row" fxLayoutGap="16px" id="searchWrap">
                 <mat-form-field floatLabel="never" class="search-text">
                     <input type="text" placeholder="What are you looking for?"
@@ -90,7 +90,7 @@
     </div>
     <div class="carousel-wrap">
         <h4 class="carousel-header">Offers</h4>
-        <ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideConfig" (afterChange)="afterChange($event)">
+        <ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideOffersConfig" (afterChange)="afterChange($event)">
             <div ngxSlickItem *ngFor="let slide of offers" class="slide">
                 <img src="{{ slide.img }}" alt="" width="100%">
             </div>
@@ -99,9 +99,28 @@
     <div class="separator-1"></div>
     <div class="carousel-wrap">
         <h4 class="carousel-header">Customer Reviews</h4>
-        <ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideConfig" (afterChange)="afterChange($event)">
-            <div ngxSlickItem *ngFor="let slide of slides" class="slide">
-                <img src="{{ slide.img }}" alt="" width="100%">
+        <ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideCRConfig" (afterChange)="afterChange($event)">
+            <div ngxSlickItem *ngFor="let review of reviews" class="slide">
+                <div class="slide-item si-cust-review" fxLayout="column">
+                    <div class="user-info" fxLayout="row">
+                        <div class="user-pic" [style.backgroundImage]="getBackground(review.user.imageUrl)"></div>
+                        <span class="user-name">{{ review.user.name }}</span>
+                    </div>
+                    <p class="review-message">
+                        {{ review.message }}
+                    </p>
+                    <div class="in-review-separator"></div>
+                    <span class="hired-header">Service Booked</span>
+                    <div class="bservice-info" fxLayout="row">
+                        <div class="bservice-pic" [style.backgroundImage]="getBackground(review.bservice.imageUrl)"></div>
+                        <div class="bservice-detail" fxLayout="column">
+                            <span class="bservice-name">{{ review.bservice.name }}</span>
+                            <span class="bservice-star">
+                                {{ review.bservice.rating }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </ngx-slick>
     </div>
