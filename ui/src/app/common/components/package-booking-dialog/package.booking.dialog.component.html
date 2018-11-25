@@ -16,7 +16,10 @@
         <div class="containerX dialog-container" *ngIf="slide === 1"
             [ngClass]="{'sidenav-fi': slide === 1, 'sidenav-fo': slide !== 1}">
             <div fxLayout="row" class="bd-content-1-wrap">
-                {{ serviceDesc }}
+                <!-- {{ serviceDesc }} -->
+                <div class="service_text" [innerHtml]="serviceDesc ">
+                    <!-- {{ serviceDesc }} -->
+                </div>
             </div>
         </div>
 

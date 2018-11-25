@@ -72,7 +72,7 @@
         <h4 class="carousel-header">Packages</h4>
         <ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideConfig" (afterChange)="afterChange($event)">
             <div ngxSlickItem *ngFor="let slide of packageItems" class="slide with-bg"
-                (click)="openPackageBookDlg(slide.id, slide.packageName)">
+                (click)="openPackageBookDlg(slide.id, slide.packageName , slide.packageDesc)">
                 <ng-container *ngIf="(slide.imageUrl && slide.imageUrl !== 'null') else noPImgTmpl">
                   <div fxLayout="column">
                     <img src="{{ slide.imageUrl }}" alt="" width="100%">

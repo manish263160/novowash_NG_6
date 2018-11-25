@@ -73,7 +73,7 @@ public hoverval: false;
         if (this.isForRecommended) {
             this.allSubServices = [this.selectedSubService];
             this.loadSubServices();
-            this.onClickSubServiceGetDesc(this.selectedSubService.id);
+            this.onClickSubServiceGetDesc(this.selectedSubService.id , this.selectedSubService.serviceDesc);
         } else {
             const subServiceSub = this.servicesService.getAllSubServices()
                 .subscribe((val) => {
@@ -263,10 +263,10 @@ public hoverval: false;
         this.loadSubServices();
     }
 
-    public onClickSubServiceGetDesc(serviceId) {
+    public onClickSubServiceGetDesc(serviceId , serviceDesc) {
         this.highlightedSubServiceId = serviceId;
         this.slide = 2;
-        this.serviceDesc = "SAMPLE DESCRIPTION";
+        this.serviceDesc = serviceDesc; /*  "SAMPLE DESCRIPTION"; */
         // this.onClickSubService1(serviceId);
     }
 

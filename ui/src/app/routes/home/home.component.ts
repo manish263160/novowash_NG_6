@@ -238,11 +238,12 @@ export class HomeComponent implements OnInit, OnDestroy {
         }
     }
 
-    public openPackageBookDlg(packageId: number = 0, packageName: string = "") {
+    public openPackageBookDlg(packageId: number = 0, packageName: string = "" , packageDesc: string = "") {
         this.dialogRef = this.dialog.open(PackageBookingDialogComponent, this.config);
         // this.dialogRef.componentInstance.serviceItems = this.serviceItems;
         this.dialogRef.componentInstance.selectedServiceId = packageId;
         this.dialogRef.componentInstance.selectedServiceName = packageName;
+        this.dialogRef.componentInstance.packageDescription = packageDesc;
         this.dialogRef.componentInstance.onBookingCancelled.subscribe(() => {
             console.log("onBookingCancelled()");
             this.dialogRef.close();

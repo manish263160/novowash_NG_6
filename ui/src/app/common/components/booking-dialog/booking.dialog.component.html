@@ -54,7 +54,7 @@
                         </div> -->
                         <div class="bd-service-sub-list-item" fxLayout="column"
                             *ngFor="let sub of subList; let j = index"
-                            (click)="onClickSubServiceGetDesc(sub.id)" >
+                            (click)="onClickSubServiceGetDesc(sub.id , sub.serviceDesc)" >
                             <span  class="service-icon" [style.backgroundImage]="!sub.localVar ? getBackground(sub.bwImageUrl) : getBackground(sub.imageUrl)"  (mouseover)="sub.localVar = true" (mouseout)="sub.localVar = false" ></span>
                             <span class="service-name">{{ sub.serviceName }}</span>
                         </div>
@@ -66,8 +66,10 @@
         <!-- slide 2 -->
         <div class="containerX dialog-container" *ngIf="slide === 2"
             [ngClass]="{'sidenav-fi': slide === 2, 'sidenav-fo': slide !== 2}">
-            <div fxLayout="row" fxLayout.lt-sm="column" class="bd-content-1-wrap">
-                {{ serviceDesc }}
+            <div fxLayout="row" fxLayout.lt-sm="column" class="bd-content-1-wrap" fxLayoutAlign="center">
+              <div class="service_text" [innerHtml]="serviceDesc ">
+                  <!-- {{ serviceDesc }} -->
+              </div>
             </div>
         </div>
 

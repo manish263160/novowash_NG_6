@@ -18,6 +18,7 @@ export class PackageBookingDialogComponent implements OnDestroy, OnInit {
     // @Input() public serviceItems = [];
     @Input() public selectedServiceId: number;
     @Input() public selectedServiceName: string;
+    @Input() public packageDescription: string;
     @Output() public onBookingCancelled: EventEmitter<any> = new EventEmitter();
     @Output() public onServiceSelected: EventEmitter<any> = new EventEmitter();
     public highlightedSubServiceId: number;
@@ -40,7 +41,7 @@ export class PackageBookingDialogComponent implements OnDestroy, OnInit {
     public type3Object: {};
     public selectedObj = {
         mainService: null,
-        subService: null, 
+        subService: null,
         mainPackages: [],
         extraPackages: [],
         type: null,
@@ -50,7 +51,7 @@ export class PackageBookingDialogComponent implements OnDestroy, OnInit {
     };
 
     // private subServiceSub: any;
-    
+
     constructor(
         public commonService: CommonService,
         private dialog: MatDialog ,
@@ -81,10 +82,11 @@ export class PackageBookingDialogComponent implements OnDestroy, OnInit {
         }
         this.slide = 1;
         this.totalAmount = 0;
-        this.serviceDesc = "SAMPLE DESCRIPTTION";
+        this.serviceDesc = this.packageDescription;  /* "SAMPLE DESCRIPTTION"; */
         const subServiceSub = this.servicesService.getPackageItems(this.selectedServiceId)
             .subscribe((val) => {
                 this.allSubServices = val;
+                console.log(this.allSubServices)
                 this.highlightedSubServiceId = (this.allSubServices && this.allSubServices[0]) ? this.allSubServices[0].id : 0;
             });
         if (this.allSubscriptions) {
@@ -112,7 +114,7 @@ export class PackageBookingDialogComponent implements OnDestroy, OnInit {
         let subServ = this.allSubServices.filter((sub) => sub.id === this.highlightedSubServiceId);
         this.selectedObj = {
             mainService: null,
-            subService: (subServ && subServ.length) ? subServ[0] : null, 
+            subService: (subServ && subServ.length) ? subServ[0] : null,
             mainPackages: [],
             extraPackages: [],
             type: null,
@@ -187,7 +189,7 @@ export class PackageBookingDialogComponent implements OnDestroy, OnInit {
                                 packageCategories.push(pack.duration);
                                 categorisedPackages[pack.duration] = {
                                     mainPackages: []
-                                };                            
+                                };
                             }
                             if (pack.isExtras === 0) {
                                 categorisedPackages[pack.duration].mainPackages.push(pack);
@@ -200,7 +202,7 @@ export class PackageBookingDialogComponent implements OnDestroy, OnInit {
                     } else if (this.mainServiceType === 3 || this.mainServiceType === 4) {
                         this.packages.forEach((pack) => {
                             if (!packageCategories.includes(pack.duration)) {
-                                packageCategories.push(pack.duration);                          
+                                packageCategories.push(pack.duration);
                             }
                             if (!subPackageCategories.includes(pack.userInputs)) {
                                 subPackageCategories.push(pack.userInputs);
