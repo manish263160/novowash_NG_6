@@ -12,7 +12,7 @@
                         <div fxLayout="column" fxLayoutGap="12px" class="form-el-wrap">
                             <mat-form-field appearance="outline">
                                 <mat-label>Select your service*</mat-label>
-                                <input type="text" placeholder="Type to find your service..." 
+                                <input type="text" placeholder="Type to find your service..."
                                     matInput [matAutocomplete]="auto" formControlName="service" novalidate
                                     #txtSearch autocomplete="off" (keyup)="getSearchResult(txtSearch.value)">
                                     <mat-error *ngIf="(partnerForm.controls['service'].errors | firstKey) ==='required' && partnerForm.controls['service'].touched">
@@ -73,9 +73,18 @@
                 <div class="sec-why-content" fxFlex="1 1 100%">
                     <h2 class="sec-header">Why Us?</h2>
                     <div class="why-img-wrap" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap.lt-sm="12px">
+                      <div fxLayout="column">
                         <div class="why-img one"></div>
+                      <span class="span_text">Increased Visibility and New Customers</span>
+                      </div>
+                      <div fxLayout="column">
                         <div class="why-img two"></div>
+                        <span class="span_text">Flexibility to choose your order</span>
+                      </div>
+                      <div fxLayout="column">
                         <div class="why-img three"></div>
+                        <span class="span_text">CRM Suit: Track, monitor your orders</span>
+                      </div>
                     </div>
                 </div>
             </div>

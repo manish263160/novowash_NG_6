@@ -2,11 +2,20 @@
     margin-left: -20px;
     margin-right: -20px;
     .beapartner-content-wrap {
-        & > div {
+      & > div {
+
             padding: 65px;
             // &:nth-child(even) {
             //     background-color: #fafafa;
             // }
+
+        }
+        .form-section{
+          background-image: url(/assets/img/be_a_partner/novowash_partners_heroimage.png);
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: initial;
+          height: 67vh;
         }
         .sec-header {
             text-align: left;
@@ -75,6 +84,10 @@
         .sec-why-content {
             .why-img-wrap {
                 justify-content: space-between;
+                .span_text{
+                  text-align: center;
+                  font-size: 1.7em;
+                }
                 .why-img {
                     width: 336px;
                     height: 300px;
@@ -82,13 +95,13 @@
                     background-position: center center;
                     background-repeat: no-repeat;
                     &.one {
-                        background-image: url(/assets/img/why1.png);
+                        background-image: url(/assets/img/be_a_partner/increased_visibitily.png);
                     }
                     &.two {
-                        background-image: url(/assets/img/why2.png);
+                        background-image: url(/assets/img/be_a_partner/flexibility_to_choose_your_order.png);
                     }
                     &.three {
-                        background-image: url(/assets/img/why3.png);
+                        background-image: url(/assets/img/be_a_partner/crm_suite.png);
                     }
                 }
             }
@@ -97,10 +110,12 @@
             .request-block-wrap {
                 height: 555px;
                 &:nth-child(even) {
-                    background-color: #efeeea;
+                    // background-color: #efeeea;
+                    background-color: #ffffff;
                 }
                 &.request-block-wrap:nth-child(odd) {
-                    background-color: #e7ebec;
+                    // background-color: #e7ebec;
+                    border-color: #e0dfdf;
                 }
                 .request-left-sec {
                     .img-left {
@@ -131,7 +146,7 @@
                 &.rbw-1 {
                     .request-left-sec {
                         .img-left {
-                            background-image: url(/assets/img/img-request-1.png);
+                            background-image: url(/assets/img/be_a_partner/how_to_accept_request_a.png);
                         }
                     }
                 }
@@ -139,14 +154,14 @@
                     .request-left-sec {
                         order: 1;
                         .img-left {
-                            background-image: url(/assets/img/img-request-2.png);
+                            background-image: url(/assets/img/be_a_partner/how_to_accept_request_b.png);
                         }
                     }
                 }
                 &.rbw-3 {
                     .request-left-sec {
                         .img-left {
-                            background-image: url(/assets/img/img-request-3.png);
+                            background-image: url(/assets/img/be_a_partner/how_to_accept_request_c.png);
                         }
                     }
                 }
@@ -192,14 +207,16 @@
                         &:nth-child(even) {
                             .request-right-sec {
                                 .request-text-block {
-                                    border-color: #efeeea;
+                                    // border-color: #efeeea;
+                                    background-color: #ffffff;
                                 }
                             }
                         }
                         &:nth-child(odd){
                             .request-right-sec {
                                 .request-text-block {
-                                    border-color: #e7ebec;
+                                    // border-color: #e7ebec;
+                                    border-color: #e0dfdf;
                                 }
                             }
                         }

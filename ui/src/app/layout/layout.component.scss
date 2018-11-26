@@ -165,12 +165,20 @@
   &.btn-user {
     border: 0;
   }
+  &.btn-help{
+    background-color: #cedbfb;
+    border-radius: 10px !important;
+    font-size: 0.7rem !important;
+    font-weight: 600 !important;
+    height: 2rem !important;
+    line-height: 0.5rem !important;
+  }
 }
 
 .custom-menu.mat-menu-panel {
   &.menu-help {
     width: 320px;
-    height: 320px;
+    height: 330px;
     max-width: unset;
     max-height: unset;
     .help-popup-wrap {
@@ -197,7 +205,7 @@
 .page-sidenav-content {
   mat-toolbar.mat-toolbar:not([color]).toolbar-primary {
     .logo {
-      background-image: url("/assets/img/logo.png");
+      background-image: url("/assets/img/icon.png");
       width: 142px;
       background-size: contain;
       background-repeat: no-repeat;
