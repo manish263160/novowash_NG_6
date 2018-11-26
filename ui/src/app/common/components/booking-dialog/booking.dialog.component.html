@@ -54,8 +54,8 @@
                         </div> -->
                         <div class="bd-service-sub-list-item" fxLayout="column"
                             *ngFor="let sub of subList; let j = index"
-                            (click)="onClickSubServiceGetDesc(sub.id , sub.serviceDesc)" >
-                            <span  class="service-icon" [style.backgroundImage]="!sub.localVar ? getBackground(sub.bwImageUrl) : getBackground(sub.imageUrl)"  (mouseover)="sub.localVar = true" (mouseout)="sub.localVar = false" ></span>
+                            (click)="onClickSubServiceGetDesc(sub.id , sub.serviceDesc)" (mouseover)="sub.localVar = true" (mouseout)="sub.localVar = false">
+                            <span  class="service-icon" [style.backgroundImage]="!sub.localVar ? getBackground(sub.bwImageUrl) : getBackground(sub.imageUrl)"   ></span>
                             <span class="service-name">{{ sub.serviceName }}</span>
                         </div>
                     </div>
