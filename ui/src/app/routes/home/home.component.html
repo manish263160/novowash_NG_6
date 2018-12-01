@@ -1,6 +1,6 @@
 <div class="banner-wrap" [ngClass]="{'bwrap-mob': commonService.getViewPort() === 'mobile'}">
     <div fxLayout="row" class="search-wrap">
-        <div fxLayout="column" fxLayoutAlign="baseline center">
+        <div fxLayout="column" fxLayoutAlign="baseline start">
             <!-- <p class="p-prime">Novowash presents</p>
             <p class="p-sub">Intelligent Interior Care!</p> -->
             <div class="logo_on_search"></div>
@@ -49,7 +49,7 @@
     <div class="carousel-wrap" *ngIf="recommendedServiceItems?.length">
         <h4 class="carousel-header">Recommended Services</h4>
         <ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideConfig" (afterChange)="afterChange($event)">
-            <div ngxSlickItem *ngFor="let slide of recommendedServiceItems" class="slide with-bg-r"
+            <div ngxSlickItem *ngFor="let slide of recommendedServiceItems" class="slide with-bg"
                 (click)="openRecommendedServiceBookDlg(slide)">
                <!--  <div class="slide-item" fxLayout="row">
                     <span class="text-center">{{ slide.serviceName }}</span>

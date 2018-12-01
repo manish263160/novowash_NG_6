@@ -8,29 +8,37 @@
         <button mat-button class="btn-help" (click)="goToPage('be-a-partner')" >
             <span> Be A Partner</span>
         </button>
-        <ng-container *ngIf="commonService.getViewPort() === 'desktop' else smallTmpl2">
+        <ng-container *ngIf="commonService.getScreenSize() >= 1200 else smallTmpl3">
             <button mat-button class="btn-help" [matMenuTriggerFor]="helpMenu" #helpTrigger="matMenuTrigger"
                 (onMenuOpen)="itMenuService.onMenuOpen(helpTrigger);onMenuOpen();" (onMenuClose)="onMenuClose();">
                 <span>Request Call Back</span>
             </button>
         </ng-container>
-        <ng-template #smallTmpl2>
+        <ng-template #smallTmpl3>
             <button mat-stroked-button class="btn-login"
                 [matMenuTriggerFor]="helpMenu" #helpTrigger="matMenuTrigger"
                 (onMenuOpen)="itMenuService.onMenuOpen(helpTrigger);onMenuOpen();" (onMenuClose)="onMenuClose();">
                 <mat-icon>help_outline</mat-icon>
             </button>
         </ng-template>
-        <ng-container *ngIf="!ropcService.user else userTmpl">
-            <button id="mh-btn-login" mat-button
-                class="btn-help" (click)="openLoginSignUpDialog()">
-                <!-- <mat-icon>person</mat-icon>
-                <mat-icon>arrow_drop_down</mat-icon> -->
-                <span>Login/Sign Up</span>
-            </button>
+        <ng-container *ngIf="!ropcService.user else userTmpl">            
+            <ng-container *ngIf="commonService.getScreenSize() >= 1200 else smallTmpl2">
+                <button id="mh-btn-login" mat-button
+                    class="btn-help" (click)="openLoginSignUpDialog()">
+                    <!-- <mat-icon>person</mat-icon>
+                    <mat-icon>arrow_drop_down</mat-icon> -->
+                    <span>Login/Sign Up</span>
+                </button>
+            </ng-container>
+            <ng-template #smallTmpl2>
+                <button id="mh-btn-login" mat-stroked-button class="btn-login"
+                    (click)="openLoginSignUpDialog()">
+                    <mat-icon>perm_identity</mat-icon>
+                </button>
+            </ng-template>
         </ng-container>
         <ng-template #userTmpl>
-            <ng-container *ngIf="commonService.getViewPort() === 'desktop' else smallTmpl1">
+            <ng-container *ngIf="commonService.getScreenSize() >= 1200 else smallTmpl1">
                 <button mat-button class="btn-user" [matMenuTriggerFor]="userMenu" #userTrigger="matMenuTrigger"
                     (onMenuOpen)="itMenuService.onMenuOpen(userTrigger);onMenuOpen();" (onMenuClose)="onMenuClose();">
                     <span>{{ getInitials() }}</span>
@@ -97,8 +105,9 @@
     <div class="separator-1"></div>
     <footer class="footer footer-primary">
         <div fxLayout="column" fxLayoutAlign="baseline center" class="fsec-wrapper">
-            <div fxLayout="row" fxLayoutAlign="space-evenly center" class="light-dark fsec-social-wrap">
-                <div class="count-wrap" fxLayout="column"
+            <div fxLayout="row" fxLayoutAlign="space-evenly center" 
+                class="light-dark fsec-social-wrap" fxLayout.lt-sm="column">
+                <div class="count-wrap" fxLayout="column" fxLayout.lt-sm="row"
                     *ngFor="let cItem of countItems">
                     <div class="count-first" fxLayout="row">
                         <mat-icon>{{ cItem.icon }}</mat-icon>
@@ -112,7 +121,7 @@
             <!-- <div class="fsec-divider"></div> -->
             <div class="fsec-content-wrap light-dark" fxLayout="row" fxLayout.lt-sm="column">
                 <!-- about us -->
-                <div class="content-block">
+                <!-- <div class="content-block">
                     <h3 class="fsec-block-header">Quick Booking</h3>
                     <div class="fsec-block-content">
                     <ul class="fsec-content-list">
@@ -121,7 +130,7 @@
                         </li>
                       </ul>
                     </div>
-                </div>
+                </div> -->
                 <!-- company -->
                 <div class="content-block">
                     <h3 class="fsec-block-header">Useful Links</h3>
@@ -164,9 +173,19 @@
                     </div>
                 </div>
                 <!-- quality sec -->
-                <div class="content-block">
+                <div class="content-block cb-why-us">
+                    <h3 class="fsec-block-header">Why Us ?</h3>
                     <div class="fsec-block-content">
-                        <ul class="fsec-content-list list-quality">
+                        <div class="why-us-wrap" fxLayout="row" fxLayout.lt-md="column">
+                            <div class="why-us-item" *ngFor="let item of qualityItems" fxLayout="row">
+                                <mat-icon>{{ item.icon }}</mat-icon>
+                                <div fxLayout="column" class="why-us-twrap">
+                                    <p class="why-us-head">{{ item.head }}</p>
+                                    <p class="why-us-text">{{ item.text }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <ul class="fsec-content-list list-quality">
                             <li *ngFor="let item of qualityItems">
                                 <div class="quality-wrap" fxLayout="row">
                                     <div class="quality-img" [ngClass]="item.classes"></div>
@@ -176,7 +195,7 @@
                                     </span>
                                 </div>
                             </li>
-                        </ul>
+                        </ul> -->
                     </div>
                 </div>
                 <!-- address -->

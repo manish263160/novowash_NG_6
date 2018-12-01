@@ -61,10 +61,10 @@
                                 padding: 12px 0;
                                 border-bottom: 1px solid #eaeaec;
                                 .header {
-                                    margin: 0 0 8px;
+                                    margin: 0;
                                 }
                                 .text {
-                                    margin: 4px 0;
+                                    margin: 0;
                                     font-size: 14px;
                                     color: #5f5c5c;
                                 }
@@ -113,10 +113,11 @@
                                         .spdc-value {
                                             &.value-status {
                                                 color: white;
-                                                padding: 2px 4px;
+                                                padding: 0 4px;
                                                 border-radius: 2px;
                                                 text-transform: uppercase;
                                                 background-color: silver;
+                                                font-size: 12px;
                                                 &.success {
                                                     background-color: green;
                                                 }
@@ -139,7 +140,7 @@
                                         padding-right: 20px;
                                         .as-header {
                                             color: #5f5c5c;
-                                            margin-bottom: 12px;
+                                            // margin-bottom: 12px;
                                         }
                                         .as-value {
                                             line-height: 20px;

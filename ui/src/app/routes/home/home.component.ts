@@ -117,7 +117,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
 
     public afterChange(e) {
-        console.log('afterChange');
+        // console.log('afterChange');
     }
 
     @HostListener('window:scroll', ['$event'])

@@ -76,4 +76,8 @@ export class CommonService {
         }
         return viewPort;
     }
+
+    public getScreenSize() {
+        return screen.width;
+    }
 }

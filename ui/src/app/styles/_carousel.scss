@@ -52,7 +52,9 @@
                     min-height: 120px;
                     cursor: pointer;
                     &.with-bg {
-                        background-color: aliceblue;
+                        background-color: #1056fb; // aliceblue;
+                        color: white;
+                        border-radius: 3px;
                     }
                     &.with-bg-r {
                         background-color: rgba(0, 139, 139, .2);

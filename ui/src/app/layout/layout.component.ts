@@ -130,17 +130,21 @@ export class LayoutComponent implements OnInit, OnDestroy {
             link: "https://plus.google.com/u/0/105957726178174805323"
         }];
         this.qualityItems = [{
-            classes: "hundred-percent",
-            message: "guarantee for all products at myntra.com",
-            strongPart: "100% ORIGINAL"
+            icon: "account_circle",
+            head: "Trusted, Experienced Professionals",
+            text: "We provide only verified professionals with experience and background checked"
         }, {
-            classes: "return",
-            message: "of receiving your order",
-            strongPart: "Return within 30days"
+            icon: "mood",
+            head: "Always as per Your Needs",
+            text: "We strive to match your needs with the right professionals, within the right budget"
         }, {
-            classes: "delivery",
-            message: "Get free delivery",
-            strongPart: "for every order above Rs. 1199"
+            icon: "thumb_up",
+            head: "High Quality Service Guaranteed",
+            text: "Hassle free, high quality service guaranteed from booking to delivery"
+        }, {
+            icon: "verified_user",
+            head: "100% Original and Safe",
+            text: "Our professionals always use 100% original items and equipments for your safety"
         }];
         this.countItems = [{
             label: "WORKING HOURS",

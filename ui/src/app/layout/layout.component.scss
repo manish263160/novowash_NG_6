@@ -151,6 +151,43 @@
           }
         }
       }
+      &.cb-why-us {
+        flex-basis: 200%;
+        .fsec-block-content {
+          .why-us-wrap {
+            flex-wrap: wrap;
+            .why-us-item {
+              flex: 1 1 44%;
+              margin-bottom: 24px;
+              margin-right: 12px;
+              .mat-icon {
+                width: 42px;
+                height: 42px;
+                min-width: 42px;
+                font-size: 24px;
+                background-color: #f3f3f3;
+                border-radius: 50%;
+                line-height: 42px;
+                text-align: center;
+              }
+              .why-us-twrap {
+                margin-left: 12px;
+                & > p {
+                  margin: 0;
+                  padding: 0;
+                  &.why-us-head {
+                    font-weight: 600;
+                    margin-bottom: 6px;
+                  }
+                  &.why-us-text {
+                    line-height: 16px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
@@ -207,9 +244,11 @@
     .logo {
       background-image: url("/assets/img/icon.png");
       width: 142px;
-      background-size: contain;
+      // background-size: contain;
       background-repeat: no-repeat;
-      background-position: center center;
+      // background-position: center center;
+      background-size: 74px;
+      background-position: 26px center;
     }
   }
 }
@@ -238,8 +277,9 @@
         }
       }
       .logo {
-        width: 136px;
+        width: 56px;
         height: 56px;
+        background-position: 0;
       }
     }
   }
@@ -248,6 +288,33 @@
       .mat-dialog-content {
         .dialog-container {
           padding: 16px 16px 30px;
+        }
+      }
+    }
+  }
+  .fsec-wrapper {
+    .fsec-social-wrap {
+      height: 116px;
+      padding: 8px 0;
+      .count-wrap {
+        align-items: flex-end;
+        .count-first {
+          height: 36px;
+          line-height: 1;
+          & > * {
+            height: 36px;
+            line-height: 36px;
+          }
+          .mat-icon {
+            font-size: 30px;
+            width: 28px;
+            height: 36px;
+            line-height: 1.5;
+          }
+          .count-number {
+            font-size: 36px;
+            padding-right: 8px;
+          }
         }
       }
     }

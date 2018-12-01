@@ -227,7 +227,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
             height: 606px;
             height: 100%;
             .search-wrap {
-                background: #000;
+                background: #96b5fb;
                 padding: 0 8px;
                 height: 390px;
                 .p-sub {
@@ -253,9 +253,9 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
               height: 108px;
               border: 1px solid #eee;
               .service-icon {
-                  width: 36px;
-                  height: 36px;
-                  background-size: contain;
+                  width: 90px;
+                  height: 52px;
+                  background-size: 100%;
                   background-repeat: no-repeat;
                   background-position: center center;
                   margin-bottom: 8px;
@@ -295,6 +295,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
         &.fixed {
             .search-text {
                 width: 44vw;
+                max-width: 409px;
             }
         }
     }
@@ -371,7 +372,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
                 width: 48px;
                 height: 48px;
                 border-radius: 50%;
-                background-size: contain;
+                background-size: 150%;
                 background-repeat: no-repeat;
                 background-position: center center;
                 margin-right: 20px;
