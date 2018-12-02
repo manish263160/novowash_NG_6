@@ -145,6 +145,16 @@
                                         .as-value {
                                             line-height: 20px;
                                         }
+                                        &.as-sec-btn-cont {
+                                            width: 100%;
+                                            padding-right: 0;
+                                            flex-wrap: wrap;
+                                            & > button {
+                                                &:not(:last-of-type) {
+                                                    margin-bottom: 8px;
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }

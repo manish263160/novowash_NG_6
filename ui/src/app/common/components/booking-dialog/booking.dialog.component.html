@@ -268,7 +268,7 @@
             </div>
             <span fxFlex></span>
             <button mat-raised-button class="btn-p-back"
-                (click)="slide=1">
+                (click)="slide = isForRecommended ? 2 : 1">
                 Back
             </button>
             <button mat-raised-button class="btn-p-next" color="primary" [disabled]="totalAmount <= 0"
