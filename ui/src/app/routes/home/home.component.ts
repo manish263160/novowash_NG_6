@@ -174,7 +174,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             message: "Booked service on novowash. Amazing experience.",
             bservice: {
                 name: "Home Cleaning Services",
-                imageUrl: "assets/img/serviceImg/home_cleaning.svg",
+                imageUrl: "assets/img/serviceImg/subcat/icons_full_home_deep_cleaning.png",
                 rating: 4.2
             }
         }, {
@@ -185,7 +185,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             message: "Booked car cleaning service on novowash. Amazing experience.",
             bservice: {
                 name: "Car Cleaning",
-                imageUrl: "assets/img/serviceImg/car_cleaning.svg",
+                imageUrl: "assets/img/serviceImg/subcat/icons_complete_car_cleaning.png",
                 rating: 4.6
             }
         }, {
