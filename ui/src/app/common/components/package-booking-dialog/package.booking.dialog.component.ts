@@ -50,6 +50,12 @@ export class PackageBookingDialogComponent implements OnDestroy, OnInit {
         couponApplied: null,
     };
 
+    //------------------these are the static data of the extra services------------------
+    public extraService = {
+      sofa:"assets/img/extras/icons_sofa_cleaning.png",
+      carpet:"assets/img/extras/icons_carpet_cleaning.png",
+      curtain:"assets/img/extras/icons_curtain_cleaning.png",
+    };
     // private subServiceSub: any;
 
     constructor(
@@ -194,6 +200,13 @@ export class PackageBookingDialogComponent implements OnDestroy, OnInit {
                             if (pack.isExtras === 0) {
                                 categorisedPackages[pack.duration].mainPackages.push(pack);
                             } else if (pack.isExtras === 1) {
+                              if(pack.userInputs === 'Sofa Cleaning'){
+                                pack.imageUrl = this.extraService.sofa;
+                              }else if(pack.userInputs === 'Carpet Cleaning'){
+                                pack.imageUrl = this.extraService.carpet;
+                              }else if(pack.userInputs === 'Curtain Cleaning'){
+                                pack.imageUrl = this.extraService.curtain;
+                              }
                                 this.extraPackages.push(pack);
                             }
                         })

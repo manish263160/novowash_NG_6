@@ -115,7 +115,7 @@
                                 <div class="extra-wrap" fxLayout="row" fxLayoutGap="12px">
                                     <div class="control-ud-pm" fxLayout="column" fxLayoutGap="8px"
                                         *ngFor="let extraPack of extraPackages; let ei = index">
-                                        <span class="service-icon" [style.backgroundImage]="getBackground(extraPack.imageUrl)"></span>
+                                        <span class="service-icon" [style.backgroundImage]="getBackground(extraPack.imageUrl)" style="background-size: cover;"></span>
                                         <span class="ud-label small">{{ extraPack?.userInputs }}</span>
                                         <div class="control-pm small" fxLayout="row">
                                             <button mat-button class="btn-control plus"

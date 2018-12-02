@@ -46,6 +46,12 @@ export class BookingDialogComponent implements OnDestroy, OnInit {
         totalAmount: 0,
         couponApplied: null,
     };
+    //------------------these are the static data of the extra services------------------
+    public extraService = {
+      sofa:"assets/img/extras/icons_sofa_cleaning.png",
+      carpet:"assets/img/extras/icons_carpet_cleaning.png",
+      curtain:"assets/img/extras/icons_curtain_cleaning.png",
+    };
 public hoverval: false;
     // private subServiceSub: any;
 
@@ -292,6 +298,16 @@ public hoverval: false;
                         this.categoriseMainPackages();
                     }
                     this.extraPackages = this.packages.filter((pack) => pack.isExtras === 1);
+                    this.extraPackages.forEach(pack => {
+                      if(pack.userInputs === 'Sofa cleaning'){
+                        pack.imageUrl = this.extraService.sofa;
+                      }else if(pack.userInputs === 'Carpet cleaning'){
+                        pack.imageUrl = this.extraService.carpet;
+                      }else if(pack.userInputs === 'Curtain Clenaing'){
+                        pack.imageUrl = this.extraService.curtain;
+                      }
+                    });
+                    console.log("pack===",JSON.stringify(this.extraPackages))
                 }
             });
         // this.loadPackages();
