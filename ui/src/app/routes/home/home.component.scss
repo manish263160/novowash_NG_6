@@ -249,11 +249,11 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
       .service-cat-list-mob {
           flex-wrap: wrap;
           .service-cat-list-item {
-              width: 33.3%;
+              width: 50%;
               height: 108px;
               border: 1px solid #eee;
               .service-icon {
-                  width: 90px;
+                  width: 16vh;
                   height: 52px;
                   background-size: 100%;
                   background-repeat: no-repeat;
