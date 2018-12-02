@@ -214,7 +214,7 @@
                                     *ngFor="let service of bookedPackages; let bi = index">
                                     <div class="header-seg">
                                         <h4 class="header">{{ service.packageCatName }}</h4>
-                                        <button mat-icon-button color="accent" (onMenuOpen)="itMenuService.onMenuOpen(trigger);"
+                                       <!--  <button mat-icon-button color="accent" (onMenuOpen)="itMenuService.onMenuOpen(trigger);"
                                             [matMenuTriggerFor]="serviceMoreMenu" #trigger="matMenuTrigger" class="btn-sp-menu">
                                             <mat-icon>more_vert</mat-icon>
                                         </button>
@@ -225,7 +225,7 @@
                                             <button mat-menu-item (click)="onClickPackageChangeAddress(bi, service)">
                                                 Change Address
                                             </button>
-                                        </mat-menu>
+                                        </mat-menu> -->
                                         <p class="text">
                                             {{ service.packageName }}
                                         </p>
@@ -280,7 +280,20 @@
                                                 <span class="as-value">&lt;date time not yet selected&gt;</span>
                                             </ng-template>
                                         </div>
-                                    </div>
+                                      </div>
+                                      <div class="action-seg" fxLayout="column" fxLayoutGap="8px">
+                                          <div class="as-sec">
+                                            <span class="as-header">Change in plans?</span>
+                                        </div>
+                                        <div class="as-sec as-sec-btn-cont" fxLayout="row" fxLayoutGap="12px">
+                                            <button mat-raised-button class="btn-bserv-action" (click)="onClickPackageChangeTime(bi, service)">
+                                              {{ service.lastBookingDate ? 'Change Date and Time' : 'Select Date and Time'}}
+                                            </button>
+                                            <button mat-raised-button class="btn-bserv-action" (click)="onClickPackageChangeAddress(bi, service)">
+                                                Change Address
+                                            </button>
+                                        </div>
+                                      </div>
                                 </div>
                             </ng-container>
                         </div>
