@@ -483,10 +483,14 @@
                 height: calc(100vh - 61px);
                 .mat-dialog-content {
                     height: calc(100vh - 122px);
+                    // height: 100%;
+                    // max-height: calc(100vh - 122px);
                 }
                 &.dialog-sans-actions {
                     .mat-dialog-content {
                         height: calc(100vh - 61px);
+                        // height: 100%;
+                        // max-height: calc(100vh - 61px);
                     }
                 }
             }
@@ -499,6 +503,27 @@
                         overflow: hidden;
                         text-overflow: ellipsis;
                         white-space: nowrap;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.non-iphone {
+    .dialog-panel-booking {
+        &.dp-booking-mobile {
+            mat-dialog-container {
+                .booking-dialog-wrap {
+                    .mat-dialog-content {
+                        height: 100%;
+                        max-height: calc(100vh - 122px);
+                    }
+                    &.dialog-sans-actions {
+                        .mat-dialog-content {
+                            height: 100%;
+                            max-height: calc(100vh - 61px);
+                        }
                     }
                 }
             }

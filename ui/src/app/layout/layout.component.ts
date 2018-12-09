@@ -159,6 +159,17 @@ export class LayoutComponent implements OnInit, OnDestroy {
             count: "99%",
             icon: "star_border"
         }]
+
+        try {
+            const isSafariOniPhone =  /iphone/i.test(navigator.userAgent) && /safari/i.test(navigator.userAgent);
+            if (isSafariOniPhone) {
+                const bodyEl = document.body;
+                bodyEl.classList.add("is-safari-on-iphone");
+            } else if (!isSafariOniPhone) {
+                const bodyEl = document.body;
+                bodyEl.classList.add("non-iphone");
+            }
+        } catch(e) {}
     }
 
     public initHelpForm() {

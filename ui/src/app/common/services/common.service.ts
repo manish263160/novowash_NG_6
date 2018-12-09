@@ -5,6 +5,7 @@ export class CommonService {
     public isOpera = false;
     public isFirefox = false;
     public isSafari = false;
+    public isSafariOniPhone = false;
     public isIE = false;
     public isEdge = false;
     public isChrome = false;
@@ -42,8 +43,15 @@ export class CommonService {
     
            // Blink engine detection
            this.isBlink = (this.isChrome || this.isOpera) && !!window["CSS"];
+
+           // for safari on iPhone
+           try {
+               this.isSafariOniPhone =  /iphone/i.test(navigator.userAgent) && /safari/i.test(navigator.userAgent);
+           } catch(e) {}
            this.browserClasses = {
                 "is-safari": this.isSafari,
+                "is-safari-on-iphone": this.isSafariOniPhone,
+                "non-iphone": !this.isSafariOniPhone,
                 "isBlink": this.isBlink,
                 "isChrome": this.isChrome,
                 "isEdge": this.isEdge,
@@ -54,6 +62,8 @@ export class CommonService {
         } catch (e) {
             this.browserClasses = {
                 "is-safari": false,
+                "is-safari-on-iphone": false,
+                "non-iphone": false,                
                 "isBlink": false,
                 "isChrome": false,
                 "isEdge": false,
