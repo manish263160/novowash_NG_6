@@ -170,6 +170,14 @@ export class LayoutComponent implements OnInit, OnDestroy {
                 bodyEl.classList.add("non-iphone");
             }
         } catch(e) {}
+        try {
+            const isAndroid =  /android/i.test(navigator.userAgent);
+            const isFirefox =  /firefox/i.test(navigator.userAgent);
+            if (isAndroid && !isFirefox) {
+                const bodyEl = document.body;
+                bodyEl.classList.add("is-android");
+            }
+        } catch(e) {}
     }
 
     public initHelpForm() {

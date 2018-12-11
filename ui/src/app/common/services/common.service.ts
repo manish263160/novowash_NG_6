@@ -10,6 +10,7 @@ export class CommonService {
     public isEdge = false;
     public isChrome = false;
     public isBlink = false;
+    public isAndroid = false;
     public browserClasses = {};
 
     public showLoader: boolean = false;
@@ -47,6 +48,7 @@ export class CommonService {
            // for safari on iPhone
            try {
                this.isSafariOniPhone =  /iphone/i.test(navigator.userAgent) && /safari/i.test(navigator.userAgent);
+               this.isAndroid = /android/i.test(navigator.userAgent);
            } catch(e) {}
            this.browserClasses = {
                 "is-safari": this.isSafari,
@@ -58,6 +60,7 @@ export class CommonService {
                 "isFirefox": this.isFirefox,
                 "ie": this.isIE,
                 "isOpera": this.isOpera,
+                "isAndroid": this.isAndroid,
             };
         } catch (e) {
             this.browserClasses = {
@@ -70,6 +73,7 @@ export class CommonService {
                 "isFirefox": false,
                 "ie": false,
                 "isOpera": false,
+                "isAndroid": false,
             };
         }
         /* tslint:enable */
