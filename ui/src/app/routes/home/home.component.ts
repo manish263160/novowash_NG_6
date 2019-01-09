@@ -36,6 +36,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     public offers = [
         {img: "/assets/images/offers/offer_banner_1.png"},
         {img: "/assets/images/offers/offer_banner_2.png"},
+        {img: "/assets/images/offers/offer_banner_3.png"},
+        {img: "/assets/images/offers/offer_banner_4.png"},
     ];
     public serviceItems = [];
     public packageItems = [];
