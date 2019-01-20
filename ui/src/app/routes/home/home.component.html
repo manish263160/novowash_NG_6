@@ -101,7 +101,7 @@
                       <div fxLayout="column">
                         <img src="{{ slide.imageUrl }}" alt="" width="100%">
                         <span class="text-center">{{ slide.packageName }}</span>
-    
+
                       </div>
                     </ng-container>
                     <ng-template #noPImgTmpl>
@@ -116,10 +116,10 @@
     <div class="carousel-wrap">
         <h4 class="carousel-header">Offers</h4>
         <ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideOffersConfig" (afterChange)="afterChange($event)">
-            <div ngxSlickItem *ngFor="let slide of offers" class="slide">
-                <img src="{{ slide.img }}" alt="" width="100%">
-            </div>
-        </ngx-slick>
+          <div ngxSlickItem *ngFor="let slide of commonService.getViewPort() === 'mobile' ? mobileOffer : offers   " class="slide">
+            <img src="{{ slide.img }}" alt="" width="100%">
+          </div>
+         </ngx-slick>
     </div>
     <div class="separator-1"></div>
     <div class="carousel-wrap">
