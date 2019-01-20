@@ -21,7 +21,7 @@
                 <mat-icon>help_outline</mat-icon>
             </button>
         </ng-template>
-        <ng-container *ngIf="!ropcService.user else userTmpl">            
+        <ng-container *ngIf="!ropcService.user else userTmpl">
             <ng-container *ngIf="commonService.getScreenSize() >= 1200 else smallTmpl2">
                 <button id="mh-btn-login" mat-button
                     class="btn-help" (click)="openLoginSignUpDialog()">
@@ -41,7 +41,8 @@
             <ng-container *ngIf="commonService.getScreenSize() >= 1200 else smallTmpl1">
                 <button mat-button class="btn-user" [matMenuTriggerFor]="userMenu" #userTrigger="matMenuTrigger"
                     (onMenuOpen)="itMenuService.onMenuOpen(userTrigger);onMenuOpen();" (onMenuClose)="onMenuClose();">
-                    <span>{{ getInitials() }}</span>
+                    <!-- <span>{{ getInitials() }}</span> -->
+                    <mat-icon>person</mat-icon>
                     <mat-icon>arrow_drop_down</mat-icon>
                 </button>
             </ng-container>
@@ -105,7 +106,7 @@
     <div class="separator-1"></div>
     <footer class="footer footer-primary">
         <div fxLayout="column" fxLayoutAlign="baseline center" class="fsec-wrapper">
-            <div fxLayout="row" fxLayoutAlign="space-evenly center" 
+            <div fxLayout="row" fxLayoutAlign="space-evenly center"
                 class="light-dark fsec-social-wrap" fxLayout.lt-sm="column">
                 <div class="count-wrap" fxLayout="column" fxLayout.lt-sm="row"
                     *ngFor="let cItem of countItems">

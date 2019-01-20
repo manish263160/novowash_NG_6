@@ -203,10 +203,10 @@
     border: 0;
   }
   &.btn-help{
-    background-color: #cedbfb;
+    // background-color: #cedbfb;
     border-radius: 10px !important;
     font-size: 0.7rem !important;
-    font-weight: 600 !important;
+    font-weight: 800 !important;
     height: 2rem !important;
     line-height: 0.5rem !important;
   }
@@ -247,7 +247,7 @@
       // background-size: contain;
       background-repeat: no-repeat;
       // background-position: center center;
-      background-size: 74px;
+      background-size: 75px;
       background-position: 26px center;
     }
   }
@@ -257,7 +257,7 @@
   .page-sidenav-content {
     mat-toolbar.mat-toolbar:not([color]).toolbar-primary {
       .logo {
-        margin-left: 36px;
+        margin-left: 0px;
       }
     }
   }
@@ -277,8 +277,8 @@
         }
       }
       .logo {
-        width: 56px;
-        height: 56px;
+        width: 70px;
+        height: 70px;
         background-position: 0;
       }
     }
