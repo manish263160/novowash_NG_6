@@ -23,71 +23,96 @@
             </div>
         </div>
     </div>
-  </div>
-      <div class="carousel-wrap service-hlist-wrap">
-          <ng-container *ngIf="commonService.getViewPort() === 'mobile' else nrmlTmplSlist">
-              <div class="service-cat-list-mob" fxLayout="row">
-                  <div class="service-cat-list-item" fxLayout="column" fxLayoutAlign="center center"
-                      *ngFor="let item of serviceItems" (click)="openServiceBookDlg(item.id, item.catName)">
-                      <span class="service-icon" [style.backgroundImage]="getBackground(item.imageUrl)"></span>
-                      <span class="service-name">{{ item.catName }}</span>
-                  </div>
-              </div>
-          </ng-container>
-          <ng-template #nrmlTmplSlist>
-              <ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideHListConfig" (afterChange)="afterChange($event)">
-                  <div ngxSlickItem *ngFor="let item of serviceItems" class="slide" (click)="openServiceBookDlg(item.id, item.catName)">
-                      <div fxLayout="column" class="service-hlist-item" fxLayoutAlign="center center" width="100%">
-                          <span class="service-icon" [style.backgroundImage]="getBackground(item.imageUrl)"></span>
-                          <span class="service-name">{{ item.catName }}</span>
-                      </div>
-                  </div>
-              </ngx-slick>
-          </ng-template>
-      </div>
+</div>
+<div class="categories-content-wrap">
+    <div class="carousel-wrap service-hlist-wrap">
+        <h4 class="carousel-header">Our Categories</h4>
+        <ng-container *ngIf="commonService.getViewPort() === 'mobile' else nrmlTmplSlist">
+            <div class="service-cat-list-mob" fxLayout="row">
+                <div class="service-cat-list-item" fxLayout="column" fxLayoutAlign="center center"
+                    *ngFor="let item of serviceItems" (click)="openServiceBookDlg(item.id, item.catName)">
+                    <span class="service-icon" [style.backgroundImage]="getBackground(item.imageUrl)"></span>
+                    <span class="service-name">{{ item.catName }}</span>
+                </div>
+            </div>
+            <ng-container *ngIf="recommendedServiceItems?.length">
+                <h4 class="carousel-header">Recommended Services</h4>
+                <div class="service-cat-list-mob" fxLayout="row">
+                    <div class="service-cat-list-item" fxLayout="column" fxLayoutAlign="center center"
+                        *ngFor="let item of recommendedServiceItems" (click)="openRecommendedServiceBookDlg(item)">
+                        <span class="service-icon" [style.backgroundImage]="getBackground(item.imageUrl)"></span>
+                        <span class="service-name">{{ item.serviceName }}</span>
+                    </div>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="packageItems?.length">
+                <h4 class="carousel-header">Packages</h4>
+                <div class="service-cat-list-mob" fxLayout="row">
+                    <div class="service-cat-list-item" fxLayout="column" fxLayoutAlign="center center"
+                        *ngFor="let item of packageItems" (click)="openPackageBookDlg(item.id, item.packageName, item.packageDesc)">
+                        <span class="service-icon" [style.backgroundImage]="getBackground(item.imageUrl)"></span>
+                        <span class="service-name">{{ item.packageName }}</span>
+                    </div>
+                </div>
+            </ng-container>
+        </ng-container>
+        <ng-template #nrmlTmplSlist>
+            <ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideHListConfig" (afterChange)="afterChange($event)">
+                <div ngxSlickItem *ngFor="let item of serviceItems" class="slide" (click)="openServiceBookDlg(item.id, item.catName)">
+                    <div fxLayout="column" class="service-hlist-item" fxLayoutAlign="center center" width="100%">
+                        <span class="service-icon" [style.backgroundImage]="getBackground(item.imageUrl)"></span>
+                        <span class="service-name">{{ item.catName }}</span>
+                    </div>
+                </div>
+            </ngx-slick>
+        </ng-template>
+    </div>
+</div>
 <div class="home-content-wrap">
-    <div class="carousel-wrap" *ngIf="recommendedServiceItems?.length">
-        <h4 class="carousel-header">Recommended Services</h4>
-        <ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideConfig" (afterChange)="afterChange($event)">
-            <div ngxSlickItem *ngFor="let slide of recommendedServiceItems" class="slide with-bg"
-                (click)="openRecommendedServiceBookDlg(slide)">
-               <!--  <div class="slide-item" fxLayout="row">
-                    <span class="text-center">{{ slide.serviceName }}</span>
-                </div> -->
-              <ng-container *ngIf="(slide.imageUrl && slide.imageUrl !== 'null') else noPImgTmpl">
-                  <div fxLayout="column">
-                      <img src="{{ slide.imageUrl }}" alt="" width="100%">
-                      <span class="text-center">{{ slide.serviceName }}</span>
-                    </div>
-                </ng-container>
-                <ng-template #noPImgTmpl>
-                    <div class="slide-item" fxLayout="row">
-                        <span>{{ slide.serviceName }}</span>
-                    </div>
-                </ng-template>
-            </div>
-        </ngx-slick>
-    </div>
-    <div class="carousel-wrap" *ngIf="packageItems?.length">
-        <h4 class="carousel-header">Packages</h4>
-        <ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideConfig" (afterChange)="afterChange($event)">
-            <div ngxSlickItem *ngFor="let slide of packageItems" class="slide with-bg"
-                (click)="openPackageBookDlg(slide.id, slide.packageName , slide.packageDesc)">
-                <ng-container *ngIf="(slide.imageUrl && slide.imageUrl !== 'null') else noPImgTmpl">
-                  <div fxLayout="column">
-                    <img src="{{ slide.imageUrl }}" alt="" width="100%">
-                    <span class="text-center">{{ slide.packageName }}</span>
-
-                  </div>
-                </ng-container>
-                <ng-template #noPImgTmpl>
-                    <div class="slide-item" fxLayout="row">
+    <ng-container *ngIf="commonService.getViewPort() !== 'mobile'">
+        <div class="carousel-wrap" *ngIf="recommendedServiceItems?.length">
+            <h4 class="carousel-header">Recommended Services</h4>
+            <ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideConfig" (afterChange)="afterChange($event)">
+                <div ngxSlickItem *ngFor="let slide of recommendedServiceItems" class="slide with-bg"
+                    (click)="openRecommendedServiceBookDlg(slide)">
+                   <!--  <div class="slide-item" fxLayout="row">
+                        <span class="text-center">{{ slide.serviceName }}</span>
+                    </div> -->
+                  <ng-container *ngIf="(slide.imageUrl && slide.imageUrl !== 'null') else noPImgTmpl">
+                      <div fxLayout="column">
+                          <img src="{{ slide.imageUrl }}" alt="" width="100%">
+                          <span class="text-center">{{ slide.serviceName }}</span>
+                        </div>
+                    </ng-container>
+                    <ng-template #noPImgTmpl>
+                        <div class="slide-item" fxLayout="row">
+                            <span>{{ slide.serviceName }}</span>
+                        </div>
+                    </ng-template>
+                </div>
+            </ngx-slick>
+        </div>
+        <div class="carousel-wrap" *ngIf="packageItems?.length">
+            <h4 class="carousel-header">Packages</h4>
+            <ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideConfig" (afterChange)="afterChange($event)">
+                <div ngxSlickItem *ngFor="let slide of packageItems" class="slide with-bg"
+                    (click)="openPackageBookDlg(slide.id, slide.packageName , slide.packageDesc)">
+                    <ng-container *ngIf="(slide.imageUrl && slide.imageUrl !== 'null') else noPImgTmpl">
+                      <div fxLayout="column">
+                        <img src="{{ slide.imageUrl }}" alt="" width="100%">
                         <span class="text-center">{{ slide.packageName }}</span>
-                    </div>
-                </ng-template>
-            </div>
-        </ngx-slick>
-    </div>
+    
+                      </div>
+                    </ng-container>
+                    <ng-template #noPImgTmpl>
+                        <div class="slide-item" fxLayout="row">
+                            <span class="text-center">{{ slide.packageName }}</span>
+                        </div>
+                    </ng-template>
+                </div>
+            </ngx-slick>
+        </div>
+    </ng-container>
     <div class="carousel-wrap">
         <h4 class="carousel-header">Offers</h4>
         <ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideOffersConfig" (afterChange)="afterChange($event)">
