@@ -56,7 +56,7 @@
                 justify-content: center;
                 padding-right: 48px;
                 .sfl-text-wrap {
-                    background-color: rgba(255, 255, 255, 0.5);
+                    // background-color: rgba(255, 255, 255, 0.5);
                     padding: 4px 12px;
                 }
                 .caption {
@@ -91,7 +91,7 @@
                 flex-wrap: wrap;
                 .wiw-content-wrap {
                     flex: 1 1 100%;
-                    max-width: 320px;
+                    max-width: 300px;
                     align-items: center;
                 }
                 .span_text{
@@ -99,8 +99,8 @@
                   font-size: 1.7em;
                 }
                 .why-img {
-                    width: 240px;
-                    height: 240px;
+                    width: 160px;
+                    height: 160px;
                     margin: 20px;
                     background-size: contain;
                     background-position: center center;
@@ -119,7 +119,7 @@
         }
         .request-section {
             .request-block-wrap {
-                height: 555px;
+                height: 500px;
                 &:nth-child(even) {
                     // background-color: #efeeea;
                     background-color: #ffffff;
@@ -135,45 +135,75 @@
                         background-position: center center;
                         background-size: contain;
                         background-repeat: no-repeat;
+                        background-color: #eef2fb;
                     }
                 }
                 .request-right-sec {
-                    align-items: center;
+                    // align-items: center;
                     justify-content: center;
                     display: inline-flex;
                     .request-text-block {
-                        width: 412px;
-                        height: 380px;
-                        align-items: center;
-                        justify-content: center;
-                        border: 1px solid #b9babb;
-                        background-color: #fff;
-                        padding: 20px;
-                        font-size: 28px;
-                        text-align: center;
-                        line-height: 36px;
+                        // width: 412px;
+                        // height: 380px;
+                        // align-items: center;
+                        // justify-content: center;
+                        // border: 1px solid #b9babb;
+                        // background-color: #fff;
+                        // padding: 20px;
+                        // font-size: 28px;
+                        // text-align: center;
+                        // line-height: 36px;
+                        padding: 112px;
+                        .text {
+                            color: #484848;
+                            word-wrap: break-word;
+                            &.large {
+                                font-size: 46px;
+                                font-weight: 800;
+                                line-height: 1.130em;
+                                padding-bottom: 8px;
+                            }
+                            &.small {
+                                font-size: 18px;
+                                line-height: 1.44em;
+                            }
+                        }
                     }
                 }
                 &.rbw-1 {
                     .request-left-sec {
+                        order: 1;
                         .img-left {
                             background-image: url(/assets/img/be_a_partner/how_to_accept_request_a.png);
                         }
                     }
+                    .request-right-sec {
+                        margin-right: 24px;
+                        background-color: rgb(234, 232, 225);
+                        
+                    }
                 }
                 &.rbw-2 {
                     .request-left-sec {
-                        order: 1;
                         .img-left {
                             background-image: url(/assets/img/be_a_partner/how_to_accept_request_b.png);
                         }
                     }
+                    .request-right-sec {
+                        margin-left: 24px;
+                        background-color: rgb(235, 236, 240);
+                    }
                 }
                 &.rbw-3 {
                     .request-left-sec {
+                        order: 1;
                         .img-left {
                             background-image: url(/assets/img/be_a_partner/how_to_accept_request_c.png);
                         }
+                    }
+                    .request-right-sec {
+                        margin-right: 24px;
+                        background-color: rgb(234, 232, 225);
                     }
                 }
             }
@@ -197,6 +227,9 @@
                 .sec-form-left {
                     padding-right: 0px;
                     padding-top: 12px;
+                    .sfl-text-wrap {
+                        height: 126px;
+                    }
                     .caption {
                         text-align: center;
                         font-size: 28px;
@@ -225,52 +258,79 @@
             .request-section {
                 .sec-request-content {
                     .request-block-wrap {
-                        height: auto;
-                        position: relative;
                         .request-left-sec {
-                            .img-left {
-                                height: 520px;
-                                background-position: center;
-                                background-size: cover;
-                                background-repeat: no-repeat;
-                            }
+                            order: 1 !important;
                         }
                         .request-right-sec {
-                            position: absolute;
-                            bottom: 0;
+                            margin-left: 0 !important;
+                            margin-right: 0 !important;
+                            order: 0 !important;
+                            background-color: transparent;
                             .request-text-block {
-                                width: 100%;
-                                height: 276px;
-                                padding: 20px;
-                                font-size: 20px;
-                                background-color: rgba(255, 255, 255, .5);
-                                border: 0;
-                            }
-                        }
-                        &:nth-child(even) {
-                            .request-right-sec {
-                                .request-text-block {
-                                    // border-color: #efeeea;
-                                    background-color: rgba(255, 255, 255, .5);
+                                padding: 0 12px;
+                                align-items: center;
+                                justify-content: center;
+                                text-align: center;
+                                .text {
+                                    &.large {
+                                        font-size: 24px;
+                                        line-height: 1.250em;
+                                    }
                                 }
-                            }
-                        }
-                        &:nth-child(odd){
-                            .request-right-sec {
-                                .request-text-block {
-                                    // border-color: #e7ebec;
-                                    border-color: #e0dfdf;
-                                }
-                            }
-                        }
-                        &.rbw-2 {
-                            .request-left-sec {
-                                order: 0;
                             }
                         }
                     }
                 }
             }
+            // .request-section {
+            //     .sec-request-content {
+            //         .request-block-wrap {
+            //             height: auto;
+            //             position: relative;
+            //             .request-left-sec {
+            //                 .img-left {
+            //                     height: 400px;
+            //                     background-position: center;
+            //                     background-size: cover;
+            //                     background-repeat: no-repeat;
+            //                 }
+            //             }
+            //             .request-right-sec {
+            //                 position: absolute;
+            //                 bottom: 0;
+            //                 .request-text-block {
+            //                     width: 100%;
+            //                     height: 276px;
+            //                     padding: 20px;
+            //                     font-size: 20px;
+            //                     background-color: rgba(255, 255, 255, .5);
+            //                     border: 0;
+            //                 }
+            //             }
+            //             &:nth-child(even) {
+            //                 .request-right-sec {
+            //                     .request-text-block {
+            //                         // border-color: #efeeea;
+            //                         background-color: rgba(255, 255, 255, .5);
+            //                     }
+            //                 }
+            //             }{
+            //             &:nth-child(odd){
+            //                 .request-right-sec {
+            //                     .request-text-block {
+            //                         // border-color: #e7ebec;
+            //                         border-color: #e0dfdf;
+            //                     }
+            //                 }
+            //             }
+            //             &.rbw-2 {
+            //                 .request-left-sec {
+            //                     order: 0;
+            //                 }
+            //             }
+            //         }
+            //     }
+            // }
         }
     }
 }
@@ -279,4 +339,13 @@
   opacity: 0.5;
     background-color: #0c21dc;
     color: #ffffff;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .beapartner-wrap .beapartner-content-wrap .form-section {
+        background-repeat: no-repeat;
+        background-size: 124% 100%;
+        background-position: center center;
+        height: 45vh;
+    }
 }

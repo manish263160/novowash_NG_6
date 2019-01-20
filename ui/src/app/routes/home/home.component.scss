@@ -12,10 +12,10 @@
     &.service-hlist-wrap {
         max-width: 100%;
         width: 100%;
-        padding-bottom: 0;
-        background-color: #fcfcfc;
+        // padding-bottom: 0;
+        // background-color: #fcfcfc;
         // background-color: rgba(77, 77, 77, 0.5);
-        height: 130px;
+        // height: 130px;
         .slick-slider {
             max-width: 836px;
             height: 100%;
@@ -203,7 +203,22 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     }
 }
 .home-content-wrap {
-    padding: 32px 20px 0;
+    padding: 20px 20px 0;
+}
+
+.categories-content-wrap {
+    background-color: #fcfcfc;
+    min-height: 170px;
+    height: 150px;
+    .carousel-wrap.service-hlist-wrap {
+        max-width: 87.3%;
+        margin: 0 auto;
+        padding-bottom: 12px;
+        padding-top: 16px;
+        .carousel-header {
+            margin: 0;
+        }
+    }
 }
 
 #searchWrap {
@@ -227,9 +242,23 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
             height: 606px;
             height: 100%;
             .search-wrap {
-                background: #96b5fb;
+                // background: #96b5fb;
+                // padding: 0 8px;
+                // height: 390px;
+                background: white;
                 padding: 0 8px;
-                height: 390px;
+                height: 96px;
+                .logo_on_search {
+                    display: none;
+                }
+                #searchWrap {
+                    margin-top: 12px;
+                    .search-text {
+                        input.mat-input-element {
+                            margin-top: -4px;
+                        }
+                    }
+                }
                 .p-sub {
                     font-size: 32px;
                 }
@@ -242,16 +271,30 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
         }
     }
 
+    .categories-content-wrap {
+        height: auto;
+        height: initial;
+    }
+
     .carousel-wrap.service-hlist-wrap {
-      background: #fff;
+    //   background: #fff;
       height: 216px;
       height: 100%;
+      .carousel-header {
+          margin-bottom: 8px !important;
+          &:not(:first-of-type) {
+              margin-top: 24px !important;
+          }
+      }
       .service-cat-list-mob {
           flex-wrap: wrap;
+          background: #fff;
           .service-cat-list-item {
               width: 50%;
               height: 108px;
               border: 1px solid #eee;
+              margin-bottom: -1px;
+              margin-right: -1px;
               .service-icon {
                   width: 16vh;
                   height: 52px;
@@ -283,7 +326,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
                   text-align: center;
                   text-transform: uppercase;
                   white-space: initial;
-                  width: 80px;
+                  width: 80%;
               }
           }
       }
