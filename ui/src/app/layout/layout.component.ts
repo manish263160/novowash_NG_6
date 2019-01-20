@@ -148,11 +148,11 @@ export class LayoutComponent implements OnInit, OnDestroy {
         }];
         this.countItems = [{
             label: "WORKING HOURS",
-            count: "10000+",
+            count: "100000+",
             icon: "access_time"
         }, {
             label: "HAPPY CUSTOMERS",
-            count: "1500+",
+            count: "10000+",
             icon: "favorite_border"
         }, {
             label: "POSITIVE FEEDBACK",

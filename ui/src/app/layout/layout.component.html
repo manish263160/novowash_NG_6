@@ -106,7 +106,7 @@
     <div class="separator-1"></div>
     <footer class="footer footer-primary">
         <div fxLayout="column" fxLayoutAlign="baseline center" class="fsec-wrapper">
-            <div fxLayout="row" fxLayoutAlign="space-evenly center"
+            <div fxLayout="row" fxLayoutAlign="space-evenly center" *ngIf="!ropcService.user"
                 class="light-dark fsec-social-wrap" fxLayout.lt-sm="column">
                 <div class="count-wrap" fxLayout="column" fxLayout.lt-sm="row"
                     *ngFor="let cItem of countItems">
