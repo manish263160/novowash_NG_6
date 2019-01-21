@@ -173,32 +173,54 @@ export class HomeComponent implements OnInit, OnDestroy {
             })
         this.reviews = [{
             user: {
-                name: "Sonia Kapoor",
-                imageUrl: "assets/img/user.png"
+                name: "Rakesh Thakur",
+                imageUrl: "assets/img/users/rakesh_thakur.jpg"
             },
-            message: "Booked service on novowash. Amazing experience.",
+            message: "Thank you Novowash team for a very professional home cleaning service.  My house is cleaned better than my expectations.",
             bservice: {
-                name: "Home Cleaning Services",
+                name: "Home Deep cleaning",
                 imageUrl: "assets/img/serviceImg/subcat/icons_full_home_deep_cleaning.png",
                 rating: 4.2
             }
         }, {
             user: {
-                name: "Raj Shekhar",
-                imageUrl: "assets/img/user.png"
+                name: "Arti Bahal",
+                imageUrl: "assets/img/users/arti_bahal.jpg"
             },
-            message: "Booked car cleaning service on novowash. Amazing experience.",
+            message: "Definitely recommending Novowash to my friends and relatives. Very professional and courteous staff with new technology equipments.",
             bservice: {
-                name: "Car Cleaning",
-                imageUrl: "assets/img/serviceImg/subcat/icons_complete_car_cleaning.png",
+                name: "Home Deep cleaning",
+                imageUrl: "assets/img/serviceImg/subcat/icons_full_home_deep_cleaning.png",
                 rating: 4.6
             }
         }, {
             user: {
-                name: "Aisha Singh",
-                imageUrl: "assets/img/user.png"
+                name: "Anmal Kohli",
+                imageUrl: "assets/img/users/anmal_kohli.jpg"
             },
-            message: "Got my sofa cleaned by novowash personnels. Amazing experience.",
+            message: "Loved your car interior care service. Had never seen steam technology based cleaning earlier. I am definitely interested in your car cleaning packages.",
+            bservice: {
+                name: "Car Cleaning",
+                imageUrl: "assets/img/serviceImg/subcat/icons_complete_car_cleaning.png",
+                rating: 4.3
+            }
+        }, {
+            user: {
+                name: "Shruti Arora",
+                imageUrl: "assets/img/users/shruti_arora.jpg"
+            },
+            message: "I have been a Novowash customer since a past few months. What I like most about them is their quality of service and the time each professional gives to ensure that the car is cleaned in a very detailed manner.  Keep it up!",
+            bservice: {
+                name: "Car Package",
+                imageUrl: "assets/img/serviceImg/subcat/icons_complete_car_cleaning.png",
+                rating: 4.0
+            }
+        }, {
+            user: {
+                name: "Meenu Jain",
+                imageUrl: "assets/img/users/meenu_jain.jpg"
+            },
+            message: "I was looking to give my couch a brand new look and you guys did just that! Keep up the excellent work!",
             bservice: {
                 name: "Sofa Cleaning",
                 imageUrl: "assets/img/serviceImg/subcat/icons_sofa_cleaning.png",

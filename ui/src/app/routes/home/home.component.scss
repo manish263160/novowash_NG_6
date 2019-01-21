@@ -379,9 +379,10 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
                 width: 48px;
                 height: 48px;
                 border-radius: 50%;
-                background-size: contain;
+                background-size: cover;
                 background-repeat: no-repeat;
                 background-position: center center;
+                background-color: black;
                 margin-right: 20px;
             }
             .user-name {
@@ -451,6 +452,22 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
                         right: 0;
                     }
                 }
+            }
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .slide-item {
+        &.si-cust-review {
+            height: 340px;
+            padding: 12px;
+            .review-message {
+                line-height: 1.3;
+                margin-top: 12px;
+            }
+            .hired-header {
+                margin-top: 12px;
             }
         }
     }
