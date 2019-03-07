@@ -307,7 +307,7 @@ public hoverval: false;
                         pack.imageUrl = this.extraService.curtain;
                       }
                     });
-                    console.log("pack===",JSON.stringify(this.extraPackages))
+                    // console.log("pack===",JSON.stringify(this.extraPackages))
                 }
             });
         // this.loadPackages();

@@ -1,9 +1,9 @@
 {
   "/auth/": {
     "target":  {
-      "host": "13.127.115.229",
-      "protocol": "http:",
-      "port": 8080
+      "host": "novowash.com",
+      "protocol": "https:",
+      "port": 80
     },
     "secure": false,
     "changeOrigin": true,
@@ -11,9 +11,9 @@
   },
   "/common/": {
     "target":  {
-      "host": "13.127.115.229",
-      "protocol": "http:",
-      "port": 8080
+      "host": "novowash.com",
+      "protocol": "https:",
+      "port": 80
     },
     "secure": false,
     "changeOrigin": true,
